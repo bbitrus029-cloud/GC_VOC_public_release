@@ -33,3 +33,4 @@ BASELINE_CONSECUTIVE_EXCEED = 3  # [signal-processing-literature: short sustaine
 BASELINE_K_OF_N = 4  # [signal-processing-literature: weak-consensus multisensor voting rule; ceil(11 / 3) for 11 gas channels and one-third quorum without sentinel selection]
 SG_WINDOW_LENGTH = 11  # [signal-processing-literature: odd-window Savitzky-Golay local polynomial smoothing; at approximately 8.33 Hz this is approximately 1.32 seconds, much shorter than MOS response/recovery dynamics on the order of 10-30 seconds; Savitzky and Golay 1964; Press et al.; MOS denoising practice]
 SG_POLYORDER = 3  # [signal-processing-literature: cubic local polynomial commonly used to preserve peak/curve shape while smoothing; Savitzky and Golay 1964; Press et al.]
+MIN_ROWS_QC2 = 1000  # [domain-physical-constant: hardware/SOP acquisition length]
