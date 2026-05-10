@@ -1,0 +1,367 @@
+provenance_schema_version: 1
+random_seed: 42
+channels:
+  dropped: S0
+  gas:
+  - S1
+  - S2
+  - S3
+  - S4
+  - S5
+  - S6
+  - S7
+  - S8
+  - S9
+  - S10
+  - S11
+  temperature: S12
+  humidity: S13
+baseline_detection:
+  t_baseline_window_init: 5
+  t_baseline_end_min: 5
+  t_baseline_end_max: 50
+  sigma_multiplier: 3.0
+  consecutive_exceed: 3
+  k_of_n: 4
+  fallback_median_float: 19.0
+  fallback_median: 19
+qc_thresholds:
+  qc1_env_sensor_fault:
+    env_sensor_baseline_points: 5
+    enabled: true
+    threshold: 833.2593749999999
+    fault_side: high
+  qc2_acquisition_truncated:
+    min_rows: 1000
+  qc3_unstable_baseline:
+    threshold: 0.08817505173290488
+  qc4_insufficient_response:
+    threshold: 25.19195644421967
+    threshold_method: otsu
+  qc5_sensor_saturation:
+    threshold: 0.001
+  qc6_excessive_spikes:
+    threshold: 211.0
+smoothing:
+  window_length: 11
+  polyorder: 3
+environmental_compensation:
+  temperature_humidity_pearson_r: 0.2737728137034382
+  temperature_humidity_abs_pearson_r_threshold: 0.8
+  multicollinearity_fallback_used: false
+  r2_threshold: 0.0
+  t_ref: 315.143023255814
+  h_ref: 807.8236434108528
+  per_channel:
+    S1:
+      alpha: -0.38583718907645426
+      beta_T: 0.280571596772329
+      beta_H: 0.361740086846407
+      adj_r2: 0.09230124207500723
+      applies_compensation: true
+    S2:
+      alpha: 107.64654242024518
+      beta_T: 0.013844618367679416
+      beta_H: 0.1819334734272897
+      adj_r2: 0.08965232800669831
+      applies_compensation: true
+    S3:
+      alpha: -309.2857765384058
+      beta_T: 1.2408840074666965
+      beta_H: 0.3805016413234856
+      adj_r2: 0.022359747936431917
+      applies_compensation: true
+    S4:
+      alpha: 390.32572356859407
+      beta_T: -0.28510556071200394
+      beta_H: 0.18625977692140402
+      adj_r2: 0.025569329018524045
+      applies_compensation: true
+    S5:
+      alpha: 431.7484602253382
+      beta_T: -0.12626573098088445
+      beta_H: 0.2512608469659797
+      adj_r2: 0.0752840612945449
+      applies_compensation: true
+    S6:
+      alpha: -95.89740890996552
+      beta_T: 0.7326467375517185
+      beta_H: 0.3964912183744914
+      adj_r2: 0.05184624134503324
+      applies_compensation: true
+    S7:
+      alpha: 154.87096293162492
+      beta_T: 0.9252172971557201
+      beta_H: 0.5966801032717964
+      adj_r2: 0.1429765259112511
+      applies_compensation: true
+    S8:
+      alpha: 367.86239627319145
+      beta_T: -0.3549560221270535
+      beta_H: 0.3675655006001293
+      adj_r2: 0.020377345533923563
+      applies_compensation: true
+    S9:
+      alpha: 411.8059917121344
+      beta_T: 1.2496969420536108
+      beta_H: -0.19009656519411966
+      adj_r2: 0.0059139907365881594
+      applies_compensation: true
+    S10:
+      alpha: 706.8634492811555
+      beta_T: 0.3895641302519647
+      beta_H: 1.2935552887128197
+      adj_r2: 0.15327926363455568
+      applies_compensation: true
+    S11:
+      alpha: 363.2050073694536
+      beta_T: 0.6668586214393984
+      beta_H: 0.45565005731613134
+      adj_r2: 0.0248405715044282
+      applies_compensation: true
+correction_and_trimming:
+  fractional_correction_formula: x_corrected_i(t) = (x_compensated_i(t) - S0_i) /
+    S0_i
+  s0_warning_abs_threshold: 10
+  clip_length_L: 960
+  padding_relative_deficit_threshold: 0.0125
+pipeline_b_features:
+  feature_names:
+  - s1_mpd
+  - s1_mnd
+  - s1_auc
+  - s1_mean
+  - s1_mas
+  - s1_mds
+  - s1_t90
+  - s1_err
+  - s1_lmr
+  - s2_mpd
+  - s2_mnd
+  - s2_auc
+  - s2_mean
+  - s2_mas
+  - s2_mds
+  - s2_t90
+  - s2_err
+  - s2_lmr
+  - s3_mpd
+  - s3_mnd
+  - s3_auc
+  - s3_mean
+  - s3_mas
+  - s3_mds
+  - s3_t90
+  - s3_err
+  - s3_lmr
+  - s4_mpd
+  - s4_mnd
+  - s4_auc
+  - s4_mean
+  - s4_mas
+  - s4_mds
+  - s4_t90
+  - s4_err
+  - s4_lmr
+  - s5_mpd
+  - s5_mnd
+  - s5_auc
+  - s5_mean
+  - s5_mas
+  - s5_mds
+  - s5_t90
+  - s5_err
+  - s5_lmr
+  - s6_mpd
+  - s6_mnd
+  - s6_auc
+  - s6_mean
+  - s6_mas
+  - s6_mds
+  - s6_t90
+  - s6_err
+  - s6_lmr
+  - s7_mpd
+  - s7_mnd
+  - s7_auc
+  - s7_mean
+  - s7_mas
+  - s7_mds
+  - s7_t90
+  - s7_err
+  - s7_lmr
+  - s8_mpd
+  - s8_mnd
+  - s8_auc
+  - s8_mean
+  - s8_mas
+  - s8_mds
+  - s8_t90
+  - s8_err
+  - s8_lmr
+  - s9_mpd
+  - s9_mnd
+  - s9_auc
+  - s9_mean
+  - s9_mas
+  - s9_mds
+  - s9_t90
+  - s9_err
+  - s9_lmr
+  - s10_mpd
+  - s10_mnd
+  - s10_auc
+  - s10_mean
+  - s10_mas
+  - s10_mds
+  - s10_t90
+  - s10_err
+  - s10_lmr
+  - s11_mpd
+  - s11_mnd
+  - s11_auc
+  - s11_mean
+  - s11_mas
+  - s11_mds
+  - s11_t90
+  - s11_err
+  - s11_lmr
+  t90_fraction_of_peak: 0.9
+  early_response_fraction: 0.2
+  late_mean_fraction: 0.5
+provenance:
+  labels:
+    provenance_schema_version: '[domain-physical-constant: first preprocessing provenance
+      schema]'
+    random_seed: '[domain-physical-constant: project reproducibility convention]'
+    baseline_detection.t_baseline_window_init: '[domain-physical-constant: SOP-derived
+      early baseline window; acquisition starts before subject blow]'
+    baseline_detection.t_baseline_end_min: '[domain-physical-constant: same SOP-derived
+      minimum early baseline bound as t_baseline_window_init]'
+    baseline_detection.t_baseline_end_max: '[domain-physical-constant: approximately
+      6 seconds at 8.33 Hz, from prompt user-confirmed SOP requiring prompt blow onset]'
+    baseline_detection.sigma_multiplier: '[signal-processing-literature: Shewhart
+      3-sigma control limit; NIST SPC handbook]'
+    baseline_detection.consecutive_exceed: '[signal-processing-literature: short sustained
+      run confirmation adapted from control-chart run-rule logic; Western Electric
+      1956; Montgomery SPC]'
+    baseline_detection.k_of_n: '[signal-processing-literature: weak-consensus multisensor
+      voting rule; 11 is domain channel count, denominator 3 encodes more-than-one-third
+      quorum without sentinel-channel selection]'
+    baseline_detection.fallback_median_float: '[runtime-determined-by-prespecified-algorithm]'
+    baseline_detection.fallback_median: '[runtime-determined-by-prespecified-algorithm]'
+    qc_thresholds.qc1_env_sensor_fault.env_sensor_baseline_points: "[domain-physical-constant:\
+      \ same SOP-derived early baseline window as \xA73.3 onset detection; consistent\
+      \ definition of \"device-just-started, no breath yet\" interval used across\
+      \ both QC-1 environmental fault detection and gas-channel onset detection]"
+    qc_thresholds.qc1_env_sensor_fault.enabled: '[runtime-determined-by-prespecified-algorithm]'
+    qc_thresholds.qc1_env_sensor_fault.threshold: '[runtime-determined-by-prespecified-algorithm]'
+    qc_thresholds.qc1_env_sensor_fault.fault_side: '[runtime-determined-by-prespecified-algorithm]'
+    qc_thresholds.qc2_acquisition_truncated.min_rows: '[domain-physical-constant:
+      hardware/SOP acquisition length]'
+    qc_thresholds.qc3_unstable_baseline.threshold: '[runtime-determined-by-prespecified-algorithm]'
+    qc_thresholds.qc4_insufficient_response.threshold: '[runtime-determined-by-prespecified-algorithm]'
+    qc_thresholds.qc4_insufficient_response.threshold_method: '[runtime-determined-by-prespecified-algorithm]'
+    qc_thresholds.qc5_sensor_saturation.threshold: '[runtime-determined-by-prespecified-algorithm]'
+    qc_thresholds.qc6_excessive_spikes.threshold: '[runtime-determined-by-prespecified-algorithm]'
+    smoothing.window_length: '[signal-processing-literature: odd-window Savitzky-Golay
+      local polynomial smoothing; at approximately 8.33 Hz this is approximately 1.32
+      seconds, much shorter than MOS response/recovery dynamics on the order of 10-30
+      seconds; Savitzky and Golay 1964; Press et al.; MOS denoising practice]'
+    smoothing.polyorder: '[signal-processing-literature: cubic local polynomial commonly
+      used to preserve peak/curve shape while smoothing; Savitzky and Golay 1964;
+      Press et al.]'
+    environmental_compensation.temperature_humidity_abs_pearson_r_threshold: '[signal-processing-literature:
+      common severe pairwise-correlation screening heuristic, applied cautiously because
+      VIF rules are context-dependent; O''Brien 2007]'
+    environmental_compensation.temperature_humidity_pearson_r: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.multicollinearity_fallback_used: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.r2_threshold: "[signal-processing-literature: adjusted\
+      \ R\xB2 greater than zero indicates improvement over intercept-only model; replaces\
+      \ unsupported 0.10 threshold]"
+    environmental_compensation.t_ref: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.h_ref: '[runtime-determined-by-prespecified-algorithm]'
+    correction_and_trimming.s0_warning_abs_threshold: '[domain-physical-constant:
+      engineering guard tied to integer ADC-like raw scale supplied in source facts;
+      warning only, not auto-exclusion]'
+    correction_and_trimming.clip_length_L: '[runtime-determined-by-prespecified-algorithm:
+      5th percentile is a robust low-tail summary preserving at least 95% without
+      truncation; percentile convention follows robust descriptive-statistics practice]'
+    correction_and_trimming.padding_relative_deficit_threshold: '[runtime-determined-by-prespecified-algorithm]'
+    pipeline_b_features.t90_fraction_of_peak: '[signal-processing-literature: T0-90%/T90
+      response-time features are standard gas-sensor response descriptors; Yan et
+      al. 2015]'
+    pipeline_b_features.early_response_fraction: '[signal-processing-literature: windowed
+      time-slicing and early transient summaries are established e-nose features;
+      0.20 is retained as a prespecified one-fifth early-window partition, not cohort-derived]'
+    pipeline_b_features.late_mean_fraction: '[signal-processing-literature: interval
+      mean/windowed time-slicing response summaries are established e-nose features;
+      0.50 is retained as a prespecified half-window late-response partition, not
+      cohort-derived]'
+    environmental_compensation.per_channel.S1.alpha: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S1.beta_T: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S1.beta_H: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S1.adj_r2: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S1.applies_compensation: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S2.alpha: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S2.beta_T: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S2.beta_H: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S2.adj_r2: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S2.applies_compensation: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S3.alpha: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S3.beta_T: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S3.beta_H: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S3.adj_r2: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S3.applies_compensation: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S4.alpha: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S4.beta_T: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S4.beta_H: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S4.adj_r2: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S4.applies_compensation: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S5.alpha: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S5.beta_T: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S5.beta_H: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S5.adj_r2: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S5.applies_compensation: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S6.alpha: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S6.beta_T: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S6.beta_H: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S6.adj_r2: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S6.applies_compensation: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S7.alpha: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S7.beta_T: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S7.beta_H: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S7.adj_r2: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S7.applies_compensation: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S8.alpha: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S8.beta_T: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S8.beta_H: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S8.adj_r2: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S8.applies_compensation: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S9.alpha: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S9.beta_T: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S9.beta_H: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S9.adj_r2: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S9.applies_compensation: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S10.alpha: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S10.beta_T: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S10.beta_H: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S10.adj_r2: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S10.applies_compensation: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S11.alpha: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S11.beta_T: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S11.beta_H: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S11.adj_r2: '[runtime-determined-by-prespecified-algorithm]'
+    environmental_compensation.per_channel.S11.applies_compensation: '[runtime-determined-by-prespecified-algorithm]'
+  citations:
+    baseline_detection.sigma_multiplier: nist_spc_handbook
+    baseline_detection.consecutive_exceed: western_electric_1956
+    baseline_detection.fallback_median_float: erratum_e003
+    baseline_detection.fallback_median: erratum_e003
+    qc_thresholds.qc1_env_sensor_fault.fault_side: erratum_e002
+    smoothing.window_length: savitzky_golay_1964
+    smoothing.polyorder: savitzky_golay_1964
+    environmental_compensation.temperature_humidity_abs_pearson_r_threshold: obrien_2007
+    pipeline_b_features.t90_fraction_of_peak: yan_2015
+    pipeline_b_features.early_response_fraction: yan_2015
+    pipeline_b_features.late_mean_fraction: yan_2015
