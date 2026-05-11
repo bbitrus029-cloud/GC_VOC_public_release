@@ -36,10 +36,11 @@ qc_thresholds:
   qc3_unstable_baseline:
     threshold: 0.08817505173290488
   qc4_insufficient_response:
-    threshold: 25.19195644421967
-    threshold_method: otsu
+    threshold: 0.0
+    threshold_method: tukey_lower_inner_fence
   qc5_sensor_saturation:
-    threshold: 0.001
+    threshold: 0.003
+    threshold_method: p95_fallback
   qc6_excessive_spikes:
     threshold: 211.0
 smoothing:
