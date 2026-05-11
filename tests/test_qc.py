@@ -104,6 +104,26 @@ def _build_pass_matrix(
     return np.column_stack(channels)
 
 
+def _apply_qc5_plateau(
+    channel: NDArray[np.float64],
+    baseline_rows: int,
+    *,
+    plateau_value: float = 199.5,
+    peak_value: float = 200.0,
+) -> NDArray[np.float64]:
+    """Apply a sustained within-one-ADC-unit plateau to one synthetic gas channel."""
+    channel_with_plateau = channel.copy()
+    channel_with_plateau[baseline_rows:200] = np.linspace(
+        100.0,
+        peak_value,
+        200 - baseline_rows,
+        dtype=np.float64,
+    )
+    channel_with_plateau[210:510] = plateau_value
+    channel_with_plateau[510:] = np.linspace(198.0, 130.0, channel.shape[0] - 510, dtype=np.float64)
+    return channel_with_plateau
+
+
 def _build_raw_record(
     gas_signals: NDArray[np.float64],
     *,
@@ -441,7 +461,65 @@ def test_run_qc_uses_passed_threshold_values_not_hardcoded() -> None:
 
 
 def test_run_qc_fails_qc5_for_within_one_adc_unit_plateau() -> None:
-    """QC-5 should use the channel-local maximum and a within-one-unit plateau fraction."""
+    """QC-5 should pass with six saturated channels and fail with seven saturated channels."""
+    (
+        _QCResult,
+        _qc_diagnostics_to_df,
+        _qc_summary_to_df,
+        run_qc,
+        _GAS_CHANNELS,
+        N_GAS_CHANNELS,
+    ) = _import_qc_symbols()
+    n_rows = 1000
+    baseline_rows = 10
+    six_saturated_channels = _build_pass_matrix(
+        n_rows=n_rows,
+        baseline_rows=baseline_rows,
+        n_gas_channels=N_GAS_CHANNELS,
+    )
+    seven_saturated_channels = six_saturated_channels.copy()
+    for channel_index in range(6):
+        six_saturated_channels[:, channel_index] = _apply_qc5_plateau(
+            six_saturated_channels[:, channel_index],
+            baseline_rows,
+        )
+    seven_saturated_channels[:, :6] = six_saturated_channels[:, :6]
+    seven_saturated_channels[:, 6] = _apply_qc5_plateau(seven_saturated_channels[:, 6], baseline_rows)
+    six_channel_record = _build_raw_record(six_saturated_channels, sample_id=501)
+    seven_channel_record = _build_raw_record(seven_saturated_channels, sample_id=502)
+    baseline_result = _build_baseline_result(t_baseline_end=baseline_rows, n_gas_channels=N_GAS_CHANNELS)
+
+    six_channel_result = run_qc(
+        record=six_channel_record,
+        baseline_result=baseline_result,
+        gas_signals=six_saturated_channels,
+        env_temperature=six_channel_record.temperature,
+        env_humidity=six_channel_record.humidity,
+        thresholds=_build_thresholds(qc5_threshold=0.1, qc6_threshold=1000.0),
+        qc1_enabled=False,
+        qc1_fault_side="high",
+    )
+    seven_channel_result = run_qc(
+        record=seven_channel_record,
+        baseline_result=baseline_result,
+        gas_signals=seven_saturated_channels,
+        env_temperature=seven_channel_record.temperature,
+        env_humidity=seven_channel_record.humidity,
+        thresholds=_build_thresholds(qc5_threshold=0.1, qc6_threshold=1000.0),
+        qc1_enabled=False,
+        qc1_fault_side="high",
+    )
+
+    assert np.count_nonzero(six_channel_result.saturation_fractions > 0.1) == 6
+    assert six_channel_result.qc5_sensor_saturation_pass is True
+    assert "qc5_sensor_saturation" not in six_channel_result.fail_reasons
+    assert np.count_nonzero(seven_channel_result.saturation_fractions > 0.1) == 7
+    assert seven_channel_result.qc5_sensor_saturation_pass is False
+    assert seven_channel_result.fail_reasons == ["qc5_sensor_saturation"]
+
+
+def test_run_qc_qc5_boundary_at_seven_saturated_channels() -> None:
+    """QC-5 should fail at the inclusive seven-channel super-majority boundary."""
     (
         _QCResult,
         _qc_diagnostics_to_df,
@@ -453,12 +531,9 @@ def test_run_qc_fails_qc5_for_within_one_adc_unit_plateau() -> None:
     n_rows = 1000
     baseline_rows = 10
     gas_signals = _build_pass_matrix(n_rows=n_rows, baseline_rows=baseline_rows, n_gas_channels=N_GAS_CHANNELS)
-    channel = gas_signals[:, 0].copy()
-    channel[baseline_rows:200] = np.linspace(100.0, 200.0, 200 - baseline_rows, dtype=np.float64)
-    channel[210:510] = 199.5
-    channel[510:] = np.linspace(198.0, 130.0, n_rows - 510, dtype=np.float64)
-    gas_signals[:, 0] = channel
-    record = _build_raw_record(gas_signals)
+    for channel_index in range(7):
+        gas_signals[:, channel_index] = _apply_qc5_plateau(gas_signals[:, channel_index], baseline_rows)
+    record = _build_raw_record(gas_signals, sample_id=503)
     baseline_result = _build_baseline_result(t_baseline_end=baseline_rows, n_gas_channels=N_GAS_CHANNELS)
 
     result = run_qc(
@@ -467,14 +542,14 @@ def test_run_qc_fails_qc5_for_within_one_adc_unit_plateau() -> None:
         gas_signals=gas_signals,
         env_temperature=record.temperature,
         env_humidity=record.humidity,
-            thresholds=_build_thresholds(qc5_threshold=0.1, qc6_threshold=1000.0),
+        thresholds=_build_thresholds(qc5_threshold=0.1, qc6_threshold=1000.0),
         qc1_enabled=False,
         qc1_fault_side="high",
     )
 
+    assert np.count_nonzero(result.saturation_fractions > 0.1) == 7
     assert result.qc5_sensor_saturation_pass is False
     assert result.fail_reasons == ["qc5_sensor_saturation"]
-    assert result.saturation_fractions[0] > 0.25
 
 
 def test_run_qc_fails_qc6_for_excessive_spikes_using_within_sample_tukey_rule() -> None:
@@ -534,8 +609,8 @@ def test_run_qc_accumulates_multiple_failures_without_nan_diagnostics() -> None:
             baseline_value=0.0,
             peak_value=2.0,
         )[baseline_rows:]
-    gas_signals[210:510, 0] = 199.5
-    gas_signals[510:, 0] = np.linspace(198.0, 130.0, n_rows - 510, dtype=np.float64)
+    for channel_index in range(7):
+        gas_signals[:, channel_index] = _apply_qc5_plateau(gas_signals[:, channel_index], baseline_rows)
     record = _build_raw_record(gas_signals)
     baseline_result = _build_baseline_result(t_baseline_end=baseline_rows, n_gas_channels=N_GAS_CHANNELS)
 
@@ -545,7 +620,13 @@ def test_run_qc_accumulates_multiple_failures_without_nan_diagnostics() -> None:
         gas_signals=gas_signals,
         env_temperature=record.temperature,
         env_humidity=record.humidity,
-        thresholds=_build_thresholds(min_rows=1000, qc3_threshold=0.5, qc4_threshold=0.5, qc5_threshold=0.1),
+        thresholds=_build_thresholds(
+            min_rows=1000,
+            qc3_threshold=0.5,
+            qc4_threshold=0.5,
+            qc5_threshold=0.1,
+            qc6_threshold=1000.0,
+        ),
         qc1_enabled=False,
         qc1_fault_side="high",
     )

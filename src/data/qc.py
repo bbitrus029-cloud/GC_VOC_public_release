@@ -19,8 +19,9 @@ from src.data.loader import RawRecord
 
 LOGGER = logging.getLogger(__name__)
 _NUMERICAL_GUARD = 1e-8
-_N_UNSTABLE_THRESHOLD = math.floor(N_GAS_CHANNELS / 2) + 1
-_N_RESPOND_THRESHOLD = math.ceil(N_GAS_CHANNELS / 4)
+_N_UNSTABLE_THRESHOLD = math.floor(N_GAS_CHANNELS / 2) + 1  # [signal-processing-literature: majority-vote multisensor reliability rule; 11 is domain channel count]
+_N_RESPOND_THRESHOLD = math.ceil(N_GAS_CHANNELS / 4)  # [signal-processing-literature: minority quorum for multisensor informativeness; 11 is domain channel count and denominator 4 encodes at-least-one-quartile response]
+_N_QC5_SATURATED_CHANNELS_THRESHOLD = math.ceil(N_GAS_CHANNELS / 2) + 1  # [signal-processing-literature: super-majority multisensor reliability rule; ceil(11 / 2) + 1 = 7 channels; +1 increment relative to QC-3's simple-majority N_UNSTABLE_THRESHOLD = 6 reflects hard-loss-versus-noise distinction per Erratum E005]
 
 
 @dataclass(frozen=True)
@@ -282,7 +283,8 @@ def _compute_saturation_fractions(gas_signals: NDArray[np.float64]) -> NDArray[n
 def _evaluate_qc5(saturation_fractions: NDArray[np.float64], thresholds: Mapping[str, Any]) -> bool:
     """Evaluate QC-5 sensor saturation."""
     threshold = _get_nested_threshold(thresholds, "qc5_sensor_saturation", "threshold")
-    return not bool(np.any(saturation_fractions > threshold))
+    n_saturated_channels = int(np.count_nonzero(saturation_fractions > threshold))
+    return n_saturated_channels < _N_QC5_SATURATED_CHANNELS_THRESHOLD
 
 
 def _compute_spike_counts(gas_signals: NDArray[np.float64]) -> NDArray[np.float64]:
