@@ -113,6 +113,7 @@ _L17_PROVENANCE: dict[str, str] = {
     "qc_thresholds.qc4_insufficient_response.threshold": "[runtime-determined-by-prespecified-algorithm]",
     "qc_thresholds.qc4_insufficient_response.threshold_method": "[runtime-determined-by-prespecified-algorithm]",
     "qc_thresholds.qc5_sensor_saturation.threshold": "[runtime-determined-by-prespecified-algorithm]",
+    "qc_thresholds.qc5_sensor_saturation.threshold_method": "[runtime-determined-by-prespecified-algorithm]",
     "qc_thresholds.qc6_excessive_spikes.threshold": "[runtime-determined-by-prespecified-algorithm]",
     "smoothing.window_length": (
         "[signal-processing-literature: odd-window Savitzky-Golay local polynomial smoothing; at "
