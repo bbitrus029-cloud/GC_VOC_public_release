@@ -719,6 +719,7 @@ def main(
             },
             "qc5_sensor_saturation": {
                 "threshold": saturation_threshold,
+                "threshold_method": saturation_threshold_method,
             },
             "qc6_excessive_spikes": {
                 "threshold": spike_count_threshold,
