@@ -68,6 +68,7 @@ _LATE_MEAN_FRACTION = 0.50
 _S0_WARNING_ABS_THRESHOLD = 10
 _TEMPERATURE_HUMIDITY_ABS_R_THRESHOLD = 0.80
 _ADJUSTED_R2_THRESHOLD = 0.0
+QC5_FALLBACK_PERCENTILE = 95  # [signal-processing-literature: prespecified 95th-percentile right-tail outlier boundary per Erratum E004]
 _CURRENT_METADATA_PATH: Path | None = None
 _CURRENT_BREATH_DATA_ROOT: Path | None = None
 
@@ -224,6 +225,37 @@ def _summarize_distribution(values: NDArray[np.float64]) -> dict[str, float]:
         "q3": float(np.percentile(array, 75)),
         "max": float(np.max(array)),
     }
+
+
+def _compute_qc4_response_amplitude_threshold(values: NDArray[np.float64]) -> tuple[float, str]:
+    """Compute the Erratum E004 QC-4 threshold and stable schema method label.
+
+    The discovery YAML/report continue to emit `threshold_method="tukey_lower_inner_fence"` so downstream
+    consumers keep a stable field even though Erratum E004 removes the bimodality dispatch and makes Tukey's
+    lower inner fence the unconditional QC-4 threshold extractor.
+    """
+    array = _ensure_nonempty_distribution(values, "response_amplitude pooled distribution")
+    threshold = float(discovery.compute_tukey_lower_inner_fence(array, clip_at_zero=True))
+    return threshold, "tukey_lower_inner_fence"
+
+
+def _compute_qc5_saturation_threshold(values: NDArray[np.float64]) -> tuple[float, str]:
+    """Compute the Erratum E004 QC-5 threshold with fallback and retained halt semantics."""
+    array = _ensure_nonempty_distribution(values, "saturation_fraction pooled distribution")
+    q1 = float(np.percentile(array, 25))
+    q3 = float(np.percentile(array, 75))
+    iqr = q3 - q1
+    if iqr == 0.0:
+        if np.all(array == array[0]) and array[0] > 0.0:
+            raise RuntimeError(
+                "The pooled saturation-fraction distribution is all identical at a value greater than 0.0; "
+                "the retained QC-5 degenerate-distribution halt applies before the Erratum E004 fallback."
+            )
+        threshold = float(np.percentile(array, QC5_FALLBACK_PERCENTILE, method="linear"))
+        return threshold, "p95_fallback"
+
+    threshold = float(discovery.compute_tukey_upper_inner_fence(array))
+    return threshold, "tukey_upper_inner_fence"
 
 
 def _write_yaml(path: Path, payload: dict[str, Any]) -> None:
@@ -567,26 +599,27 @@ def main(
         np.abs(np.asarray(summaries["response_amplitude"], dtype=np.float64)[mask_qc1_qc2, :]).ravel(),
         "response_amplitude pooled distribution",
     )
-    qc4_bimodal = discovery.detect_bimodality_kde(response_amplitude_abs_distribution)
-    if qc4_bimodal:
-        response_amplitude_threshold = float(discovery.compute_otsu_threshold(response_amplitude_abs_distribution))
-        response_amplitude_threshold_method = "otsu"
-    else:
-        response_amplitude_threshold = float(
-            discovery.compute_tukey_lower_inner_fence(response_amplitude_abs_distribution, clip_at_zero=True)
-        )
-        response_amplitude_threshold_method = "tukey_lower_inner_fence_clipped_zero"
+    response_amplitude_threshold, response_amplitude_threshold_method = _compute_qc4_response_amplitude_threshold(
+        response_amplitude_abs_distribution
+    )
+    LOGGER.info(
+        "QC-4 threshold extraction complete: threshold=%.6f method=%s",
+        response_amplitude_threshold,
+        response_amplitude_threshold_method,
+    )
 
     saturation_fraction_distribution = _ensure_nonempty_distribution(
         np.asarray(summaries["saturation_fraction"], dtype=np.float64)[mask_qc1_qc2, :].ravel(),
         "saturation_fraction pooled distribution",
     )
-    if np.all(saturation_fraction_distribution == saturation_fraction_distribution[0]) and saturation_fraction_distribution[0] > 0.0:
-        raise RuntimeError(
-            "The pooled saturation-fraction distribution has zero variance at a value greater than 0.0; the "
-            "prespecified QC-5 outlier algorithm cannot separate normal from saturated behavior."
-        )
-    saturation_threshold = float(discovery.compute_tukey_upper_inner_fence(saturation_fraction_distribution))
+    saturation_threshold, saturation_threshold_method = _compute_qc5_saturation_threshold(
+        saturation_fraction_distribution
+    )
+    LOGGER.info(
+        "QC-5 threshold extraction complete: threshold=%.6f method=%s",
+        saturation_threshold,
+        saturation_threshold_method,
+    )
 
     spike_count_distribution = _ensure_nonempty_distribution(
         np.asarray(summaries["spike_count"], dtype=np.float64)[mask_qc1_qc2, :].ravel(),
@@ -764,6 +797,7 @@ def main(
         },
         "qc5_saturation": {
             "threshold": saturation_threshold,
+            "threshold_method": saturation_threshold_method,
             "distribution_summary": _summarize_distribution(saturation_fraction_distribution),
         },
         "qc6_spikes": {
