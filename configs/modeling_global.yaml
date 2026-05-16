@@ -1,0 +1,24 @@
+# Modeling global configuration. Locked at the modeling-prespecified tag.
+# Operational plan: .cursor/plans/modeling_plan_v1_a7c3f9b2_dc789bb5.plan.md §6.1
+# Protocol snapshot: docs/protocol/modeling_plan.md §3
+provenance_schema_version: 1  # [project-reproducibility-convention]
+random_seed: 42  # [project-reproducibility-convention]
+data_split_seed: "__TBD__"  # locked from candidate set {42, 43, 44, 45, 46} at Session 5 Phase 2; do NOT replace until then
+data_split_candidate_seeds: [42, 43, 44, 45, 46]  # [project-reproducibility-convention]
+split:
+  train_fraction: 0.80  # [project-reproducibility-convention]
+cv:
+  outer_folds: 5  # [project-reproducibility-convention]
+  inner_folds: 3  # [project-reproducibility-convention]
+dl:
+  holdout_fraction: 0.125  # [project-reproducibility-convention: early-stopping holdout size]
+bootstrap:
+  n_boot: 2000  # [ml-methodology-literature: percentile bootstrap precision convention]
+calibration:
+  method: sigmoid  # [ml-methodology-literature: Platt preferred for OOF n<1000]
+age_cutpoint: 60  # [clinical-literature: see operational plan §0 web verification ledger]
+bmi_cutpoint: 24  # [clinical-literature: WS/T 428-2013; Zhou 2002]
+prevalence_scenarios:
+  - 0.01  # REQUIRES-USER-VERIFICATION per operational plan §0
+  - 0.05  # REQUIRES-USER-VERIFICATION per operational plan §0
+  - 0.10  # REQUIRES-USER-VERIFICATION per operational plan §0
