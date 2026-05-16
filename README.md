@@ -11,6 +11,10 @@ This repository implements a TRIPOD-aligned analysis pipeline:
 
 Plans, rules, and agent state live under `.cursor/` (untracked by git). Frozen plan snapshots that serve as the TRIPOD prespecification evidence live under `docs/protocol/`. Two annotated git tags — `preprocessing-prespecified` and `modeling-prespecified` — anchor the prespecification timestamps.
 
+## Modeling Stage (Active)
+
+Modeling-stage repository initialization, Stage 1 verification, and protocol snapshot authoring are active. The modeling methodology snapshot is prepared in `docs/protocol/modeling_plan.md` and is intended to be frozen at the user-executed `modeling-prespecified` tag before any modeling implementation commit.
+
 ## Environment
 
 Python 3.11 with PyTorch 2.10 + CUDA 12.9. Full dependencies pinned in `environment.yml`. Reproduce via:
