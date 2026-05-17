@@ -1,3 +1,11 @@
+"""Training-facing binary metrics.
+
+Key `brier_pre_platt` is computed in raw-probability space; the post-Platt
+counterpart `brier_post_platt` is only available via
+`src/evaluation/metrics.py::compute_full_metric_set` because `p_cal` is
+unavailable inside the nested-CV inner loop.
+"""
+
 from __future__ import annotations
 
 import logging
@@ -99,7 +107,7 @@ class MetricsCalculator:
             p_raw: Raw predicted probabilities for the positive class.
 
         Returns:
-            A dictionary with AUC-ROC, AUC-PR, and Brier score.
+            A dictionary with AUC-ROC, AUC-PR, and raw-space Brier score.
         """
         self._validate_inputs(y_true=y_true, p_raw=p_raw)
         unique_classes = np.unique(y_true)
@@ -114,7 +122,7 @@ class MetricsCalculator:
         return {
             "auc_roc": auc_roc,
             "auc_pr": auc_pr,
-            "brier": float(brier_score_loss(y_true, p_raw)),
+            "brier_pre_platt": float(brier_score_loss(y_true, p_raw)),
         }
 
     @staticmethod

@@ -230,7 +230,7 @@ def test_compute_binary_metrics_matches_sklearn(
 
     assert metrics["auc_roc"] == pytest.approx(roc_auc_score(y_true, p_raw))
     assert metrics["auc_pr"] == pytest.approx(average_precision_score(y_true, p_raw))
-    assert metrics["brier"] == pytest.approx(brier_score_loss(y_true, p_raw))
+    assert metrics["brier_pre_platt"] == pytest.approx(brier_score_loss(y_true, p_raw))
     assert metrics["sensitivity"] == pytest.approx(recall_score(y_true, y_pred))
     assert metrics["specificity"] == pytest.approx(tn / (tn + fp))
     assert metrics["ppv"] == pytest.approx(precision_score(y_true, y_pred))
@@ -263,7 +263,7 @@ def test_compute_binary_metrics_returns_nan_for_missing_positive_class(
     assert np.isnan(metrics["auc_roc"])
     assert np.isnan(metrics["auc_pr"])
     assert np.isnan(metrics["sensitivity"])
-    assert metrics["brier"] == pytest.approx(brier_score_loss(y_true, p_raw))
+    assert metrics["brier_pre_platt"] == pytest.approx(brier_score_loss(y_true, p_raw))
     assert any("class" in record.message.lower() for record in caplog.records)
 
 
