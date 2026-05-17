@@ -1,14 +1,17 @@
 from __future__ import annotations
 
 from pathlib import Path
+import shutil
 
+import numpy as np
 import pytest
 import yaml
 
+from src.config import PROJECT_ROOT
 from src.analysis.data_split import SeedScore, _select_best_seed, generate_and_save_splits
 
 
-def _write_config(tmp_path: Path, data_split_seed: object) -> Path:
+def _write_config(tmp_path: Path, data_split_seed: object, splits_dir: Path | None = None) -> Path:
     """Write a minimal temporary modeling config for guard tests."""
     config_path = tmp_path / "modeling_global.yaml"
     config = {
@@ -23,7 +26,7 @@ def _write_config(tmp_path: Path, data_split_seed: object) -> Path:
         "calibration": {"method": "sigmoid"},
         "paths": {
             "sample_index": "data/processed/sample_index.csv",
-            "splits_dir": "data/processed/splits",
+            "splits_dir": str(splits_dir or Path("data/processed/splits")),
             "outputs_analysis_dir": "outputs/analysis",
         },
     }
@@ -56,6 +59,33 @@ def test_generate_and_save_splits_raises_on_non_integer_seed(tmp_path: Path) -> 
 
     with pytest.raises(ValueError):
         generate_and_save_splits(config_path)
+
+
+def test_generate_and_save_splits_writes_final_dl_holdout(tmp_path: Path) -> None:
+    """Locked split generation should persist the Stage 4b final DL holdout."""
+    splits_dir = PROJECT_ROOT / ".pytest_tmp" / tmp_path.name / "splits"
+    shutil.rmtree(splits_dir.parent, ignore_errors=True)
+    config_path = _write_config(tmp_path=tmp_path, data_split_seed=43, splits_dir=splits_dir)
+    try:
+        generate_and_save_splits(config_path)
+
+        final_holdout_path = splits_dir / "final_dl_es_holdout.npz"
+        assert final_holdout_path.exists()
+
+        with np.load(splits_dir / "train_idx.npz", allow_pickle=False) as train_split:
+            expected_train_idx = train_split["train_idx"].astype(int)
+
+        with np.load(final_holdout_path, allow_pickle=False) as final_holdout:
+            assert set(final_holdout.files) == {"train_idx", "holdout_idx"}
+            final_train_idx = final_holdout["train_idx"].astype(int)
+            holdout_idx = final_holdout["holdout_idx"].astype(int)
+
+        assert len(final_train_idx) + len(holdout_idx) == len(expected_train_idx) == 777
+        assert len(holdout_idx) in {97, 98}
+        assert len(np.intersect1d(final_train_idx, holdout_idx)) == 0
+        assert np.array_equal(np.sort(np.concatenate([final_train_idx, holdout_idx])), np.sort(expected_train_idx))
+    finally:
+        shutil.rmtree(splits_dir.parent, ignore_errors=True)
 
 
 def test_seed_selection_scoring_lexicographic() -> None:

@@ -3,7 +3,7 @@
 # Protocol snapshot: docs/protocol/modeling_plan.md §3
 provenance_schema_version: 1  # [project-reproducibility-convention]
 random_seed: 42  # [project-reproducibility-convention]
-data_split_seed: "__TBD__"  # unlocked sentinel until Session 5 Phase 2 manual lock; valid set {42, 43, 44, 45, 46}
+data_split_seed: 43  # unlocked sentinel until Session 5 Phase 2 manual lock; valid set {42, 43, 44, 45, 46}
 data_split_seed_candidates: [42, 43, 44, 45, 46]  # [project-reproducibility-convention]
 split:
   train_fraction: 0.80  # [project-reproducibility-convention]

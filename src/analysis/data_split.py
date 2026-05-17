@@ -12,6 +12,7 @@ import pandas as pd
 import yaml
 
 from src.config import METADATA_PATH, PROCESSED_DATA_ROOT, PROJECT_ROOT
+from src.training.common.early_stopping import create_dl_holdout_indices, save_dl_holdout
 from src.training.common.fold_generator import FoldGenerator
 
 
@@ -589,8 +590,21 @@ def generate_and_save_splits(config_path: Path) -> None:
             seed=int(config["random_seed"]) + fold.outer_fold,
         )
 
+    # Use a distinct deterministic seed offset for the final Stage 4b holdout. [project-reproducibility-convention]
+    final_dl_train_idx, final_dl_holdout_idx = create_dl_holdout_indices(
+        train_idx=train_idx,
+        disease_categories=disease_categories,
+        holdout_fraction=float(config["dl"]["holdout_fraction"]),
+        seed=int(config["random_seed"]) + 100,
+    )
+
     splits_dir = _resolve_path(config["paths"]["splits_dir"])
     splits_dir.mkdir(parents=True, exist_ok=True)
     _save_primary_split_arrays(output_dir=splits_dir, train_idx=train_idx, test_idx=test_idx)
     fold_generator.save_splits(output_dir=splits_dir)
+    save_dl_holdout(
+        path=splits_dir / "final_dl_es_holdout.npz",
+        train_idx=final_dl_train_idx,
+        holdout_idx=final_dl_holdout_idx,
+    )
     LOGGER.info("Saved locked split artifacts under %s.", _format_path(splits_dir))
