@@ -3,8 +3,8 @@
 # Protocol snapshot: docs/protocol/modeling_plan.md §3
 provenance_schema_version: 1  # [project-reproducibility-convention]
 random_seed: 42  # [project-reproducibility-convention]
-data_split_seed: "__TBD__"  # locked from candidate set {42, 43, 44, 45, 46} at Session 5 Phase 2; do NOT replace until then
-data_split_candidate_seeds: [42, 43, 44, 45, 46]  # [project-reproducibility-convention]
+data_split_seed: "__TBD__"  # unlocked sentinel until Session 5 Phase 2 manual lock; valid set {42, 43, 44, 45, 46}
+data_split_seed_candidates: [42, 43, 44, 45, 46]  # [project-reproducibility-convention]
 split:
   train_fraction: 0.80  # [project-reproducibility-convention]
 cv:
@@ -15,10 +15,11 @@ dl:
 bootstrap:
   n_boot: 2000  # [ml-methodology-literature: percentile bootstrap precision convention]
 calibration:
-  method: sigmoid  # [ml-methodology-literature: Platt preferred for OOF n<1000]
+  method: "sigmoid"  # [ml-methodology-literature: Platt preferred for OOF n<1000]
 age_cutpoint: 60  # [clinical-literature: see operational plan §0 web verification ledger]
-bmi_cutpoint: 24  # [clinical-literature: WS/T 428-2013; Zhou 2002]
-prevalence_scenarios:
-  - 0.01  # REQUIRES-USER-VERIFICATION per operational plan §0
-  - 0.05  # REQUIRES-USER-VERIFICATION per operational plan §0
-  - 0.10  # REQUIRES-USER-VERIFICATION per operational plan §0
+bmi_cutpoint: 24  # [clinical-literature: WS/T 428-2013 + Zhou 2002]
+prevalence_scenarios: [0.01, 0.05, 0.10]  # [clinical-literature: REQUIRES-USER-VERIFICATION per operational plan §0 / §13]
+paths:
+  sample_index: "data/processed/sample_index.csv"
+  splits_dir: "data/processed/splits"
+  outputs_analysis_dir: "outputs/analysis"
