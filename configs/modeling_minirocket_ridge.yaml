@@ -1,0 +1,46 @@
+# MiniRocket+Ridge nested-CV configuration for Session 6.
+# Governing plan sections: §0, §2.2, §2.6, §6.2, §10.
+# Locked via Erratum E002 in .cursor/plans/modeling_plan_v1_a7c3f9b2_dc789bb5.plan.md.
+provenance:
+  operational_plan: ".cursor/plans/modeling_plan_v1_a7c3f9b2_dc789bb5.plan.md"
+  governing_sections:
+    - "§0"
+    - "§2.2"
+    - "§2.6"
+    - "§6.2"
+    - "§10"
+  errata:
+    - "E002"
+
+model_name: minirocket_ridge
+pipeline: A
+input_layout: NCL
+
+minirocket:
+  # num_kernels: [hyperparameter-range-from-domain-practice]
+  # Authority: Dempster et al. 2021; sktime MiniRocketMultivariate default; locked via Erratum E002.
+  num_kernels: 10000
+  # random_state: [project-reproducibility-convention]
+  # Authority: RANDOM_SEED = 42 in src/config.py; locked via Erratum E002.
+  random_state: 42
+
+ridge:
+  classifier: RidgeClassifier
+  class_weight: balanced
+
+calibration_layer_a:
+  method: sigmoid
+  # cv: [ml-methodology-literature]
+  # Authority: plan §2.6 CalibratedClassifierCV(RidgeClassifier, method='sigmoid', cv=5, ensemble=True).
+  cv: 5
+  ensemble: true
+
+bootstrap:
+  n_boot_source: modeling_global.bootstrap.n_boot
+
+paths:
+  nested_cv_oof: outputs/predictions/binary_minirocket_ridge_nested_cv_oof.csv
+  nested_cv_per_fold: outputs/predictions/binary_minirocket_ridge_nested_cv_per_fold.csv
+  nested_cv_summary: outputs/metrics/binary_minirocket_ridge_nested_cv_summary.csv
+  nested_cv_results: outputs/analysis/binary_minirocket_ridge_nested_cv_results.json
+  log: outputs/logs/train_minirocket_ridge.log

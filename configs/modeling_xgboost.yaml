@@ -1,0 +1,96 @@
+# XGBoost nested-CV configuration for Session 6.
+# Governing plan sections: §0, §2.2, §2.7, §2.24, §6.2, §10.
+# Locked via Erratum E002 in .cursor/plans/modeling_plan_v1_a7c3f9b2_dc789bb5.plan.md.
+provenance:
+  operational_plan: ".cursor/plans/modeling_plan_v1_a7c3f9b2_dc789bb5.plan.md"
+  governing_sections:
+    - "§0"
+    - "§2.2"
+    - "§2.7"
+    - "§2.24"
+    - "§6.2"
+    - "§10"
+  errata:
+    - "E002"
+
+model_name: xgboost
+pipeline: B
+
+xgboost_fixed:
+  tree_method: exact
+  n_jobs: 1
+
+search:
+  # n_iter: [hyperparameter-range-from-domain-practice]
+  # Authority: plan §2.2 randomized search budget; locked via Erratum E002.
+  n_iter: 20
+  scoring: roc_auc
+
+search_space:
+  # n_estimators: [hyperparameter-range-from-domain-practice]
+  # Authority: Chen & Guestrin 2016; Bischl et al. 2023; locked via Erratum E002.
+  n_estimators:
+    type: randint
+    low: 100
+    high: 1001
+  # max_depth: [hyperparameter-range-from-domain-practice]
+  # Authority: Chen & Guestrin 2016; Bischl et al. 2023; locked via Erratum E002.
+  max_depth:
+    type: randint
+    low: 3
+    high: 11
+  # learning_rate: [hyperparameter-range-from-domain-practice]
+  # Authority: Chen & Guestrin 2016; Bischl et al. 2023; locked via Erratum E002.
+  learning_rate:
+    type: loguniform
+    a: 0.01
+    b: 0.3
+  # subsample: [hyperparameter-range-from-domain-practice]
+  # Authority: Chen & Guestrin 2016; Bischl et al. 2023; locked via Erratum E002.
+  subsample:
+    type: uniform
+    loc: 0.5
+    scale: 0.5
+  # colsample_bytree: [hyperparameter-range-from-domain-practice]
+  # Authority: Chen & Guestrin 2016; Bischl et al. 2023; locked via Erratum E002.
+  colsample_bytree:
+    type: uniform
+    loc: 0.5
+    scale: 0.5
+  # min_child_weight: [hyperparameter-range-from-domain-practice]
+  # Authority: Chen & Guestrin 2016; Bischl et al. 2023; locked via Erratum E002.
+  min_child_weight:
+    type: randint
+    low: 1
+    high: 11
+  # gamma: [hyperparameter-range-from-domain-practice]
+  # Authority: Chen & Guestrin 2016; Bischl et al. 2023; locked via Erratum E002.
+  gamma:
+    type: uniform
+    loc: 0.0
+    scale: 5.0
+  # reg_alpha: [hyperparameter-range-from-domain-practice]
+  # Authority: Chen & Guestrin 2016; Bischl et al. 2023; locked via Erratum E002.
+  reg_alpha:
+    type: loguniform
+    a: 0.001
+    b: 10.0
+  # reg_lambda: [hyperparameter-range-from-domain-practice]
+  # Authority: Chen & Guestrin 2016; Bischl et al. 2023; locked via Erratum E002.
+  reg_lambda:
+    type: loguniform
+    a: 0.001
+    b: 10.0
+
+class_imbalance:
+  scale_pos_weight: computed_per_inner_train
+
+bootstrap:
+  n_boot_source: modeling_global.bootstrap.n_boot
+
+paths:
+  nested_cv_oof: outputs/predictions/binary_xgboost_nested_cv_oof.csv
+  nested_cv_per_fold: outputs/predictions/binary_xgboost_nested_cv_per_fold.csv
+  nested_cv_summary: outputs/metrics/binary_xgboost_nested_cv_summary.csv
+  nested_cv_results: outputs/analysis/binary_xgboost_nested_cv_results.json
+  log: outputs/logs/train_xgboost.log
