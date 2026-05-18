@@ -1,0 +1,96 @@
+# InceptionTime nested-CV configuration for Session 8.
+# Governing plan sections: §0, §2.2, §2.7, §2.23, §6.2, §10.
+# Locked via Erratum E004 in .cursor/plans/modeling_plan_v1_a7c3f9b2_dc789bb5.plan.md.
+provenance:
+  operational_plan: ".cursor/plans/modeling_plan_v1_a7c3f9b2_dc789bb5.plan.md"
+  governing_sections:
+    - "§0"
+    - "§2.2"
+    - "§2.7"
+    - "§2.23"
+    - "§6.2"
+    - "§10"
+  errata:
+    - "E004"
+
+model_name: inception_time
+pipeline: A
+input_layout: NCL
+
+random_seed: 42  # [project-reproducibility-convention]
+
+class_imbalance:
+  mechanism: dl_two_class_weighted_loss
+
+hyperparameter_candidates:
+  # Config A [hyperparameter-range-from-domain-practice]
+  # Authority: Fawaz et al. 2020 baseline-width setting; locked via Erratum E004.
+  - depth: 6
+    n_filters: 32
+    # Kernel sizes adapted from Fawaz et al. 2020's {10, 20, 40} to the closest
+    # odd-valued triplet {9, 19, 39} to preserve tensor length in the Session 4
+    # same-padding implementation. The receptive-field change is negligible at L=960.
+    kernel_sizes: [9, 19, 39]
+    dropout: 0.2
+    lr: 1.0e-3
+    weight_decay: 1.0e-4
+    batch_size: 32
+    bottleneck_channels: 32
+
+  # Config B [hyperparameter-range-from-domain-practice]
+  # Authority: Fawaz et al. 2020 wider variant; locked via Erratum E004.
+  - depth: 6
+    n_filters: 64
+    kernel_sizes: [9, 19, 39]
+    dropout: 0.2
+    lr: 1.0e-3
+    weight_decay: 1.0e-4
+    batch_size: 32
+    bottleneck_channels: 32
+
+  # Config C [hyperparameter-range-from-domain-practice]
+  # Authority: Erratum E004 small-cohort guard with depth/dropout isolated.
+  - depth: 9
+    n_filters: 32
+    kernel_sizes: [9, 19, 39]
+    dropout: 0.3
+    lr: 1.0e-3
+    weight_decay: 1.0e-4
+    batch_size: 32
+    bottleneck_channels: 32
+
+training:
+  # max_epochs: [hyperparameter-range-from-domain-practice]
+  # Authority: Erratum E004.
+  max_epochs: 200
+  precision: 16-mixed
+  deterministic: true
+  accelerator: gpu
+  devices: 1
+  # Early stopping configuration locked by Erratum E005 (2026-05-18).
+  # Original E004-locked values (monitor=val_auc, mode=max, patience=20) triggered
+  # Post-hoc G in the first Session 8 run due to val_auc dominance by holdout-size
+  # noise (Hanley-McNeil SE ~0.047 at n_holdout=78). Adjusted to val_loss + mode=min
+  # + patience=40 per E005; supporting authority Reimers & Gurevych 2017 (EMNLP).
+  # These values apply identically to Session 9 (CNN-BiLSTM-Attention) and to
+  # Stage 4b DL final training (Session 10 Phase 2) per E005 scope.
+  early_stopping:
+    monitor: val_loss  # [hyperparameter-range-from-domain-practice; locked by E005]
+    mode: min  # [hyperparameter-range-from-domain-practice; locked by E005]
+    patience: 40  # [hyperparameter-range-from-domain-practice; locked by E005]
+  csv_logger:
+    path: outputs/logs/lightning_csv/binary_inception_time
+  nan_retry:
+    enabled: true
+    lr_halving: true
+    max_retries: 1
+
+bootstrap:
+  n_boot_source: modeling_global.bootstrap.n_boot
+
+paths:
+  nested_cv_oof: outputs/predictions/binary_inception_time_nested_cv_oof.csv
+  nested_cv_per_fold: outputs/predictions/binary_inception_time_nested_cv_per_fold.csv
+  nested_cv_summary: outputs/metrics/binary_inception_time_nested_cv_summary.csv
+  nested_cv_results: outputs/analysis/binary_inception_time_nested_cv_results.json
+  log: outputs/logs/train_inception_time.log
