@@ -1,0 +1,42 @@
+# SVM nested-CV configuration for Session 7.
+# Governing plan sections: §0, §2.2, §2.6, §2.7, §3.9, §6.2, §10.
+provenance:
+  operational_plan: ".cursor/plans/modeling_plan_v1_a7c3f9b2_dc789bb5.plan.md"
+  governing_sections:
+    - "§0"
+    - "§2.2"
+    - "§2.6"
+    - "§2.7"
+    - "§3.9"
+    - "§6.2"
+    - "§10"
+
+model_name: svm
+pipeline: B
+
+svc_fixed:
+  kernel: rbf  # [hyperparameter-range-from-domain-practice: Pardo & Sberveglieri 2005 e-nose SVM benchmark]
+  probability: true  # [ml-methodology-literature: intrinsic sklearn SVC probability mode uses internal sigmoid calibration]
+  class_weight: balanced  # [ml-methodology-literature: inverse-frequency class weighting per plan §2.7]
+  random_state: 42  # [project-reproducibility-convention]
+
+search:
+  method: grid
+  scoring: roc_auc
+
+search_space:
+  C: [0.1, 1.0, 10.0]  # [hyperparameter-range-from-domain-practice: Pardo & Sberveglieri 2005; plan §2.2 / §10]
+  gamma: ["scale", 0.01, 0.1]  # [hyperparameter-range-from-domain-practice: Pardo & Sberveglieri 2005; plan §2.2 / §10]
+
+class_imbalance:
+  mechanism: class_weight_balanced
+
+bootstrap:
+  n_boot_source: modeling_global.bootstrap.n_boot
+
+paths:
+  nested_cv_oof: outputs/predictions/binary_svm_nested_cv_oof.csv
+  nested_cv_per_fold: outputs/predictions/binary_svm_nested_cv_per_fold.csv
+  nested_cv_summary: outputs/metrics/binary_svm_nested_cv_summary.csv
+  nested_cv_results: outputs/analysis/binary_svm_nested_cv_results.json
+  log: outputs/logs/train_svm.log

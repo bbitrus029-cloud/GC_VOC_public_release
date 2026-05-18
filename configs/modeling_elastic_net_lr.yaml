@@ -1,0 +1,42 @@
+# Elastic-net logistic-regression nested-CV configuration for Session 7.
+# Governing plan sections: §0, §2.2, §2.7, §3.9, §6.2, §10.
+provenance:
+  operational_plan: ".cursor/plans/modeling_plan_v1_a7c3f9b2_dc789bb5.plan.md"
+  governing_sections:
+    - "§0"
+    - "§2.2"
+    - "§2.7"
+    - "§3.9"
+    - "§6.2"
+    - "§10"
+
+model_name: elastic_net_lr
+pipeline: B
+
+lr_fixed:
+  penalty: elasticnet
+  solver: saga
+  class_weight: balanced  # [ml-methodology-literature: inverse-frequency class weighting per plan §2.7]
+  max_iter: 5000  # [hyperparameter-range-from-domain-practice: saga convergence under elastic-net penalty]
+  random_state: 42  # [project-reproducibility-convention]
+
+search:
+  method: grid
+  scoring: roc_auc
+
+search_space:
+  C: [0.01, 0.0316, 0.1, 0.316, 1.0, 3.16, 10.0, 31.6, 100.0]  # [hyperparameter-range-from-domain-practice: plan §2.2 / §10]
+  l1_ratio: [0.1, 0.3, 0.5, 0.7, 0.9]  # [hyperparameter-range-from-domain-practice: plan §2.2 / §10]
+
+class_imbalance:
+  mechanism: class_weight_balanced
+
+bootstrap:
+  n_boot_source: modeling_global.bootstrap.n_boot
+
+paths:
+  nested_cv_oof: outputs/predictions/binary_elastic_net_lr_nested_cv_oof.csv
+  nested_cv_per_fold: outputs/predictions/binary_elastic_net_lr_nested_cv_per_fold.csv
+  nested_cv_summary: outputs/metrics/binary_elastic_net_lr_nested_cv_summary.csv
+  nested_cv_results: outputs/analysis/binary_elastic_net_lr_nested_cv_results.json
+  log: outputs/logs/train_elastic_net_lr.log
