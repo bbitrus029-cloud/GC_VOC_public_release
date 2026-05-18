@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -19,6 +20,7 @@ from sklearn.metrics import (
 )
 
 from src.training.common import (
+    BaseNestedCVTrainer,
     FoldGenerator,
     MetricsCalculator,
     bootstrap_metric,
@@ -326,3 +328,77 @@ def test_create_dl_holdout_indices_preserves_strata() -> None:
     assert sorted(np.concatenate([kept_train_idx, holdout_idx]).tolist()) == train_idx.tolist()
     holdout_counts = np.bincount(disease_categories[holdout_idx], minlength=6)
     assert holdout_counts.tolist() == [1, 1, 1, 1, 1, 1]
+
+
+def test_base_trainer_pipeline_a_load_data_sorts_numeric_sample_ids(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Pipeline A alignment should sort numeric sample IDs numerically, not lexicographically."""
+    from src.training.common import base_trainer as base_trainer_module
+
+    class _ProbeTrainer(BaseNestedCVTrainer):
+        model_name = "probe"
+        pipeline = "A"
+        class_weight_mode = "balanced"
+        hyperparameter_candidates = ({"probe": True},)
+
+        def build_estimator(self, hparams: dict[str, object], class_weights: object) -> object:
+            raise NotImplementedError
+
+        def fit_fold(
+            self,
+            outer_fold: int,
+            inner_train_idx: np.ndarray,
+            inner_val_idx: np.ndarray,
+            hparams: dict[str, object],
+        ) -> dict[str, object]:
+            raise NotImplementedError
+
+        def save_outputs(self) -> None:
+            raise NotImplementedError
+
+    processed_root = tmp_path / "data" / "processed"
+    sequences_root = processed_root / "sequences"
+    sequences_root.mkdir(parents=True)
+
+    sample_index = pd.DataFrame(
+        {
+            "sample_id": [2, 10, 100, 1000],
+            "label": [0, 1, 0, 1],
+            "in_final_output": [True, True, True, True],
+        }
+    )
+    sample_index.to_csv(processed_root / "sample_index.csv", index=False)
+
+    x = np.array(
+        [
+            np.full((3, 11), fill_value=1000.0),
+            np.full((3, 11), fill_value=10.0),
+            np.full((3, 11), fill_value=2.0),
+            np.full((3, 11), fill_value=100.0),
+        ],
+        dtype=np.float32,
+    )
+    np.savez_compressed(
+        sequences_root / "pipeline_a_raw.npz",
+        x=x,
+        sample_id=np.array([1000, 10, 2, 100], dtype=np.int64),
+        label=np.array([1, 1, 0, 0], dtype=np.int64),
+        channel_names=np.array([f"S{index}" for index in range(1, 12)], dtype="U3"),
+        clip_length_L=np.array(3, dtype=np.int64),
+    )
+
+    monkeypatch.setattr(base_trainer_module, "PROCESSED_DATA_ROOT", processed_root)
+
+    trainer = _ProbeTrainer()
+    trainer.load_data()
+
+    assert trainer.sample_ids_.tolist() == ["2", "10", "100", "1000"]
+    assert trainer.y_.tolist() == [0, 1, 0, 1]
+    assert isinstance(trainer.x_, np.ndarray)
+    assert trainer.x_.shape == (4, 3, 11)
+    assert np.allclose(trainer.x_[0], 2.0)
+    assert np.allclose(trainer.x_[1], 10.0)
+    assert np.allclose(trainer.x_[2], 100.0)
+    assert np.allclose(trainer.x_[3], 1000.0)

@@ -94,11 +94,11 @@ class BaseNestedCVTrainer(ABC):
                 raise OSError(f"Failed to read Pipeline A tensor from {sequence_path}.") from exc
 
             x = sequence_data["x"]
-            pipeline_sample_ids = sequence_data["sample_id"].astype(str)
+            pipeline_sample_ids = sequence_data["sample_id"]
             pipeline_labels = sequence_data["label"].astype(int)
             channel_names = [str(name) for name in sequence_data["channel_names"].tolist()]
             order = np.argsort(pipeline_sample_ids)
-            ordered_sample_ids = pipeline_sample_ids[order]
+            ordered_sample_ids = pipeline_sample_ids[order].astype(str)
             ordered_labels = pipeline_labels[order]
 
             assert np.array_equal(
