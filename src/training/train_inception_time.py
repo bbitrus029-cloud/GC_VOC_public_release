@@ -801,7 +801,7 @@ class InceptionTimeTrainer(BaseNestedCVTrainer):
                         ):
                             oof_records.append(
                                 {
-                                    "sample_id": str(sample_id),
+                                    "sample_id": int(sample_id),
                                     "y_true": int(y_true),
                                     "p_raw": float(p_raw),
                                     "outer_fold": int(fold.outer_fold),
@@ -838,7 +838,7 @@ class InceptionTimeTrainer(BaseNestedCVTrainer):
 
         oof_frame = pd.DataFrame(oof_records)
         if not oof_frame.empty:
-            oof_frame.sort_values("sample_id", inplace=True)
+            oof_frame.sort_values("sample_id", kind="mergesort", inplace=True)
             oof_frame.reset_index(drop=True, inplace=True)
 
         summary_records: list[dict[str, Any]] = []
@@ -919,11 +919,15 @@ class InceptionTimeTrainer(BaseNestedCVTrainer):
             if not oof_frame.empty
             else pd.DataFrame(columns=["sample_id", "y_true", "p_raw", "outer_fold"])
         )
-        self.nested_cv_per_fold_ = (
-            oof_frame.loc[:, ["sample_id", "y_true", "p_raw", "outer_fold", "best_hparams_json"]].copy()
-            if not oof_frame.empty
-            else pd.DataFrame(columns=["sample_id", "y_true", "p_raw", "outer_fold", "best_hparams_json"])
-        )
+        if not oof_frame.empty:
+            per_fold_frame = oof_frame.loc[:, ["sample_id", "y_true", "p_raw", "outer_fold", "best_hparams_json"]].copy()
+            per_fold_frame.sort_values("sample_id", kind="mergesort", inplace=True)
+            per_fold_frame.reset_index(drop=True, inplace=True)
+            self.nested_cv_per_fold_ = per_fold_frame
+        else:
+            self.nested_cv_per_fold_ = pd.DataFrame(
+                columns=["sample_id", "y_true", "p_raw", "outer_fold", "best_hparams_json"]
+            )
         self.nested_cv_summary_ = pd.DataFrame(summary_records)
         self.nested_cv_results_ = {
             "model_name": self.model_name,

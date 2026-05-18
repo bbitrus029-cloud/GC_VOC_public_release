@@ -24,7 +24,7 @@ def inception_time_smoke_fixture(tmp_path: Path) -> dict[str, Path]:
     outputs_dir.mkdir(parents=True)
     configs_dir.mkdir(parents=True)
 
-    sample_ids = np.array([f"S{index:03d}" for index in range(20)], dtype="U4")
+    sample_ids = np.arange(20, dtype=np.int64)
     labels = np.array([index % 2 for index in range(20)], dtype=int)
     disease_categories = np.array(
         [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 0, 1, 2, 3, 4, 5, 0, 5],

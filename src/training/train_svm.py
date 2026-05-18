@@ -480,7 +480,7 @@ class SVMTrainer(BaseNestedCVTrainer):
             for sample_id, y_true, p_raw in zip(sample_ids_outer_val, y_outer_val, val_probabilities, strict=True):
                 oof_records.append(
                     {
-                        "sample_id": str(sample_id),
+                        "sample_id": int(sample_id),
                         "y_true": int(y_true),
                         "p_raw": float(p_raw),
                         "outer_fold": int(fold.outer_fold),
@@ -504,7 +504,7 @@ class SVMTrainer(BaseNestedCVTrainer):
         if not np.isfinite(oof_frame["p_raw"]).all():
             raise ValueError("SVM nested CV produced non-finite OOF probabilities.")
 
-        oof_frame.sort_values("sample_id", inplace=True)
+        oof_frame.sort_values("sample_id", kind="mergesort", inplace=True)
         oof_frame.reset_index(drop=True, inplace=True)
         aggregate_metrics = compute_full_metric_set(
             y_true=oof_frame["y_true"].to_numpy(dtype=int),
@@ -558,9 +558,10 @@ class SVMTrainer(BaseNestedCVTrainer):
             )
 
         self.nested_cv_oof_ = oof_frame.loc[:, ["sample_id", "y_true", "p_raw", "outer_fold"]].copy()
-        self.nested_cv_per_fold_ = oof_frame.loc[
-            :, ["sample_id", "y_true", "p_raw", "outer_fold", "best_hparams_json"]
-        ].copy()
+        per_fold_frame = oof_frame.loc[:, ["sample_id", "y_true", "p_raw", "outer_fold", "best_hparams_json"]].copy()
+        per_fold_frame.sort_values("sample_id", kind="mergesort", inplace=True)
+        per_fold_frame.reset_index(drop=True, inplace=True)
+        self.nested_cv_per_fold_ = per_fold_frame
         self.nested_cv_summary_ = pd.DataFrame(summary_records)
         self.nested_cv_results_ = {
             "model_name": self.model_name,
