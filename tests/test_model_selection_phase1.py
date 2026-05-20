@@ -142,17 +142,10 @@ def test_check_halt_conditions_raises_for_auc_ci_containing_no_skill() -> None:
         module._check_halt_conditions(results_dict)
 
 
-def test_train_final_models_skeleton_raises_not_implemented() -> None:
-    """Phase 1 final-training stubs should exist and raise the handoff marker."""
+def test_train_final_models_phase2_helpers_are_exposed() -> None:
+    """Phase 2 final-training module should expose the aggregation helpers."""
     module = _import_module_or_fail("src.training.train_final_models")
-    dummy_path = Path("configs/modeling_global.yaml")
-
-    with pytest.raises(NotImplementedError, match="Filled in Session 10 Phase 2"):
-        module.train_final_model(
-            model_name="xgboost",
-            global_config_path=dummy_path,
-            model_config_path=Path("configs/modeling_xgboost.yaml"),
-        )
-
-    with pytest.raises(NotImplementedError, match="Filled in Session 10 Phase 2"):
-        module.run_all_final_models(global_config_path=dummy_path)
+    assert callable(module.train_final_model)
+    assert callable(module.run_all_final_models)
+    assert callable(module._extract_per_fold_best_hparams)
+    assert callable(module._aggregate_final_hparams)

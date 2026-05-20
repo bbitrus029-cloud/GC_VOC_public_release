@@ -334,14 +334,23 @@ class ElasticNetLRTrainer(BaseNestedCVTrainer):
         """
         del class_weights
         fixed_config = self.model_config["lr_fixed"]
+        # E009 requires the trainer-side exclusion set to match
+        # `NON_HP_KEYS_PER_MODEL["elastic_net_lr"]` in `train_final_models.py`.
+        excluded_from_splat = {"class_weight", "max_iter", "penalty", "random_state", "solver"}
+        search_hparams = {
+            key: value for key, value in hparams.items() if key not in excluded_from_splat
+        }
+        if "C" in search_hparams:
+            search_hparams["C"] = float(search_hparams["C"])
+        if "l1_ratio" in search_hparams:
+            search_hparams["l1_ratio"] = float(search_hparams["l1_ratio"])
         classifier = _WarningAwareElasticNetLogisticRegression(
-            C=float(hparams.get("C", 1.0)),
-            l1_ratio=float(hparams.get("l1_ratio", 0.5)),
             penalty=str(fixed_config["penalty"]),
             solver=str(fixed_config["solver"]),
             class_weight=str(fixed_config["class_weight"]),
             max_iter=int(fixed_config["max_iter"]),
             random_state=int(fixed_config["random_state"]),
+            **search_hparams,
         )
         return Pipeline(
             steps=[

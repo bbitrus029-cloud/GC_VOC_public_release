@@ -29,10 +29,8 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 import json
 import logging
-import os
 from pathlib import Path
 import subprocess
-import tempfile
 from time import perf_counter
 from typing import Any
 
@@ -49,6 +47,7 @@ from src.evaluation.metrics import compute_full_metric_set
 from src.training.common.base_trainer import BaseNestedCVTrainer
 from src.training.common.bootstrap import bootstrap_metric
 from src.training.common.normalizer import SIGMA_CLAMP_THRESHOLD
+from src.training.common.runtime import ensure_numba_cache_dir
 
 
 LOGGER = logging.getLogger(__name__)
@@ -151,12 +150,8 @@ def _get_git_commit_hash(project_root: Path) -> str:
 
 
 def _ensure_numba_cache_dir() -> None:
-    """Set a writable numba cache directory for MiniRocket runtime compilation."""
-    if os.environ.get("NUMBA_CACHE_DIR"):
-        return
-    cache_dir = Path(tempfile.gettempdir()) / "gcvoc_numba_cache"
-    cache_dir.mkdir(parents=True, exist_ok=True)
-    os.environ["NUMBA_CACHE_DIR"] = str(cache_dir)
+    """Backward-compatible wrapper around the public numba-cache helper."""
+    ensure_numba_cache_dir()
     LOGGER.info("Configured a temporary numba cache directory for MiniRocket runtime.")
 
 

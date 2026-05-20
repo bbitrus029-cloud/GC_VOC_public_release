@@ -342,6 +342,12 @@ class XGBoostTrainer(BaseNestedCVTrainer):
         """
         del class_weights
         fixed_config = self.model_config["xgboost_fixed"]
+        # E009 requires the trainer-side exclusion set to match
+        # `NON_HP_KEYS_PER_MODEL["xgboost"]` in `train_final_models.py`.
+        excluded_from_splat = {"n_jobs", "random_state", "tree_method"}
+        search_hparams = {
+            key: value for key, value in hparams.items() if key not in excluded_from_splat
+        }
         classifier = _InnerTrainBalancedXGBClassifier(
             objective="binary:logistic",
             eval_metric="logloss",
@@ -349,7 +355,7 @@ class XGBoostTrainer(BaseNestedCVTrainer):
             n_jobs=int(fixed_config["n_jobs"]),
             random_state=int(hparams["random_state"]),
             verbosity=0,
-            **{key: value for key, value in hparams.items() if key != "random_state"},
+            **search_hparams,
         )
         return Pipeline(
             steps=[

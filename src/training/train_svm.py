@@ -294,13 +294,20 @@ class SVMTrainer(BaseNestedCVTrainer):
         """
         del class_weights
         fixed_config = self.model_config["svc_fixed"]
+        # E009 requires the trainer-side exclusion set to match
+        # `NON_HP_KEYS_PER_MODEL["svm"]` in `train_final_models.py`.
+        excluded_from_splat = {"class_weight", "kernel", "probability", "random_state"}
+        search_hparams = {
+            key: value for key, value in hparams.items() if key not in excluded_from_splat
+        }
+        if "C" in search_hparams:
+            search_hparams["C"] = float(search_hparams["C"])
         classifier = SVC(
-            C=float(hparams.get("C", 1.0)),
-            gamma=hparams.get("gamma", "scale"),
             kernel=str(fixed_config["kernel"]),
             probability=bool(fixed_config["probability"]),
             class_weight=str(fixed_config["class_weight"]),
             random_state=int(fixed_config["random_state"]),
+            **search_hparams,
         )
         return Pipeline(
             steps=[

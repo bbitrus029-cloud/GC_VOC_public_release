@@ -100,7 +100,7 @@ def elastic_net_lr_smoke_fixture(tmp_path: Path) -> dict[str, Path]:
             "penalty": "elasticnet",
             "solver": "saga",
             "class_weight": "balanced",
-            "max_iter": 500,
+            "max_iter": 5000,
             "random_state": 42,
         },
         "search": {"method": "grid", "scoring": "roc_auc"},
