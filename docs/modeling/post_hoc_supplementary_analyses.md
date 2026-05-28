@@ -1,0 +1,44 @@
+# Post-Hoc Supplementary Analyses
+
+This document records the post-hoc supplementary analyses conducted after the frozen modeling stage of the GC VOC clinical study. It supplements the locked primary analysis with reviewer-facing uncertainty quantification and methodological context, while leaving the prespecified modeling-stage results, selected model, thresholds, calibrators, normalizers, transformers, train/test split, and fold structure unchanged. Frozen upstream facts in this document are copied from `docs/modeling/validated_modeling_run_summary.md`, and later sections are populated only after the corresponding Session 1-4 Plan 1 outputs are generated.
+
+## Post-Hoc Declaration
+
+> This analysis is post-hoc, conducted after the `modeling-frozen` tag, and is provided as supplementary evidence only. It does not modify or replace the prespecified primary modeling analysis, selected model, model parameters, thresholds, calibrators, normalizers, transformers, train/test split, fold structure, or any primary-analysis artifact.
+
+## Upstream Frozen-Model Facts
+
+The frozen modeling-stage record in `docs/modeling/validated_modeling_run_summary.md` establishes the following upstream facts for Plan 1:
+
+- Best model: `minirocket_ridge`
+- Locked train/test split: `n_train = 777`, `n_test = 195`
+- Best-model OOF AUC-ROC: `0.9246` with `95%` CI `0.9048-0.9427`
+- Best-model test AUC-ROC: `0.9223` with `95%` CI `0.8831-0.9585`
+- Best-model test Brier: pre-Platt `0.1193`, post-Platt `0.1211`, delta `0.0018`
+- Calibration slope: `0.9046`
+- Calibration intercept: `0.3397`
+- Raw Youden threshold: `threshold_p_raw = 0.341894`
+- Calibrated equivalent threshold: `threshold_p_final_equivalent = 0.219589`
+- Test-set threshold-dependent counts at `threshold_p_raw`: TP/TN/FP/FN = `74 / 97 / 16 / 8`
+- Actual event-per-candidate-parameter ratio: `413 / 25 = 16.5` EPV
+
+## Sample Size Reconstruction
+
+(Pending — to be populated by Session 1 of Plan 1.)
+
+## Bootstrap Optimism-Corrected Validation
+
+(Pending — to be populated by Session 2 of Plan 1.)
+
+## Decision-Curve Threshold-Uncertainty Sensitivity
+
+(Pending — to be populated by Session 3 of Plan 1.)
+
+## Calibration Goodness-Of-Fit Tests
+
+(Pending — to be populated by Session 4 of Plan 1.)
+
+## Execution Ledger
+
+| Session | Date (UTC) | Commit hash | Artifacts produced |
+|---|---|---|---|
