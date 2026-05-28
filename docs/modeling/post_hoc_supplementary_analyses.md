@@ -32,7 +32,11 @@ Under the Plan 1 §3.4 transient-refit procedure for `minirocket_ridge`, the app
 
 ## Decision-Curve Threshold-Uncertainty Sensitivity
 
-(Pending — to be populated by Session 3 of Plan 1.)
+Recomputing the OOF Youden threshold from `binary_minirocket_ridge_nested_cv_oof.csv` reproduced the frozen mapping value exactly within the required tolerance (`threshold_p_raw = 0.341893878614765`, agreement delta `0.000000000000000` vs `binary_minirocket_ridge_threshold_mapping.json`). The stratified `n_boot=2000` percentile bootstrap yielded a 95% CI of `0.341893878614765-0.421007456988883`, with the lower bound coinciding numerically with the point estimate in this run.
+
+Across the three prevalence scenarios, the operative threshold is unchanged and the fixed-threshold sensitivity analysis remains directionally stable over the CI band. At prevalence `0.01` and `0.05`, model net benefit remained negative for all three operating points but was consistently much less negative than the treat-all strategy; at prevalence `0.10`, model net benefit remained positive across the band (`0.0240` at the frozen point estimate, `0.0031` at the upper-CI threshold). Moving from the frozen point estimate to the upper-CI threshold traded some sensitivity (`0.9024` to `0.8415`) for a modest reduction in false-positive rate (`0.1416` to `0.1239`), without changing the conclusion that the frozen `threshold_p_raw` remains the operative threshold and this post-hoc sensitivity analysis does not modify any frozen primary-analysis artifact.
+
+The threshold-uncertainty operating-point table and the background DCA-curve table are intentionally orthogonal outputs: the former captures uncertainty around the three fixed OOF-derived operating points, whereas the latter stores the standard per-prevalence DCA curves over the 98-point threshold grid for downstream visualization. Plan 1 renders no figure; Plan 2 will consume `outputs/analysis/posthoc_threshold_uncertainty_minirocket_ridge_dca_curve_data.csv` and overlay the three operating points from `outputs/analysis/posthoc_threshold_uncertainty_minirocket_ridge.csv`.
 
 ## Calibration Goodness-Of-Fit Tests
 
@@ -44,3 +48,4 @@ Under the Plan 1 §3.4 transient-refit procedure for `minirocket_ridge`, the app
 |---|---|---|---|
 | 1 | 2026-05-28T03:06:01Z | `<placeholder; user fills after commit>` | `outputs/analysis/posthoc_sample_size_reconstruction.md`; `outputs/analysis/posthoc_sample_size_reconstruction.json`; `docs/modeling/post_hoc_supplementary_analyses.md` |
 | 2 | 2026-05-28T03:46:22Z | `<placeholder; user fills after commit>` | `outputs/analysis/posthoc_optimism_correction_minirocket_ridge.csv`; `outputs/analysis/posthoc_optimism_correction_minirocket_ridge.md`; `outputs/logs/posthoc_optimism_correction.log`; `docs/modeling/post_hoc_supplementary_analyses.md` |
+| 3 | 2026-05-28T08:34:50Z | `<placeholder; user fills after commit>` | `outputs/analysis/posthoc_threshold_uncertainty_minirocket_ridge.csv`; `outputs/analysis/posthoc_threshold_uncertainty_minirocket_ridge_dca_curve_data.csv`; `outputs/analysis/posthoc_threshold_uncertainty_minirocket_ridge.md`; `docs/modeling/post_hoc_supplementary_analyses.md` |
