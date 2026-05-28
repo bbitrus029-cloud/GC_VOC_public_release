@@ -1,0 +1,28 @@
+provenance_schema_version: 1  # [project-reproducibility-convention; inherited from configs/modeling_global.yaml]
+stage: "post_hoc_supplementary_plan_1"
+best_model: "minirocket_ridge"
+random_seed: 42  # [project-reproducibility-convention; inherited from src/config.py::RANDOM_SEED and configs/modeling_global.yaml::random_seed]
+temporal_anchor_tag: "modeling-frozen"
+sample_size:
+  anticipated_auc: 0.90  # [prospectively-registered-protocol-parameter]
+  candidate_predictor_parameters: 25  # [prospectively-registered-protocol-parameter]
+  anticipated_prevalence: 0.50  # [prospectively-registered-protocol-parameter]
+  target_shrinkage: 0.90  # [ml-methodology-literature: Riley 2020 and pmsampsize default shrinkage recommendation]
+  target_mape: 0.05  # [ml-methodology-literature: Riley 2020 B2 target mean absolute prediction error]
+  prevalence_margin_of_error: 0.05  # [ml-methodology-literature: Riley 2020 B1]
+  target_r2_nagelkerke_optimism: 0.05  # [ml-methodology-literature: Riley 2020 B4]
+  cox_snell_simulation_n: 1000000  # [ml-methodology-literature: pmsampsize cstat2rsq reference implementation]
+optimism_correction:
+  n_boot: 200  # [ml-methodology-literature: Harrell RMS / rms validate default and 100-200 bootstrap internal-validation convention]
+  metric: "auc_roc"
+threshold_uncertainty:
+  n_boot: 2000  # [ml-methodology-literature: percentile bootstrap precision convention already locked in modeling config]
+  ci_percentiles: [2.5, 97.5]  # [ml-methodology-literature: percentile bootstrap]
+  tie_break: "smallest_threshold"
+calibration_tests:
+  hosmer_lemeshow_groups: 10  # [ml-methodology-literature: standard HL decile grouping]
+paths:
+  outputs_analysis_dir: "outputs/analysis"
+  outputs_logs_dir: "outputs/logs"
+  outputs_figures_modeling_dir: "outputs/figures/modeling"
+  post_hoc_docs: "docs/modeling/post_hoc_supplementary_analyses.md"
