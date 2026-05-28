@@ -63,5 +63,5 @@ Taken together with the frozen post-Platt Brier `0.1211`, calibration slope `0.9
 | 1 | 2026-05-28T03:06:01Z | `73dd2bc` | `outputs/analysis/posthoc_sample_size_reconstruction.md`; `outputs/analysis/posthoc_sample_size_reconstruction.json`; `docs/modeling/post_hoc_supplementary_analyses.md` |
 | 2 | 2026-05-28T03:46:22Z | `beacefd` | `outputs/analysis/posthoc_optimism_correction_minirocket_ridge.csv`; `outputs/analysis/posthoc_optimism_correction_minirocket_ridge.md`; `outputs/logs/posthoc_optimism_correction.log`; `docs/modeling/post_hoc_supplementary_analyses.md` |
 | 3 | 2026-05-28T08:34:50Z | `2d89ba6` | `outputs/analysis/posthoc_threshold_uncertainty_minirocket_ridge.csv`; `outputs/analysis/posthoc_threshold_uncertainty_minirocket_ridge_dca_curve_data.csv`; `outputs/analysis/posthoc_threshold_uncertainty_minirocket_ridge.md`; `docs/modeling/post_hoc_supplementary_analyses.md` |
-| 4A | 2026-05-28T09:09:01Z | `<placeholder; user fills after commit>` | `outputs/analysis/posthoc_calibration_gof_minirocket_ridge.csv`; `outputs/analysis/posthoc_calibration_gof_minirocket_ridge.md` |
-| 4B | 2026-05-28T09:27:41Z | `<placeholder; user fills after commit>` | `docs/modeling/post_hoc_supplementary_analyses.md` |
+| 4A | 2026-05-28T09:09:01Z | `635bec6` | `outputs/analysis/posthoc_calibration_gof_minirocket_ridge.csv`; `outputs/analysis/posthoc_calibration_gof_minirocket_ridge.md` |
+| 4B | 2026-05-28T09:27:41Z | `0b66184` | `docs/modeling/post_hoc_supplementary_analyses.md` |
