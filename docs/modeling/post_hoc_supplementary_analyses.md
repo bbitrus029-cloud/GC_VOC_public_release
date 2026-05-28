@@ -24,7 +24,7 @@ The frozen modeling-stage record in `docs/modeling/validated_modeling_run_summar
 
 ## Sample Size Reconstruction
 
-(Pending — to be populated by Session 1 of Plan 1.)
+Reconstruction under the prospectively registered parameters (`anticipated_auc=0.90`, `candidate_predictor_parameters=25`, `anticipated_prevalence=0.50`) yields `n_b1=385`, `n_b2=1374`, `n_b3=368`, and `n_b4=489`, with `n_required=1374` driven by the van Smeden B2 MAPE criterion. The actual development cohort (`n=972`, `413` events, `EPV=16.5`) meets B1, B3, and B4 but falls short of B2 by `402` samples. See report subsection "Sample-size reconstruction: shortfall against criterion B2" for full disclosure.
 
 ## Bootstrap Optimism-Corrected Validation
 
@@ -42,3 +42,4 @@ The frozen modeling-stage record in `docs/modeling/validated_modeling_run_summar
 
 | Session | Date (UTC) | Commit hash | Artifacts produced |
 |---|---|---|---|
+| 1 | 2026-05-28T03:06:01Z | `<placeholder; user fills after commit>` | `outputs/analysis/posthoc_sample_size_reconstruction.md`; `outputs/analysis/posthoc_sample_size_reconstruction.json`; `docs/modeling/post_hoc_supplementary_analyses.md` |
