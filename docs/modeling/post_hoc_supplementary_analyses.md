@@ -28,7 +28,7 @@ Reconstruction under the prospectively registered parameters (`anticipated_auc=0
 
 ## Bootstrap Optimism-Corrected Validation
 
-(Pending — to be populated by Session 2 of Plan 1.)
+Under the Plan 1 §3.4 transient-refit procedure for `minirocket_ridge`, the apparent discrimination on the locked 777-sample training set was `auc_full_apparent=1.000000`. The mean bootstrap optimism was `0.020074`, yielding a supplementary optimism-corrected AUC-ROC of `0.979926` with a descriptive 2.5/97.5 percentile interval of `0.971265-0.988045`. This corrected value remains higher than the frozen nested-CV OOF AUC `0.9246` and frozen test AUC `0.9223`, but those frozen OOF and test estimates remain the primary discrimination evidence; the optimism-corrected value is supplementary context only.
 
 ## Decision-Curve Threshold-Uncertainty Sensitivity
 
@@ -43,3 +43,4 @@ Reconstruction under the prospectively registered parameters (`anticipated_auc=0
 | Session | Date (UTC) | Commit hash | Artifacts produced |
 |---|---|---|---|
 | 1 | 2026-05-28T03:06:01Z | `<placeholder; user fills after commit>` | `outputs/analysis/posthoc_sample_size_reconstruction.md`; `outputs/analysis/posthoc_sample_size_reconstruction.json`; `docs/modeling/post_hoc_supplementary_analyses.md` |
+| 2 | 2026-05-28T03:46:22Z | `<placeholder; user fills after commit>` | `outputs/analysis/posthoc_optimism_correction_minirocket_ridge.csv`; `outputs/analysis/posthoc_optimism_correction_minirocket_ridge.md`; `outputs/logs/posthoc_optimism_correction.log`; `docs/modeling/post_hoc_supplementary_analyses.md` |
