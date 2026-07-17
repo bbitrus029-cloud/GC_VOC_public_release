@@ -1,0 +1,617 @@
+schema_version: posthoc_final_pre_execution_amendment.v1
+amendment_id: posthoc_final_pre_execution_amendment_01
+package_id: posthoc_final_supplementary
+amendment_status: approved_for_additive_freeze
+review_status: approved
+independent_review_complete: true
+effective_freeze_requires_external_commit_validation: true
+amendment_freeze_commit_id: null
+immediate_preflight_retry_authorized_at_materialization: false
+participant_score_access_authorized: false
+score_derived_computation_authorized: false
+auxiliary_fit_authorized: false
+session_4_execution_authorized: false
+visualization_v2_authorized: false
+results_status: result_free
+materialization_status: independent_final_review_approved_and_approval_evidence_materialized
+approval_evidence:
+  reviewed_amendment_candidate_paths_and_sha256:
+  - path: configs/post_hoc_final_supplementary_pre_execution_amendment_01.yaml
+    sha256: a11a7cf4db23d352d0c72b6149102777ae2ee3216cd23534fc15a424080cec6e
+  - path: docs/modeling/final_post_hoc_supplementary_pre_execution_amendment_01.md
+    sha256: ead4eab9b6f6c52f337d17305d69126535a461cfb3ddea7ec429ccdb56338273
+  - path: outputs/analysis/posthoc_final_pre_execution_amendment_01_manifest.json
+    sha256: 11f22aa34f286dbb9a262f77754f4c2ef84f749d29a27ebc1d64f2f8803f5ada
+  review_status: approved
+  reviewer_designation_or_role: 'Independent read-only methods and provenance reviewer (Codex)'
+  approval_channel_or_reference: 'Codex project-governance conversation — independent final review of pre-execution amendment 01 candidate and Step 2 authorization, 2026-07-17'
+  approval_date_utc: '2026-07-17T02:55:07Z'
+  user_confirmation: true
+authority:
+  reviewed_plan_path: .cursor/plans/acquisition_context_robustness_audit_97707a26.plan.md
+  reviewed_plan_sha256: c1fac4e6ec408f06a9be2efb9748c5ec48d43d981af0faf36bf305c5386b7ef6
+  original_session_0_freeze_commit: 3c0ff6b3b40460a2c340ad3193222ee54979109d
+  original_session_0_parent: cbb87b0380d7129798002ff4ea8b869c4b786582
+  original_session_0_changed_paths:
+  - configs/post_hoc_final_supplementary.yaml
+  - docs/modeling/final_post_hoc_supplementary_methods.md
+  - outputs/analysis/posthoc_final_freeze_manifest.json
+  original_session_0_artifact_sha256:
+    config: 441ad4e27e951a5b31bf2fa078c5371de121594088c22c7dd5c2904d831d704f
+    methods: edfe093113a237178101feb1b7c24ce616a84d98c054798d7a4dbf2bc220e983
+    freeze_manifest: ac503ea9db87ddcc560347b35dcd1e1f6084bfcb2d02cc994c95330bf14cb6be
+  active_rule_sha256:
+    .cursor/rules/modeling-guardrails.mdc: 9c91e770c31c42e8f0467fcfb5788b218f46a583eecb909221d31a6e20134be3
+    .cursor/rules/project-conventions.mdc: 20bc6fab69a3ce833f2bd1b19fae52d3a4609231a854ac3c74aec709a4cc6583
+    .cursor/rules/python-coding-standards.mdc: e156928096fbdf23d412ed9e03cb2889f6def4ec1d02d7294a435da6919d20b7
+    .cursor/rules/karpathy-guidelines.mdc: 259cf32ac1a493b7bf863992bbb968079a2b6ffdce99dad092ec6f4e2764717d
+  original_session_0_artifacts_immutable: true
+  original_active_plan_immutable: true
+  original_active_rules_immutable: true
+trigger:
+  event: first_session_1_score_blind_preflight_failed_closed
+  command_mode: --preflight-score-blind
+  failure_stage: modeling_cohort_date_parsing
+  sanitized_failure_code: invalid_date_format_count=972
+  sanitized_failure_message: 'Date parsing failed: missing_or_nonstring_count=0, invalid_date_format_count=972, invalid_date_count=0.'
+  freeze_validation_completed: true
+  opaque_frozen_input_hashing_completed: true
+  prediction_semantic_load_usecols:
+  - sample_id
+  - y_true
+  p_raw_requested: false
+  p_cal_requested: false
+  collection_location_requested: false
+  preflight_json_promoted: false
+  temporary_candidate_remained: false
+  session_1_completion_log_created: false
+  session_4_or_later_output_created: false
+  qc5_real_data_loading_or_reconciliation_reached: false
+  git_mutation_occurred: false
+  external_project_data_transmission_occurred: false
+failed_attempt_access_state:
+  session_activity:
+    prediction_container_bytes_hashed: true
+    prediction_schema_or_header_inspected: true
+    participant_level_label_values_read: true
+    participant_level_score_values_read: false
+    participant_level_date_values_read: true
+    participant_level_qc_values_read: false
+    new_score_derived_results_computed: false
+    auxiliary_model_fit_executed: false
+    privacy_reference_loader_executed: false
+  cumulative_through_failed_attempt:
+    prediction_container_bytes_hashed: true
+    prediction_schema_or_header_inspected: true
+    participant_level_label_values_read: true
+    participant_level_score_values_read: false
+    participant_level_date_values_read: true
+    participant_level_qc_values_read: false
+    new_score_derived_results_computed: false
+    auxiliary_model_fit_executed: false
+    privacy_reference_loader_executed: false
+  notes:
+  - Failed attempt halted at modeling-cohort date parsing before QC5 real-data loading.
+  - Cumulative ledger preserves Session 0 opaque hashing/header inspection plus actual failed-attempt label and date reads
+    only.
+  - Do not claim participant_level_qc_values_read merely because a successful preflight would later reach QC5.
+  - Scope: these flags describe the failed score-blind preflight attempt only, not the entire historical modeling project.
+amendment_drafting_session_access_state:
+  session_activity:
+    prediction_container_bytes_hashed: true
+    prediction_schema_or_header_inspected: false
+    participant_level_label_values_read: true
+    participant_level_score_values_read: false
+    participant_level_date_values_read: true
+    participant_level_qc_values_read: false
+    new_score_derived_results_computed: false
+    auxiliary_model_fit_executed: false
+    privacy_reference_loader_executed: false
+  cumulative_through_session:
+    prediction_container_bytes_hashed: true
+    prediction_schema_or_header_inspected: true
+    participant_level_label_values_read: true
+    participant_level_score_values_read: false
+    participant_level_date_values_read: true
+    participant_level_qc_values_read: false
+    new_score_derived_results_computed: false
+    auxiliary_model_fit_executed: false
+    privacy_reference_loader_executed: false
+  purpose: privacy_safe_aggregate_source_format_audit_and_authority_verification
+  notes:
+  - Label and date values were read only in memory for aggregate format counts and endpoint-class-per-date counts during amendment
+    drafting.
+  - Opaque whole-container hashes of frozen prediction files were recomputed for authority verification during amendment drafting.
+  - Amendment-drafting session_activity has prediction_schema_or_header_inspected false because this drafting activity did
+    not re-inspect headers.
+  - cumulative_through_session has prediction_schema_or_header_inspected true because header inspection already occurred in
+    Session 0 and the failed attempt.
+  - Scope: no p_raw, p_cal, QC value, score-derived metric, or model fit occurred during the failed preflight or amendment-drafting
+      activities. This does not restate historical primary-modeling score access outside those activities.
+correction_pass_access_state:
+  covers_both_document_only_correction_passes: true
+  session_activity:
+    prediction_container_bytes_hashed: false
+    prediction_schema_or_header_inspected: false
+    participant_level_label_values_read: false
+    participant_level_score_values_read: false
+    participant_level_date_values_read: false
+    participant_level_qc_values_read: false
+    new_score_derived_results_computed: false
+    auxiliary_model_fit_executed: false
+    privacy_reference_loader_executed: false
+  cumulative_through_session:
+    prediction_container_bytes_hashed: true
+    prediction_schema_or_header_inspected: true
+    participant_level_label_values_read: true
+    participant_level_score_values_read: false
+    participant_level_date_values_read: true
+    participant_level_qc_values_read: false
+    new_score_derived_results_computed: false
+    auxiliary_model_fit_executed: false
+    privacy_reference_loader_executed: false
+  notes:
+  - Both document-only correction passes revised only the three amendment candidate documents and had identical all-false
+    session_activity.
+  - cumulative_through_session carries forward Session 0, failed-preflight, and amendment-drafting activity; it does not imply
+    any participant-level reread during either correction pass.
+  - No participant-level source rows, dates, labels, scores, or QC values were reread in either correction pass.
+  - The already recorded aggregate date-format audit was reused without repetition.
+step_2_approval_materialization_access_state:
+  session_activity:
+    prediction_container_bytes_hashed: false
+    prediction_schema_or_header_inspected: false
+    participant_level_label_values_read: false
+    participant_level_score_values_read: false
+    participant_level_date_values_read: false
+    participant_level_qc_values_read: false
+    new_score_derived_results_computed: false
+    auxiliary_model_fit_executed: false
+    privacy_reference_loader_executed: false
+  cumulative_through_session:
+    prediction_container_bytes_hashed: true
+    prediction_schema_or_header_inspected: true
+    participant_level_label_values_read: true
+    participant_level_score_values_read: false
+    participant_level_date_values_read: true
+    participant_level_qc_values_read: false
+    new_score_derived_results_computed: false
+    auxiliary_model_fit_executed: false
+    privacy_reference_loader_executed: false
+  purpose: document_only_approval_evidence_materialization
+  notes:
+  - Step 2A revised only the three amendment documents.
+  - No participant-level labels, dates, scores, QC values, or prediction containers were read.
+  - No Git commit was created; effective freeze remains pending external commit validation.
+overlay_application_contract:
+  status: future_implementation_requirement_not_implemented_in_this_step
+  base_config_path: configs/post_hoc_final_supplementary.yaml
+  base_config_immutable: true
+  base_config_remains_byte_for_byte_authority_except_allowlisted_overrides: true
+  overlay_path: configs/post_hoc_final_supplementary_pre_execution_amendment_01.yaml
+  overlay_is_sole_additive_machine_readable_override_authority: true
+  load_order:
+  - validate_and_load_base_config_from_original_session_0_freeze_blob
+  - validate_and_load_exact_commit_anchored_amendment_overlay
+  - apply_allowlisted_key_path_overrides_only
+  - fail_closed_on_any_authority_or_overlay_violation_before_participant_value_access
+  allowlisted_override_target_key_paths_exact:
+  - loaders.date_parsing
+  base_target_key_path: loaders.date_parsing
+  overlay_payload_source_key_path: overlay_application_contract.overlay_date_parsing_payload
+  replacement_semantics: replace_entire_loaders_date_parsing_object_with_overlay_date_parsing_payload
+  recursive_or_broad_merging_forbidden: true
+  non_allowlisted_base_key_paths_remain_authoritative_and_byte_unchanged: true
+  fail_closed_conditions:
+  - unknown_overlay_override_key_path
+  - missing_required_overlay_allowlisted_key_path
+  - duplicate_or_conflicting_overlay_definitions
+  - broader_recursive_merge_beyond_allowlist
+  - semantic_conflict_between_proposed_date_parsing_replacement_contract_and_overlay_date_parsing_payload
+  - base_config_hash_or_blob_mismatch
+  - amendment_overlay_hash_or_blob_mismatch
+  dual_freeze_gate_required_before_participant_value_access: true
+  future_cli_contract:
+    original_freeze_commit_argument: --freeze-commit
+    amendment_freeze_commit_argument: --amendment-freeze-commit
+    overlay_path_policy: fixed_project_relative_path_configs/post_hoc_final_supplementary_pre_execution_amendment_01.yaml_must_match_amendment_freeze_blob
+    must_validate_original_and_amendment_paths_parents_changed_path_sets_blobs_hashes_and_approval_evidence: true
+    either_authority_chain_failure_halts_before_participant_value_access: true
+  overlay_date_parsing_payload:
+    format: slash_encoded_date_only_ascii
+    regex_full_match: '^([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})$'
+    regex_digit_class: ascii_0_to_9_only
+    year_digits: 4
+    month_digits: one_or_two
+    day_digits: one_or_two
+    parser: explicit_three_token_integer_parse_then_pd_to_datetime_format_%Y-%m-%d_exact_true_errors_raise
+    midnight_normalization_required: true
+    parsed_components_must_equal_original_numeric_tokens: true
+    exact_round_trip_text_required: false
+    whitespace_or_time_of_day_rejected: true
+    iso_yyyy_mm_dd_rejected: true
+    unicode_or_non_ascii_digits_rejected: true
+    coercion_or_imputation_forbidden: true
+    errors_report_aggregate_counts_only: true
+    errors_must_not_echo_value_id_or_date: true
+    raw_to_normalized_one_to_one_required: true
+    normalization_collision_forbidden: true
+    canonicalize_in_memory_only: true
+    rewrite_sample_index_forbidden: true
+superseded_session_0_date_parsing_contract:
+  status: superseded_result_free_implementation_assumption
+  retained_as_historical_record: true
+  base_target_key_path: loaders.date_parsing
+  format: '%Y-%m-%d'
+  regex_full_match_required: true
+  parser: 'pd.to_datetime(format="%Y-%m-%d", exact=True, errors="raise")'
+  midnight_normalization_required: true
+  exact_round_trip_text_required: true
+  whitespace_or_time_of_day_rejected: true
+  coercion_or_imputation_forbidden: true
+  errors_report_aggregate_counts_only: true
+  errors_must_not_echo_value_id_or_date: true
+  note: Session 0 freeze retained this contract under nested key path loaders.date_parsing. This amendment does not rewrite
+    Session 0 artifacts to imply the slash parser was frozen then.
+proposed_date_parsing_replacement_contract:
+  status: approved_descriptive_contract_for_additive_freeze
+  role: methods_and_provenance_description_not_runtime_overlay_payload
+  replaces: superseded_session_0_date_parsing_contract
+  base_target_key_path: loaders.date_parsing
+  sole_runtime_overlay_payload_source_key_path: overlay_application_contract.overlay_date_parsing_payload
+  must_remain_semantically_consistent_with_overlay_date_parsing_payload: true
+  semantic_conflict_with_runtime_payload_fails_validation: true
+  source_field: collection_time
+  source_file: data/processed/sample_index.csv
+  accepted_grammar: slash_encoded_date_only_ascii
+  regex_full_match: '^([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})$'
+  year_digits: 4
+  month_digits: one_or_two
+  day_digits: one_or_two
+  reject:
+  - missing_values
+  - non_string_values
+  - whitespace
+  - time_of_day_content
+  - extra_tokens
+  - ambiguous_or_non_slash_forms
+  - iso_yyyy_mm_dd_forms
+  - unicode_or_non_ascii_digits
+  parse_steps:
+  - fullmatch_ascii_slash_grammar_and_capture_three_numeric_tokens
+  - convert_year_month_day_tokens_to_integers_without_generic_inference
+  - validate_real_calendar_date_with_pd_to_datetime_format_yyyy_mm_dd_exact_true_errors_raise
+  - require_midnight_normalized_parsed_timestamp
+  - require_parsed_year_month_day_equal_original_numeric_tokens
+  - canonicalize_in_memory_only_to_stable_calendar_date_for_grouping
+  mapping_invariants:
+    raw_unique_string_to_normalized_date_must_be_one_to_one: true
+    normalization_collision_forbidden: true
+  persistence_policy:
+    persist_raw_date_labels: false
+    persist_normalized_date_labels: false
+    persist_date_hashes: false
+    persist_date_lookup_tables: false
+    persist_participant_date_mappings: false
+    persist_date_group_id: false
+    report_failures_as_aggregate_counts_only: true
+    errors_must_not_echo_value_id_or_date: true
+  immutable_source_policy:
+    rewrite_sample_index_forbidden: true
+    regenerate_sample_index_forbidden: true
+    normalize_on_disk_forbidden: true
+    canonicalization_is_lossless_representation_conversion_not_imputation: true
+aggregate_source_format_audit:
+  population: modeling_cohort_in_final_output_true
+  source_cohort_n: 1040
+  modeling_cohort_n: 972
+  n_match_original_yyyy_mm_dd_contract: 0
+  n_slash_encoded_date_only: 972
+  n_missing_or_nonstring: 0
+  n_whitespace_containing: 0
+  n_time_of_day_marker: 0
+  n_invalid_calendar_under_proposed_parser: 0
+  n_other_nonmatching: 0
+  n_unique_raw_date_strings: 40
+  n_unique_normalized_calendar_dates: 40
+  raw_to_normalized_one_to_one: true
+  normalization_collision_present: false
+  n_normalized_dates_with_both_endpoint_classes: 34
+  digit_length_distribution_aggregate_only:
+    n_month_1digit: 972
+    n_month_2digit: 0
+    n_day_1digit: 305
+    n_day_2digit: 667
+  reconciles_known_date_feasibility_anchors_40_34: true
+  no_date_string_persisted: true
+  no_sample_id_persisted: true
+  reused_without_reread_in_correction_pass: true
+current_session_1_implementation_candidates:
+  paths_and_sha256:
+    src/analysis/posthoc_final_common.py: 0b78fae628126fffea33227093a0a4b7c1b4f59da12f2eeb8d8ec4000d146119
+    src/analysis/posthoc_final_locked_scores.py: 95745873de36f44e150d859dc8f9aeff55c269343b3cfe46be731a9dda8e07d1
+    scripts/run_posthoc_final_locked_scores.py: b41d333a8caf48cb6a99aac22d97a615cd4ec1e171368e9ca8d6d8820b8fee72
+    tests/test_posthoc_final_common.py: c9ad2a4fe51b7dcdaf19da22d60ca2c2771b186468e812bb73205d8134682320
+    tests/test_posthoc_final_locked_scores.py: ee4520997741c429475cb96eb953e11ba441a6079725b76e356c0e51f07db84a
+  preserved_byte_for_byte_in_this_step: true
+  repaired_in_this_step: false
+  excluded_from_future_amendment_freeze_commit: true
+required_future_session_1_code_corrections:
+  status: recorded_for_review_not_implemented_in_this_step
+  corrections:
+  - id: C01
+    summary: Implement --execute-approved as the real Session 4 execution path instead of a placeholder RuntimeError.
+    evidence: scripts/run_posthoc_final_locked_scores.py raises RuntimeError for --execute-approved.
+  - id: C02
+    summary: Session 1 must implement the complete Analyses 1, 2, and 4 framework that Session 4 later executes.
+    details:
+    - exact real-data minimal loaders
+    - difficult-spectrum metrics and composition
+    - strict-QC5 metrics, correctness, and composition
+    - frozen-primary-test LR augmentation
+    - within-date concordance
+    - four exact scientific CSV schemas and row inventories
+    - two isolated deterministic candidate computations
+    - schema/privacy/source validation
+    - individual atomic promotion
+    - sanitized completion log promoted last
+    evidence: current locked-score module exposes score-blind preflight plus incomplete synthetic-only execute_approved_framework
+      stub.
+  - id: C03
+    summary: Replace the test that prohibits Session 4 output paths from appearing in Session 1 implementation.
+    evidence: 'tests/test_posthoc_final_locked_scores.py::test_session_one_does_not_declare_completion_or_later_outputs contradicts
+      active architecture.'
+  - id: C04
+    summary: Difficult-spectrum disease counts must be calculated from the restricted population with zero-preserving six
+      rows.
+    details:
+    - excluded HC and AGC counts equal zero
+    - six counts sum to restricted n
+    evidence: difficult_spectrum_filter currently counts categories before restriction and attaches unrestricted counts.
+  - id: C05
+    summary: QC5 correctness must use exact configured strict_status values.
+    required_values:
+    - strict_pass
+    - strict_fail
+    - not_applicable
+    evidence: strict_qc5_correctness_inventory currently emits pass/fail/pass_minus_fail labels.
+  - id: C06
+    summary: Replace chained vector-length comparison with an exact all-vector alignment check.
+    evidence: 'strict_qc5_correctness_inventory uses len(a) != len(b) != len(c) != len(d), which is logically insufficient.'
+  - id: C07
+    summary: Pre-access authority and entry gate before any participant-level value access.
+    details:
+    - validate active plan and all four active-rule hashes
+    - validate all required annotated-tag ancestry
+    - validate original Session 0 commit, sole parent, exact three paths, and blobs
+    - validate amendment commit, sole parent, exact three paths, and blobs
+    - validate original and amendment approval evidence
+    - validate immutable base config and bounded loaders.date_parsing overlay
+    - validate stale targets and completion logs
+    - validate entry hashes for all required frozen inputs
+    - all of the above before participant-level value access
+    - does_not_require_exit_rehash_before_participant_access
+    evidence: current preflight validates only the Session 0 freeze commit and frozen-input hashes and lacks dual-freeze/overlay/tag/stale-target
+      completeness.
+  - id: C08
+    summary: Machine-enforce complete nested schema semantics, row inventories, dtype/nullability, status/reason dependencies,
+      access-state values, and hash-map ordering.
+    evidence: validate_preflight_schema docstring and body enforce only an essential subset.
+  - id: C09
+    summary: Synthetic unit tests must cover the ASCII slash-format parser.
+    details:
+    - valid one- and two-digit month/day components
+    - invalid calendars
+    - whitespace and time-content rejection
+    - ISO rejection
+    - extra-token rejection
+    - Unicode/non-ASCII digit rejection
+    - mapping collision detection
+    - sanitized no-echo failures
+    evidence: current date tests and fixtures use ISO YYYY-MM-DD only.
+  - id: C10
+    summary: No second preflight may occur until reviewed corrections are implemented, synthetic tests pass, dual-freeze validates,
+      and retry conditions are all satisfied.
+    evidence: governance gate defined by this amendment candidate.
+  - id: C11
+    summary: Access-state ledger must reflect actual access, including QC false when QC is not reached.
+    evidence: build_session_1_access_state currently hard-codes participant_level_qc_values_read true even though the failed
+      attempt never reached QC.
+  - id: C12
+    summary: Privacy validators that reject leaked clinical dates must recognize both ISO-like and slash-like forms without
+      echoing matched values.
+    evidence: validate_preflight_privacy currently regex-matches only YYYY-MM-DD date values.
+  - id: C13
+    summary: Replace the ISO-only parser used by real preflight and later date-based analyses with the exact amended ASCII
+      slash parser.
+    details:
+    - single-value and series parsers share the same frozen contract
+    - canonicalized dates used only in memory
+    - no on-disk source rewrite
+    evidence: posthoc_final_common.py currently implements only YYYY-MM-DD parsing used by preflight and within-date paths.
+  - id: C14
+    summary: Persist computed aggregates into the preflight candidate; do not reconstruct literals after asserting anchors.
+    details:
+    - date-feasibility and QC5 reconciliation values must come from objects just computed from validated inputs
+    - frozen constants may be comparison anchors only
+    - do not assert equality then write separate literal 40/34 or 974/298/676 values
+    - cohort, view, disease-composition, and access-state values must reflect computed or actually observed state
+    evidence: run_score_blind_preflight asserts anchors then writes separate literal OrderedDict date/QC5 values into aggregate_counts.
+  - id: C15
+    summary: Post-computation, pre-promotion source-integrity gate.
+    details:
+    - after permitted computation and immediately before candidate promotion, re-hash every required source/container
+    - require exit hashes to equal entry hashes and frozen authority hashes
+    - any mismatch fails closed without promotion or leftover temporary artifacts
+    - entry hashing itself belongs to C07 and occurs before participant-level access
+    evidence: current preflight hashes inputs once at entry and does not re-validate before promotion.
+  - id: C16
+    summary: Full orchestration and call-order synthetic tests of the real preflight orchestrator.
+    details:
+    - complete authority validation before participant-level value access
+    - both original and amendment freeze chains validated
+    - stale target and completion-log checks before participant access
+    - prediction headers and exact ordered usecols enforced
+    - p_raw, p_cal, and collection_location never requested in score-blind mode
+    - label/date reads only after authority gates
+    - QC reads only after date parsing and alignment succeed
+    - date-parse failure leaves QC access false
+    - all failure stages produce truthful access-state values
+    - before/after hashes checked
+    - no failure promotes a candidate or leaves a temporary file
+    - success promotes only the exact preflight target
+    - privacy validation recognizes ISO-like and slash-like leaked dates without echoing matches
+    evidence: current tests cover helpers and CLI mode selection but not full dual-freeze orchestrator call order on intercepted/synthetic
+      reads.
+absence_verification:
+  outputs/analysis/posthoc_final_score_blind_preflight.json: absent
+  outputs/logs/posthoc_final_locked_scores.log: absent
+  outputs/analysis/posthoc_final_locked_score_metrics_minirocket_ridge.csv: absent
+  outputs/analysis/posthoc_final_locked_score_composition_minirocket_ridge.csv: absent
+  outputs/analysis/posthoc_final_qc5_correctness_minirocket_ridge.csv: absent
+  outputs/analysis/posthoc_final_within_date_concordance_minirocket_ridge.csv: absent
+  outputs/analysis/posthoc_final_date_grouped_validation_minirocket_ridge.csv: absent
+  outputs/analysis/posthoc_final_date_grouped_fold_audit_minirocket_ridge.csv: absent
+  outputs/analysis/posthoc_final_execution_manifest.json: absent
+  outputs/analysis/posthoc_final_integrity_audit.json: absent
+  outputs/analysis/posthoc_final_visualization_release.json: absent
+future_review_materialization_contract:
+  status: phase_a_materialized_phase_b_pending_external_commit_phase_c_immediately_unauthorized
+  current_candidate_remains_unapproved_unfrozen_in_this_pass: false
+  approval_evidence_values_must_not_be_guessed_or_populated_in_this_correction_pass: false
+  phase_a_approval_materialization_before_commit:
+    independent_reviewer_must_approve_exact_corrected_candidate_hashes_first: true
+    approval_evidence_materialized_into_same_three_additive_paths_before_user_freeze_commit: true
+    pre_commit_package_status: approved_for_additive_freeze
+    pre_commit_package_may_set:
+      review_status: approved
+      independent_review_complete: true
+      complete_externally_supplied_approval_evidence: true
+      amendment_freeze_commit_id: null
+    pre_commit_package_must_not_claim_amendment_freeze_commit_already_exists: true
+    pre_commit_package_must_not_set_unqualified_amendment_frozen_true: true
+    freeze_ready_approval_evidence_required_fields_ordered:
+    - reviewed_amendment_candidate_paths_and_sha256
+    - review_status
+    - reviewer_designation_or_role
+    - approval_channel_or_reference
+    - approval_date_utc
+    - user_confirmation
+    reviewed_candidate_manifest_hash_policy: record_hash_of_prior_reviewed_candidate_manifest_version_not_final_manifest_self_hash
+    final_amendment_manifest_self_hash_forbidden: true
+    phase_status: completed_materialized
+    materialized_at_step: step_2a_approval_materialization
+  phase_b_effective_freeze_after_commit:
+    effective_freeze_requires_external_commit_validation: true
+    pre_commit_package_must_state_effective_freeze_requires_external_commit_validation: true
+    effective_amendment_freeze_exists_only_after:
+    - user_creates_exact_three_path_amendment_commit
+    - full_amendment_freeze_commit_id_is_supplied_externally
+    - commit_parent_paths_and_blobs_validate
+    pre_commit_package_must_not_set_unqualified_amendment_frozen_true: true
+    committed_package_must_not_contain_unqualified_amendment_frozen_false: true
+    preferred_fields_instead_of_unqualified_amendment_frozen_boolean:
+    - amendment_status_approved_for_additive_freeze_or_equivalent
+    - effective_freeze_requires_external_commit_validation
+    - amendment_freeze_commit_id_null_before_commit
+    - effective_freeze_validated_externally_after_commit
+    phase_status: pending_external_commit_validation
+  phase_c_retry_authorization_remains_separate:
+    immediate_preflight_retry_authorized_at_materialization: false
+    amendment_freeze_alone_does_not_authorize:
+    - participant_score_access
+    - score_derived_computation
+    - auxiliary_fit
+    - session_4_execution
+    - preflight_retry
+    conditional_single_preflight_retry_requires_all_of:
+    - exact_independent_approval_evidence_present
+    - additive_amendment_freeze_commit_validates
+    - reviewed_session_1_corrections_implemented
+    - required_synthetic_tests_passed
+    - all_other_score_blind_preflight_gates_satisfied
+    committed_amendment_package_need_not_be_rewritten_when_later_retry_conditions_become_true: true
+    future_cli_determines_effective_retry_authorization_from_frozen_conditional_contract_and_current_external_evidence: true
+    phase_status: immediately_unauthorized
+  no_permanent_semantic_contradiction: approved_pre_commit_package_uses_approved_for_additive_freeze_plus_external_commit_validation_fields_not_unqualified_amendment_frozen_boolean
+  approval_evidence_materialized_in_this_step: true
+future_retry_conditions:
+  independent_review_of_this_amendment_required: false
+  additive_amendment_freeze_commit_required: true
+  reviewed_session_1_code_corrections_implemented_required: true
+  required_synthetic_tests_passed_required: true
+  second_preflight_authorized_only_after_all_conditional_retry_requirements: true
+  score_access_remains_unauthorized_by_this_amendment: true
+  session_4_execution_remains_unauthorized_by_this_amendment: true
+  maximum_new_preflight_attempts_authorized_after_all_gates: 1
+  independent_review_complete_recorded: true
+  immediate_preflight_retry_authorized_at_materialization: false
+future_additive_freeze_contract:
+  status: approved_pending_user_controlled_commit
+  preserve_original_session_0_freeze_commit_unchanged: true
+  original_session_0_freeze_commit: 3c0ff6b3b40460a2c340ad3193222ee54979109d
+  amendment_freeze_commit_parent_count: 1
+  amendment_freeze_commit_sole_parent: 3c0ff6b3b40460a2c340ad3193222ee54979109d
+  amendment_freeze_changed_paths_exact:
+  - configs/post_hoc_final_supplementary_pre_execution_amendment_01.yaml
+  - docs/modeling/final_post_hoc_supplementary_pre_execution_amendment_01.md
+  - outputs/analysis/posthoc_final_pre_execution_amendment_01_manifest.json
+  session_1_implementation_or_test_candidates_forbidden_in_amendment_freeze_commit: true
+  amendment_freeze_commit_id: null
+  amendment_freeze_commit_id_policy: externally_recorded_after_user_creates_commit_not_guessed_here
+  validate_original_and_amendment_blobs_separately: true
+  future_cli_must_validate_both_original_freeze_and_amendment_freeze: true
+  authorizes_exactly_one_new_preflight_attempt_only_after_all_conditional_retry_requirements: true
+  does_not_authorize_score_access: true
+  does_not_authorize_session_4_execution: true
+  committed_package_need_not_be_rewritten_after_commit_validation: true
+privacy:
+  aggregate_only: true
+  no_participant_identifiers: true
+  no_participant_scores: true
+  no_exact_clinical_dates: true
+  no_chronological_or_pseudonymous_date_labels: true
+  no_date_hashes: true
+  no_filenames_as_values: true
+  no_absolute_paths: true
+  no_individual_value_or_row_hashes: true
+  network_transfer_of_project_data_prohibited: true
+exclusions:
+- rewrite_of_session_0_artifacts
+- modification_of_active_plan_or_rules
+- rewrite_of_sample_index
+- score_derived_results
+- auxiliary_model_fit
+- visualization_v2
+- collection_location_analyses
+- second_preflight_before_approval_freeze_validation_and_code_repair
+- creating_amendment_freeze_commit_in_this_step
+- preflight_rerun_in_this_step
+non_circularity:
+  amendment_freeze_commit_id_embedded: false
+  amendment_manifest_self_hash_embedded: false
+  invented_approval: false
+  invented_reviewer_identity: false
+  guessed_future_commit_id: false
+  approval_evidence_populated_in_this_correction_pass: false
+  approval_evidence_materialized_from_externally_supplied_values: true
+  immediate_preflight_retry_authorized_at_materialization_false: true
+historical_correction_pass_status: corrected_candidate_independent_final_review_pending_historical
+additive_pre_commit_freeze_paths:
+  config: configs/post_hoc_final_supplementary_pre_execution_amendment_01.yaml
+  methods_or_erratum: docs/modeling/final_post_hoc_supplementary_pre_execution_amendment_01.md
+  manifest: outputs/analysis/posthoc_final_pre_execution_amendment_01_manifest.json
+prior_reviewed_candidate_artifact_hashes:
+  role: prior_independently_reviewed_candidate_version_hashes
+  note: These are the exact candidate hashes approved by the independent reviewer; the reviewed manifest hash is not a final-manifest
+    self-hash.
+  paths_and_sha256:
+    configs/post_hoc_final_supplementary_pre_execution_amendment_01.yaml: a11a7cf4db23d352d0c72b6149102777ae2ee3216cd23534fc15a424080cec6e
+    docs/modeling/final_post_hoc_supplementary_pre_execution_amendment_01.md: ead4eab9b6f6c52f337d17305d69126535a461cfb3ddea7ec429ccdb56338273
+    outputs/analysis/posthoc_final_pre_execution_amendment_01_manifest.json: 11f22aa34f286dbb9a262f77754f4c2ef84f749d29a27ebc1d64f2f8803f5ada
+additive_pre_commit_freeze_artifact_hash_policy:
+  final_manifest_self_hash_forbidden: true
+  prior_reviewed_candidate_manifest_sha256: 11f22aa34f286dbb9a262f77754f4c2ef84f749d29a27ebc1d64f2f8803f5ada
+  prior_reviewed_candidate_manifest_hash_is_not_self_hash: true
+final_status: approved pre-commit amendment package materialized; user-controlled additive freeze commit pending; effective
+  freeze not yet established; immediate preflight retry not authorized
