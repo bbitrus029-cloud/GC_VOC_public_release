@@ -326,9 +326,33 @@ def test_ordered_usecols_loader_returns_request_order_not_file_order(tmp_path: P
 
 
 def test_freeze_commit_validation_uses_mocked_read_only_git() -> None:
-    """Freeze validation requires exact ancestry, parent, paths, blobs, and approval evidence."""
+    """Historical Session 0 validation uses Git objects, not consolidated worktree equality."""
     calls: list[tuple[str, ...]] = []
     commit = "3c0ff6b3b40460a2c340ad3193222ee54979109d"
+    paths = [
+        "configs/post_hoc_final_supplementary.yaml",
+        "docs/modeling/final_post_hoc_supplementary_methods.md",
+        "outputs/analysis/posthoc_final_freeze_manifest.json",
+    ]
+    blobs = ["configblob", "methodsblob", "manifestblob"]
+    hashes = ["c" * 64, "d" * 64, "e" * 64]
+    approval = {
+        "reviewed_plan_path": ".cursor/plans/approved.plan.md",
+        "reviewed_plan_sha256": "b" * 64,
+        "review_status": "approved",
+        "user_confirmation": True,
+    }
+    historical = {
+        "commit_id": commit,
+        "sole_parent": "cbb87b0380d7129798002ff4ea8b869c4b786582",
+        "changed_paths_exact": paths,
+        "artifacts": [
+            {"path": path, "sha256": digest, "git_blob_id": blob}
+            for path, digest, blob in zip(paths, hashes, blobs, strict=True)
+        ],
+        "approval_evidence": approval,
+        "historical_rule_sha256": {".cursor/rules/example.mdc": "a" * 64},
+    }
 
     def fake_git(*args: str) -> str:
         calls.append(args)
@@ -341,74 +365,64 @@ def test_freeze_commit_validation_uses_mocked_read_only_git() -> None:
                 "docs/modeling/final_post_hoc_supplementary_methods.md\n"
                 "outputs/analysis/posthoc_final_freeze_manifest.json\n"
             ),
-            ("rev-parse", f"{commit}:configs/post_hoc_final_supplementary.yaml"): "configblob",
-            ("rev-parse", f"{commit}:docs/modeling/final_post_hoc_supplementary_methods.md"): "methodsblob",
-            ("rev-parse", f"{commit}:outputs/analysis/posthoc_final_freeze_manifest.json"): "manifestblob",
-            ("hash-object", "configs/post_hoc_final_supplementary.yaml"): "configblob",
-            ("hash-object", "docs/modeling/final_post_hoc_supplementary_methods.md"): "methodsblob",
-            ("hash-object", "outputs/analysis/posthoc_final_freeze_manifest.json"): "manifestblob",
+            **{("rev-parse", f"{commit}:{path}"): blob for path, blob in zip(paths, blobs, strict=True)},
         }
         return outputs[args]
 
     config = {
-        "authority": {
-            "baseline_head": "cbb87b0380d7129798002ff4ea8b869c4b786582",
-            "reviewed_plan_path": ".cursor/plans/approved.plan.md",
-            "reviewed_plan_sha256": "b" * 64,
-            "approval_evidence": {
-                "reviewed_plan_path": ".cursor/plans/approved.plan.md",
-                "reviewed_plan_sha256": "b" * 64,
-                "review_status": "approved",
-                "user_confirmation": True,
-            },
-            "active_rules": [{"path": "rule", "sha256": "a" * 64}],
-        },
+        "historical_consolidation": {"original_session_0": historical},
         "outputs": {
             "session_0": {
-                "config": "configs/post_hoc_final_supplementary.yaml",
-                "methods": "docs/modeling/final_post_hoc_supplementary_methods.md",
-                "freeze_manifest": "outputs/analysis/posthoc_final_freeze_manifest.json",
+                "config": paths[0],
+                "methods": paths[1],
+                "freeze_manifest": paths[2],
             }
         },
     }
-    manifest = {
-        "session_0_artifacts": {
-            "config": {
-                "path": "configs/post_hoc_final_supplementary.yaml",
-                "sha256": "c" * 64,
-            },
-            "methods": {
-                "path": "docs/modeling/final_post_hoc_supplementary_methods.md",
-                "sha256": "d" * 64,
-            },
-            "freeze_manifest": {"path": "outputs/analysis/posthoc_final_freeze_manifest.json"},
-        },
-        "expected_session_0_changed_paths": [
-            "configs/post_hoc_final_supplementary.yaml",
-            "docs/modeling/final_post_hoc_supplementary_methods.md",
-            "outputs/analysis/posthoc_final_freeze_manifest.json",
-        ],
-        "approval_evidence": {
-            "reviewed_plan_path": ".cursor/plans/approved.plan.md",
-            "reviewed_plan_sha256": "b" * 64,
-            "review_status": "approved",
-            "user_confirmation": True,
-        },
-        "reviewed_plan": {"path": ".cursor/plans/approved.plan.md", "sha256": "b" * 64},
-        "active_rules": {"rule": {"sha256": "a" * 64}},
-    }
+    manifest = {"historical_evidence": {"original_session_0": historical}}
     result = validate_freeze_commit(
         commit,
         config,
         manifest,
         git_runner=fake_git,
-        rule_hashes={"rule": "a" * 64},
-        artifact_hashes={"config": "c" * 64, "methods": "d" * 64},
     )
     assert all(value is True for key, value in result.items() if key != "freeze_commit_id")
     assert result["freeze_commit_id"] == commit
-    assert ("hash-object", "configs/post_hoc_final_supplementary.yaml") in calls
+    assert not any(call[0] == "hash-object" for call in calls)
     assert all("status" not in call and "reset" not in call for call in calls)
+
+
+@pytest.mark.parametrize("field", ["sole_parent", "changed_paths_exact", "artifacts"])
+def test_freeze_commit_validation_rejects_historical_record_mismatch(field: str) -> None:
+    """A changed historical parent, path inventory, blob, or SHA record fails closed."""
+    commit = "3c0ff6b3b40460a2c340ad3193222ee54979109d"
+    paths = ["config.yaml", "methods.md", "manifest.json"]
+    historical = {
+        "commit_id": commit,
+        "sole_parent": "c" * 40,
+        "changed_paths_exact": paths,
+        "artifacts": [
+            {"path": path, "sha256": chr(97 + index) * 64, "git_blob_id": f"blob-{index}"}
+            for index, path in enumerate(paths)
+        ],
+        "approval_evidence": {"review_status": "approved", "user_confirmation": True},
+        "historical_rule_sha256": {"legacy-rule": "f" * 64},
+    }
+    manifest_record = json.loads(json.dumps(historical))
+    if field == "sole_parent":
+        manifest_record[field] = "d" * 40
+    elif field == "changed_paths_exact":
+        manifest_record[field] = [*paths, "unexpected"]
+    else:
+        manifest_record[field][0]["sha256"] = "f" * 64
+    config = {
+        "historical_consolidation": {"original_session_0": historical},
+        "outputs": {"session_0": {"config": paths[0], "methods": paths[1], "freeze_manifest": paths[2]}},
+    }
+    manifest = {"historical_evidence": {"original_session_0": manifest_record}}
+
+    with pytest.raises(ValueError):
+        validate_freeze_commit(commit, config, manifest, git_runner=lambda *_args: "")
 
 
 def _valid_preflight_payload() -> dict[str, object]:

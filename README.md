@@ -13,17 +13,17 @@ Six annotated git tags anchor the prespecification timestamps and methodological
 
 ## Local Agent Workspace and Migration Provenance
 
-Current local agent guidance is in root `AGENTS.md`, and local operational plans are under `docs/plans/`. Project-level Codex configuration may later live under `.codex/`, and project skills may later live under `.agents/skills/`. These local execution files are intentionally excluded from Git and will not be reconstructed by a fresh clone.
+Current local agent guidance is root `AGENTS.md`, and current local operational plans are under `docs/plans/`. Project-level Codex configuration may later live under `.codex/`, and project skills may later live under `.agents/skills/`. These local execution files are intentionally excluded from Git and will not be reconstructed by a fresh clone.
 
 The tracked prespecification evidence remains `docs/protocol/preprocessing_plan.md`, `docs/protocol/modeling_plan.md`, and the annotated Git tags and their history. Legacy `.cursor/plans/...` strings retained in frozen protocols, configurations, manifests, code provenance fields, and run summaries are historical path literals, not current runtime locations. Those frozen historical documents must not be edited merely to clean up legacy path wording. The literal `TBD-at-commit-time` text in a frozen snapshot is a preserved historical placeholder; its actual provenance anchor is the corresponding annotated tag resolved from Git.
 
-Read-only history inspection confirms that the `.cursor/` plan files themselves were never tracked by Git. Any old statement that the operational `.cursor` plan itself was committed is historical documentation imprecision; the tracked protocol snapshots and Git anchors are the repository evidence. Commit A does not yet remove `.cursor/`; it remains temporarily as an ignored compatibility source until the separately reviewed Commit B cutover.
+Read-only history inspection confirms that the `.cursor/` plan files themselves were never tracked by Git. Any old statement that the operational `.cursor` plan itself was committed is historical documentation imprecision; the tracked protocol snapshots and Git anchors are the repository evidence. After the externally reviewed Commit B cutover, `.cursor/` is no longer a runtime source. Legacy `.cursor` paths remain only where needed to identify historical approval and migration provenance.
 
 The destination hashes below are migration-time local hashes, not frozen scientific artifact hashes.
 
 | Legacy local path | Legacy SHA-256 | New local path | New SHA-256 | Role/status |
 | --- | --- | --- | --- | --- |
-| `.cursor/plans/acquisition_context_robustness_audit_97707a26.plan.md` | `c1fac4e6ec408f06a9be2efb9748c5ec48d43d981af0faf36bf305c5386b7ef6` | `docs/plans/acquisition_context_robustness_audit_97707a26.plan.md` | `ea38735dce9383adeff839ca5c8bdcd084b5f065f5fd68eeda924cdaa522a452` | Local relocation candidate of the already-approved active final plan at the stated legacy SHA-256; operational cutover awaits separately reviewed Commit B and does not initiate, reopen, or recreate Session 0 |
+| `.cursor/plans/acquisition_context_robustness_audit_97707a26.plan.md` | `c1fac4e6ec408f06a9be2efb9748c5ec48d43d981af0faf36bf305c5386b7ef6` | `docs/plans/acquisition_context_robustness_audit_97707a26.plan.md` | `ea38735dce9383adeff839ca5c8bdcd084b5f065f5fd68eeda924cdaa522a452` | Current local operational copy after externally reviewed Commit B cutover; the legacy path/hash remains the exact Session 0 approval provenance, and relocation does not initiate, reopen, or recreate Session 0 |
 | `.cursor/plans/modeling_plan_v1_a7c3f9b2_dc789bb5.plan.md` | `771861cc69e96dbf27172528086a42bd4e83045b51aa4bb6055527d0b50652ff` | `docs/plans/modeling_plan_v1_a7c3f9b2_dc789bb5.plan.md` | `542303ec561d2c272853a82c5dbbac59a1ee932c39b42b3373ce4a67dd187029` | Historical modeling operational plan; modeling is frozen |
 | `.cursor/plans/modeling_supplementary_plan_v1_b12558f4.plan.md` | `b8221dce5c3b2b70c7ec4ff7204c498fed8ffd0bd8ea8bffe137ec7b19c229eb` | `docs/plans/modeling_supplementary_plan_v1_b12558f4.plan.md` | `369f0c49c3ac5573fc2bdb3c846e0ad42fb307a9cc2539a64b981d8b304d02d2` | Historical post-hoc supplementary Plan 1 operational record |
 | `.cursor/plans/preprocessing_plan_v1_539bc1eb.plan.md` | `169f3bc91cd06cf39065ff495b6339052327d6a0de42d65fa26bdcaf5059941e` | `docs/plans/preprocessing_plan_v1_539bc1eb.plan.md` | `0f413a7384410ee976a8d4eb38472be4d93762fd84d5707f1223e9479a4d5f6c` | Historical preprocessing operational plan; preprocessing is frozen |
@@ -37,7 +37,7 @@ The destination hashes below are migration-time local hashes, not frozen scienti
 
 ## Current Stage — Final Post-Hoc Robustness and Reporting-Closure Package
 
-The approved active legacy plan has SHA-256 `c1fac4e6ec408f06a9be2efb9748c5ec48d43d981af0faf36bf305c5386b7ef6`. Session 0 completed at `3c0ff6b3b40460a2c340ad3193222ee54979109d`, additive Amendment 01 at `2e08e8fb89d99bb62cca2e5204a13ff09e47d432`, and Session 1 at `d19dcbdb7bd9ef20c8534cca0a87384ed1c6fa9f`. The three Session 2 code files exist locally but remain unreviewed and uncommitted. This README, the workspace migration task, and Commit A do not authorize Session 2 or any later execution.
+The original approved legacy plan has SHA-256 `c1fac4e6ec408f06a9be2efb9748c5ec48d43d981af0faf36bf305c5386b7ef6`. Session 0 completed at `3c0ff6b3b40460a2c340ad3193222ee54979109d`, additive Amendment 01 at `2e08e8fb89d99bb62cca2e5204a13ff09e47d432`, and Session 1 at `d19dcbdb7bd9ef20c8534cca0a87384ed1c6fa9f`. The current final post-hoc package has one consolidated active record bundle: `configs/post_hoc_final_supplementary.yaml`, `docs/modeling/final_post_hoc_supplementary_methods.md`, and `outputs/analysis/posthoc_final_freeze_manifest.json`. Original Session 0 and Amendment 01 remain independently recoverable and verifiable from Git history; consolidation changes neither their scientific content nor their historical timing and creates no new Session 0. The successful Session 1 score-blind preflight remains byte-preserved. The three Session 2 code files exist locally but remain unreviewed and uncommitted, and neither Commit B nor this README authorizes Session 2 or any later execution.
 
 ## Environment
 
@@ -50,4 +50,4 @@ conda activate gcvocs
 
 ## Status
 
-Preprocessing and modeling are frozen. The final post-hoc package has completed Session 0, Amendment 01, and Session 1; Session 2 and later execution are not authorized by this README or Commit A.
+Preprocessing and modeling are frozen. The final post-hoc package has completed Session 0, Amendment 01, and Session 1; its active records are consolidated without a scientific change. Session 2 and later execution remain unauthorized.

@@ -1,43 +1,311 @@
 # Final post-hoc robustness and reporting-closure package configuration.
-# Result-free Session 0 machine-readable transcription of the approved plan contracts.
-# Authority: .cursor/plans/acquisition_context_robustness_audit_97707a26.plan.md
-# Approved plan SHA-256: c1fac4e6ec408f06a9be2efb9748c5ec48d43d981af0faf36bf305c5386b7ef6
-# Pre-commit correction revision 3: Session-4 log inventory, exact nested leaf/map-key contracts, completion-log grammar.
+# Current consolidated runtime authority: original Session 0 plus the exact approved Amendment 01 date parser.
+# Operational plan: docs/plans/acquisition_context_robustness_audit_97707a26.plan.md
+# Agent guidance: AGENTS.md
 
 schema_version: posthoc_final_supplementary.config.v1
 package_id: posthoc_final_supplementary
 package_status: post_hoc_supplementary
 session_scope: session_0_result_free_methods_freeze
+record_bundle_status: consolidated_current_authority_with_immutable_historical_chain
+consolidation_date: '2026-07-20'
+consolidation_creates_new_session_0: false
+consolidation_backdates_amended_parser_to_original_session_0: false
 visualization_v2_authorized: false
 visualization_v2_authorization_rule: Unauthorized through Session 7. Authorization requires a later user-controlled additive
   outputs/analysis/posthoc_final_visualization_release.json after Session 7 is committed and independently approved.
 authority:
-  reviewed_plan_path: .cursor/plans/acquisition_context_robustness_audit_97707a26.plan.md
-  reviewed_plan_sha256: c1fac4e6ec408f06a9be2efb9748c5ec48d43d981af0faf36bf305c5386b7ef6
-  retired_prohibited_plan_path: .cursor/plans/acquisition_context_robustness_audit_4d2cfd18.plan.md
-  retired_plan_status: prohibited_never_execute
+  reviewed_plan_path: docs/plans/acquisition_context_robustness_audit_97707a26.plan.md
+  reviewed_plan_sha256: ea38735dce9383adeff839ca5c8bdcd084b5f065f5fd68eeda924cdaa522a452
+  agent_guidance_path: AGENTS.md
+  agent_guidance_sha256: 1cb134c06871ba1837e0ff235dca9ca6ee0c10c1d08a123ff3912354299f9c9a
+  retired_plan_identifier: acquisition_context_robustness_audit_4d2cfd18.plan.md
+  retired_plan_status: historical_prohibited_never_execute_not_current_filesystem_dependency
   baseline_branch: main
   baseline_head: cbb87b0380d7129798002ff4ea8b869c4b786582
   temporal_anchor_tag: modeling-frozen
   temporal_anchor_peeled_commit: 5112f80b8468d62c4f3bf630e06b2b14da78b467
-  approval_evidence:
-    reviewed_plan_path: .cursor/plans/acquisition_context_robustness_audit_97707a26.plan.md
-    reviewed_plan_sha256: c1fac4e6ec408f06a9be2efb9748c5ec48d43d981af0faf36bf305c5386b7ef6
-    review_status: approved
-    reviewer_designation_or_role: Independent read-only methods and provenance reviewer (Codex)
-    approval_channel_or_reference: 'Codex project-governance conversation: final independent plan audit and Session 0 handoff,
-      2026-07-16'
-    approval_date_utc: '2026-07-16T08:12:37Z'
-    user_confirmation: true
-  active_rules:
-  - path: .cursor/rules/modeling-guardrails.mdc
-    sha256: 9c91e770c31c42e8f0467fcfb5788b218f46a583eecb909221d31a6e20134be3
-  - path: .cursor/rules/project-conventions.mdc
-    sha256: 20bc6fab69a3ce833f2bd1b19fae52d3a4609231a854ac3c74aec709a4cc6583
-  - path: .cursor/rules/python-coding-standards.mdc
-    sha256: e156928096fbdf23d412ed9e03cb2889f6def4ec1d02d7294a435da6919d20b7
-  - path: .cursor/rules/karpathy-guidelines.mdc
-    sha256: 259cf32ac1a493b7bf863992bbb968079a2b6ffdce99dad092ec6f4e2764717d
+historical_consolidation:
+  original_session_0:
+    status: immutable_historical_result_free_methods_freeze
+    commit_id: 3c0ff6b3b40460a2c340ad3193222ee54979109d
+    sole_parent: cbb87b0380d7129798002ff4ea8b869c4b786582
+    changed_paths_exact:
+    - configs/post_hoc_final_supplementary.yaml
+    - docs/modeling/final_post_hoc_supplementary_methods.md
+    - outputs/analysis/posthoc_final_freeze_manifest.json
+    artifacts:
+    - path: configs/post_hoc_final_supplementary.yaml
+      sha256: 441ad4e27e951a5b31bf2fa078c5371de121594088c22c7dd5c2904d831d704f
+      git_blob_id: 37cf32215c17b2c5a8d2440df988fee92003325f
+    - path: docs/modeling/final_post_hoc_supplementary_methods.md
+      sha256: edfe093113a237178101feb1b7c24ce616a84d98c054798d7a4dbf2bc220e983
+      git_blob_id: 65f1ef6ccb8d5de0fdb4c4c1538e135460b5ad03
+    - path: outputs/analysis/posthoc_final_freeze_manifest.json
+      sha256: ac503ea9db87ddcc560347b35dcd1e1f6084bfcb2d02cc994c95330bf14cb6be
+      git_blob_id: f4e2eae3fa49befed74053564e3049a8efbdb0e4
+    approval_evidence:
+      reviewed_plan_path: .cursor/plans/acquisition_context_robustness_audit_97707a26.plan.md
+      reviewed_plan_sha256: c1fac4e6ec408f06a9be2efb9748c5ec48d43d981af0faf36bf305c5386b7ef6
+      review_status: approved
+      reviewer_designation_or_role: Independent read-only methods and provenance reviewer (Codex)
+      approval_channel_or_reference: 'Codex project-governance conversation: final independent plan audit and Session 0 handoff,
+        2026-07-16'
+      approval_date_utc: '2026-07-16T08:12:37Z'
+      user_confirmation: true
+    original_date_parsing_assumption:
+      status: superseded_result_free_implementation_assumption
+      format: '%Y-%m-%d'
+      parser: pd.to_datetime(format="%Y-%m-%d", exact=True, errors="raise")
+      amended_parser_existed_in_original_blob: false
+    historical_legacy_plan:
+      path: .cursor/plans/acquisition_context_robustness_audit_97707a26.plan.md
+      sha256: c1fac4e6ec408f06a9be2efb9748c5ec48d43d981af0faf36bf305c5386b7ef6
+      role: exact_independently_reviewed_approval_provenance_not_current_runtime_file
+    historical_rule_sha256:
+      .cursor/rules/modeling-guardrails.mdc: 9c91e770c31c42e8f0467fcfb5788b218f46a583eecb909221d31a6e20134be3
+      .cursor/rules/project-conventions.mdc: 20bc6fab69a3ce833f2bd1b19fae52d3a4609231a854ac3c74aec709a4cc6583
+      .cursor/rules/python-coding-standards.mdc: e156928096fbdf23d412ed9e03cb2889f6def4ec1d02d7294a435da6919d20b7
+      .cursor/rules/karpathy-guidelines.mdc: 259cf32ac1a493b7bf863992bbb968079a2b6ffdce99dad092ec6f4e2764717d
+    historical_rules_role: migration_provenance_not_current_runtime_files
+    retired_plan_historical_path: .cursor/plans/acquisition_context_robustness_audit_4d2cfd18.plan.md
+    retired_plan_status: prohibited_never_execute_not_current_filesystem_dependency
+  amendment_01:
+    status: immutable_historical_pre_execution_amendment
+    commit_id: 2e08e8fb89d99bb62cca2e5204a13ff09e47d432
+    sole_parent: 3c0ff6b3b40460a2c340ad3193222ee54979109d
+    changed_paths_exact:
+    - configs/post_hoc_final_supplementary_pre_execution_amendment_01.yaml
+    - docs/modeling/final_post_hoc_supplementary_pre_execution_amendment_01.md
+    - outputs/analysis/posthoc_final_pre_execution_amendment_01_manifest.json
+    artifacts:
+    - path: configs/post_hoc_final_supplementary_pre_execution_amendment_01.yaml
+      sha256: ffc0b655fc0292b1d7bdc29b185941c2cea872654be19cbad102997acbd12ff5
+      git_blob_id: 6f1f5ae2142dce4475dba9eba565951c0822d3be
+    - path: docs/modeling/final_post_hoc_supplementary_pre_execution_amendment_01.md
+      sha256: c6f5e465fab72a1f106feed3b4b91fc65d0aa35a7c54cefb689cee0e17ab0a9d
+      git_blob_id: 393d7e161cb3200cee8563faac765e93601df55e
+    - path: outputs/analysis/posthoc_final_pre_execution_amendment_01_manifest.json
+      sha256: b8e436704eccd48765e3b78082e28401c3785d2c1fea425baf886252ddf3e9c6
+      git_blob_id: e8b03852e48c6de3d462d1296789d9ca8c3061b9
+    approval_evidence:
+      reviewed_amendment_candidate_paths_and_sha256:
+      - path: configs/post_hoc_final_supplementary_pre_execution_amendment_01.yaml
+        sha256: a11a7cf4db23d352d0c72b6149102777ae2ee3216cd23534fc15a424080cec6e
+      - path: docs/modeling/final_post_hoc_supplementary_pre_execution_amendment_01.md
+        sha256: ead4eab9b6f6c52f337d17305d69126535a461cfb3ddea7ec429ccdb56338273
+      - path: outputs/analysis/posthoc_final_pre_execution_amendment_01_manifest.json
+        sha256: 11f22aa34f286dbb9a262f77754f4c2ef84f749d29a27ebc1d64f2f8803f5ada
+      review_status: approved
+      reviewer_designation_or_role: Independent read-only methods and provenance reviewer (Codex)
+      approval_channel_or_reference: Codex project-governance conversation — independent final review of pre-execution
+        amendment 01 candidate and Step 2 authorization, 2026-07-17
+      approval_date_utc: '2026-07-17T02:55:07Z'
+      user_confirmation: true
+    immediate_preflight_retry_authorized_at_materialization: false
+    participant_score_access_authorized: false
+    score_derived_computation_authorized: false
+    auxiliary_fit_authorized: false
+    session_4_execution_authorized: false
+    trigger:
+      event: first_session_1_score_blind_preflight_failed_closed
+      failure_stage: modeling_cohort_date_parsing
+      sanitized_failure_code: invalid_date_format_count=972
+      sanitized_failure_message: 'Date parsing failed: missing_or_nonstring_count=0, invalid_date_format_count=972, invalid_date_count=0.'
+      freeze_validation_completed: true
+      opaque_frozen_input_hashing_completed: true
+      prediction_semantic_load_usecols:
+      - sample_id
+      - y_true
+      p_raw_requested: false
+      p_cal_requested: false
+      collection_location_requested: false
+      preflight_json_promoted: false
+      temporary_candidate_remained: false
+      session_1_completion_log_created: false
+      session_4_or_later_output_created: false
+      qc5_real_data_loading_or_reconciliation_reached: false
+      git_mutation_occurred: false
+      external_project_data_transmission_occurred: false
+    aggregate_source_format_audit:
+      population: modeling_cohort_in_final_output_true
+      source_cohort_n: 1040
+      modeling_cohort_n: 972
+      n_match_original_yyyy_mm_dd_contract: 0
+      n_slash_encoded_date_only: 972
+      n_missing_or_nonstring: 0
+      n_whitespace_containing: 0
+      n_time_of_day_marker: 0
+      n_invalid_calendar_under_approved_parser: 0
+      n_other_nonmatching: 0
+      n_unique_raw_date_strings: 40
+      n_unique_normalized_calendar_dates: 40
+      raw_to_normalized_one_to_one: true
+      normalization_collision_present: false
+      n_normalized_dates_with_both_endpoint_classes: 34
+      digit_length_distribution_aggregate_only:
+        n_month_1digit: 972
+        n_month_2digit: 0
+        n_day_1digit: 305
+        n_day_2digit: 667
+      no_date_string_persisted: true
+      no_sample_id_persisted: true
+    access_state:
+      failed_attempt:
+        session_activity:
+          prediction_container_bytes_hashed: true
+          prediction_schema_or_header_inspected: true
+          participant_level_label_values_read: true
+          participant_level_score_values_read: false
+          participant_level_date_values_read: true
+          participant_level_qc_values_read: false
+          new_score_derived_results_computed: false
+          auxiliary_model_fit_executed: false
+          privacy_reference_loader_executed: false
+        cumulative_through_failed_attempt:
+          prediction_container_bytes_hashed: true
+          prediction_schema_or_header_inspected: true
+          participant_level_label_values_read: true
+          participant_level_score_values_read: false
+          participant_level_date_values_read: true
+          participant_level_qc_values_read: false
+          new_score_derived_results_computed: false
+          auxiliary_model_fit_executed: false
+          privacy_reference_loader_executed: false
+      amendment_drafting:
+        session_activity:
+          prediction_container_bytes_hashed: true
+          prediction_schema_or_header_inspected: false
+          participant_level_label_values_read: true
+          participant_level_score_values_read: false
+          participant_level_date_values_read: true
+          participant_level_qc_values_read: false
+          new_score_derived_results_computed: false
+          auxiliary_model_fit_executed: false
+          privacy_reference_loader_executed: false
+        cumulative_through_session:
+          prediction_container_bytes_hashed: true
+          prediction_schema_or_header_inspected: true
+          participant_level_label_values_read: true
+          participant_level_score_values_read: false
+          participant_level_date_values_read: true
+          participant_level_qc_values_read: false
+          new_score_derived_results_computed: false
+          auxiliary_model_fit_executed: false
+          privacy_reference_loader_executed: false
+      correction_passes:
+        session_activity:
+          prediction_container_bytes_hashed: false
+          prediction_schema_or_header_inspected: false
+          participant_level_label_values_read: false
+          participant_level_score_values_read: false
+          participant_level_date_values_read: false
+          participant_level_qc_values_read: false
+          new_score_derived_results_computed: false
+          auxiliary_model_fit_executed: false
+          privacy_reference_loader_executed: false
+        cumulative_through_session:
+          prediction_container_bytes_hashed: true
+          prediction_schema_or_header_inspected: true
+          participant_level_label_values_read: true
+          participant_level_score_values_read: false
+          participant_level_date_values_read: true
+          participant_level_qc_values_read: false
+          new_score_derived_results_computed: false
+          auxiliary_model_fit_executed: false
+          privacy_reference_loader_executed: false
+      step_2_approval_materialization:
+        session_activity:
+          prediction_container_bytes_hashed: false
+          prediction_schema_or_header_inspected: false
+          participant_level_label_values_read: false
+          participant_level_score_values_read: false
+          participant_level_date_values_read: false
+          participant_level_qc_values_read: false
+          new_score_derived_results_computed: false
+          auxiliary_model_fit_executed: false
+          privacy_reference_loader_executed: false
+        cumulative_through_session:
+          prediction_container_bytes_hashed: true
+          prediction_schema_or_header_inspected: true
+          participant_level_label_values_read: true
+          participant_level_score_values_read: false
+          participant_level_date_values_read: true
+          participant_level_qc_values_read: false
+          new_score_derived_results_computed: false
+          auxiliary_model_fit_executed: false
+          privacy_reference_loader_executed: false
+    session_1_corrections:
+    - {id: C01, status: implemented_in_session_1}
+    - {id: C02, status: implemented_in_session_1}
+    - {id: C03, status: implemented_in_session_1}
+    - {id: C04, status: implemented_in_session_1}
+    - {id: C05, status: implemented_in_session_1}
+    - {id: C06, status: implemented_in_session_1}
+    - {id: C07, status: implemented_in_session_1}
+    - {id: C08, status: implemented_in_session_1}
+    - {id: C09, status: implemented_in_session_1}
+    - {id: C10, status: implemented_in_session_1}
+    - {id: C11, status: implemented_in_session_1}
+    - {id: C12, status: implemented_in_session_1}
+    - {id: C13, status: implemented_in_session_1}
+    - {id: C14, status: implemented_in_session_1}
+    - {id: C15, status: implemented_in_session_1}
+    - {id: C16, status: implemented_in_session_1}
+  completed_session_1:
+    commit_id: d19dcbdb7bd9ef20c8534cca0a87384ed1c6fa9f
+    sole_parent: 2e08e8fb89d99bb62cca2e5204a13ff09e47d432
+    score_blind_preflight:
+      path: outputs/analysis/posthoc_final_score_blind_preflight.json
+      sha256: 2014bc72ba2c08952be1ad7d7327f07273605c98b3814c2f0ca1b9de4f10e3bf
+      preserved_byte_identical: true
+      recorded_authority_hashes_are_historical_session_0_hashes: true
+      access_state:
+        session_activity:
+          prediction_container_bytes_hashed: true
+          prediction_schema_or_header_inspected: true
+          participant_level_label_values_read: true
+          participant_level_score_values_read: false
+          participant_level_date_values_read: true
+          participant_level_qc_values_read: true
+          new_score_derived_results_computed: false
+          auxiliary_model_fit_executed: false
+          privacy_reference_loader_executed: false
+        cumulative_through_session:
+          prediction_container_bytes_hashed: true
+          prediction_schema_or_header_inspected: true
+          participant_level_label_values_read: true
+          participant_level_score_values_read: false
+          participant_level_date_values_read: true
+          participant_level_qc_values_read: true
+          new_score_derived_results_computed: false
+          auxiliary_model_fit_executed: false
+          privacy_reference_loader_executed: false
+    session_1_corrections_implemented_exact:
+    - C01
+    - C02
+    - C03
+    - C04
+    - C05
+    - C06
+    - C07
+    - C08
+    - C09
+    - C10
+    - C11
+    - C12
+    - C13
+    - C14
+    - C15
+    - C16
+  consolidation:
+    purpose: administrative_runtime_authority_and_provenance_consolidation
+    creates_new_session_0: false
+    creates_new_amendment: false
+    scientific_or_statistical_change: false
+    live_amendment_file_dependency: false
+    live_legacy_cursor_dependency: false
+    session_2_or_later_authorized: false
 interpretation_boundary:
   is_external_validation: false
   is_prospective_temporal_validation: false
@@ -667,15 +935,26 @@ loaders:
     - filename
     - collection_time
   date_parsing:
-    format: '%Y-%m-%d'
-    regex_full_match_required: true
-    parser: pd.to_datetime(format="%Y-%m-%d", exact=True, errors="raise")
+    format: slash_encoded_date_only_ascii
+    regex_full_match: '^([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})$'
+    regex_digit_class: ascii_0_to_9_only
+    year_digits: 4
+    month_digits: one_or_two
+    day_digits: one_or_two
+    parser: explicit_three_token_integer_parse_then_pd_to_datetime_format_%Y-%m-%d_exact_true_errors_raise
     midnight_normalization_required: true
-    exact_round_trip_text_required: true
+    parsed_components_must_equal_original_numeric_tokens: true
+    exact_round_trip_text_required: false
     whitespace_or_time_of_day_rejected: true
+    iso_yyyy_mm_dd_rejected: true
+    unicode_or_non_ascii_digits_rejected: true
     coercion_or_imputation_forbidden: true
     errors_report_aggregate_counts_only: true
     errors_must_not_echo_value_id_or_date: true
+    raw_to_normalized_one_to_one_required: true
+    normalization_collision_forbidden: true
+    canonicalize_in_memory_only: true
+    rewrite_sample_index_forbidden: true
 access_state_ledger:
   required_objects:
   - session_activity
@@ -6226,13 +6505,13 @@ outputs:
             order: 3
             logical_type: string
             nullable: false
-            allowed_value: .cursor/plans/acquisition_context_robustness_audit_97707a26.plan.md
+            allowed_value: docs/plans/acquisition_context_robustness_audit_97707a26.plan.md
           reviewed_plan_sha256:
             order: 4
             logical_type: string
             nullable: false
             pattern: sha256_64_lowercase_hex
-            allowed_value: c1fac4e6ec408f06a9be2efb9748c5ec48d43d981af0faf36bf305c5386b7ef6
+            allowed_value: ea38735dce9383adeff839ca5c8bdcd084b5f065f5fd68eeda924cdaa522a452
           config_sha256:
             order: 5
             logical_type: string

@@ -28,18 +28,18 @@ def _freeze_commit_argument(value: str) -> str:
 def build_parser() -> argparse.ArgumentParser:
     """Build the explicit Session 1 command-line contract."""
     parser = argparse.ArgumentParser(description="Run final post-hoc score-blind preflight or approved execution.")
-    parser.add_argument("--config", type=Path, required=True, help="Frozen post-hoc YAML configuration.")
+    parser.add_argument("--config", type=Path, required=True, help="Consolidated current post-hoc YAML configuration.")
     parser.add_argument(
         "--freeze-commit",
         type=_freeze_commit_argument,
         required=True,
-        help="Externally supplied exact Session 0 freeze commit.",
+        help="Exact historical Session 0 commit for immutable Git-chain validation.",
     )
     parser.add_argument(
         "--amendment-freeze-commit",
         type=_freeze_commit_argument,
         required=True,
-        help="Externally supplied exact amendment freeze commit.",
+        help="Exact historical Amendment 01 commit for immutable Git-chain validation.",
     )
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument(

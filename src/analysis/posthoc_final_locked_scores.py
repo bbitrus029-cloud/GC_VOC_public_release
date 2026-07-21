@@ -49,11 +49,10 @@ _DISEASE_KEYS = tuple(str(value) for value in range(6))
 _SATURATION_COLUMNS = tuple(f"s{index}_saturation_fraction" for index in range(1, 12))
 SESSION_1_CORRECTIONS_IMPLEMENTED = frozenset({f"C{index:02d}" for index in range(1, 17)})
 BASE_CONFIG_RELATIVE_PATH = "configs/post_hoc_final_supplementary.yaml"
-AMENDMENT_OVERLAY_RELATIVE_PATH = "configs/post_hoc_final_supplementary_pre_execution_amendment_01.yaml"
-AMENDMENT_MANIFEST_RELATIVE_PATH = "outputs/analysis/posthoc_final_pre_execution_amendment_01_manifest.json"
+CURRENT_MANIFEST_RELATIVE_PATH = "outputs/analysis/posthoc_final_freeze_manifest.json"
 SCORE_BLIND_PREFLIGHT_RELATIVE_PATH = "outputs/analysis/posthoc_final_score_blind_preflight.json"
-# Exact ordered overlay date-parsing payload approved by the amendment (20 keys).
-_OVERLAY_DATE_PARSING_PAYLOAD_EXACT: tuple[tuple[str, Any], ...] = (
+# Exact ordered date-parsing payload approved by Amendment 01 (20 keys).
+_APPROVED_DATE_PARSING_PAYLOAD_EXACT: tuple[tuple[str, Any], ...] = (
     ("format", "slash_encoded_date_only_ascii"),
     ("regex_full_match", r"^([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})$"),
     ("regex_digit_class", "ascii_0_to_9_only"),
@@ -151,75 +150,33 @@ def _canonical_immutable_path(
 
 def load_effective_posthoc_config(
     config_path: Path,
-    amendment_path: Path,
 ) -> dict[str, Any]:
-    """Load the immutable base config with the sole allowed amendment overlay.
+    """Load the single consolidated current post-hoc configuration.
 
     Args:
-        config_path: Frozen base configuration path.
-        amendment_path: Fixed amendment overlay path.
+        config_path: Current consolidated configuration path.
 
     Returns:
-        Effective configuration with only ``loaders.date_parsing`` replaced.
+        Validated consolidated configuration.
 
     Raises:
-        ValueError: If the overlay is not the exact bounded date-parser replacement.
+        ValueError: If the path or embedded approved date-parser contract is invalid.
     """
     config_path = _canonical_immutable_path(
         config_path,
         BASE_CONFIG_RELATIVE_PATH,
-        "base configuration",
-        "The base configuration path is immutable.",
+        "current configuration",
+        "The current configuration path is immutable.",
     )
-    amendment_path = _canonical_immutable_path(
-        amendment_path,
-        AMENDMENT_OVERLAY_RELATIVE_PATH,
-        "amendment overlay",
-        "The amendment overlay path is fixed.",
-    )
-    base = load_posthoc_config(config_path)
-    overlay = load_posthoc_config(amendment_path)
-    contract = overlay.get("overlay_application_contract")
-    if not isinstance(contract, Mapping):
-        raise ValueError("Amendment overlay contract is missing.")
-    if contract.get("base_config_path") != "configs/post_hoc_final_supplementary.yaml":
-        raise ValueError("Amendment overlay base config path is not the immutable base.")
-    if contract.get("overlay_path") != AMENDMENT_OVERLAY_RELATIVE_PATH:
-        raise ValueError("Amendment overlay path is not the fixed amendment path.")
-    if contract.get("base_target_key_path") != "loaders.date_parsing":
-        raise ValueError("Amendment overlay base target key path is invalid.")
-    if contract.get("overlay_payload_source_key_path") != "overlay_application_contract.overlay_date_parsing_payload":
-        raise ValueError("Amendment overlay payload source key path is invalid.")
-    if (
-        contract.get("replacement_semantics")
-        != "replace_entire_loaders_date_parsing_object_with_overlay_date_parsing_payload"
-    ):
-        raise ValueError("Amendment overlay replacement semantics are invalid.")
-    allowed = contract.get("allowlisted_override_target_key_paths_exact")
-    if not isinstance(allowed, Sequence) or tuple(allowed) != ("loaders.date_parsing",):
-        raise ValueError("Amendment overlay allowlist is broader than the sole date-parser target.")
-    payload = contract.get("overlay_date_parsing_payload")
-    if base.get("loaders", {}).get("date_parsing") is None:
-        raise ValueError("Base config is missing the loaders.date_parsing target.")
-    expected_keys = tuple(key for key, _ in _OVERLAY_DATE_PARSING_PAYLOAD_EXACT)
+    config = load_posthoc_config(config_path)
+    payload = config.get("loaders", {}).get("date_parsing")
+    expected_keys = tuple(key for key, _ in _APPROVED_DATE_PARSING_PAYLOAD_EXACT)
     if not isinstance(payload, Mapping) or tuple(payload) != expected_keys:
-        raise ValueError("Amendment date-parser payload keys or order do not match the approved contract.")
-    for key, value in _OVERLAY_DATE_PARSING_PAYLOAD_EXACT:
+        raise ValueError("Consolidated date-parser keys or order do not match the approved contract.")
+    for key, value in _APPROVED_DATE_PARSING_PAYLOAD_EXACT:
         if payload[key] != value or type(payload[key]) is not type(value):
-            raise ValueError("Amendment date-parser payload values do not match the approved contract.")
-    proposed = overlay.get("proposed_date_parsing_replacement_contract")
-    if isinstance(proposed, Mapping):
-        if (
-            proposed.get("regex_full_match") != payload["regex_full_match"]
-            or proposed.get("accepted_grammar") != payload["format"]
-            or proposed.get("sole_runtime_overlay_payload_source_key_path")
-            != "overlay_application_contract.overlay_date_parsing_payload"
-        ):
-            raise ValueError("Descriptive replacement contract conflicts with the runtime overlay payload.")
-    effective = dict(base)
-    effective["loaders"] = dict(base["loaders"])
-    effective["loaders"]["date_parsing"] = dict(payload)
-    return effective
+            raise ValueError("Consolidated date-parser values do not match the approved contract.")
+    return config
 
 
 def evaluate_conditional_preflight_retry_authorization(
@@ -327,15 +284,14 @@ def _validate_annotated_tag_chain(git_runner: Callable[..., str]) -> None:
 def validate_amendment_freeze_commit(
     amendment_freeze_commit: str,
     *,
-    amendment: Mapping[str, Any],
+    historical_amendment: Mapping[str, Any],
     git_runner: Callable[..., str] = _git,
-    manifest: Mapping[str, Any] | None = None,
 ) -> OrderedDict[str, Any]:
-    """Validate the exact three-path amendment freeze and approval evidence.
+    """Validate Amendment 01 from recorded hashes and immutable Git objects.
 
     Args:
         amendment_freeze_commit: Externally supplied amendment commit SHA.
-        amendment: Parsed amendment configuration.
+        historical_amendment: Consolidated historical Amendment 01 record.
         git_runner: Read-only Git adapter.
 
     Returns:
@@ -346,64 +302,51 @@ def validate_amendment_freeze_commit(
     """
     if _COMMIT_PATTERN.fullmatch(amendment_freeze_commit) is None:
         raise ValueError("Amendment freeze commit must be lowercase 40-character hexadecimal.")
-    freeze = amendment.get("future_additive_freeze_contract", {})
-    expected_paths = list(freeze.get("amendment_freeze_changed_paths_exact", []))
+    if historical_amendment.get("commit_id") != amendment_freeze_commit:
+        raise ValueError("Supplied Amendment 01 commit disagrees with historical authority.")
+    expected_paths = historical_amendment.get("changed_paths_exact")
     if expected_paths != list(AMENDMENT_CHANGED_PATHS):
         raise ValueError("Amendment freeze changed-path contract is invalid.")
-    approval = amendment.get("approval_evidence", {})
-    prior_hashes = amendment.get("prior_reviewed_candidate_artifact_hashes", {}).get("paths_and_sha256", {})
-    reviewed_candidates = approval.get("reviewed_amendment_candidate_paths_and_sha256", [])
+    artifacts = historical_amendment.get("artifacts")
+    if not isinstance(artifacts, Sequence) or isinstance(artifacts, (str, bytes)) or len(artifacts) != 3:
+        raise ValueError("Amendment 01 artifact record is malformed.")
+    artifact_records = [dict(item) for item in artifacts if isinstance(item, Mapping)]
+    if len(artifact_records) != 3 or [item.get("path") for item in artifact_records] != expected_paths:
+        raise ValueError("Amendment 01 artifact paths are invalid.")
+    hashes_valid = all(
+        isinstance(item.get("sha256"), str) and _SHA256_PATTERN.fullmatch(item["sha256"])
+        for item in artifact_records
+    )
+    blobs_valid = all(isinstance(item.get("git_blob_id"), str) and item["git_blob_id"] for item in artifact_records)
+    approval = historical_amendment.get("approval_evidence", {})
+    approval_ok = (
+        isinstance(approval, Mapping)
+        and approval.get("review_status") == "approved"
+        and approval.get("user_confirmation") is True
+    )
     try:
         git_runner("cat-file", "-e", f"{amendment_freeze_commit}^{{commit}}")
         parents = git_runner("rev-list", "--parents", "-n", "1", amendment_freeze_commit).split()
         changed = git_runner("diff-tree", "--no-commit-id", "--name-only", "-r", amendment_freeze_commit).splitlines()
         blobs = {path: git_runner("rev-parse", f"{amendment_freeze_commit}:{path}") for path in expected_paths}
-        worktree_blobs = {path: git_runner("hash-object", path) for path in expected_paths}
         git_runner("merge-base", "--is-ancestor", amendment_freeze_commit, "HEAD")
     except (subprocess.CalledProcessError, KeyError) as exc:
         raise ValueError("Amendment freeze provenance validation failed.") from exc
-    reviewed_map = {
-        item.get("path"): item.get("sha256")
-        for item in reviewed_candidates
-        if isinstance(item, Mapping)
-    }
-    # Prior-reviewed hashes are historical approval evidence, not final committed
-    # worktree digests. Effective freeze identity is commit/worktree blob equality.
-    prior_evidence_consistent = (
-        isinstance(prior_hashes, Mapping)
-        and list(prior_hashes) == expected_paths
-        and reviewed_map == dict(prior_hashes)
-        and all(isinstance(value, str) and _SHA256_PATTERN.fullmatch(value) for value in prior_hashes.values())
-    )
-    required_field_order = (
-        "reviewed_amendment_candidate_paths_and_sha256",
-        "review_status",
-        "reviewer_designation_or_role",
-        "approval_channel_or_reference",
-        "approval_date_utc",
-        "user_confirmation",
-    )
-    approval_field_order_ok = isinstance(approval, Mapping) and tuple(approval) == required_field_order
-    manifest_consistent = True
-    if manifest is not None:
-        manifest_approval = manifest.get("approval_evidence")
-        manifest_consistent = manifest_approval == dict(approval)
-    approval_ok = (
-        approval.get("review_status") == "approved"
-        and approval.get("user_confirmation") is True
-        and prior_evidence_consistent
-        and approval_field_order_ok
-        and manifest_consistent
-        and isinstance(approval.get("approval_date_utc"), str)
+    blob_matches = all(
+        blobs[path] == record["git_blob_id"]
+        for path, record in zip(expected_paths, artifact_records, strict=True)
     )
     result: OrderedDict[str, Any] = OrderedDict(
         [
             ("amendment_freeze_commit_id", amendment_freeze_commit),
             ("exists", True),
             ("is_ancestor_of_head", True),
-            ("parent_is_session0_freeze", len(parents) == 2 and parents[1] == SESSION0_FREEZE),
+            (
+                "parent_is_session0_freeze",
+                len(parents) == 2 and parents[1] == historical_amendment.get("sole_parent") == SESSION0_FREEZE,
+            ),
             ("changed_paths_exact", changed == expected_paths),
-            ("overlay_blob_matches", all(blobs[path] == worktree_blobs[path] for path in expected_paths)),
+            ("overlay_blob_matches", hashes_valid and blobs_valid and blob_matches),
             ("approval_evidence_matches", approval_ok),
         ]
     )
@@ -412,10 +355,95 @@ def validate_amendment_freeze_commit(
     return result
 
 
+def validate_current_runtime_authority(
+    config_path: Path,
+    config: Mapping[str, Any],
+    manifest: Mapping[str, Any],
+    *,
+    require_head_identical: bool,
+    git_runner: Callable[..., str] = _git,
+) -> OrderedDict[str, bool]:
+    """Validate current local authorities separately from immutable history.
+
+    Args:
+        config_path: Canonical consolidated config path.
+        config: Parsed consolidated configuration.
+        manifest: Parsed consolidated manifest.
+        require_head_identical: Whether tracked current records must equal ``HEAD``.
+        git_runner: Read-only Git adapter.
+
+    Returns:
+        Ordered current-authority validation flags.
+
+    Raises:
+        ValueError: If any path, hash, self-hash, or Git-identity check fails.
+    """
+    try:
+        current = manifest["current_runtime_authority"]
+        config_record = current["config"]
+        methods_record = current["methods"]
+        manifest_record = current["manifest"]
+        plan_record = current["operational_plan"]
+        guidance_record = current["agent_guidance"]
+        session_0 = config["outputs"]["session_0"]
+        authority = config["authority"]
+    except (KeyError, TypeError) as exc:
+        raise ValueError("Current runtime authority record is malformed.") from exc
+    config_relative = str(config_path.relative_to(PROJECT_ROOT))
+    if config_record.get("path") != config_relative or config_relative != BASE_CONFIG_RELATIVE_PATH:
+        raise ValueError("Current config path does not match consolidated authority.")
+    if methods_record.get("path") != session_0.get("methods"):
+        raise ValueError("Current methods path does not match consolidated authority.")
+    if manifest_record.get("path") != session_0.get("freeze_manifest") or manifest_record.get(
+        "path"
+    ) != CURRENT_MANIFEST_RELATIVE_PATH:
+        raise ValueError("Current manifest path does not match consolidated authority.")
+    if manifest_record.get("self_hash") is not None or manifest_record.get("self_hash_policy") != "forbidden":
+        raise ValueError("Current manifest self-hash must remain null and forbidden.")
+    if sha256_file(config_path) != config_record.get("sha256"):
+        raise ValueError("Current config hash does not match the consolidated manifest.")
+    methods_path = PROJECT_ROOT / methods_record["path"]
+    if sha256_file(methods_path) != methods_record.get("sha256"):
+        raise ValueError("Current methods hash does not match the consolidated manifest.")
+    if (
+        plan_record.get("path") != authority.get("reviewed_plan_path")
+        or plan_record.get("sha256") != authority.get("reviewed_plan_sha256")
+        or sha256_file(PROJECT_ROOT / plan_record["path"]) != plan_record.get("sha256")
+    ):
+        raise ValueError("Reviewed plan hash does not match the current authority.")
+    if (
+        guidance_record.get("path") != authority.get("agent_guidance_path")
+        or guidance_record.get("sha256") != authority.get("agent_guidance_sha256")
+        or sha256_file(PROJECT_ROOT / guidance_record["path"]) != guidance_record.get("sha256")
+    ):
+        raise ValueError("Agent guidance hash does not match the current authority.")
+    head_identical = True
+    if require_head_identical:
+        try:
+            for path in (config_relative, methods_record["path"], manifest_record["path"]):
+                git_runner("ls-files", "--error-unmatch", path)
+                git_runner("cat-file", "-e", f"HEAD:{path}")
+                if git_runner("rev-parse", f"HEAD:{path}") != git_runner("hash-object", path):
+                    head_identical = False
+        except subprocess.CalledProcessError as exc:
+            raise ValueError("Current record bundle must be committed and HEAD-identical.") from exc
+        if not head_identical:
+            raise ValueError("Current record bundle must be committed and HEAD-identical.")
+    return OrderedDict(
+        [
+            ("config_hash_matches", True),
+            ("methods_hash_matches", True),
+            ("manifest_self_hash_forbidden", True),
+            ("operational_plan_hash_matches", True),
+            ("agent_guidance_hash_matches", True),
+            ("record_bundle_head_identical_when_required", head_identical),
+        ]
+    )
+
+
 def validate_pre_access_authority(
     *,
     config_path: Path,
-    amendment_path: Path,
     freeze_commit: str,
     amendment_freeze_commit: str,
     mode: str,
@@ -424,8 +452,7 @@ def validate_pre_access_authority(
     """Validate every authority gate before participant-level reads.
 
     Args:
-        config_path: Immutable base config path.
-        amendment_path: Fixed amendment path.
+        config_path: Current consolidated config path.
         freeze_commit: Session 0 freeze SHA.
         amendment_freeze_commit: Amendment freeze SHA.
         mode: ``preflight`` or ``execute``.
@@ -442,50 +469,46 @@ def validate_pre_access_authority(
     config_path = _canonical_immutable_path(
         config_path,
         BASE_CONFIG_RELATIVE_PATH,
-        "base configuration",
-        "The base configuration path is immutable.",
+        "current configuration",
+        "The current configuration path is immutable.",
     )
-    amendment_path = _canonical_immutable_path(
-        amendment_path,
-        AMENDMENT_OVERLAY_RELATIVE_PATH,
-        "amendment overlay",
-        "The amendment overlay path is fixed.",
-    )
-    base = load_posthoc_config(config_path)
-    amendment = load_posthoc_config(amendment_path)
-    plan_path = PROJECT_ROOT / base["authority"]["reviewed_plan_path"]
-    if sha256_file(plan_path) != base["authority"]["reviewed_plan_sha256"]:
-        raise ValueError("Reviewed plan hash does not match the frozen authority.")
-    rule_hashes = OrderedDict(
-        (item["path"], sha256_file(PROJECT_ROOT / item["path"])) for item in base["authority"]["active_rules"]
-    )
-    _validate_annotated_tag_chain(git_runner)
+    base = load_effective_posthoc_config(config_path)
     manifest_path = PROJECT_ROOT / base["outputs"]["session_0"]["freeze_manifest"]
     with manifest_path.open("r", encoding="utf-8") as handle:
         manifest = json.load(handle)
+    current_validation = validate_current_runtime_authority(
+        config_path,
+        base,
+        manifest,
+        require_head_identical=mode == "execute",
+        git_runner=git_runner,
+    )
+    _validate_annotated_tag_chain(git_runner)
     freeze_validation = validate_freeze_commit(
         freeze_commit,
         base,
         manifest,
         git_runner=git_runner,
-        rule_hashes=rule_hashes,
-        artifact_hashes={
-            "config": sha256_file(config_path),
-            "methods": sha256_file(PROJECT_ROOT / base["outputs"]["session_0"]["methods"]),
-        },
     )
-    manifest_amendment_path = PROJECT_ROOT / AMENDMENT_MANIFEST_RELATIVE_PATH
-    amendment_manifest: Mapping[str, Any] | None = None
-    if manifest_amendment_path.exists():
-        with manifest_amendment_path.open("r", encoding="utf-8") as handle:
-            amendment_manifest = json.load(handle)
+    try:
+        amendment = base["historical_consolidation"]["amendment_01"]
+        manifest_amendment = manifest["historical_evidence"]["amendment_01"]
+    except (KeyError, TypeError) as exc:
+        raise ValueError("Historical Amendment 01 record is malformed.") from exc
+    comparison_keys = ("commit_id", "sole_parent", "changed_paths_exact", "artifacts", "approval_evidence")
+    if not isinstance(amendment, Mapping) or not isinstance(manifest_amendment, Mapping) or any(
+        amendment.get(key) != manifest_amendment.get(key) for key in comparison_keys
+    ):
+        raise ValueError("Historical Amendment 01 config and manifest records disagree.")
+    if amendment.get("access_state") != manifest_amendment.get("access_state"):
+        raise ValueError("Historical Amendment 01 access-state records disagree.")
+    if amendment.get("session_1_corrections") != manifest_amendment.get("session_1_corrections"):
+        raise ValueError("Historical Amendment 01 correction records disagree.")
     amendment_validation = validate_amendment_freeze_commit(
         amendment_freeze_commit,
-        amendment=amendment,
+        historical_amendment=amendment,
         git_runner=git_runner,
-        manifest=amendment_manifest,
     )
-    effective = load_effective_posthoc_config(config_path, amendment_path)
     outputs = base["outputs"]["scientific_and_closure"]
     configured_session4 = (
         outputs["locked_score_metrics"]["path"],
@@ -528,17 +551,19 @@ def validate_pre_access_authority(
                 preflight_payload = json.load(handle)
         except OSError as exc:
             raise ValueError("Approved execution requires a committed HEAD-identical preflight.") from exc
-        cumulative_prior = _amendment_cumulative_prior(amendment)
+        cumulative_prior = _amendment_cumulative_prior(base)
         validate_preflight_schema(
             preflight_payload,
             frozen_hash_paths=container_paths,
             expected_cumulative_prior=cumulative_prior,
         )
         validate_preflight_privacy(preflight_payload)
+        historical_artifacts = manifest["historical_evidence"]["original_session_0"]["artifacts"]
+        historical_hashes = {item["path"]: item["sha256"] for item in historical_artifacts}
         expected_authority_hashes = {
-            "config_sha256": sha256_file(config_path),
-            "methods_sha256": sha256_file(PROJECT_ROOT / base["outputs"]["session_0"]["methods"]),
-            "freeze_manifest_sha256": sha256_file(PROJECT_ROOT / base["outputs"]["session_0"]["freeze_manifest"]),
+            "config_sha256": historical_hashes[base["outputs"]["session_0"]["config"]],
+            "methods_sha256": historical_hashes[base["outputs"]["session_0"]["methods"]],
+            "freeze_manifest_sha256": historical_hashes[base["outputs"]["session_0"]["freeze_manifest"]],
         }
         if any(preflight_payload["hashes"][key] != value for key, value in expected_authority_hashes.items()):
             raise ValueError("Preflight recorded authority hashes disagree with current authorities.")
@@ -549,14 +574,14 @@ def validate_pre_access_authority(
             raise ValueError("Preflight freeze commit provenance disagrees with the supplied freeze commit.")
         if preflight_payload["status"] != "pass":
             raise ValueError("Approved execution requires a passing prior preflight.")
-    entry_hashes = _ordered_entry_integrity_hashes(base, config_path, amendment_path)
+    entry_hashes = _ordered_entry_integrity_hashes(base, config_path)
     if mode == "execute":
         entry_hashes[SCORE_BLIND_PREFLIGHT_RELATIVE_PATH] = sha256_file(preflight_target)
     authority_records = OrderedDict(
         [
             ("session0_freeze", OrderedDict(freeze_validation)),
             ("amendment_freeze", amendment_validation),
-            ("rule_hashes", rule_hashes),
+            ("current_runtime", current_validation),
             ("container_hashes", container_hashes),
         ]
     )
@@ -564,20 +589,18 @@ def validate_pre_access_authority(
         authority_records["preflight_cumulative"] = OrderedDict(
             preflight_payload["access_state"]["cumulative_through_session"]
         )
-    return effective, entry_hashes, authority_records
+    return base, entry_hashes, authority_records
 
 
 def _ordered_entry_integrity_hashes(
     base: Mapping[str, Any],
     config_path: Path,
-    amendment_path: Path,
 ) -> OrderedDict[str, str]:
     """Hash the exact ordered C15 source set covering every frozen authority input.
 
     Args:
         base: Parsed immutable base configuration.
         config_path: Immutable base config path.
-        amendment_path: Fixed amendment overlay path.
 
     Returns:
         Ordered project-relative path to SHA-256 map for the full integrity set.
@@ -590,10 +613,8 @@ def _ordered_entry_integrity_hashes(
         str(config_path.relative_to(PROJECT_ROOT)),
         session_0["methods"],
         session_0["freeze_manifest"],
-        str(amendment_path.relative_to(PROJECT_ROOT)),
-        AMENDMENT_MANIFEST_RELATIVE_PATH,
         base["authority"]["reviewed_plan_path"],
-        *[rule["path"] for rule in base["authority"]["active_rules"]],
+        base["authority"]["agent_guidance_path"],
     ]
     for path in extra_paths:
         ordered[path] = sha256_file(PROJECT_ROOT / path)
@@ -1228,24 +1249,17 @@ def run_score_blind_preflight(
     config_path = _canonical_immutable_path(
         config_path,
         BASE_CONFIG_RELATIVE_PATH,
-        "base configuration",
-        "The base configuration path is immutable.",
-    )
-    amendment_path = _canonical_immutable_path(
-        PROJECT_ROOT / AMENDMENT_OVERLAY_RELATIVE_PATH,
-        AMENDMENT_OVERLAY_RELATIVE_PATH,
-        "amendment overlay",
-        "The amendment overlay path is fixed.",
+        "current configuration",
+        "The current configuration path is immutable.",
     )
     config, entry_hashes, authority = validate_pre_access_authority(
         config_path=config_path,
-        amendment_path=amendment_path,
         freeze_commit=freeze_commit,
         amendment_freeze_commit=amendment_freeze_commit,
         mode="preflight",
         git_runner=git_runner,
     )
-    amendment = load_posthoc_config(amendment_path)
+    amendment = config["historical_consolidation"]["amendment_01"]
     if amendment.get("immediate_preflight_retry_authorized_at_materialization") is not False:
         raise ValueError("Amendment package incorrectly authorizes immediate preflight retry.")
     if not evaluate_conditional_preflight_retry_authorization(
@@ -1260,7 +1274,7 @@ def run_score_blind_preflight(
         other_gates_satisfied=True,
     ):
         raise ValueError("Conditional preflight retry authorization is not satisfied.")
-    cumulative_prior = _amendment_cumulative_prior(amendment)
+    cumulative_prior = _amendment_cumulative_prior(config)
     tracker = AccessStateTracker(cumulative_start=cumulative_prior)
     try:
         # Entry-integrity hashing already completed inside the authority gate.
@@ -1366,13 +1380,17 @@ def run_score_blind_preflight(
         )
         container_paths = list(config["frozen_inputs"]["whole_container_sha256"])
         container_hashes = OrderedDict((path, entry_hashes[path]) for path in container_paths)
+        historical_hashes = {
+            item["path"]: item["sha256"]
+            for item in config["historical_consolidation"]["original_session_0"]["artifacts"]
+        }
         hashes = OrderedDict(
             [
-                ("config_sha256", sha256_file(config_path)),
-                ("methods_sha256", sha256_file(PROJECT_ROOT / config["outputs"]["session_0"]["methods"])),
+                ("config_sha256", historical_hashes[config["outputs"]["session_0"]["config"]]),
+                ("methods_sha256", historical_hashes[config["outputs"]["session_0"]["methods"]]),
                 (
                     "freeze_manifest_sha256",
-                    sha256_file(PROJECT_ROOT / config["outputs"]["session_0"]["freeze_manifest"]),
+                    historical_hashes[config["outputs"]["session_0"]["freeze_manifest"]],
                 ),
                 ("frozen_input_whole_container_sha256", container_hashes),
             ]
@@ -1428,9 +1446,10 @@ def _modeling_date_feasibility(modeling: pd.DataFrame) -> OrderedDict[str, int]:
     )
 
 
-def _amendment_cumulative_prior(amendment: Mapping[str, Any]) -> OrderedDict[str, bool]:
+def _amendment_cumulative_prior(config: Mapping[str, Any]) -> OrderedDict[str, bool]:
     """Extract the exact ordered Step-2 cumulative access-state carry-forward ledger."""
-    state = amendment.get("step_2_approval_materialization_access_state", {})
+    amendment = config.get("historical_consolidation", {}).get("amendment_01", {})
+    state = amendment.get("access_state", {}).get("step_2_approval_materialization", {})
     cumulative = state.get("cumulative_through_session", {}) if isinstance(state, Mapping) else {}
     if tuple(cumulative) != ACCESS_STATE_KEYS or any(not isinstance(value, bool) for value in cumulative.values()):
         raise ValueError("Amendment Step-2 cumulative access state is malformed.")
@@ -2325,10 +2344,7 @@ def execute_approved_framework(
         Aggregate-only data frames keyed by the four configured CSV contracts.
     """
     if config is None:
-        config = load_effective_posthoc_config(
-            PROJECT_ROOT / "configs/post_hoc_final_supplementary.yaml",
-            PROJECT_ROOT / AMENDMENT_OVERLAY_RELATIVE_PATH,
-        )
+        config = load_effective_posthoc_config(PROJECT_ROOT / BASE_CONFIG_RELATIVE_PATH)
     frames = _execution_frames(config, views, on_first_aggregate=on_first_aggregate)
     return {"frames": frames, "scores_read": True}
 
@@ -2586,16 +2602,12 @@ def execute_approved(
     Raises:
         ValueError: If execution authorization, authority, validation, or integrity fails.
     """
-    amendment_path = PROJECT_ROOT / AMENDMENT_OVERLAY_RELATIVE_PATH
     # The machine gate for Session 4 execution is a prior validated score-blind
     # preflight (verified inside validate_pre_access_authority(mode="execute")),
-    # dual-freeze validation, and absent targets. The amendment field
-    # ``session_4_execution_authorized`` records only that the amendment alone does
-    # not authorize execution; an independent external Session 4 "go" is a human
-    # authorization outside this machine-verifiable gate (residual governance gap).
+    # historical dual-freeze validation, current-authority validation, and absent
+    # targets. An independent external Session 4 "go" remains a human gate.
     config, entry_hashes, authority = validate_pre_access_authority(
         config_path=config_path,
-        amendment_path=amendment_path,
         freeze_commit=freeze_commit,
         amendment_freeze_commit=amendment_freeze_commit,
         mode="execute",

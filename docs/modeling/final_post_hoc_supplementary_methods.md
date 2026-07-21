@@ -2,17 +2,26 @@
 
 **Package status:** post-hoc supplementary  
 **Package ID:** `posthoc_final_supplementary`  
-**Authority:** `.cursor/plans/acquisition_context_robustness_audit_97707a26.plan.md`  
-**Approved plan SHA-256:** `c1fac4e6ec408f06a9be2efb9748c5ec48d43d981af0faf36bf305c5386b7ef6`  
+**Current operational authority:** `docs/plans/acquisition_context_robustness_audit_97707a26.plan.md`
+**Current operational-plan SHA-256:** `ea38735dce9383adeff839ca5c8bdcd084b5f065f5fd68eeda924cdaa522a452`
+**Current agent-guidance authority:** `AGENTS.md` (`1cb134c06871ba1837e0ff235dca9ca6ee0c10c1d08a123ff3912354299f9c9a`)
 **Baseline HEAD:** `cbb87b0380d7129798002ff4ea8b869c4b786582`  
 **Machine-readable contract:** `configs/post_hoc_final_supplementary.yaml`  
-**Results status:** this snapshot is entirely results-free.
+**Record status:** current consolidated methods/provenance authority; the original Session 0 snapshot was entirely results-free.
 
 ## 1. Purpose and analysis category
 
 This package freezes and later executes a bounded, aggregate-only final post-hoc robustness and reporting-closure exercise. It does not alter or replace the frozen primary endpoint, cohort, split, preprocessing, model selection, MiniRocket configuration, calibrators, thresholds, predictions, models, or annotated tags. It is conceived after the `modeling-frozen` temporal anchor and is therefore post-hoc supplementary, not prespecified primary analysis.
 
 The package closes four reviewer-facing robustness questions and freezes aggregate reporting-closure sources needed for later manuscript and visualization work. Visualization v2 remains unauthorized through Session 7 and requires a later additive `outputs/analysis/posthoc_final_visualization_release.json` after Session 7 is committed and independently approved.
+
+### 1.1 Administrative/runtime consolidation — 2026-07-20
+
+Original result-free Session 0 was committed at `3c0ff6b3b40460a2c340ad3193222ee54979109d` with an exact ISO `%Y-%m-%d` parser assumption. Its historical approval provenance is the legacy path `.cursor/plans/acquisition_context_robustness_audit_97707a26.plan.md` at SHA-256 `c1fac4e6ec408f06a9be2efb9748c5ec48d43d981af0faf36bf305c5386b7ef6`; that path is not a current runtime dependency. The first score-blind preflight subsequently failed closed at modeling-cohort date parsing with the sanitized message `Date parsing failed: missing_or_nonstring_count=0, invalid_date_format_count=972, invalid_date_count=0.` That attempt did not access scores, compute score-derived results, fit a model, promote a preflight artifact, or execute Session 4 or any later session.
+
+Pre-execution Amendment 01, committed at `2e08e8fb89d99bb62cca2e5204a13ff09e47d432`, approved only the complete replacement of `loaders.date_parsing` by the exact ASCII slash-date contract and recorded the failed attempt, aggregate format audit, access-state ledgers, retry gates, and required C01–C16 corrections. The amendment did not rewrite or backdate the original Session 0 blob. Session 1 implemented exactly C01–C16 and committed the successful score-blind preflight at `d19dcbdb7bd9ef20c8534cca0a87384ed1c6fa9f`; `outputs/analysis/posthoc_final_score_blind_preflight.json` remains preserved byte-for-byte at SHA-256 `2014bc72ba2c08952be1ad7d7327f07273605c98b3814c2f0ca1b9de4f10e3bf`.
+
+This Commit B candidate consolidates the currently effective Session 0 plus Amendment 01 record into this methods file, the main configuration, and the main manifest, and relocates current local workspace authority to `docs/plans/` and root `AGENTS.md`. The original Session 0 and Amendment 01 commits, changed-path inventories, blobs, hashes, and approval records remain independently verifiable from Git history; the full historical Amendment documents are recoverable from commit `2e08e8fb89d99bb62cca2e5204a13ff09e47d432`. This is administrative/runtime consolidation only: it creates no new approval, freeze, Session 0, amendment, scientific execution, statistical change, or Session 2 authorization.
 
 ## 2. Interpretation boundaries
 
@@ -61,7 +70,7 @@ Sensitivity and specificity use Wilson score intervals from installed statsmodel
 
 The package is aggregate-only. Participant identifiers, participant scores, date labels, fold assignments, and participant-level QC flags are not output artifacts. Exact collection dates may be processed only in memory for approved date analyses; persist aggregate counts and estimates only.
 
-Per-purpose ordered `usecols` loaders are frozen in configuration. Loading a broader table is a hard failure. No loader requests `collection_location`. Analysis 2 and Analysis 3 accept only date-only `%Y-%m-%d` strings with regex full-match, exact `pd.to_datetime` parsing, midnight normalization, and exact round-trip text. Errors report sanitized aggregate invalid/missing counts only.
+Per-purpose ordered `usecols` loaders are frozen in configuration. Loading a broader table is a hard failure. No loader requests `collection_location`. Analysis 2 and Analysis 3 accept only ASCII date-only strings matching `^([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})$`; they parse the three integer tokens explicitly, validate the calendar exactly, normalize only in memory, and reject ISO text, whitespace, time content, Unicode digits, and normalization collisions. Errors report sanitized aggregate invalid/missing counts only. This effective parser is the exact Amendment 01 correction and is not attributed to the original Session 0 blob.
 
 Every Session 0 or later manifest and handoff records `session_activity` and `cumulative_through_session` with the nine required boolean keys. Session 0 may hash opaque prediction containers and inspect static headers, but must not read participant-level label, score, date, or QC values; must not compute new score-derived results; must not fit the auxiliary model; and must not execute the privacy-reference loader. Legacy access flags are not emitted.
 
@@ -129,7 +138,7 @@ Discrepancies that must remain visible and must not be silently repaired:
 2. Legacy `outputs/logs/experiment_manifest.json` still records `modeling-frozen.commit = PENDING_USER_TAG` and an older stage-head commit.
 3. The pre-existing observed-prevalence DCA artifact is outside this package and must not be consumed, recomputed, relabeled, deleted, or folded into this package.
 4. QC6 operational any-channel rule, protocol omission, run-summary six-channel wording error, strict `>` execution semantics, zero QC6 failures, and absence of cohort/model impact.
-5. The retired acquisition-location plan `.cursor/plans/acquisition_context_robustness_audit_4d2cfd18.plan.md` is prohibited.
+5. The retired acquisition-location plan historically stored as `.cursor/plans/acquisition_context_robustness_audit_4d2cfd18.plan.md` is prohibited and is not a current filesystem dependency.
 6. Exact historical QC5 membership identity is unrecoverable despite aggregate reconciliation.
 
 ## 10. Explicit exclusions and conservative reporting
@@ -140,6 +149,6 @@ Exclude all `collection_location` or disposition analyses; physical-location str
 
 Session 7 creates only the integrity audit and its completion log, leaves the Session 6 consolidated report byte-for-byte unchanged, and records `visualization_v2_authorized=false`. Visualization v2 remains blocked until Session 7 is committed and independently approved and the later additive visualization-release authorization file exists and validates completely. This package produces no figures.
 
-## 12. Session 0 freeze non-circularity
+## 12. Historical freeze and consolidation non-circularity
 
-This methods snapshot, the configuration, and the freeze manifest are created before any new score-derived result access or auxiliary fit. The freeze manifest records the approved plan path and SHA-256 and states that the eventual Session 0 freeze commit ID is supplied externally after the user creates the commit. No guessed future commit ID and no manifest self-hash are embedded.
+The original Session 0 methods snapshot, configuration, and manifest were created before any new score-derived result access or auxiliary fit and remain immutable in commit `3c0ff6b3b40460a2c340ad3193222ee54979109d`. The current manifest records that historical Git identity separately from the consolidated current config and methods hashes. It embeds no manifest self-hash and invents no future Commit B identity; the effective cutover commit can be validated only after the user creates it. Consolidation does not recreate Session 0 or imply that the amended slash parser existed in the original Session 0 blob.

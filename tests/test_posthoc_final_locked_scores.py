@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import os
 import subprocess
@@ -23,7 +24,6 @@ from src.analysis.posthoc_final_common import AccessStateError, AccessStateTrack
 from src.analysis.posthoc_final_locked_scores import (
     AMENDMENT_CHANGED_PATHS,
     AMENDMENT_FREEZE_DEFAULT_FOR_TESTS,
-    AMENDMENT_OVERLAY_RELATIVE_PATH,
     SCORE_BLIND_PREFLIGHT_RELATIVE_PATH,
     SESSION0_FREEZE,
     SESSION_1_CORRECTIONS_IMPLEMENTED,
@@ -47,6 +47,9 @@ from src.analysis.posthoc_final_locked_scores import (
     within_date_concordance,
 )
 from src.config import PROJECT_ROOT
+
+
+CURRENT_MANIFEST_RELATIVE_PATH = "outputs/analysis/posthoc_final_freeze_manifest.json"
 
 
 def _six_category_frame() -> pd.DataFrame:
@@ -469,8 +472,7 @@ def test_scientific_validator_rejects_planned_rows_in_wrong_order() -> None:
         "strict_pass": np.array([True, False, True, False]),
     }
     config = locked_scores.load_effective_posthoc_config(
-        PROJECT_ROOT / "configs/post_hoc_final_supplementary.yaml",
-        PROJECT_ROOT / AMENDMENT_OVERLAY_RELATIVE_PATH,
+        PROJECT_ROOT / "configs/post_hoc_final_supplementary.yaml"
     )
     frame = locked_scores._execution_frames(
         config,
@@ -497,8 +499,7 @@ def _synthetic_scientific_records() -> tuple[dict[str, Any], dict[str, list[dict
         "strict_pass": np.array([True, False, True, False]),
     }
     config = locked_scores.load_effective_posthoc_config(
-        PROJECT_ROOT / "configs/post_hoc_final_supplementary.yaml",
-        PROJECT_ROOT / AMENDMENT_OVERLAY_RELATIVE_PATH,
+        PROJECT_ROOT / "configs/post_hoc_final_supplementary.yaml"
     )
     frames = locked_scores._execution_frames(config, OrderedDict([("oof", inputs), ("test", inputs)]))
     return config, {name: frame.to_dict(orient="records") for name, frame in frames.items()}
@@ -1371,27 +1372,13 @@ def test_cli_preflight_defaults_block_retry_without_synthetic_evidence(
     assert captured["amendment_freeze_commit"] == AMENDMENT_FREEZE_DEFAULT_FOR_TESTS
 
 
-def _write_synthetic_immutable_configs(tmp_path: Path) -> tuple[Path, Path]:
-    """Write minimal synthetic base and amendment configs at their fixed paths."""
+def _write_synthetic_consolidated_config(tmp_path: Path) -> Path:
+    """Write a minimal current config with the approved parser embedded directly."""
     base_path = tmp_path / "configs/post_hoc_final_supplementary.yaml"
-    amendment_path = tmp_path / AMENDMENT_OVERLAY_RELATIVE_PATH
     base_path.parent.mkdir(parents=True, exist_ok=True)
-    base = {"loaders": {"date_parsing": {"format": "%Y-%m-%d"}}}
-    payload = dict(locked_scores._OVERLAY_DATE_PARSING_PAYLOAD_EXACT)
-    amendment = {
-        "overlay_application_contract": {
-            "base_config_path": "configs/post_hoc_final_supplementary.yaml",
-            "overlay_path": AMENDMENT_OVERLAY_RELATIVE_PATH,
-            "base_target_key_path": "loaders.date_parsing",
-            "overlay_payload_source_key_path": "overlay_application_contract.overlay_date_parsing_payload",
-            "replacement_semantics": "replace_entire_loaders_date_parsing_object_with_overlay_date_parsing_payload",
-            "allowlisted_override_target_key_paths_exact": ["loaders.date_parsing"],
-            "overlay_date_parsing_payload": payload,
-        }
-    }
+    base = {"loaders": {"date_parsing": dict(locked_scores._APPROVED_DATE_PARSING_PAYLOAD_EXACT)}}
     base_path.write_text(yaml.safe_dump(base, sort_keys=False), encoding="utf-8")
-    amendment_path.write_text(yaml.safe_dump(amendment, sort_keys=False), encoding="utf-8")
-    return base_path, amendment_path
+    return base_path
 
 
 def test_effective_config_accepts_project_root_relative_base_path(
@@ -1399,15 +1386,12 @@ def test_effective_config_accepts_project_root_relative_base_path(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """The approved project-root-relative base path resolves to the frozen file."""
-    _, amendment_path = _write_synthetic_immutable_configs(tmp_path)
+    _write_synthetic_consolidated_config(tmp_path)
     monkeypatch.setattr("src.analysis.posthoc_final_locked_scores.PROJECT_ROOT", tmp_path)
 
-    effective = locked_scores.load_effective_posthoc_config(
-        Path("configs/post_hoc_final_supplementary.yaml"),
-        amendment_path,
-    )
+    effective = locked_scores.load_effective_posthoc_config(Path("configs/post_hoc_final_supplementary.yaml"))
 
-    assert effective["loaders"]["date_parsing"] == dict(locked_scores._OVERLAY_DATE_PARSING_PAYLOAD_EXACT)
+    assert effective["loaders"]["date_parsing"] == dict(locked_scores._APPROVED_DATE_PARSING_PAYLOAD_EXACT)
 
 
 def test_effective_config_accepts_canonical_absolute_base_path(
@@ -1415,12 +1399,12 @@ def test_effective_config_accepts_canonical_absolute_base_path(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """The canonical absolute base path resolves to the same frozen file."""
-    base_path, amendment_path = _write_synthetic_immutable_configs(tmp_path)
+    base_path = _write_synthetic_consolidated_config(tmp_path)
     monkeypatch.setattr("src.analysis.posthoc_final_locked_scores.PROJECT_ROOT", tmp_path)
 
-    effective = locked_scores.load_effective_posthoc_config(base_path.resolve(), amendment_path.resolve())
+    effective = locked_scores.load_effective_posthoc_config(base_path.resolve())
 
-    assert effective["loaders"]["date_parsing"] == dict(locked_scores._OVERLAY_DATE_PARSING_PAYLOAD_EXACT)
+    assert effective["loaders"]["date_parsing"] == dict(locked_scores._APPROVED_DATE_PARSING_PAYLOAD_EXACT)
 
 
 @pytest.mark.parametrize(
@@ -1436,14 +1420,14 @@ def test_effective_config_rejects_wrong_relative_and_traversal_paths(
     candidate: Path,
 ) -> None:
     """Existing wrong relative files and traversal outside the project fail closed."""
-    base_path, amendment_path = _write_synthetic_immutable_configs(tmp_path)
+    base_path = _write_synthetic_consolidated_config(tmp_path)
     wrong_path = (tmp_path / candidate).resolve()
     wrong_path.parent.mkdir(parents=True, exist_ok=True)
     wrong_path.write_bytes(base_path.read_bytes())
     monkeypatch.setattr("src.analysis.posthoc_final_locked_scores.PROJECT_ROOT", tmp_path)
 
-    with pytest.raises(ValueError, match="base configuration path is immutable"):
-        locked_scores.load_effective_posthoc_config(candidate, amendment_path)
+    with pytest.raises(ValueError, match="current configuration path is immutable"):
+        locked_scores.load_effective_posthoc_config(candidate)
 
 
 def test_effective_config_rejects_same_named_file_elsewhere(
@@ -1451,14 +1435,14 @@ def test_effective_config_rejects_same_named_file_elsewhere(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """A valid-looking same-named file outside the fixed directory is not accepted."""
-    base_path, amendment_path = _write_synthetic_immutable_configs(tmp_path)
+    base_path = _write_synthetic_consolidated_config(tmp_path)
     lookalike = tmp_path / "lookalike/post_hoc_final_supplementary.yaml"
     lookalike.parent.mkdir(parents=True)
     lookalike.write_bytes(base_path.read_bytes())
     monkeypatch.setattr("src.analysis.posthoc_final_locked_scores.PROJECT_ROOT", tmp_path)
 
-    with pytest.raises(ValueError, match="base configuration path is immutable"):
-        locked_scores.load_effective_posthoc_config(lookalike, amendment_path)
+    with pytest.raises(ValueError, match="current configuration path is immutable"):
+        locked_scores.load_effective_posthoc_config(lookalike)
 
 
 def test_effective_config_missing_path_fails_closed_without_echo(
@@ -1466,31 +1450,152 @@ def test_effective_config_missing_path_fails_closed_without_echo(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """A missing candidate produces a concise error without exposing its value."""
-    _, amendment_path = _write_synthetic_immutable_configs(tmp_path)
+    _write_synthetic_consolidated_config(tmp_path)
     missing = Path("configs/private-missing-name.yaml")
     monkeypatch.setattr("src.analysis.posthoc_final_locked_scores.PROJECT_ROOT", tmp_path)
 
     with pytest.raises(ValueError) as excinfo:
-        locked_scores.load_effective_posthoc_config(missing, amendment_path)
+        locked_scores.load_effective_posthoc_config(missing)
 
     assert "could not be resolved" in str(excinfo.value)
     assert str(missing) not in str(excinfo.value)
     assert excinfo.value.__cause__ is None
 
 
-def test_effective_config_enforces_fixed_amendment_overlay_path(
-    tmp_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """A byte-identical amendment overlay at another path remains forbidden."""
-    base_path, amendment_path = _write_synthetic_immutable_configs(tmp_path)
-    lookalike = tmp_path / "elsewhere/post_hoc_final_supplementary_pre_execution_amendment_01.yaml"
-    lookalike.parent.mkdir(parents=True)
-    lookalike.write_bytes(amendment_path.read_bytes())
+def test_consolidated_config_requires_no_live_amendment_path(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """The exact approved date contract loads after every live Amendment file is absent."""
+    base_path = _write_synthetic_consolidated_config(tmp_path)
     monkeypatch.setattr("src.analysis.posthoc_final_locked_scores.PROJECT_ROOT", tmp_path)
 
-    with pytest.raises(ValueError, match="amendment overlay path is fixed"):
-        locked_scores.load_effective_posthoc_config(base_path, lookalike)
+    effective = locked_scores.load_effective_posthoc_config(base_path)
+
+    assert effective["loaders"]["date_parsing"] == dict(locked_scores._APPROVED_DATE_PARSING_PAYLOAD_EXACT)
+    assert not any("amendment_01" in str(path) for path in tmp_path.rglob("*"))
+
+
+def test_repository_config_contains_exact_approved_date_contract() -> None:
+    """The current repository config embeds the ordered 20-key Amendment parser verbatim."""
+    config = yaml.safe_load((PROJECT_ROOT / locked_scores.BASE_CONFIG_RELATIVE_PATH).read_text(encoding="utf-8"))
+    parser = config["loaders"]["date_parsing"]
+
+    assert tuple(parser.items()) == locked_scores._APPROVED_DATE_PARSING_PAYLOAD_EXACT
+
+
+def test_consolidated_config_equals_git_session0_plus_exact_amendment_and_governance() -> None:
+    """Every non-governance field equals Session 0 with only the approved parser replaced."""
+    git_environment = {**os.environ, "GIT_OPTIONAL_LOCKS": "0"}
+
+    def git_yaml(commit: str, path: str) -> dict[str, Any]:
+        completed = subprocess.run(
+            ["git", "show", f"{commit}:{path}"],
+            cwd=PROJECT_ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+            env=git_environment,
+        )
+        return yaml.safe_load(completed.stdout)
+
+    original = git_yaml(SESSION0_FREEZE, locked_scores.BASE_CONFIG_RELATIVE_PATH)
+    amendment = git_yaml(AMENDMENT_FREEZE_DEFAULT_FOR_TESTS, AMENDMENT_CHANGED_PATHS[0])
+    current = yaml.safe_load((PROJECT_ROOT / locked_scores.BASE_CONFIG_RELATIVE_PATH).read_text(encoding="utf-8"))
+    expected = copy.deepcopy(original)
+    expected["loaders"]["date_parsing"] = amendment["overlay_application_contract"][
+        "overlay_date_parsing_payload"
+    ]
+    assert original["loaders"]["date_parsing"]["format"] == "%Y-%m-%d"
+    assert tuple(expected["loaders"]["date_parsing"].items()) == locked_scores._APPROVED_DATE_PARSING_PAYLOAD_EXACT
+
+    current_for_comparison = copy.deepcopy(current)
+    for key in (
+        "record_bundle_status",
+        "consolidation_date",
+        "consolidation_creates_new_session_0",
+        "consolidation_backdates_amended_parser_to_original_session_0",
+        "historical_consolidation",
+    ):
+        current_for_comparison.pop(key)
+    current_authority = current_for_comparison.pop("authority")
+    expected.pop("authority")
+    current_release = current_for_comparison["outputs"]["scientific_and_closure"]["visualization_release"]["schema"]
+    original_release = expected["outputs"]["scientific_and_closure"]["visualization_release"]["schema"]
+    current_release["leaf_contracts"]["reviewed_plan_path"]["allowed_value"] = original_release["leaf_contracts"][
+        "reviewed_plan_path"
+    ]["allowed_value"]
+    current_release["leaf_contracts"]["reviewed_plan_sha256"]["allowed_value"] = original_release[
+        "leaf_contracts"
+    ]["reviewed_plan_sha256"]["allowed_value"]
+
+    assert current_for_comparison == expected
+    assert current_authority["reviewed_plan_path"] == (
+        "docs/plans/acquisition_context_robustness_audit_97707a26.plan.md"
+    )
+    assert current_authority["reviewed_plan_sha256"] == (
+        "ea38735dce9383adeff839ca5c8bdcd084b5f065f5fd68eeda924cdaa522a452"
+    )
+    assert current_authority["agent_guidance_path"] == "AGENTS.md"
+    assert "active_rules" not in current_authority
+
+
+def test_repository_current_authority_is_single_config_and_not_cursor_runtime() -> None:
+    """Only current project paths are active; legacy paths remain historical evidence."""
+    config = yaml.safe_load((PROJECT_ROOT / locked_scores.BASE_CONFIG_RELATIVE_PATH).read_text(encoding="utf-8"))
+    authority = config["authority"]
+
+    assert authority["reviewed_plan_path"] == "docs/plans/acquisition_context_robustness_audit_97707a26.plan.md"
+    assert authority["agent_guidance_path"] == "AGENTS.md"
+    assert "active_rules" not in authority
+    assert "overlay_application_contract" not in config
+    assert "amendment_overlay" not in config
+
+
+def test_consolidated_corrections_and_cumulative_ledger_are_unchanged() -> None:
+    """C01--C16 and the ordered Amendment carry-forward booleans survive consolidation."""
+    config = yaml.safe_load((PROJECT_ROOT / locked_scores.BASE_CONFIG_RELATIVE_PATH).read_text(encoding="utf-8"))
+    amendment = config["historical_consolidation"]["amendment_01"]
+    correction_ids = tuple(item["id"] for item in amendment["session_1_corrections"])
+    cumulative = amendment["access_state"]["step_2_approval_materialization"]["cumulative_through_session"]
+
+    assert correction_ids == tuple(f"C{index:02d}" for index in range(1, 17))
+    assert tuple(cumulative) == tuple(AccessStateTracker().snapshot()["session_activity"])
+    assert tuple(cumulative.values()) == (True, True, True, False, True, False, False, False, False)
+
+
+def test_current_runtime_hashes_validate_separately_from_historical_hashes() -> None:
+    """Current config/method/plan/guidance hashes match the consolidated manifest."""
+    config_path = PROJECT_ROOT / locked_scores.BASE_CONFIG_RELATIVE_PATH
+    config = locked_scores.load_effective_posthoc_config(config_path)
+    manifest_path = PROJECT_ROOT / CURRENT_MANIFEST_RELATIVE_PATH
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+
+    assert hasattr(locked_scores, "validate_current_runtime_authority")
+    result = locked_scores.validate_current_runtime_authority(
+        config_path,
+        config,
+        manifest,
+        require_head_identical=False,
+    )
+
+    assert all(result.values())
+
+
+def test_preserved_preflight_hashes_bind_to_historical_session0_not_current_bundle() -> None:
+    """The byte-preserved preflight retains its original Session 0 authority hashes."""
+    manifest = json.loads((PROJECT_ROOT / CURRENT_MANIFEST_RELATIVE_PATH).read_text(encoding="utf-8"))
+    preflight = json.loads(
+        (PROJECT_ROOT / SCORE_BLIND_PREFLIGHT_RELATIVE_PATH).read_text(encoding="utf-8")
+    )
+    historical = manifest["historical_evidence"]["original_session_0"]["artifacts"]
+    historical_by_path = {item["path"]: item["sha256"] for item in historical}
+
+    assert preflight["hashes"]["config_sha256"] == historical_by_path[locked_scores.BASE_CONFIG_RELATIVE_PATH]
+    assert preflight["hashes"]["methods_sha256"] == historical_by_path[
+        "docs/modeling/final_post_hoc_supplementary_methods.md"
+    ]
+    assert preflight["hashes"]["freeze_manifest_sha256"] == historical_by_path[
+        CURRENT_MANIFEST_RELATIVE_PATH
+    ]
+    assert preflight["hashes"]["config_sha256"] != manifest["current_runtime_authority"]["config"]["sha256"]
 
 
 def test_cli_relative_config_reaches_preflight_with_canonical_frozen_path(
@@ -1498,7 +1603,7 @@ def test_cli_relative_config_reaches_preflight_with_canonical_frozen_path(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """The real CLI/preflight path boundary canonicalizes before governance work."""
-    base_path, _ = _write_synthetic_immutable_configs(tmp_path)
+    base_path = _write_synthetic_consolidated_config(tmp_path)
     captured: dict[str, Any] = {}
 
     class BoundaryReached(RuntimeError):
@@ -1539,11 +1644,21 @@ def test_cli_relative_config_reaches_preflight_with_canonical_frozen_path(
     assert captured["config_path"] == base_path.resolve()
 
 
-def test_amendment_freeze_validation_uses_commit_blobs_not_prior_reviewed_worktree() -> None:
-    """Effective amendment freeze compares commit/worktree blobs, not prior hashes."""
-    amendment = yaml.safe_load((PROJECT_ROOT / AMENDMENT_OVERLAY_RELATIVE_PATH).read_text(encoding="utf-8"))
+def test_amendment_freeze_validation_uses_historical_commit_blobs_without_live_files() -> None:
+    """Amendment history remains verifiable without a worktree overlay or manifest."""
     commit = AMENDMENT_FREEZE_DEFAULT_FOR_TESTS
     calls: list[tuple[str, ...]] = []
+    blob_ids = ("blob-a", "blob-b", "blob-c")
+    amendment = {
+        "commit_id": commit,
+        "sole_parent": SESSION0_FREEZE,
+        "changed_paths_exact": list(AMENDMENT_CHANGED_PATHS),
+        "artifacts": [
+            {"path": path, "sha256": chr(97 + index) * 64, "git_blob_id": blob_ids[index]}
+            for index, path in enumerate(AMENDMENT_CHANGED_PATHS)
+        ],
+        "approval_evidence": {"review_status": "approved", "user_confirmation": True},
+    }
 
     def fake_git(*args: str) -> str:
         calls.append(args)
@@ -1553,15 +1668,35 @@ def test_amendment_freeze_validation_uses_commit_blobs_not_prior_reviewed_worktr
             ("diff-tree", "--no-commit-id", "--name-only", "-r", commit): "\n".join(AMENDMENT_CHANGED_PATHS) + "\n",
             ("merge-base", "--is-ancestor", commit, "HEAD"): "",
         }
-        for path in AMENDMENT_CHANGED_PATHS:
-            outputs[("rev-parse", f"{commit}:{path}")] = f"blob-{path}"
-            outputs[("hash-object", path)] = f"blob-{path}"
+        for path, blob_id in zip(AMENDMENT_CHANGED_PATHS, blob_ids, strict=True):
+            outputs[("rev-parse", f"{commit}:{path}")] = blob_id
         return outputs[args]
 
-    result = validate_amendment_freeze_commit(commit, amendment=amendment, git_runner=fake_git)
+    result = validate_amendment_freeze_commit(commit, historical_amendment=amendment, git_runner=fake_git)
     assert result["approval_evidence_matches"] is True
     assert result["overlay_blob_matches"] is True
-    assert ("hash-object", AMENDMENT_CHANGED_PATHS[0]) in calls
+    assert not any(call[0] == "hash-object" for call in calls)
+
+
+def test_repository_historical_chain_validates_from_git_objects_only() -> None:
+    """Both completed freezes validate without reading any live Amendment path."""
+    config = locked_scores.load_effective_posthoc_config(PROJECT_ROOT / locked_scores.BASE_CONFIG_RELATIVE_PATH)
+    manifest = json.loads((PROJECT_ROOT / CURRENT_MANIFEST_RELATIVE_PATH).read_text(encoding="utf-8"))
+
+    session_0 = locked_scores.validate_freeze_commit(SESSION0_FREEZE, config, manifest)
+    amendment = validate_amendment_freeze_commit(
+        AMENDMENT_FREEZE_DEFAULT_FOR_TESTS,
+        historical_amendment=config["historical_consolidation"]["amendment_01"],
+    )
+
+    config_amendment = config["historical_consolidation"]["amendment_01"]
+    manifest_amendment = manifest["historical_evidence"]["amendment_01"]
+    for key in ("commit_id", "sole_parent", "changed_paths_exact", "artifacts", "approval_evidence"):
+        assert config_amendment[key] == manifest_amendment[key]
+    assert config_amendment["access_state"] == manifest_amendment["access_state"]
+    assert config_amendment["session_1_corrections"] == manifest_amendment["session_1_corrections"]
+    assert all(value is True for key, value in session_0.items() if key != "freeze_commit_id")
+    assert all(value is True for key, value in amendment.items() if key != "amendment_freeze_commit_id")
 
 
 def test_execute_git_prerequisites_use_real_temporary_repository(
@@ -1642,8 +1777,7 @@ def _install_real_framework_environment(tmp_path: Path, monkeypatch: pytest.Monk
     the actual ``execute_approved_framework``/``_stage_csv`` call chain.
     """
     config = locked_scores.load_effective_posthoc_config(
-        PROJECT_ROOT / "configs/post_hoc_final_supplementary.yaml",
-        PROJECT_ROOT / AMENDMENT_OVERLAY_RELATIVE_PATH,
+        PROJECT_ROOT / "configs/post_hoc_final_supplementary.yaml"
     )
     entry_hashes = OrderedDict([("fixture", "a" * 64)])
 
@@ -1894,9 +2028,27 @@ def test_preflight_retry_fails_before_participant_access_without_test_gate(
     def fake_authority(**kwargs: Any) -> tuple[dict[str, Any], OrderedDict[str, str], OrderedDict[str, Any]]:
         calls.append("authority")
         return (
-            {"outputs": {"session_0": {"methods": "docs/modeling/final_post_hoc_supplementary_methods.md",
-                                       "freeze_manifest": "outputs/analysis/posthoc_final_freeze_manifest.json"}},
-             "frozen_inputs": {"whole_container_sha256": OrderedDict(), "prediction_static_headers": {}}},
+            {
+                "outputs": {
+                    "session_0": {
+                        "methods": "docs/modeling/final_post_hoc_supplementary_methods.md",
+                        "freeze_manifest": "outputs/analysis/posthoc_final_freeze_manifest.json",
+                    }
+                },
+                "frozen_inputs": {"whole_container_sha256": OrderedDict(), "prediction_static_headers": {}},
+                "historical_consolidation": {
+                    "amendment_01": {
+                        "immediate_preflight_retry_authorized_at_materialization": False,
+                        "access_state": {
+                            "step_2_approval_materialization": {
+                                "cumulative_through_session": OrderedDict(
+                                    (key, False) for key in AccessStateTracker().snapshot()["session_activity"]
+                                )
+                            }
+                        },
+                    }
+                },
+            },
             OrderedDict(),
             OrderedDict(
                 [
@@ -1927,10 +2079,6 @@ def test_preflight_retry_fails_before_participant_access_without_test_gate(
     monkeypatch.setattr(
         "src.analysis.posthoc_final_locked_scores.validate_pre_access_authority",
         fake_authority,
-    )
-    monkeypatch.setattr(
-        "src.analysis.posthoc_final_locked_scores.load_posthoc_config",
-        lambda _path: {"immediate_preflight_retry_authorized_at_materialization": False},
     )
     monkeypatch.setattr("src.analysis.posthoc_final_locked_scores.load_csv_with_ordered_usecols", boom)
     with pytest.raises(ValueError, match="Conditional preflight retry authorization"):
@@ -2056,7 +2204,7 @@ def _install_preflight_environment(
         A knobs mapping exposing the requested-usecols log, the captured
         ``build_score_blind_preflight`` access-state snapshot, and the call log.
     """
-    _write_synthetic_immutable_configs(tmp_path)
+    _write_synthetic_consolidated_config(tmp_path)
     monkeypatch.setattr("src.analysis.posthoc_final_locked_scores.PROJECT_ROOT", tmp_path)
     for relative in (_OOF_RELATIVE, _TEST_RELATIVE):
         path = tmp_path / relative
@@ -2065,6 +2213,9 @@ def _install_preflight_environment(
 
     container_hashes = OrderedDict([("data/processed/sample_index.csv", "a" * 64)])
     oof_header = ["sample_id", "wrong"] if fail_stage == "prediction_header_inspection" else list(_PREDICTION_HEADER)
+    cumulative = step2_cumulative or OrderedDict(
+        (key, False) for key in AccessStateTracker().snapshot()["session_activity"]
+    )
     config = {
         "frozen_inputs": {
             "whole_container_sha256": container_hashes,
@@ -2075,8 +2226,30 @@ def _install_preflight_environment(
         },
         "outputs": {
             "session_0": {
+                "config": "configs/post_hoc_final_supplementary.yaml",
                 "methods": "docs/modeling/final_post_hoc_supplementary_methods.md",
                 "freeze_manifest": "outputs/analysis/posthoc_final_freeze_manifest.json",
+            }
+        },
+        "historical_consolidation": {
+            "original_session_0": {
+                "artifacts": [
+                    {"path": "configs/post_hoc_final_supplementary.yaml", "sha256": "c" * 64},
+                    {
+                        "path": "docs/modeling/final_post_hoc_supplementary_methods.md",
+                        "sha256": "c" * 64,
+                    },
+                    {
+                        "path": "outputs/analysis/posthoc_final_freeze_manifest.json",
+                        "sha256": "c" * 64,
+                    },
+                ]
+            },
+            "amendment_01": {
+                "immediate_preflight_retry_authorized_at_materialization": False,
+                "access_state": {
+                    "step_2_approval_materialization": {"cumulative_through_session": cumulative}
+                },
             }
         },
     }
@@ -2104,18 +2277,6 @@ def _install_preflight_environment(
         "src.analysis.posthoc_final_locked_scores.validate_pre_access_authority",
         lambda **_kwargs: (config, entry_hashes, authority),
     )
-    cumulative = step2_cumulative or OrderedDict(
-        (key, False) for key in AccessStateTracker().snapshot()["session_activity"]
-    )
-    amendment = {
-        "immediate_preflight_retry_authorized_at_materialization": False,
-        "step_2_approval_materialization_access_state": {"cumulative_through_session": cumulative},
-    }
-    monkeypatch.setattr(
-        "src.analysis.posthoc_final_locked_scores.load_posthoc_config",
-        lambda _path: amendment,
-    )
-
     lineage = pd.DataFrame(
         {
             "sample_id": list(range(1040)),
@@ -2422,22 +2583,64 @@ def _install_authority_environment(
     Returns:
         A knobs mapping with the base config, container path, and a participant-read log.
     """
-    _write_synthetic_immutable_configs(tmp_path)
+    _write_synthetic_consolidated_config(tmp_path)
     monkeypatch.setattr("src.analysis.posthoc_final_locked_scores.PROJECT_ROOT", tmp_path)
-    plan_rel = ".cursor/plans/approved.plan.md"
-    rule_rel = ".cursor/rules/modeling-guardrails.mdc"
+    plan_rel = "docs/plans/approved.plan.md"
+    guidance_rel = "AGENTS.md"
     container_rel = "data/processed/sample_index.csv"
+    methods_rel = "docs/modeling/final_post_hoc_supplementary_methods.md"
+    manifest_rel = CURRENT_MANIFEST_RELATIVE_PATH
+    cumulative = OrderedDict(
+        (
+            key,
+            key
+            in {
+                "prediction_container_bytes_hashed",
+                "prediction_schema_or_header_inspected",
+                "participant_level_label_values_read",
+                "participant_level_date_values_read",
+            },
+        )
+        for key in AccessStateTracker().snapshot()["session_activity"]
+    )
+    amendment = {
+        "commit_id": AMENDMENT_FREEZE_DEFAULT_FOR_TESTS,
+        "sole_parent": SESSION0_FREEZE,
+        "changed_paths_exact": list(AMENDMENT_CHANGED_PATHS),
+        "artifacts": [
+            {"path": path, "sha256": chr(97 + index) * 64, "git_blob_id": f"blob-{index}"}
+            for index, path in enumerate(AMENDMENT_CHANGED_PATHS)
+        ],
+        "approval_evidence": {"review_status": "approved", "user_confirmation": True},
+        "immediate_preflight_retry_authorized_at_materialization": False,
+        "access_state": {
+            "step_2_approval_materialization": {"cumulative_through_session": cumulative}
+        },
+    }
+    historical_session_0 = {
+        "commit_id": SESSION0_FREEZE,
+        "artifacts": [
+            {"path": locked_scores.BASE_CONFIG_RELATIVE_PATH, "sha256": "c" * 64},
+            {"path": methods_rel, "sha256": "c" * 64},
+            {"path": manifest_rel, "sha256": "c" * 64},
+        ],
+    }
     base = {
         "authority": {
             "reviewed_plan_path": plan_rel,
             "reviewed_plan_sha256": "a" * 64,
-            "active_rules": [{"path": rule_rel, "sha256": "b" * 64}],
+            "agent_guidance_path": guidance_rel,
+            "agent_guidance_sha256": "b" * 64,
+        },
+        "historical_consolidation": {
+            "original_session_0": historical_session_0,
+            "amendment_01": amendment,
         },
         "outputs": {
             "session_0": {
                 "config": "configs/post_hoc_final_supplementary.yaml",
-                "methods": "docs/modeling/final_post_hoc_supplementary_methods.md",
-                "freeze_manifest": "outputs/analysis/posthoc_final_freeze_manifest.json",
+                "methods": methods_rel,
+                "freeze_manifest": manifest_rel,
             },
             "scientific_and_closure": {
                 "locked_score_metrics": {"path": SESSION_4_SCIENTIFIC_OUTPUT_PATHS[0]},
@@ -2453,28 +2656,35 @@ def _install_authority_environment(
             ),
         },
         "frozen_inputs": {"whole_container_sha256": {container_rel: "d" * 64}},
+        "loaders": {"date_parsing": dict(locked_scores._APPROVED_DATE_PARSING_PAYLOAD_EXACT)},
     }
-    amendment = {
-        "immediate_preflight_retry_authorized_at_materialization": False,
-        "step_2_approval_materialization_access_state": {
-            "cumulative_through_session": OrderedDict(
-                (key, key in {
-                    "prediction_container_bytes_hashed",
-                    "prediction_schema_or_header_inspected",
-                    "participant_level_label_values_read",
-                    "participant_level_date_values_read",
-                })
-                for key in AccessStateTracker().snapshot()["session_activity"]
-            )
+    manifest = {
+        "historical_evidence": {
+            "original_session_0": historical_session_0,
+            "amendment_01": amendment,
+        },
+        "current_runtime_authority": {
+            "config": {"path": locked_scores.BASE_CONFIG_RELATIVE_PATH, "sha256": "c" * 64},
+            "methods": {"path": methods_rel, "sha256": "c" * 64},
+            "manifest": {"path": manifest_rel, "self_hash": None, "self_hash_policy": "forbidden"},
+            "operational_plan": {"path": plan_rel, "sha256": "a" * 64},
+            "agent_guidance": {"path": guidance_rel, "sha256": "b" * 64},
+            "cutover_commit_id": None,
         },
     }
-    sha_by_rel = {plan_rel: "a" * 64, rule_rel: "b" * 64, container_rel: "d" * 64}
-    manifest_path = tmp_path / base["outputs"]["session_0"]["freeze_manifest"]
+    sha_by_rel = {
+        plan_rel: "a" * 64,
+        guidance_rel: "b" * 64,
+        container_rel: "d" * 64,
+        locked_scores.BASE_CONFIG_RELATIVE_PATH: "c" * 64,
+        methods_rel: "c" * 64,
+    }
+    manifest_path = tmp_path / manifest_rel
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
-    manifest_path.write_text("{}", encoding="utf-8")
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
 
-    def fake_load_config(path: Path) -> dict[str, Any]:
-        return amendment if "amendment_01" in str(path) else base
+    def fake_load_config(_path: Path) -> dict[str, Any]:
+        return base
 
     monkeypatch.setattr("src.analysis.posthoc_final_locked_scores.load_posthoc_config", fake_load_config)
 
@@ -2482,8 +2692,10 @@ def _install_authority_environment(
         rel = str(Path(path).relative_to(tmp_path))
         if fail_stage == "active_plan_validation" and rel == plan_rel:
             return "f" * 64
-        if fail_stage == "rule_validation" and rel == rule_rel:
-            raise ValueError("synthetic rule hash failure")
+        if fail_stage == "agent_guidance_validation" and rel == guidance_rel:
+            return "f" * 64
+        if fail_stage == "current_authority_validation" and rel == methods_rel:
+            return "f" * 64
         if fail_stage == "entry_hashing" and rel == container_rel:
             return "f" * 64
         return sha_by_rel.get(rel, "c" * 64)
@@ -2513,8 +2725,8 @@ def _install_authority_environment(
     )
 
     def fake_effective(*_args: Any, **_kwargs: Any) -> dict[str, Any]:
-        if fail_stage == "overlay_validation":
-            raise ValueError("synthetic overlay validation failure")
+        if fail_stage == "consolidated_config_validation":
+            raise ValueError("synthetic consolidated-config failure")
         return base
 
     monkeypatch.setattr("src.analysis.posthoc_final_locked_scores.load_effective_posthoc_config", fake_effective)
@@ -2538,11 +2750,12 @@ def _install_authority_environment(
     ("stage", "message_fragment"),
     [
         ("active_plan_validation", "Reviewed plan hash"),
-        ("rule_validation", "synthetic rule hash failure"),
+        ("agent_guidance_validation", "Agent guidance hash"),
+        ("current_authority_validation", "Current methods hash"),
         ("annotated_tag_validation", "synthetic annotated-tag validation failure"),
         ("original_session0_freeze_validation", "synthetic Session 0 freeze validation failure"),
         ("amendment_freeze_validation", "synthetic amendment freeze validation failure"),
-        ("overlay_validation", "synthetic overlay validation failure"),
+        ("consolidated_config_validation", "synthetic consolidated-config failure"),
         ("stale_target_completion_log_validation", "already exists"),
         ("entry_hashing", "whole-container hashes do not match"),
     ],
@@ -2668,7 +2881,6 @@ def _authority_kwargs(tmp_path: Path, mode: str) -> dict[str, Any]:
 
     return {
         "config_path": tmp_path / "configs/post_hoc_final_supplementary.yaml",
-        "amendment_path": tmp_path / AMENDMENT_OVERLAY_RELATIVE_PATH,
         "freeze_commit": SESSION0_FREEZE,
         "amendment_freeze_commit": AMENDMENT_FREEZE_DEFAULT_FOR_TESTS,
         "mode": mode,

@@ -617,119 +617,99 @@ def validate_freeze_commit(
     manifest: Mapping[str, Any],
     *,
     git_runner: Callable[..., str] = _run_git_command,
-    rule_hashes: Mapping[str, str] | None = None,
-    artifact_hashes: Mapping[str, str] | None = None,
 ) -> dict[str, Any]:
-    """Validate the supplied three-path Session 0 freeze commit read-only.
+    """Validate original Session 0 from recorded hashes and immutable Git objects.
 
     Args:
         freeze_commit: Required lowercase 40-character commit SHA.
-        config: Parsed frozen package configuration.
-        manifest: Parsed frozen Session 0 manifest.
+        config: Parsed consolidated package configuration.
+        manifest: Parsed consolidated current manifest.
         git_runner: Read-only Git command adapter for testing.
-        rule_hashes: Active rule content hashes, if already computed.
-        artifact_hashes: Current config/methods SHA-256 values, if already computed.
 
     Returns:
         Ordered freeze-validation booleans.
 
     Raises:
-        ValueError: If any freeze invariant fails.
+        ValueError: If any historical record or Git-object invariant fails.
     """
     if _COMMIT_PATTERN.fullmatch(freeze_commit) is None:
         raise ValueError("Freeze commit must be a lowercase 40-character hexadecimal SHA.")
-    authority = config["authority"]
-    session_outputs = config["outputs"]["session_0"]
-    expected_paths = [session_outputs["config"], session_outputs["methods"], session_outputs["freeze_manifest"]]
+    try:
+        config_record = config["historical_consolidation"]["original_session_0"]
+        manifest_record = manifest["historical_evidence"]["original_session_0"]
+        session_outputs = config["outputs"]["session_0"]
+        expected_paths = [
+            session_outputs["config"],
+            session_outputs["methods"],
+            session_outputs["freeze_manifest"],
+        ]
+    except (KeyError, TypeError) as exc:
+        raise ValueError("Original Session 0 historical record is malformed.") from exc
+    comparison_keys = (
+        "commit_id",
+        "sole_parent",
+        "changed_paths_exact",
+        "artifacts",
+        "approval_evidence",
+        "historical_rule_sha256",
+    )
+    if not isinstance(config_record, Mapping) or not isinstance(manifest_record, Mapping) or any(
+        config_record.get(key) != manifest_record.get(key) for key in comparison_keys
+    ):
+        raise ValueError("Original Session 0 config and manifest records disagree.")
+    artifacts = config_record.get("artifacts")
+    if not isinstance(artifacts, Sequence) or isinstance(artifacts, (str, bytes)) or len(artifacts) != 3:
+        raise ValueError("Original Session 0 artifact record is malformed.")
+    artifact_records = [dict(item) for item in artifacts if isinstance(item, Mapping)]
+    if len(artifact_records) != 3 or [item.get("path") for item in artifact_records] != expected_paths:
+        raise ValueError("Original Session 0 artifact paths disagree with the runtime inventory.")
+    if config_record.get("commit_id") != freeze_commit:
+        raise ValueError("Supplied Session 0 freeze commit disagrees with historical authority.")
+    recorded_paths = config_record.get("changed_paths_exact")
+    if recorded_paths != expected_paths:
+        raise ValueError("Original Session 0 changed-path record is invalid.")
+    hashes_valid = all(
+        isinstance(item.get("sha256"), str) and _SHA256_PATTERN.fullmatch(item["sha256"])
+        for item in artifact_records
+    )
+    blobs_valid = all(isinstance(item.get("git_blob_id"), str) and item["git_blob_id"] for item in artifact_records)
+    historical_rules = config_record.get("historical_rule_sha256")
+    rules_valid = (
+        isinstance(historical_rules, Mapping)
+        and bool(historical_rules)
+        and all(isinstance(value, str) and _SHA256_PATTERN.fullmatch(value) for value in historical_rules.values())
+    )
+    approval = config_record.get("approval_evidence")
+    approval_valid = (
+        isinstance(approval, Mapping)
+        and approval.get("review_status") == "approved"
+        and approval.get("user_confirmation") is True
+    )
     try:
         git_runner("cat-file", "-e", f"{freeze_commit}^{{commit}}")
-        exists = True
         git_runner("merge-base", "--is-ancestor", freeze_commit, "HEAD")
-        is_ancestor = True
         parents = git_runner("rev-list", "--parents", "-n", "1", freeze_commit).split()
-        parent_is_baseline = len(parents) == 2 and parents[1] == authority["baseline_head"]
         changed_paths = git_runner("diff-tree", "--no-commit-id", "--name-only", "-r", freeze_commit).splitlines()
-        changed_paths_exact = changed_paths == expected_paths
         commit_blobs = {
             path: git_runner("rev-parse", f"{freeze_commit}:{path}") for path in expected_paths
         }
-        working_tree_blobs = {path: git_runner("hash-object", path) for path in expected_paths}
     except (subprocess.CalledProcessError, KeyError) as exc:
         raise ValueError("Freeze-commit provenance validation failed.") from exc
-
-    artifact_records = manifest.get("session_0_artifacts", {})
-    artifact_keys = ("config", "methods", "freeze_manifest")
-    artifact_paths_match = all(
-        artifact_records.get(key, {}).get("path") == path for key, path in zip(artifact_keys, expected_paths, strict=True)
-    )
-    blob_records_match = all(
-        record.get("blob_id") in (None, commit_blobs[path])
-        for record, path in zip(
-            (artifact_records.get(key, {}) for key in artifact_keys),
-            expected_paths,
-            strict=True,
-        )
-    )
-    current_artifact_hashes = (
-        dict(artifact_hashes)
-        if artifact_hashes is not None
-        else {
-            "config": sha256_file(PROJECT_ROOT / expected_paths[0]),
-            "methods": sha256_file(PROJECT_ROOT / expected_paths[1]),
-        }
-    )
-    artifact_sha256_match = all(
-        current_artifact_hashes.get(key) == artifact_records.get(key, {}).get("sha256")
-        for key in ("config", "methods")
-    )
-    manifest_expected_paths = manifest.get("expected_session_0_changed_paths")
-    manifest_paths_match = manifest_expected_paths == expected_paths
-    approval_evidence = authority.get("approval_evidence", {})
-    reviewed_plan = {
-        "path": authority.get("reviewed_plan_path"),
-        "sha256": authority.get("reviewed_plan_sha256"),
-    }
-    approval_evidence_matches = (
-        manifest.get("approval_evidence") == approval_evidence
-        and manifest.get("reviewed_plan") == reviewed_plan
-        and approval_evidence.get("reviewed_plan_path") == reviewed_plan["path"]
-        and approval_evidence.get("reviewed_plan_sha256") == reviewed_plan["sha256"]
-        and approval_evidence.get("review_status") == "approved"
-        and approval_evidence.get("user_confirmation") is True
-    )
-    expected_rules = {
-        item["path"]: item["sha256"] for item in authority.get("active_rules", []) if "path" in item and "sha256" in item
-    }
-    actual_rules = rule_hashes if rule_hashes is not None else expected_rules
-    manifest_rules = {
-        path: record.get("sha256") for path, record in manifest.get("active_rules", {}).items() if isinstance(record, Mapping)
-    }
-    active_rule_hashes_match = dict(actual_rules) == expected_rules and manifest_rules == expected_rules
+    blob_matches = [
+        commit_blobs[path] == record["git_blob_id"]
+        for path, record in zip(expected_paths, artifact_records, strict=True)
+    ]
     result = {
         "freeze_commit_id": freeze_commit,
-        "exists": exists,
-        "is_ancestor_of_head": is_ancestor,
-        "parent_is_baseline_head": parent_is_baseline,
-        "changed_paths_exact": changed_paths_exact and manifest_paths_match,
-        "config_blob_matches": (
-            artifact_paths_match
-            and blob_records_match
-            and artifact_sha256_match
-            and commit_blobs[expected_paths[0]] == working_tree_blobs[expected_paths[0]]
-        ),
-        "methods_blob_matches": (
-            artifact_paths_match
-            and blob_records_match
-            and artifact_sha256_match
-            and commit_blobs[expected_paths[1]] == working_tree_blobs[expected_paths[1]]
-        ),
-        "manifest_blob_matches": (
-            artifact_paths_match
-            and blob_records_match
-            and commit_blobs[expected_paths[2]] == working_tree_blobs[expected_paths[2]]
-        ),
-        "approval_evidence_matches": approval_evidence_matches,
-        "active_rule_hashes_match": active_rule_hashes_match,
+        "exists": True,
+        "is_ancestor_of_head": True,
+        "parent_is_baseline_head": len(parents) == 2 and parents[1] == config_record.get("sole_parent"),
+        "changed_paths_exact": changed_paths == expected_paths,
+        "config_blob_matches": hashes_valid and blobs_valid and blob_matches[0],
+        "methods_blob_matches": hashes_valid and blobs_valid and blob_matches[1],
+        "manifest_blob_matches": hashes_valid and blobs_valid and blob_matches[2],
+        "approval_evidence_matches": approval_valid,
+        "active_rule_hashes_match": rules_valid,
     }
     if tuple(result) != _FREEZE_KEYS or not all(value is True for key, value in result.items() if key != "freeze_commit_id"):
         raise ValueError("Freeze-commit validation did not satisfy all immutable provenance checks.")
