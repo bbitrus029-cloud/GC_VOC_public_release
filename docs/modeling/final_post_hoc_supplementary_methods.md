@@ -4,7 +4,7 @@
 **Package ID:** `posthoc_final_supplementary`  
 **Current operational authority:** `docs/plans/acquisition_context_robustness_audit_97707a26.plan.md`
 **Current operational-plan SHA-256:** `ea38735dce9383adeff839ca5c8bdcd084b5f065f5fd68eeda924cdaa522a452`
-**Current agent-guidance authority:** `AGENTS.md` (`1cb134c06871ba1837e0ff235dca9ca6ee0c10c1d08a123ff3912354299f9c9a`)
+**Current agent-guidance authority:** `AGENTS.md` (`09d904128916a7c1ed8294a285c17725ecb1eadbcb0c78e4e4a3fbf2cbea1a9a`)
 **Baseline HEAD:** `cbb87b0380d7129798002ff4ea8b869c4b786582`  
 **Machine-readable contract:** `configs/post_hoc_final_supplementary.yaml`  
 **Record status:** current consolidated methods/provenance authority; the original Session 0 snapshot was entirely results-free.

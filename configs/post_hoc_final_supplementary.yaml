@@ -18,7 +18,7 @@ authority:
   reviewed_plan_path: docs/plans/acquisition_context_robustness_audit_97707a26.plan.md
   reviewed_plan_sha256: ea38735dce9383adeff839ca5c8bdcd084b5f065f5fd68eeda924cdaa522a452
   agent_guidance_path: AGENTS.md
-  agent_guidance_sha256: 1cb134c06871ba1837e0ff235dca9ca6ee0c10c1d08a123ff3912354299f9c9a
+  agent_guidance_sha256: 09d904128916a7c1ed8294a285c17725ecb1eadbcb0c78e4e4a3fbf2cbea1a9a
   retired_plan_identifier: acquisition_context_robustness_audit_4d2cfd18.plan.md
   retired_plan_status: historical_prohibited_never_execute_not_current_filesystem_dependency
   baseline_branch: main
