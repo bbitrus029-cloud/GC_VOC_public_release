@@ -1343,8 +1343,8 @@ def test_minimal_loader_uses_exact_columns_and_preserves_locked_order(
     pd.DataFrame(
         {
             "sample_id": ids,
-            "label": labels,
             "collection_time": [dates[index % len(dates)] for index in range(972)],
+            "label": labels,
             "in_final_output": True,
         }
     ).to_csv(sample_index, index=False)

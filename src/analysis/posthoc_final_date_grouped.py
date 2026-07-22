@@ -27,6 +27,7 @@ from src.analysis.posthoc_final_common import (
     ACCESS_STATE_KEYS,
     AccessStateTracker,
     build_registry_frame,
+    load_csv_with_ordered_usecols,
     parse_date_series_ascii_slash,
     registry_readback_matches,
     sha256_file,
@@ -549,12 +550,7 @@ def validate_analysis3_authority(
 
 def _read_csv_exact(path: Path, usecols: Sequence[str], expected: Sequence[str]) -> pd.DataFrame:
     """Read exactly one ordered CSV projection."""
-    if tuple(usecols) != tuple(expected):
-        raise ValueError("Requested CSV projection does not match the approved loader contract.")
-    frame = pd.read_csv(path, usecols=list(usecols))
-    if list(frame.columns) != list(expected):
-        raise ValueError("Loaded CSV projection order does not match the approved contract.")
-    return frame
+    return load_csv_with_ordered_usecols(path, usecols, expected)
 
 
 def _require_integer_vector(values: np.ndarray, *, expected_length: int, role: str) -> np.ndarray:
