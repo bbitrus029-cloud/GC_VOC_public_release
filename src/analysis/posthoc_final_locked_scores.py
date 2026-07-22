@@ -1910,10 +1910,13 @@ def _validate_scientific_records(
             denominator = rows[0]["denominator_n"]
             if any(row["denominator_n"] != denominator for row in rows) or sum(row["n"] for row in rows) != denominator:
                 raise ValueError("Disease composition counts do not reconcile.")
-            if key[0] == "analysis_1_difficult_spectrum" and (rows[0]["n"] != 0 or rows[5]["n"] != 0):
-                raise ValueError("Difficult-spectrum composition must exclude HC and AGC.")
-            if rows[1]["n"] + rows[2]["n"] + rows[3]["n"] + rows[4]["n"] != denominator:
-                raise ValueError("Disease composition does not reconcile with endpoint-class totals.")
+            if key[0] == "analysis_1_difficult_spectrum":
+                if rows[0]["n"] != 0 or rows[5]["n"] != 0:
+                    raise ValueError("Difficult-spectrum composition must exclude HC and AGC.")
+                if rows[1]["n"] + rows[2]["n"] + rows[3]["n"] + rows[4]["n"] != denominator:
+                    raise ValueError(
+                        "Difficult-spectrum middle-four composition does not reconcile with its denominator."
+                    )
     if name == "qc5_correctness":
         rules = contract["field_population_rules_by_record_type"]
 

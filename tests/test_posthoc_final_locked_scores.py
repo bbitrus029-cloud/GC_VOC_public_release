@@ -517,6 +517,29 @@ def _synthetic_framework_views() -> OrderedDict[str, Mapping[str, np.ndarray]]:
     return OrderedDict([("oof", inputs), ("test", inputs)])
 
 
+def test_framework_accepts_hc_and_agc_in_strict_qc5_composition() -> None:
+    """Strict-QC5 composition retains endpoint-consistent HC and AGC rows."""
+    inputs = {
+        "y_true": np.array([0, 0, 0, 1, 1, 1]),
+        "p_raw": np.array([0.1, 0.2, 0.3, 0.7, 0.8, 0.9]),
+        "dates": np.array(
+            ["2025/1/1", "2025/1/2", "2025/1/3", "2025/1/1", "2025/1/2", "2025/1/3"]
+        ),
+        "disease_category": np.array([0, 1, 2, 3, 4, 5]),
+        "strict_pass": np.array([True, False, False, False, False, True]),
+    }
+
+    result = execute_approved_framework(OrderedDict([("oof", inputs), ("test", inputs)]))
+
+    composition = result["frames"]["locked_score_composition"]
+    strict_oof = composition[
+        (composition["analysis_id"] == "analysis_4_strict_qc5") & (composition["view"] == "oof")
+    ]
+    assert strict_oof["disease_category_code"].tolist() == list(range(6))
+    assert strict_oof["n"].tolist() == [1, 0, 0, 0, 0, 1]
+    assert strict_oof["denominator_n"].tolist() == [2] * 6
+
+
 def _record(records: list[dict[str, Any]], **expected: object) -> dict[str, Any]:
     """Return the unique synthetic record matching the supplied public fields."""
     matches = [
