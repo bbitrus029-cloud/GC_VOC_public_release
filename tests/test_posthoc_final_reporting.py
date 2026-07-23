@@ -995,6 +995,16 @@ def test_reporting_closure_has_exact_eight_pre_manifest_artifacts_and_determinis
     }
     assert retained_reasons
     assert all(reason in report for reason in retained_reasons)
+    assert config["interpretation_boundary"]["endpoint_definition"] in report
+    assert "enriched diagnostic case-control/two-gate sampling design" in report
+    assert (
+        "LGIN findings remain exploratory because biopsy can undergrade disease and complete resection pathology was "
+        "unavailable."
+    ) in report
+    assert "Analyses 1-4 are post-hoc model-robustness analyses." in report
+    assert "non-model reporting-closure artifacts, not a fifth model analysis" in report
+    assert "Pre-endoscopy triage remains a future validation target" in report
+    assert "This study does not directly validate that use." in report
     assert "Session 7 integrity audit is pending" in report
     assert "Visualization release remains unauthorized" in report
     assert "outputs/analysis/posthoc_final_integrity_audit.json" in report

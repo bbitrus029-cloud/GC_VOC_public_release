@@ -1647,6 +1647,7 @@ def build_consolidated_report(
     scientific_paths = config["outputs"]["scientific_and_closure"]
     audit_path = scientific_paths["integrity_audit"]["path"]
     release_path = scientific_paths["visualization_release"]["path"]
+    endpoint_definition = config["interpretation_boundary"]["endpoint_definition"]
     sections = [
         "# Final post-hoc supplementary analyses",
         "",
@@ -1654,9 +1655,21 @@ def build_consolidated_report(
         "It is not external or temporal validation, does not establish deployment readiness or clinical benefit, "
         "and does not support causal interpretation.",
         "",
-        "Breath collection followed diagnostic gastroscopy and indicated biopsy and preceded treatment; direct "
-        "pre-endoscopy-triage validation remains unavailable. Differential reference standards are retained as a "
-        "limitation.",
+        endpoint_definition,
+        "",
+        "The enriched diagnostic case-control/two-gate sampling design limits transportability to target clinical "
+        "populations and does not establish population-screening performance.",
+        "",
+        "LGIN findings remain exploratory because biopsy can undergrade disease and complete resection pathology was "
+        "unavailable.",
+        "",
+        "Analyses 1-4 are post-hoc model-robustness analyses. Cohort flow, included-versus-excluded descriptions, "
+        "calibration-source generation, the reference-standard/timing audit, and the QC6 lineage correction are "
+        "non-model reporting-closure artifacts, not a fifth model analysis.",
+        "",
+        "Breath collection followed diagnostic gastroscopy and indicated biopsy and preceded treatment. Pre-endoscopy "
+        "triage remains a future validation target. This study does not directly validate that use. Differential "
+        "reference standards are retained as a limitation.",
         "",
         f"Session 7 integrity audit is pending; its authoritative status path is `{audit_path}`.",
         "",
