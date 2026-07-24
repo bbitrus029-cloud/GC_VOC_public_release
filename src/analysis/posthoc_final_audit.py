@@ -1206,6 +1206,47 @@ def validate_session7_additive_scope(
         raise ValueError("Session 7 must remain additive and leave the consolidated report unchanged.")
 
 
+def _is_audit_namespace_sensitive(relative: str) -> bool:
+    """Identify an artifact path governed by IA06 namespace controls."""
+    path = Path(relative)
+    lower_name = path.name.lower()
+    return (
+        relative.startswith("outputs/figures/")
+        or relative.startswith("outputs/models/")
+        or relative.startswith("outputs/predictions/")
+        or ("fold" in lower_name and "assign" in lower_name)
+        or "posthoc_final" in path.name
+    )
+
+
+def _capture_audit_namespace_snapshot(project_root: Path) -> OrderedDict[str, str]:
+    """Hash the deterministic in-memory IA06 namespace without exposing file contents."""
+    root = project_root.resolve()
+    search_roots = (
+        root / "outputs",
+        root / "docs/preprocessing",
+        root / "docs/modeling",
+    )
+    paths = sorted(
+        (
+            path
+            for search_root in search_roots
+            if search_root.exists()
+            for path in search_root.rglob("*")
+            if path.is_file() and _is_audit_namespace_sensitive(path.relative_to(root).as_posix())
+        ),
+        key=lambda path: path.relative_to(root).as_posix(),
+    )
+    snapshot: OrderedDict[str, str] = OrderedDict()
+    try:
+        for path in paths:
+            relative = path.relative_to(root).as_posix()
+            snapshot[relative] = hashlib.sha256(path.read_bytes()).hexdigest()
+    except OSError:
+        raise ValueError("The IA06 namespace could not be captured deterministically.") from None
+    return snapshot
+
+
 def _git(*args: str) -> str:
     """Run one read-only Git command from the project root."""
     completed = subprocess.run(
@@ -1307,6 +1348,7 @@ def validate_audit_authority(
         protected_paths,
         declared_hashes=config["frozen_inputs"]["whole_container_sha256"],
     )
+    namespace_entry_snapshot = _capture_audit_namespace_snapshot(root)
     return {
         "config": config,
         "manifest": manifest,
@@ -1316,6 +1358,7 @@ def validate_audit_authority(
         "cumulative_prior": OrderedDict(cumulative),
         "reporting_cumulative_prior": OrderedDict(reporting_cumulative_prior or cumulative),
         "entry_hashes": entry_hashes,
+        "namespace_entry_snapshot": namespace_entry_snapshot,
         "required_paths": tuple(dict.fromkeys(prior_paths)),
         "project_root": root,
         "git_runner": git_runner,
@@ -1590,6 +1633,17 @@ def _check_stale_output_and_namespace(context: AuditCheckContext) -> str:
     """Execute IA06 exact namespace and clean additive-target checks."""
     config = context.authority["config"]
     root = Path(context.authority["project_root"])
+    entry_namespace = OrderedDict(context.authority["namespace_entry_snapshot"])
+    current_namespace = _capture_audit_namespace_snapshot(root)
+    if current_namespace != entry_namespace:
+        changed_count = sum(
+            entry_namespace.get(path) != current_namespace.get(path)
+            for path in set(entry_namespace) | set(current_namespace)
+        )
+        raise ValueError(
+            "Artifact namespace changed after authority validation "
+            f"(match_count={changed_count})."
+        )
     outputs, log_path = audit_promotion_inventory(config)
     require_clean_promotion_state([root / path for path in outputs], root / log_path)
     release = root / config["outputs"]["scientific_and_closure"]["visualization_release"]["path"]
@@ -1638,8 +1692,14 @@ def _check_stale_output_and_namespace(context: AuditCheckContext) -> str:
                 tracked = True
             except Exception:
                 tracked = False
-            newly_generated = relative not in allowed_paths and not tracked
-            prohibited_post_freeze = prohibited_kind and relative not in allowed_paths and not existed_at_freeze
+            unchanged_untracked_entry = relative in entry_namespace and not tracked
+            newly_generated = relative not in allowed_paths and not tracked and not unchanged_untracked_entry
+            prohibited_post_freeze = (
+                prohibited_kind
+                and relative not in allowed_paths
+                and not existed_at_freeze
+                and not unchanged_untracked_entry
+            )
             if undeclared_supplement or newly_generated or prohibited_post_freeze:
                 violation_count += 1
     if violation_count:
@@ -1649,7 +1709,7 @@ def _check_stale_output_and_namespace(context: AuditCheckContext) -> str:
         )
     return (
         "executed:stale_output_and_namespace; audit_targets_absent=2; "
-        f"filesystem_artifact_count={scanned_count}"
+        f"filesystem_artifact_count={scanned_count}; namespace_entry_count={len(entry_namespace)}"
     )
 
 

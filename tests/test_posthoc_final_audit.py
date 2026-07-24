@@ -982,6 +982,42 @@ def _synthetic_audit_context(
     return synthetic_config, git_runner, authority, references, context
 
 
+def _synthetic_audit_context_with_untracked_entry_model(
+    tmp_path: Path,
+    config: dict[str, Any],
+    monkeypatch: pytest.MonkeyPatch,
+) -> tuple[Path, audit.AuditCheckContext]:
+    """Capture one synthetic untracked model that is absent from the Session 0 tree."""
+    synthetic_config, base_runner = _complete_synthetic_reporting(tmp_path, config, monkeypatch)
+    relative = "outputs/models/synthetic_legacy_model.pkl"
+    target = tmp_path / relative
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(b"synthetic legacy model container\n")
+
+    def legacy_runner(*args: str) -> str:
+        if args[:2] == ("ls-files", "--error-unmatch") and args[2] == relative:
+            raise ValueError("Synthetic legacy model is untracked.")
+        if args[:2] == ("cat-file", "-e") and args[2] == f"{SESSION0_FREEZE}:{relative}":
+            raise ValueError("Synthetic legacy model was absent at the Session 0 freeze.")
+        return base_runner(*args)
+
+    authority = audit.validate_audit_authority(
+        Path("configs/post_hoc_final_supplementary.yaml"),
+        SESSION0_FREEZE,
+        AMENDMENT_FREEZE,
+        git_runner=legacy_runner,
+        project_root=tmp_path,
+    )
+    references = audit.load_privacy_references(
+        tmp_path / synthetic_config["privacy"]["privacy_reference_loader"]["source"],
+        synthetic_config,
+        authorized=True,
+    )
+    prior_inputs = audit.load_prior_audit_inputs(authority)
+    context = audit.build_audit_check_context(authority, prior_inputs, references)
+    return target, context
+
+
 def test_ia01_and_ia03_reject_schema_valid_session5_fold_incoherence(
     tmp_path: Path,
     config: dict[str, Any],
@@ -1078,6 +1114,40 @@ def test_audit_independently_rejects_rehashed_qc6_statement_mutation(
     assert audit._check_negative_result_retention(changed).startswith("executed:")
     with pytest.raises(ValueError, match="QC6"):
         audit._check_schema_dtype_order_validation(changed)
+
+
+def test_ia06_accepts_unchanged_untracked_model_present_at_authority_entry(
+    tmp_path: Path,
+    config: dict[str, Any],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """IA06 accepts an unchanged entry-state model whose chronology Git cannot prove."""
+    _, context = _synthetic_audit_context_with_untracked_entry_model(tmp_path, config, monkeypatch)
+    assert audit._check_stale_output_and_namespace(context).startswith("executed:")
+
+
+@pytest.mark.parametrize("namespace_change", ["add", "mutate", "remove"])
+def test_ia06_rejects_untracked_model_delta_after_authority_entry(
+    namespace_change: str,
+    tmp_path: Path,
+    config: dict[str, Any],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """IA06 rejects additions, byte changes, and removals after its entry snapshot."""
+    target, context = _synthetic_audit_context_with_untracked_entry_model(tmp_path, config, monkeypatch)
+    if namespace_change == "add":
+        added = target.with_name("synthetic_new_model.pkl")
+        added.write_bytes(b"synthetic new model container\n")
+    elif namespace_change == "mutate":
+        target.write_bytes(b"synthetic changed model container\n")
+    else:
+        target.unlink()
+    with pytest.raises(ValueError, match="namespace changed") as exc_info:
+        audit._check_stale_output_and_namespace(context)
+    message = str(exc_info.value)
+    assert target.name not in message
+    assert str(tmp_path) not in message
+    assert "synthetic" not in message
 
 
 @pytest.mark.parametrize(
