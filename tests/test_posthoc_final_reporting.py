@@ -1366,6 +1366,9 @@ def test_reporting_real_cli_executes_full_synthetic_chain(
     from scripts import run_posthoc_final_reporting as cli
     from src.analysis import posthoc_final_locked_scores as locked_scores
 
+    real_target = PROJECT_ROOT / "outputs/analysis/posthoc_final_cohort_flow.csv"
+    real_target_existed_before = real_target.exists()
+    real_target_bytes_before = real_target.read_bytes() if real_target_existed_before else None
     synthetic_config, git_runner = build_synthetic_session6_root(tmp_path, config)
     monkeypatch.setattr(locked_scores, "PROJECT_ROOT", tmp_path)
     before = {path.relative_to(tmp_path) for path in tmp_path.rglob("*") if path.is_file()}
@@ -1398,7 +1401,9 @@ def test_reporting_real_cli_executes_full_synthetic_chain(
         "scientific_payload_agreement": True,
         "shared_invocation_utc": "2030-01-02T03:04:05Z",
     }
-    assert not (PROJECT_ROOT / "outputs/analysis/posthoc_final_cohort_flow.csv").exists()
+    assert real_target.exists() == real_target_existed_before
+    if real_target_existed_before:
+        assert real_target.read_bytes() == real_target_bytes_before
 
 
 def test_reporting_real_cli_rejects_schema_shaped_semantically_invalid_prior_aggregate(

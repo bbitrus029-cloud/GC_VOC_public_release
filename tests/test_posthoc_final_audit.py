@@ -1150,6 +1150,10 @@ def test_audit_real_cli_executes_checks_staging_readback_and_log_last_promotion(
     """The real audit parser/main executes IA01--IA12 and promotes exactly JSON then log."""
     from scripts import run_posthoc_final_audit as cli
 
+    real_output_paths, _ = audit.audit_promotion_inventory(config)
+    real_target = PROJECT_ROOT / real_output_paths[0]
+    real_target_existed_before = real_target.exists()
+    real_target_bytes_before = real_target.read_bytes() if real_target_existed_before else None
     synthetic_config, git_runner = _complete_synthetic_reporting(tmp_path, config, monkeypatch)
     report_path = synthetic_config["outputs"]["scientific_and_closure"]["consolidated_analyses_document"]["path"]
     report_hash_before = hashlib.sha256((tmp_path / report_path).read_bytes()).hexdigest()
@@ -1175,7 +1179,9 @@ def test_audit_real_cli_executes_checks_staging_readback_and_log_last_promotion(
     assert {item["status"] for item in payload["checks"]} == {"pass"}
     assert all(item["evidence_note"].startswith("executed:") for item in payload["checks"])
     assert hashlib.sha256((tmp_path / report_path).read_bytes()).hexdigest() == report_hash_before
-    assert not (PROJECT_ROOT / output_paths[0]).exists()
+    assert real_target.exists() == real_target_existed_before
+    if real_target_existed_before:
+        assert real_target.read_bytes() == real_target_bytes_before
 
 
 def test_audit_real_cli_rejects_rehashed_schema_shaped_semantically_invalid_prior(
