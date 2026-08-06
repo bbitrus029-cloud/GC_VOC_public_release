@@ -1,0 +1,264 @@
+diagnostic_id: figure3_e010_deep_model_reconciliation_diagnostic
+diagnostic_classification: operational_reproducibility_diagnostic_results_aware
+source_analysis_id: figure3_unified_channel_block_permutation
+endpoint: high_grade_gastric_lesion
+score_domain: p_raw
+random_seed: 42
+batch_size: 32
+n_fresh_loads: 2
+n_repeated_test_calls_per_load: 2
+score_reconciliation_atol: 1.0e-6
+auroc_reconciliation_atol: 1.0e-12
+n_jobs: 1
+requires_cuda: true
+approved_plan:
+  path: docs/plans/figure3_e010_deep_model_reconciliation_diagnostic.plan.md
+  sha256: 9129067eaf3c1d433e0b9eddd10a0fdb8a7ee95c152f931b3f69d55dec9ce509
+expected_git_head: 3478442b26bf42e7963b61916d8ac6180984ebbc
+models:
+  - model_id: inception_time
+    model_display_name: InceptionTime
+    model_order: 1
+  - model_id: cnn_bilstm_attention
+    model_display_name: CNN–BiLSTM–Attention
+    model_order: 2
+conditions:
+  - condition_id: cpu_original_direct
+    condition_order: 1
+    requested_device_class: cpu
+    input_order: original_test_idx
+    train_warmup: false
+  - condition_id: cpu_original_train_warmup
+    condition_order: 2
+    requested_device_class: cpu
+    input_order: original_test_idx
+    train_warmup: true
+  - condition_id: gpu_original_direct
+    condition_order: 3
+    requested_device_class: cuda
+    input_order: original_test_idx
+    train_warmup: false
+  - condition_id: gpu_original_train_warmup
+    condition_order: 4
+    requested_device_class: cuda
+    input_order: original_test_idx
+    train_warmup: true
+  - condition_id: cpu_participant_sorted_direct
+    condition_order: 5
+    requested_device_class: cpu
+    input_order: participant_key_sorted
+    train_warmup: false
+  - condition_id: gpu_participant_sorted_direct
+    condition_order: 6
+    requested_device_class: cuda
+    input_order: participant_key_sorted
+    train_warmup: false
+cohorts:
+  diagnostic_comparison:
+    n_test: 195
+    n_positive: 82
+    n_negative: 113
+  execution_only_warmup:
+    n_train: 777
+paths:
+  pipeline_a: data/processed/sequences/pipeline_a_raw.npz
+  train_idx: data/processed/splits/train_idx.npz
+  test_idx: data/processed/splits/test_idx.npz
+  model_dir: outputs/models
+  prediction_dir: outputs/predictions
+  metric_dir: outputs/metrics
+  work_root: outputs/work/figure3_e010_deep_model_reconciliation_diagnostic
+  promotion_candidate: outputs/work/figure3_e010_deep_model_reconciliation_diagnostic/promotion_candidate
+  final_output_dir: outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic
+  figure3_run_a: outputs/work/figure3_unified_channel_block_permutation/run_a
+  figure3_final_output: outputs/analysis/figure3_unified_channel_block_permutation
+allowed_implementation_paths:
+  - configs/figure3_e010_deep_model_reconciliation_diagnostic.yaml
+  - src/analysis/figure3_e010_deep_model_reconciliation_diagnostic.py
+  - scripts/run_figure3_e010_deep_model_reconciliation_diagnostic.py
+  - tests/test_figure3_e010_deep_model_reconciliation_diagnostic.py
+immutable_inputs:
+  configs/modeling_global.yaml: c4520df8040adfebdfd1f6ae89376be5484ae3dfeda0cfd2481103df323a2e54
+  data/processed/sequences/pipeline_a_raw.npz: 82dcca83f0caf21f262fbf9f140fa4c0463a7d782986249bcea341d03517095f
+  data/processed/features/pipeline_b_raw.csv: 4594b83b6d08674f78501dabe5f236c303252bcd1ac9bf3657c7faa92d40acea
+  data/processed/splits/test_idx.npz: 7fc60acfc54f27e77f60a9813ca829fd61f174a8d3e4ab59aac18f5e05c981c3
+  outputs/models/binary_minirocket_ridge_final.pkl: 9152bc2b2bc7172dd6f6d7bc3491741538687043dcadd51ab173eb7f3bc39aef
+  outputs/models/binary_xgboost_final.pkl: c8ec92965aab6ad4e13e818d79e07224a5f4cc1856c8f01d79b4167f4db34791
+  outputs/models/binary_elastic_net_lr_final.pkl: 9516e98a49defffb8283850d06d90dba06097490479baa55f94e041e6330fcd4
+  outputs/models/binary_svm_final.pkl: 85b6dfa28c3bee56284009ac3494873d5061abef9f85641c78defb89453d996b
+  outputs/models/binary_inception_time_final.pkl: 99e73e2c9dfc9baa74da0261f9027b9db4581529d127ecc5d73569e0fc8e8622
+  outputs/models/binary_cnn_bilstm_attention_final.pkl: 4e2a543ebbdbdf387e9ccb59dd5f64ea18e5d61c16cb480c5851bcdb92addd75
+  outputs/predictions/binary_minirocket_ridge_test_predictions.csv: ec2f912cd83d523cdff92f453472daf3816cafe4238d98e5b6d650fefe73de28
+  outputs/predictions/binary_xgboost_test_predictions.csv: bc3745fd5cb31b85e1256317d05ffe4f20a6e4083a239773a79afa270434730f
+  outputs/predictions/binary_elastic_net_lr_test_predictions.csv: de472a79e76d9d254e7cde217b6ae11053d3a6cab9287b923548c6acdaa7be41
+  outputs/predictions/binary_svm_test_predictions.csv: 0b229d969f476b1ff5d335d5d7ce96af789daf3dc7fcc7ea883817a1ed028773
+  outputs/predictions/binary_inception_time_test_predictions.csv: 661c8387e0888977f990a9f586d68dab36677a8e3c5c0b41df1b65d8859bc5c0
+  outputs/predictions/binary_cnn_bilstm_attention_test_predictions.csv: b56feeb932f6dccdc7dc666f30b8992112e44032d893f77ae63de337fe47e126
+  outputs/metrics/binary_minirocket_ridge_test_metrics.csv: eb60d67d42383a0ff764633e09b271c98398ce461f20c2d094f7592a1b882835
+  outputs/metrics/binary_xgboost_test_metrics.csv: 314270fcb17885c53f0f477749c4dfdba4fee5f0607e052bd784c04ca1b27352
+  outputs/metrics/binary_elastic_net_lr_test_metrics.csv: 67d888b1d28e70a125098a80cd8797b6ad133c69c1af2325bdf5cb3fdaf33cc8
+  outputs/metrics/binary_svm_test_metrics.csv: 4b0d14a152905b67afdb55b7fad894853532b045fc870b3d419a561534484de2
+  outputs/metrics/binary_inception_time_test_metrics.csv: 59836ea0f12f4b956c7eaa802e4622f467282d34d49c4a4b573dcf1e25e3e5d2
+  outputs/metrics/binary_cnn_bilstm_attention_test_metrics.csv: 3c860545a1b0a1c4f2ee5c6cc7ac27771b855b6a943192998f9777c9de65ac2b
+  data/processed/splits/train_idx.npz: 82f64e88f29228faa7dc93cf507013f14db32b80bf9d20e417c53f1ae6bb1131
+  docs/plans/modeling_plan_v1_a7c3f9b2_dc789bb5.plan.md: 542303ec561d2c272853a82c5dbbac59a1ee932c39b42b3373ce4a67dd187029
+  configs/modeling_inception_time.yaml: 27b1267a03ce0118ff9d993204289dc15603a8c52674abbca559ec23a0882fc2
+  configs/modeling_cnn_bilstm_attention.yaml: 2732132cc0dbb002054af54824bdf3784ed94349c8fba4c0dd7411e55b1838d6
+  environment.yml: 3dc29be50859d2a3b0cab354d2d7e3eaf0e5baee5de13a972807665c81b61184
+  src/training/dl_inference.py: 1ac8bffa05eede6276dbc424fbab36cf326f5ec1e4b1263ef9dd708c0d870cb9
+  src/training/load_final_model.py: 3813e2ba07c0fb611c5f260ae5deca9e89fa034cb5396ef15acc57170a794330
+  src/training/train_final_models.py: 6a2a960a06a022ebc91a06ad0236ff2011ae6c2add5f870c3395a1141958e41b
+  src/training/train_inception_time.py: 6992eb9b9dd92fbfda201b28363b2e1e70b072938d4ce6ba35f7c4a2dcfe7673
+  src/training/train_cnn_bilstm_attention.py: 70cbad7715079dbd9f085c8d1ec73e4b7d4ab9e9f19031aebe845eccac221d38
+  src/training/common/normalizer.py: d04df8a5300c3bd4c843a0a26434684e5655e6fb89f5e6269c4a21b0c65056de
+  docs/plans/figure3_unified_channel_block_permutation.plan.md: 1f1fbf47ef39ccd16ccebe0c8cff920653c844c120aa3bc5201aa4e5c772fb89
+  configs/figure3_unified_channel_block_permutation.yaml: 694837f6ee7a487af8aa8cf503abb14bc22ec88bc2ff59f90382d3265ae2201f
+  scripts/run_figure3_unified_channel_block_permutation.py: dd73f69c5ce0d3d23259536ef1c93aa799f20edbb1417dd456ad6b9151ab3816
+  src/analysis/figure3_unified_channel_block_permutation.py: 39624c7b9e575e535faeaf3765c18a3d319714af28cf40137395e48ae3094d24
+  tests/test_figure3_unified_channel_block_permutation.py: 0f5970142e755a3c7d7899f01279faba26dab72a7987e7a96903ae69e79b51bf
+schemas:
+  condition_diagnostics:
+    - diagnostic_id
+    - model_id
+    - model_display_name
+    - model_order
+    - condition_id
+    - condition_order
+    - requested_device_class
+    - input_order
+    - train_warmup
+    - load_number
+    - repeat_number
+    - wrapper_accelerator_before
+    - wrapper_accelerator_after
+    - wrapper_batch_size
+    - actual_parameter_device_class
+    - score_n
+    - score_all_finite
+    - score_in_unit_interval
+    - max_abs_difference
+    - mean_abs_difference
+    - median_abs_difference
+    - rmse_difference
+    - abs_difference_q95
+    - abs_difference_q99
+    - count_abs_difference_gt_1e_6
+    - count_abs_difference_gt_1e_5
+    - count_abs_difference_gt_1e_4
+    - count_abs_difference_gt_1e_3
+    - reproduced_auroc
+    - frozen_prediction_auroc
+    - frozen_metric_auroc
+    - reproduced_vs_prediction_auroc_difference
+    - reproduced_vs_metric_auroc_difference
+    - prediction_vs_metric_auroc_difference
+    - ranking_identical
+    - kendall_tau_b
+    - kendall_estimable
+    - kendall_nonestimable_reason
+    - spearman_rho
+    - spearman_estimable
+    - spearman_nonestimable_reason
+    - state_sha256_before
+    - state_sha256_after_warmup
+    - state_sha256_after_inference
+    - state_unchanged_from_before
+    - score_reconciliation_passed
+    - auroc_reconciliation_passed
+  comparison_diagnostics:
+    - diagnostic_id
+    - comparison_type
+    - comparison_type_order
+    - model_id
+    - model_order
+    - left_condition_id
+    - right_condition_id
+    - left_load_number
+    - right_load_number
+    - left_repeat_number
+    - right_repeat_number
+    - score_n
+    - max_abs_score_difference
+    - exact_score_identity
+    - exceeds_score_reconciliation_tolerance
+  model_condition_summary:
+    - diagnostic_id
+    - model_id
+    - model_display_name
+    - model_order
+    - condition_id
+    - condition_order
+    - requested_device_class
+    - input_order
+    - train_warmup
+    - n_fresh_loads
+    - n_repeats_per_load
+    - all_actual_devices_match_request
+    - all_wrapper_contracts_unchanged
+    - all_score_vectors_valid
+    - worst_max_abs_difference_from_frozen
+    - maximum_count_abs_difference_gt_1e_6
+    - maximum_count_abs_difference_gt_1e_5
+    - maximum_count_abs_difference_gt_1e_4
+    - maximum_count_abs_difference_gt_1e_3
+    - all_score_reconciliations_passed
+    - all_auroc_reconciliations_passed
+    - condition_reconciles
+    - maximum_within_load_repeat_difference
+    - maximum_between_fresh_load_difference
+    - all_state_digests_unchanged
+    - within_load_differences_within_1e_6
+    - between_load_differences_within_1e_6
+    - score_reconciliation_status_consistent
+    - auroc_reconciliation_status_consistent
+    - wrapper_and_device_checks_passed
+    - condition_stable_at_frozen_scale
+    - all_rankings_identical
+    - minimum_estimable_kendall_tau_b
+    - minimum_estimable_spearman_rho
+  interpretation_branches:
+    - diagnostic_id
+    - model_id
+    - model_display_name
+    - model_order
+    - gpu_stage4b_sequence_reconciles
+    - matched_cpu_sequence_reconciles
+    - e010_gpu_to_cpu_effect_isolatable
+    - e010_gpu_to_cpu_effect_nonisolatable_reason
+    - e010_gpu_to_cpu_change_supported
+    - cpu_warmup_effect_isolatable
+    - cpu_warmup_effect_nonisolatable_reason
+    - gpu_warmup_effect_isolatable
+    - gpu_warmup_effect_nonisolatable_reason
+    - warmup_sequence_effect_supported
+    - cpu_input_order_effect_isolatable
+    - cpu_input_order_effect_nonisolatable_reason
+    - gpu_input_order_effect_isolatable
+    - gpu_input_order_effect_nonisolatable_reason
+    - input_order_sensitivity_supported
+    - within_load_nondeterminism_observed
+    - between_load_nondeterminism_observed
+    - model_state_mutation_observed
+    - any_condition_reconciles
+    - unresolved_artifact_state_or_provenance_mismatch
+    - root_cause_summary
+    - pre_e010_pkl_available
+    - e010_source_checkpoint_available
+comparison_pairs:
+  cpu_gpu:
+    - [cpu_original_direct, gpu_original_direct]
+    - [cpu_original_train_warmup, gpu_original_train_warmup]
+    - [cpu_participant_sorted_direct, gpu_participant_sorted_direct]
+  input_order:
+    - [cpu_original_direct, cpu_participant_sorted_direct]
+    - [gpu_original_direct, gpu_participant_sorted_direct]
+  train_warmup:
+    - [cpu_original_direct, cpu_original_train_warmup]
+    - [gpu_original_direct, gpu_original_train_warmup]
+interpretation_branch_order:
+  - e010_gpu_to_cpu_change_supported
+  - warmup_sequence_effect_supported
+  - input_order_sensitivity_supported
+  - within_load_nondeterminism_observed
+  - between_load_nondeterminism_observed
+  - model_state_mutation_observed
