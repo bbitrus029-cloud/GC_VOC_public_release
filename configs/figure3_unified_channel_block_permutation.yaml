@@ -1,0 +1,157 @@
+analysis_id: figure3_unified_channel_block_permutation
+analysis_classification: exploratory_post_hoc
+endpoint: high_grade_gastric_lesion
+score_domain: p_raw
+final_model_id: minirocket_ridge
+permutation_seed: 42
+bootstrap_seed: 42
+n_permutations: 100
+n_bootstrap_final_model: 2000
+score_reconciliation_atol: 1.0e-6
+auroc_reconciliation_atol: 1.0e-12
+n_jobs: 1
+approved_plan:
+  path: docs/plans/figure3_unified_channel_block_permutation.plan.md
+  sha256: 1f1fbf47ef39ccd16ccebe0c8cff920653c844c120aa3bc5201aa4e5c772fb89
+expected_git_head: 3478442b26bf42e7963b61916d8ac6180984ebbc
+model_order:
+  - model_id: minirocket_ridge
+    model_display_name: MiniRocket + Ridge
+    model_order: 1
+    pipeline: pipeline_a
+  - model_id: xgboost
+    model_display_name: XGBoost
+    model_order: 2
+    pipeline: pipeline_b
+  - model_id: elastic_net_lr
+    model_display_name: Elastic Net LR
+    model_order: 3
+    pipeline: pipeline_b
+  - model_id: svm
+    model_display_name: SVM
+    model_order: 4
+    pipeline: pipeline_b
+  - model_id: inception_time
+    model_display_name: InceptionTime
+    model_order: 5
+    pipeline: pipeline_a
+  - model_id: cnn_bilstm_attention
+    model_display_name: CNN–BiLSTM–Attention
+    model_order: 6
+    pipeline: pipeline_a
+channel_order: [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11]
+cohort:
+  n_test: 195
+  n_positive: 82
+  n_negative: 113
+random_streams:
+  root_seed_sequence_entropy: 42
+  spawn_count: 2
+  permutation_spawn_key: [0]
+  bootstrap_spawn_key: [1]
+  matrix_digest_dtype: "<i8"
+  matrix_digest_order: C
+paths:
+  modeling_config: configs/modeling_global.yaml
+  pipeline_a: data/processed/sequences/pipeline_a_raw.npz
+  pipeline_b: data/processed/features/pipeline_b_raw.csv
+  test_idx: data/processed/splits/test_idx.npz
+  final_output_dir: outputs/analysis/figure3_unified_channel_block_permutation
+  work_root: outputs/work/figure3_unified_channel_block_permutation
+immutable_inputs:
+  configs/modeling_global.yaml: c4520df8040adfebdfd1f6ae89376be5484ae3dfeda0cfd2481103df323a2e54
+  data/processed/sequences/pipeline_a_raw.npz: 82dcca83f0caf21f262fbf9f140fa4c0463a7d782986249bcea341d03517095f
+  data/processed/features/pipeline_b_raw.csv: 4594b83b6d08674f78501dabe5f236c303252bcd1ac9bf3657c7faa92d40acea
+  data/processed/splits/test_idx.npz: 7fc60acfc54f27e77f60a9813ca829fd61f174a8d3e4ab59aac18f5e05c981c3
+  outputs/models/binary_minirocket_ridge_final.pkl: 9152bc2b2bc7172dd6f6d7bc3491741538687043dcadd51ab173eb7f3bc39aef
+  outputs/models/binary_xgboost_final.pkl: c8ec92965aab6ad4e13e818d79e07224a5f4cc1856c8f01d79b4167f4db34791
+  outputs/models/binary_elastic_net_lr_final.pkl: 9516e98a49defffb8283850d06d90dba06097490479baa55f94e041e6330fcd4
+  outputs/models/binary_svm_final.pkl: 85b6dfa28c3bee56284009ac3494873d5061abef9f85641c78defb89453d996b
+  outputs/models/binary_inception_time_final.pkl: 99e73e2c9dfc9baa74da0261f9027b9db4581529d127ecc5d73569e0fc8e8622
+  outputs/models/binary_cnn_bilstm_attention_final.pkl: 4e2a543ebbdbdf387e9ccb59dd5f64ea18e5d61c16cb480c5851bcdb92addd75
+  outputs/predictions/binary_minirocket_ridge_test_predictions.csv: ec2f912cd83d523cdff92f453472daf3816cafe4238d98e5b6d650fefe73de28
+  outputs/predictions/binary_xgboost_test_predictions.csv: bc3745fd5cb31b85e1256317d05ffe4f20a6e4083a239773a79afa270434730f
+  outputs/predictions/binary_elastic_net_lr_test_predictions.csv: de472a79e76d9d254e7cde217b6ae11053d3a6cab9287b923548c6acdaa7be41
+  outputs/predictions/binary_svm_test_predictions.csv: 0b229d969f476b1ff5d335d5d7ce96af789daf3dc7fcc7ea883817a1ed028773
+  outputs/predictions/binary_inception_time_test_predictions.csv: 661c8387e0888977f990a9f586d68dab36677a8e3c5c0b41df1b65d8859bc5c0
+  outputs/predictions/binary_cnn_bilstm_attention_test_predictions.csv: b56feeb932f6dccdc7dc666f30b8992112e44032d893f77ae63de337fe47e126
+  outputs/metrics/binary_minirocket_ridge_test_metrics.csv: eb60d67d42383a0ff764633e09b271c98398ce461f20c2d094f7592a1b882835
+  outputs/metrics/binary_xgboost_test_metrics.csv: 314270fcb17885c53f0f477749c4dfdba4fee5f0607e052bd784c04ca1b27352
+  outputs/metrics/binary_elastic_net_lr_test_metrics.csv: 67d888b1d28e70a125098a80cd8797b6ad133c69c1af2325bdf5cb3fdaf33cc8
+  outputs/metrics/binary_svm_test_metrics.csv: 4b0d14a152905b67afdb55b7fad894853532b045fc870b3d419a561534484de2
+  outputs/metrics/binary_inception_time_test_metrics.csv: 59836ea0f12f4b956c7eaa802e4622f467282d34d49c4a4b573dcf1e25e3e5d2
+  outputs/metrics/binary_cnn_bilstm_attention_test_metrics.csv: 3c860545a1b0a1c4f2ee5c6cc7ac27771b855b6a943192998f9777c9de65ac2b
+schemas:
+  channel_importance_summary:
+    - analysis_id
+    - model_id
+    - model_display_name
+    - model_order
+    - pipeline
+    - channel_index
+    - channel_name
+    - n_test
+    - n_positive
+    - n_negative
+    - baseline_auroc
+    - n_permutations
+    - mean_permuted_auroc
+    - mean_delta_auroc
+    - median_delta_auroc
+    - sd_delta_auroc
+    - repeat_delta_q025
+    - repeat_delta_q975
+    - negative_delta_count
+    - negative_delta_fraction
+    - rank_within_model
+    - n_bootstrap
+    - bootstrap_ci_low
+    - bootstrap_ci_high
+    - ci_method
+  permutation_repeats:
+    - analysis_id
+    - model_id
+    - model_order
+    - channel_index
+    - channel_name
+    - permutation_repeat
+    - baseline_auroc
+    - permuted_auroc
+    - delta_auroc
+  cross_model_consistency:
+    - analysis_id
+    - model_1_id
+    - model_1_order
+    - model_2_id
+    - model_2_order
+    - n_channels
+    - kendall_tau_b
+    - estimable
+    - nonestimable_reason
+  channel_consensus_summary:
+    - analysis_id
+    - channel_index
+    - channel_name
+    - positive_model_count
+    - zero_model_count
+    - negative_model_count
+    - mean_rank
+    - median_rank
+    - minimum_rank
+    - maximum_rank
+    - mean_delta_auroc
+    - median_delta_auroc
+interpretive_limitations:
+  - Exploratory post hoc analysis.
+  - Internal same-center, same-device, same-period random validation only.
+  - Enriched case-control or two-gate sampling limits transportability.
+  - Breath was collected after diagnostic endoscopy and indicated biopsy but before treatment.
+  - No external, temporal, multicenter, cross-device, prospective, or deployment validation.
+  - A model score is not a gastric-cancer probability.
+  - The endpoint is high-grade gastric lesion, not gastric cancer alone.
+  - MOS channels are cross-responsive and cannot identify a molecule or disease-specific VOC.
+  - Channel-block importance does not establish causality or hardware inclusion or exclusion.
+  - Participant-level bootstrap confidence intervals are computed only for MiniRocket + Ridge.
+  - Supporting-model percentiles describe permutation-repeat spread, not confidence intervals.
+  - Correlated channel blocks can redistribute permutation importance.
+  - LGIN findings are exploratory because biopsy may undergrade disease and reference standards differ.
