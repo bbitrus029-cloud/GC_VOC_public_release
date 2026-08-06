@@ -13,7 +13,56 @@ n_jobs: 1
 approved_plan:
   path: docs/plans/figure3_unified_channel_block_permutation.plan.md
   sha256: 1f1fbf47ef39ccd16ccebe0c8cff920653c844c120aa3bc5201aa4e5c772fb89
-expected_git_head: 3478442b26bf42e7963b61916d8ac6180984ebbc
+gpu_inference_amendment_plan:
+  path: docs/plans/figure3_unified_channel_block_permutation_gpu_inference_amendment.plan.md
+  sha256: 665a082b02364ff50eb0ea21044dda1815ede17ac6632412d0fb0a31919506ee
+diagnostic_plan:
+  path: docs/plans/figure3_e010_deep_model_reconciliation_diagnostic.plan.md
+  sha256: 9129067eaf3c1d433e0b9eddd10a0fdb8a7ee95c152f931b3f69d55dec9ce509
+diagnostic_aggregate_outputs:
+  - path: outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/audit.json
+    sha256: 4eb67a050833992617d65b6ce2da727c1e059b53368da71b3e66b09da32ba162
+  - path: outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/comparison_diagnostics.csv
+    sha256: d87fccd74e6b505f81e2ada286bec71fc55009d485d32316ef62009b7c94aaab
+  - path: outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/condition_diagnostics.csv
+    sha256: 2706e27e28bd2ddea74674979d2f923ad130bf408b0232db1fadf4c780b1be19
+  - path: outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/interpretation_branches.csv
+    sha256: 0c03b944e35f98c6383bf68952a94dfefad72bad39a0e80bc8777a97c924d44b
+  - path: outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/manifest.json
+    sha256: 302d8a643d04233876d2cc5c128bb691b8848c566fc5220fac6ea3e67434033a
+  - path: outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/model_condition_summary.csv
+    sha256: ec853c3233c3f2b4a8a690c2fb8b626fb7aea09bd0846f54b9252c56178b0dec
+  - path: outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/report.md
+    sha256: 3734d2d36486f99f5353d34dd51c86751f212c6ce77cfb6fea783138bade9447
+starting_unified_implementation_sha256:
+  configs/figure3_unified_channel_block_permutation.yaml: 694837f6ee7a487af8aa8cf503abb14bc22ec88bc2ff59f90382d3265ae2201f
+  scripts/run_figure3_unified_channel_block_permutation.py: dd73f69c5ce0d3d23259536ef1c93aa799f20edbb1417dd456ad6b9151ab3816
+  src/analysis/figure3_unified_channel_block_permutation.py: 39624c7b9e575e535faeaf3765c18a3d319714af28cf40137395e48ae3094d24
+  tests/test_figure3_unified_channel_block_permutation.py: 0f5970142e755a3c7d7899f01279faba26dab72a7987e7a96903ae69e79b51bf
+allowed_pre_execution_git_status:
+  - status: "??"
+    path: .vscode/
+  - status: " M"
+    path: configs/figure3_unified_channel_block_permutation.yaml
+  - status: " M"
+    path: src/analysis/figure3_unified_channel_block_permutation.py
+  - status: " M"
+    path: tests/test_figure3_unified_channel_block_permutation.py
+deep_inference_contract:
+  contract_id: e010_gpu_direct_no_warmup_v1
+  model_ids: [inception_time, cnn_bilstm_attention]
+  persisted_wrapper_accelerator: cpu
+  persisted_batch_size: 32
+  requested_accelerator: gpu
+  effective_batch_size: 32
+  normalizer_calls_per_inference: 1
+  training_warmup: false
+  requires_cuda: true
+  required_cuda_device_count: 1
+  actual_device_requirement: homogeneous_named_parameters_and_buffers_cuda_after_each_call
+  state_digest_checkpoints: [before_baseline, after_baseline, after_model_permutation_block]
+  state_digest_equality_required: true
+expected_git_head: 98f1b33d9beead54311fd84065b9344d27d7addd
 model_order:
   - model_id: minirocket_ridge
     model_display_name: MiniRocket + Ridge

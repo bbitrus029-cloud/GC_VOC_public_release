@@ -13,6 +13,7 @@ import os
 import platform
 import re
 import shutil
+import struct
 import subprocess
 import sys
 from collections.abc import Callable, Mapping, Sequence
@@ -33,6 +34,9 @@ from src.config import PROJECT_ROOT
 
 LOGGER = logging.getLogger(__name__)
 ANALYSIS_ID = "figure3_unified_channel_block_permutation"
+DEEP_MODEL_IDS: tuple[str, ...] = ("inception_time", "cnn_bilstm_attention")
+DEEP_INFERENCE_CONTRACT_ID = "e010_gpu_direct_no_warmup_v1"
+EXPECTED_PYTHON_INTERPRETER = Path("[PRIVATE_PATH_REDACTED]")
 CHANNEL_ORDER: tuple[str, ...] = tuple(f"S{index}" for index in range(1, 12))
 MODEL_ORDER: tuple[dict[str, Any], ...] = (
     {
@@ -224,6 +228,111 @@ EXPECTED_IMMUTABLE_INPUTS: Mapping[str, str] = {
         "3c860545a1b0a1c4f2ee5c6cc7ac27771b855b6a943192998f9777c9de65ac2b"
     ),
 }
+EXPECTED_PARENT_PLAN: Mapping[str, str] = {
+    "path": "docs/plans/figure3_unified_channel_block_permutation.plan.md",
+    "sha256": "1f1fbf47ef39ccd16ccebe0c8cff920653c844c120aa3bc5201aa4e5c772fb89",
+}
+EXPECTED_AMENDMENT_PLAN: Mapping[str, str] = {
+    "path": "docs/plans/figure3_unified_channel_block_permutation_gpu_inference_amendment.plan.md",
+    "sha256": "665a082b02364ff50eb0ea21044dda1815ede17ac6632412d0fb0a31919506ee",
+}
+EXPECTED_DIAGNOSTIC_PLAN: Mapping[str, str] = {
+    "path": "docs/plans/figure3_e010_deep_model_reconciliation_diagnostic.plan.md",
+    "sha256": "9129067eaf3c1d433e0b9eddd10a0fdb8a7ee95c152f931b3f69d55dec9ce509",
+}
+EXPECTED_DIAGNOSTIC_AGGREGATE_OUTPUTS: tuple[dict[str, str], ...] = (
+    {
+        "path": "outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/audit.json",
+        "sha256": "4eb67a050833992617d65b6ce2da727c1e059b53368da71b3e66b09da32ba162",
+    },
+    {
+        "path": "outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/comparison_diagnostics.csv",
+        "sha256": "d87fccd74e6b505f81e2ada286bec71fc55009d485d32316ef62009b7c94aaab",
+    },
+    {
+        "path": "outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/condition_diagnostics.csv",
+        "sha256": "2706e27e28bd2ddea74674979d2f923ad130bf408b0232db1fadf4c780b1be19",
+    },
+    {
+        "path": "outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/interpretation_branches.csv",
+        "sha256": "0c03b944e35f98c6383bf68952a94dfefad72bad39a0e80bc8777a97c924d44b",
+    },
+    {
+        "path": "outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/manifest.json",
+        "sha256": "302d8a643d04233876d2cc5c128bb691b8848c566fc5220fac6ea3e67434033a",
+    },
+    {
+        "path": "outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/model_condition_summary.csv",
+        "sha256": "ec853c3233c3f2b4a8a690c2fb8b626fb7aea09bd0846f54b9252c56178b0dec",
+    },
+    {
+        "path": "outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/report.md",
+        "sha256": "3734d2d36486f99f5353d34dd51c86751f212c6ce77cfb6fea783138bade9447",
+    },
+)
+EXPECTED_STARTING_IMPLEMENTATION_SHA256: Mapping[str, str] = {
+    "configs/figure3_unified_channel_block_permutation.yaml": (
+        "694837f6ee7a487af8aa8cf503abb14bc22ec88bc2ff59f90382d3265ae2201f"
+    ),
+    "scripts/run_figure3_unified_channel_block_permutation.py": (
+        "dd73f69c5ce0d3d23259536ef1c93aa799f20edbb1417dd456ad6b9151ab3816"
+    ),
+    "src/analysis/figure3_unified_channel_block_permutation.py": (
+        "39624c7b9e575e535faeaf3765c18a3d319714af28cf40137395e48ae3094d24"
+    ),
+    "tests/test_figure3_unified_channel_block_permutation.py": (
+        "0f5970142e755a3c7d7899f01279faba26dab72a7987e7a96903ae69e79b51bf"
+    ),
+}
+EXPECTED_DIAGNOSTIC_IMPLEMENTATION_SHA256: Mapping[str, str] = {
+    "configs/figure3_e010_deep_model_reconciliation_diagnostic.yaml": (
+        "45d54daee969533d959b49d20b8b121b1d86fd457888daf1cddf18797323f64a"
+    ),
+    "scripts/run_figure3_e010_deep_model_reconciliation_diagnostic.py": (
+        "98b2dc1fa1ac0423e5a90160be04f22ddfc293203f32cb723d0b0f77210f3573"
+    ),
+    "src/analysis/figure3_e010_deep_model_reconciliation_diagnostic.py": (
+        "b517d3b9d724745769347fde811aeee4d59db0d109f05a4cda098c6eeb0eaaa2"
+    ),
+    "tests/test_figure3_e010_deep_model_reconciliation_diagnostic.py": (
+        "e76c6c7f68e648481c2672d4a206ecd5e24fbaa3ce6a87838bef1084bbd6b0be"
+    ),
+}
+EXPECTED_PRE_EXECUTION_STATUS: tuple[dict[str, str], ...] = (
+    {"status": "??", "path": ".vscode/"},
+    {"status": " M", "path": "configs/figure3_unified_channel_block_permutation.yaml"},
+    {"status": " M", "path": "src/analysis/figure3_unified_channel_block_permutation.py"},
+    {"status": " M", "path": "tests/test_figure3_unified_channel_block_permutation.py"},
+)
+EXPECTED_DEEP_INFERENCE_CONTRACT: Mapping[str, Any] = {
+    "contract_id": DEEP_INFERENCE_CONTRACT_ID,
+    "model_ids": list(DEEP_MODEL_IDS),
+    "persisted_wrapper_accelerator": "cpu",
+    "persisted_batch_size": 32,
+    "requested_accelerator": "gpu",
+    "effective_batch_size": 32,
+    "normalizer_calls_per_inference": 1,
+    "training_warmup": False,
+    "requires_cuda": True,
+    "required_cuda_device_count": 1,
+    "actual_device_requirement": "homogeneous_named_parameters_and_buffers_cuda_after_each_call",
+    "state_digest_checkpoints": ["before_baseline", "after_baseline", "after_model_permutation_block"],
+    "state_digest_equality_required": True,
+}
+EXECUTION_IMPLEMENTATION_PATHS: tuple[str, ...] = tuple(EXPECTED_STARTING_IMPLEMENTATION_SHA256)
+REQUIRED_MODEL_PAYLOAD_KEYS = frozenset(
+    {
+        "transformer",
+        "normalizer",
+        "model",
+        "calibrator",
+        "threshold_p_raw",
+        "threshold_p_final_equivalent",
+        "feature_names",
+        "training_sample_ids",
+        "metadata",
+    }
+)
 EXPECTED_PATHS: Mapping[str, str] = {
     "modeling_config": "configs/modeling_global.yaml",
     "pipeline_a": "data/processed/sequences/pipeline_a_raw.npz",
@@ -255,6 +364,153 @@ EXPECTED_INTERPRETIVE_LIMITATIONS: tuple[str, ...] = (
     "Correlated channel blocks can redistribute permutation importance.",
     "LGIN findings are exploratory because biopsy may undergrade disease and reference standards differ.",
 )
+
+
+def _validate_cuda_contract(cuda_available: bool, cuda_device_count: int) -> dict[str, Any]:
+    """Require the frozen single-CUDA execution contract."""
+    if not isinstance(cuda_available, bool) or not cuda_available:
+        raise ValueError("CUDA availability differs from the approved deep-inference contract.")
+    if isinstance(cuda_device_count, bool) or int(cuda_device_count) != 1:
+        raise ValueError("CUDA device count differs from the approved deep-inference contract.")
+    return {
+        "cuda_available": True,
+        "cuda_device_count": 1,
+        "cuda_device_class": "cuda",
+    }
+
+
+def _device_class_from_records(device_classes: Sequence[str]) -> str:
+    """Require nonempty homogeneous CUDA device-class records."""
+    classes = list(device_classes)
+    if not classes:
+        raise ValueError("Model parameter/buffer device records are absent.")
+    if set(classes) != {"cuda"}:
+        raise ValueError("Model parameter/buffer device records are mixed, invalid, or non-CUDA.")
+    return "cuda"
+
+
+def _actual_model_device_class(model: Any) -> str:
+    """Prove homogeneous CUDA residency from actual named model state."""
+    records: list[str] = []
+    for _name, tensor in itertools.chain(model.named_parameters(), model.named_buffers()):
+        if not hasattr(tensor, "device") or not hasattr(tensor.device, "type"):
+            raise TypeError("Model state contains a non-tensor device record.")
+        records.append(str(tensor.device.type))
+    return _device_class_from_records(records)
+
+
+def _canonical_model_state_sha256(model: Any) -> str:
+    """Hash named parameters and buffers with the diagnostic's canonical encoding."""
+    records: list[tuple[str, str, Any]] = []
+    records.extend(("parameter", name, tensor) for name, tensor in model.named_parameters())
+    records.extend(("buffer", name, tensor) for name, tensor in model.named_buffers())
+    if not records:
+        raise ValueError("Model parameter/buffer state is absent.")
+    digest = hashlib.sha256()
+    for kind, name, tensor in sorted(records, key=lambda item: (item[0], item[1])):
+        if not hasattr(tensor, "detach"):
+            raise TypeError("Model state contains a non-tensor record.")
+        contiguous = tensor.detach().cpu().contiguous()
+        for part in (kind.encode("utf-8"), name.encode("utf-8"), str(contiguous.dtype).encode("utf-8")):
+            digest.update(struct.pack("<Q", len(part)))
+            digest.update(part)
+        shape = tuple(int(value) for value in contiguous.shape)
+        digest.update(struct.pack("<Q", len(shape)))
+        for value in shape:
+            digest.update(struct.pack("<q", value))
+        raw = contiguous.reshape(-1).view(dtype=__import__("torch").uint8).numpy().tobytes(order="C")
+        digest.update(struct.pack("<Q", len(raw)))
+        digest.update(raw)
+    return digest.hexdigest()
+
+
+def _validate_deep_state_digests(digests: Mapping[str, str]) -> bool:
+    """Require the exact three device-independent state checkpoints to agree."""
+    expected_keys = ("before_baseline", "after_baseline", "after_model_permutation_block")
+    if tuple(digests) != expected_keys:
+        raise ValueError("Deep-model state-digest checkpoint inventory or order differs.")
+    values = list(digests.values())
+    if any(re.fullmatch(r"[0-9a-f]{64}", value) is None for value in values):
+        raise ValueError("Deep-model state digest is malformed.")
+    if len(set(values)) != 1:
+        raise ValueError("Deep-model state digest changed during inference.")
+    return True
+
+
+def _build_deep_inference_contract_payload(model_records: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """Build and validate aggregate-only deep-inference provenance."""
+    records = [dict(record) for record in model_records]
+    if [record.get("model_id") for record in records] != list(DEEP_MODEL_IDS):
+        raise ValueError("Deep-inference provenance model order differs.")
+    expected_keys = (
+        "model_id",
+        "persisted_wrapper_accelerator",
+        "persisted_batch_size",
+        "effective_batch_size",
+        "baseline_invocation_count",
+        "permutation_invocation_count",
+        "all_actual_device_classes",
+        "all_device_records_homogeneous",
+        "state_sha256_before_baseline",
+        "state_sha256_after_baseline",
+        "state_sha256_after_model_permutation_block",
+        "state_digests_identical",
+        "wrapper_contract_unchanged",
+    )
+    for record in records:
+        if tuple(record) != expected_keys:
+            raise ValueError("Deep-inference provenance fields differ from the approved contract.")
+        digests = {
+            "before_baseline": str(record["state_sha256_before_baseline"]),
+            "after_baseline": str(record["state_sha256_after_baseline"]),
+            "after_model_permutation_block": str(record["state_sha256_after_model_permutation_block"]),
+        }
+        if not _validate_deep_state_digests(digests):
+            raise ValueError("Deep-model state-digest validation failed.")
+        expected_values = (
+            record["persisted_wrapper_accelerator"] == "cpu",
+            record["persisted_batch_size"] == 32,
+            record["effective_batch_size"] == 32,
+            record["baseline_invocation_count"] == 1,
+            record["permutation_invocation_count"] == 1100,
+            record["all_actual_device_classes"] == "cuda",
+            record["all_device_records_homogeneous"] is True,
+            record["state_digests_identical"] is True,
+            record["wrapper_contract_unchanged"] is True,
+        )
+        if not all(expected_values):
+            raise ValueError("Deep-inference provenance values differ from the approved contract.")
+    return {
+        "contract_id": DEEP_INFERENCE_CONTRACT_ID,
+        "requested_accelerator": "gpu",
+        "required_cuda_device_count": 1,
+        "training_warmup_used": False,
+        "models": records,
+    }
+
+
+def _normalize_git_status_lines(status_lines: Sequence[str]) -> list[dict[str, str]]:
+    """Parse unquoted porcelain-v1 lines into unambiguous status/path records."""
+    normalized: list[dict[str, str]] = []
+    for line in status_lines:
+        if len(line) < 4 or line[2] != " " or " -> " in line or line[3] == '"':
+            raise ValueError("Git worktree status contains an ambiguous path or status.")
+        normalized.append({"status": line[:2], "path": line[3:]})
+    return normalized
+
+
+def _validate_pre_execution_status(
+    status_lines: Sequence[str],
+    expected_records: Sequence[Mapping[str, str]],
+) -> list[dict[str, str]]:
+    """Require exact normalized status-set equality and return fixed record order."""
+    observed = _normalize_git_status_lines(status_lines)
+    expected = [dict(record) for record in expected_records]
+    observed_pairs = {(record["status"], record["path"]) for record in observed}
+    expected_pairs = {(record["status"], record["path"]) for record in expected}
+    if len(observed_pairs) != len(observed) or observed_pairs != expected_pairs:
+        raise ValueError("Git worktree state differs from the approved modified-path set.")
+    return expected
 
 
 def channel_position(channel_name: str) -> int:
@@ -854,6 +1110,8 @@ _FORBIDDEN_OUTPUT_PATTERNS: tuple[re.Pattern[str], ...] = (
     re.compile(r"\by_pred\b", flags=re.IGNORECASE),
     re.compile(r"\bparticipant_(?:id|index|indices|key|keys)\b", flags=re.IGNORECASE),
     re.compile(r"\b(?:permutation|bootstrap)_(?:index|indices)\b", flags=re.IGNORECASE),
+    re.compile(r"\b(?:tensor_(?:name|names|shape|shapes|value|values)|device_(?:name|ordinal|serial))\b", flags=re.IGNORECASE),
+    re.compile(r"\b(?:host_identifier|hostname|username)\b", flags=re.IGNORECASE),
     re.compile(r"data/raw/(?:clinical_data|breath_data)", flags=re.IGNORECASE),
     re.compile(r"(?:^|[\s\"'])(?:/home/|/mnt/|[A-Za-z]:\\)"),
 )
@@ -1210,6 +1468,7 @@ def render_report(
     frames: Mapping[str, pd.DataFrame],
     baseline_reconciliation: Sequence[Mapping[str, Any]],
     limitations: Sequence[str],
+    operational_provenance: Mapping[str, Any] | None = None,
 ) -> str:
     """Render the deterministic aggregate scientific Markdown report.
 
@@ -1217,6 +1476,7 @@ def render_report(
         frames: Validated aggregate scientific frames.
         baseline_reconciliation: Six aggregate reconciliation records in fixed model order.
         limitations: Frozen interpretive limitations.
+        operational_provenance: Optional aggregate GPU-inference authority and execution evidence.
 
     Returns:
         Complete report text with no participant-level content.
@@ -1239,12 +1499,57 @@ def render_report(
         "separate unified perturbation analysis and does not replace the heterogeneous Stage 8 analyses or robustness",
         "analyses.",
         "",
-        "## Baseline reconciliation",
-        "",
-        "| model_id | display_name | max_abs_score_difference | reproduced_auroc | "
-        "frozen_prediction_auroc | frozen_metric_auroc | passed |",
-        "|---|---|---:|---:|---:|---:|---|",
     ]
+    if operational_provenance is not None:
+        required = {
+            "parent_plan",
+            "amendment_plan",
+            "diagnostic_plan",
+            "diagnostic_aggregate_outputs",
+            "implementation_starting_head",
+            "cuda",
+            "deep_inference_contract",
+        }
+        if set(operational_provenance) != required:
+            raise ValueError("Operational report provenance fields differ from the approved amendment.")
+        deep_contract = operational_provenance["deep_inference_contract"]
+        lines.extend(
+            [
+                "## Operational deep-model inference provenance",
+                "",
+                "This aggregate evidence is operational provenance and is not a scientific result.",
+                "",
+                f"- Contract identifier: `{deep_contract['contract_id']}`.",
+                f"- Parent plan: `{operational_provenance['parent_plan']['path']}`; SHA-256 "
+                f"`{operational_provenance['parent_plan']['sha256']}`.",
+                f"- GPU amendment plan: `{operational_provenance['amendment_plan']['path']}`; SHA-256 "
+                f"`{operational_provenance['amendment_plan']['sha256']}`.",
+                f"- Diagnostic plan: `{operational_provenance['diagnostic_plan']['path']}`; SHA-256 "
+                f"`{operational_provenance['diagnostic_plan']['sha256']}`.",
+                f"- Implementation starting HEAD: `{operational_provenance['implementation_starting_head']}`.",
+                f"- CUDA: available={str(operational_provenance['cuda']['cuda_available']).lower()}, "
+                f"device_count={operational_provenance['cuda']['cuda_device_count']}, "
+                f"device_class=`{operational_provenance['cuda']['cuda_device_class']}`.",
+                "- Deep inference: persisted wrapper accelerator `cpu`, persisted/effective batch size `32`, "
+                "requested accelerator `gpu`, training warm-up used `false`, actual state homogeneously `cuda`, "
+                "and all three parameter/buffer state digests identical.",
+                "- Diagnostic aggregate evidence:",
+            ]
+        )
+        lines.extend(
+            f"  - `{record['path']}`; SHA-256 `{record['sha256']}`."
+            for record in operational_provenance["diagnostic_aggregate_outputs"]
+        )
+        lines.append("")
+    lines.extend(
+        [
+            "## Baseline reconciliation",
+            "",
+            "| model_id | display_name | max_abs_score_difference | reproduced_auroc | "
+            "frozen_prediction_auroc | frozen_metric_auroc | passed |",
+            "|---|---|---:|---:|---:|---:|---|",
+        ]
+    )
     display_by_id = {str(model["model_id"]): str(model["model_display_name"]) for model in MODEL_ORDER}
     for record in baseline_reconciliation:
         model_id = str(record["model_id"])
@@ -1430,6 +1735,12 @@ def load_analysis_config(path: Path) -> dict[str, Any]:
         "auroc_reconciliation_atol",
         "n_jobs",
         "approved_plan",
+        "gpu_inference_amendment_plan",
+        "diagnostic_plan",
+        "diagnostic_aggregate_outputs",
+        "starting_unified_implementation_sha256",
+        "allowed_pre_execution_git_status",
+        "deep_inference_contract",
         "expected_git_head",
         "model_order",
         "channel_order",
@@ -1455,21 +1766,41 @@ def load_analysis_config(path: Path) -> dict[str, Any]:
         "score_reconciliation_atol": 1.0e-6,
         "auroc_reconciliation_atol": 1.0e-12,
         "n_jobs": 1,
-        "expected_git_head": "3478442b26bf42e7963b61916d8ac6180984ebbc",
+        "expected_git_head": "98f1b33d9beead54311fd84065b9344d27d7addd",
     }
     for key, expected in expected_scalars.items():
         if payload[key] != expected:
             raise ValueError(f"Analysis configuration value differs for {key}.")
-    if payload["approved_plan"] != {
-        "path": "docs/plans/figure3_unified_channel_block_permutation.plan.md",
-        "sha256": "1f1fbf47ef39ccd16ccebe0c8cff920653c844c120aa3bc5201aa4e5c772fb89",
-    }:
+    if payload["approved_plan"] != dict(EXPECTED_PARENT_PLAN):
         raise ValueError("Approved plan authority differs from the frozen contract.")
+    if payload["gpu_inference_amendment_plan"] != dict(EXPECTED_AMENDMENT_PLAN):
+        raise ValueError("GPU-inference amendment authority differs from the frozen contract.")
+    if payload["diagnostic_plan"] != dict(EXPECTED_DIAGNOSTIC_PLAN):
+        raise ValueError("Diagnostic plan authority differs from the frozen contract.")
+    if payload["diagnostic_aggregate_outputs"] != [
+        dict(record) for record in EXPECTED_DIAGNOSTIC_AGGREGATE_OUTPUTS
+    ]:
+        raise ValueError("Diagnostic aggregate evidence differs from the frozen contract.")
+    if payload["starting_unified_implementation_sha256"] != dict(EXPECTED_STARTING_IMPLEMENTATION_SHA256):
+        raise ValueError("Starting unified implementation anchors differ from the frozen contract.")
+    if payload["allowed_pre_execution_git_status"] != [dict(record) for record in EXPECTED_PRE_EXECUTION_STATUS]:
+        raise ValueError("Allowed pre-execution Git status differs from the frozen contract.")
+    if payload["deep_inference_contract"] != dict(EXPECTED_DEEP_INFERENCE_CONTRACT):
+        raise ValueError("Deep-inference contract differs from the frozen contract.")
     if payload["model_order"] != list(MODEL_ORDER) or tuple(payload["channel_order"]) != CHANNEL_ORDER:
         raise ValueError("Model or channel order differs from the frozen contract.")
     if payload["cohort"] != {"n_test": 195, "n_positive": 82, "n_negative": 113}:
         raise ValueError("Cohort counts differ from the frozen contract.")
-    configured_paths = [*payload["paths"].values(), *payload["immutable_inputs"].keys()]
+    configured_paths = [
+        *payload["paths"].values(),
+        *payload["immutable_inputs"].keys(),
+        payload["approved_plan"]["path"],
+        payload["gpu_inference_amendment_plan"]["path"],
+        payload["diagnostic_plan"]["path"],
+        *(record["path"] for record in payload["diagnostic_aggregate_outputs"]),
+        *payload["starting_unified_implementation_sha256"].keys(),
+        *(record["path"] for record in payload["allowed_pre_execution_git_status"]),
+    ]
     for relative_path in configured_paths:
         candidate = Path(relative_path)
         if candidate.is_absolute() or ".." in candidate.parts:
@@ -1502,6 +1833,87 @@ def _sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _verify_hash_mapping(expected_hashes: Mapping[str, str], *, context: str) -> dict[str, str]:
+    """Verify one exact project-relative whole-file hash mapping."""
+    observed: dict[str, str] = {}
+    for relative_path, expected_digest in expected_hashes.items():
+        path = _project_path(relative_path)
+        if not path.is_file() or path.is_symlink():
+            raise ValueError(f"{context} file is absent or invalid: {relative_path}")
+        digest = _sha256_file(path)
+        if digest != expected_digest:
+            raise ValueError(f"{context} file hash differs: {relative_path}")
+        observed[relative_path] = digest
+    return observed
+
+
+def verify_operational_evidence(config: Mapping[str, Any]) -> dict[str, Any]:
+    """Verify plans, diagnostic implementation, and aggregate evidence by hash only."""
+    plan_records = (
+        config["approved_plan"],
+        config["gpu_inference_amendment_plan"],
+        config["diagnostic_plan"],
+    )
+    verified_plans: list[dict[str, str]] = []
+    for record in plan_records:
+        path = _project_path(str(record["path"]))
+        if not path.is_file() or path.is_symlink() or _sha256_file(path) != record["sha256"]:
+            raise ValueError("Plan authority hash differs from the approved contract.")
+        ignore = _git_output("check-ignore", "-v", str(record["path"]))
+        if not ignore.startswith(".gitignore:17:/docs/plans/"):
+            raise ValueError("Plan ignore rule differs from the approved contract.")
+        verified_plans.append(dict(record))
+    diagnostic_implementation = _verify_hash_mapping(
+        EXPECTED_DIAGNOSTIC_IMPLEMENTATION_SHA256,
+        context="Diagnostic implementation",
+    )
+    aggregate_hashes: list[dict[str, str]] = []
+    for record in config["diagnostic_aggregate_outputs"]:
+        path = _project_path(str(record["path"]))
+        if not path.is_file() or path.is_symlink():
+            raise ValueError("Diagnostic aggregate evidence is absent or invalid.")
+        digest = _sha256_file(path)
+        if digest != record["sha256"]:
+            raise ValueError("Diagnostic aggregate evidence hash differs.")
+        aggregate_hashes.append({"path": str(record["path"]), "sha256": digest})
+    return {
+        "plans": verified_plans,
+        "diagnostic_implementation_sha256": diagnostic_implementation,
+        "diagnostic_aggregate_outputs": aggregate_hashes,
+    }
+
+
+def _verify_starting_implementation_anchors(config: Mapping[str, Any]) -> dict[str, str]:
+    """Verify configured starting hashes against the exact implementation-starting commit."""
+    observed: dict[str, str] = {}
+    for relative_path, expected_digest in config["starting_unified_implementation_sha256"].items():
+        result = subprocess.run(
+            ["git", "show", f"{config['expected_git_head']}:{relative_path}"],
+            cwd=PROJECT_ROOT,
+            check=True,
+            capture_output=True,
+        )
+        digest = hashlib.sha256(result.stdout).hexdigest()
+        if digest != expected_digest:
+            raise ValueError("Starting unified implementation anchor differs from Git evidence.")
+        observed[relative_path] = digest
+    return observed
+
+
+def verify_execution_implementation_hashes(
+    expected_hashes: Mapping[str, str] | None = None,
+) -> dict[str, str]:
+    """Hash the exact four implementation files used by execution."""
+    observed = {relative_path: _sha256_file(_project_path(relative_path)) for relative_path in EXECUTION_IMPLEMENTATION_PATHS}
+    if observed["scripts/run_figure3_unified_channel_block_permutation.py"] != (
+        "dd73f69c5ce0d3d23259536ef1c93aa799f20edbb1417dd456ad6b9151ab3816"
+    ):
+        raise ValueError("Unified entry-script hash differs from the immutable contract.")
+    if expected_hashes is not None and observed != dict(expected_hashes):
+        raise ValueError("Execution implementation hashes changed during execution.")
+    return observed
+
+
 def build_manifest_payload(candidate: Path, final_relative_dir: Path) -> dict[str, Any]:
     """Build the exact non-self-hashing final manifest payload.
 
@@ -1529,7 +1941,11 @@ def build_manifest_payload(candidate: Path, final_relative_dir: Path) -> dict[st
                 "sha256": _sha256_file(source),
             }
         )
-    return {"analysis_id": ANALYSIS_ID, "files": files}
+    return {
+        "analysis_id": ANALYSIS_ID,
+        "deep_inference_contract_id": DEEP_INFERENCE_CONTRACT_ID,
+        "files": files,
+    }
 
 
 @dataclass(repr=False)
@@ -1544,6 +1960,7 @@ class _ScientificContext:
     frozen_scores: dict[str, np.ndarray]
     payloads: dict[str, dict[str, Any]]
     baseline_reconciliation: list[dict[str, Any]]
+    deep_inference_provenance: dict[str, dict[str, Any]]
 
 
 def _project_path(relative_path: str) -> Path:
@@ -1563,7 +1980,7 @@ def _git_output(*args: str) -> str:
         capture_output=True,
         text=True,
     )
-    return result.stdout.strip()
+    return result.stdout.rstrip("\n")
 
 
 def _utc_timestamp() -> str:
@@ -1621,6 +2038,16 @@ def verify_immutable_hashes(config: Mapping[str, Any]) -> dict[str, str]:
     return verified
 
 
+def _validate_python_interpreter_path(executable: str) -> str:
+    """Require the exact approved logical interpreter alias without exposing it."""
+    actual_interpreter = Path(executable)
+    if actual_interpreter != EXPECTED_PYTHON_INTERPRETER:
+        raise ValueError("Python executable differs from the approved logical environment alias.")
+    if not EXPECTED_PYTHON_INTERPRETER.is_file():
+        raise ValueError("Approved logical Python interpreter alias is absent or invalid.")
+    return "bin/python"
+
+
 def verify_execution_preflight(config: Mapping[str, Any]) -> dict[str, Any]:
     """Verify approval, repository, environment, and stale-target execution gates.
 
@@ -1633,40 +2060,59 @@ def verify_execution_preflight(config: Mapping[str, Any]) -> dict[str, Any]:
     Raises:
         ValueError: If any execution gate differs from the approved plan.
     """
-    plan_path = _project_path(config["approved_plan"]["path"])
-    if _sha256_file(plan_path) != config["approved_plan"]["sha256"]:
-        raise ValueError("Approved plan hash differs from the on-disk plan.")
+    if _git_output("branch", "--show-current") != "main":
+        raise ValueError("Git branch differs from the approved implementation branch.")
     head = _git_output("rev-parse", "HEAD")
     if head != config["expected_git_head"]:
         raise ValueError("Git HEAD differs from the approved plan.")
+    expected_commits = (
+        "98f1b33d9beead54311fd84065b9344d27d7addd data(figure3): record deep-model reconciliation results\n"
+        "d00820e337f61b79f0bbb5927c0a2fb8f89332d4 feat(figure3): add deep-model reconciliation diagnostic\n"
+        "8f27b188a7d38abe83829392391abb48f9e1615c feat(figure3): add unified channel-block permutation workflow"
+    )
+    if _git_output("log", "-3", "--format=%H %s") != expected_commits:
+        raise ValueError("Latest Git commit evidence differs from the approved contract.")
     status_lines = [line for line in _git_output("status", "--short").splitlines() if line]
-    expected_status = {
-        "?? .vscode/",
-        "?? configs/figure3_unified_channel_block_permutation.yaml",
-        "?? scripts/run_figure3_unified_channel_block_permutation.py",
-        "?? src/analysis/figure3_unified_channel_block_permutation.py",
-        "?? tests/test_figure3_unified_channel_block_permutation.py",
-    }
-    if set(status_lines) != expected_status:
-        raise ValueError("Git worktree state differs from the approved Phase 2 write scope.")
+    normalized_status = _validate_pre_execution_status(
+        status_lines,
+        config["allowed_pre_execution_git_status"],
+    )
+    if _git_output("diff", "--cached", "--name-only"):
+        raise ValueError("Git index contains a staged change.")
+    changed_paths = set(_git_output("diff", "--name-only").splitlines())
+    if changed_paths != {
+        "configs/figure3_unified_channel_block_permutation.yaml",
+        "src/analysis/figure3_unified_channel_block_permutation.py",
+        "tests/test_figure3_unified_channel_block_permutation.py",
+    }:
+        raise ValueError("Tracked Git diff paths differ from the approved modified-path set.")
     if os.environ.get("CONDA_DEFAULT_ENV") != "gcvocs":
         raise ValueError("The gcvocs conda environment is not active.")
-    expected_environment_root = Path.home() / "miniforge3" / "envs" / "gcvocs" / "bin"
-    if Path(sys.executable).resolve().parent != expected_environment_root.resolve():
-        raise ValueError("Python does not resolve inside the required gcvocs environment.")
+    python_executable_environment_relative = _validate_python_interpreter_path(sys.executable)
+    import torch
+
+    cuda = _validate_cuda_contract(bool(torch.cuda.is_available()), int(torch.cuda.device_count()))
     final_dir = _project_path(config["paths"]["final_output_dir"])
     work_root = _project_path(config["paths"]["work_root"])
     if final_dir.exists() or final_dir.is_symlink():
         raise FileExistsError("Final scientific output directory already exists.")
     if work_root.exists() or work_root.is_symlink():
         raise FileExistsError("Task work directory already exists.")
+    operational_evidence = verify_operational_evidence(config)
+    starting_hashes = _verify_starting_implementation_anchors(config)
+    execution_hashes = verify_execution_implementation_hashes()
     immutable_hashes = verify_immutable_hashes(config)
     return {
         "git_head": head,
-        "worktree_status": status_lines,
+        "phase2_start_normalized_status_set": [{"status": "??", "path": ".vscode/"}],
+        "pre_execution_normalized_status_set": normalized_status,
         "environment_name": "gcvocs",
-        "python_executable_environment_relative": "bin/python",
+        "python_executable_environment_relative": python_executable_environment_relative,
         "package_versions": _package_versions(),
+        **cuda,
+        "operational_evidence": operational_evidence,
+        "starting_unified_implementation_sha256": starting_hashes,
+        "execution_implementation_sha256": execution_hashes,
         "immutable_hashes": immutable_hashes,
     }
 
@@ -1680,15 +2126,44 @@ def _configure_determinism(seed: int) -> dict[str, Any]:
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
     torch.set_float32_matmul_precision("high")
-    device_class = "cuda" if torch.cuda.is_available() else "cpu"
+    cuda = _validate_cuda_contract(bool(torch.cuda.is_available()), int(torch.cuda.device_count()))
     return {
         "framework_seed": int(seed),
         "workers_seeded": True,
         "cudnn_deterministic": bool(torch.backends.cudnn.deterministic),
         "cudnn_benchmark": bool(torch.backends.cudnn.benchmark),
         "float32_matmul_precision": "high",
-        "device_class": device_class,
+        "device_class": cuda["cuda_device_class"],
+        "cuda_available": cuda["cuda_available"],
+        "cuda_device_count": cuda["cuda_device_count"],
     }
+
+
+def _load_deep_payloads_before_sensitive_access(
+    load_final_model: Callable[[Path], dict[str, Any]],
+) -> dict[str, dict[str, Any]]:
+    """Load and validate both locked deep wrappers before participant access."""
+    from src.training.dl_inference import DLPredictProbaWrapper
+
+    payloads: dict[str, dict[str, Any]] = {}
+    for model_id in DEEP_MODEL_IDS:
+        model_path = PROJECT_ROOT / "outputs" / "models" / f"binary_{model_id}_final.pkl"
+        payload = load_final_model(model_path)
+        if not isinstance(payload, dict) or not REQUIRED_MODEL_PAYLOAD_KEYS.issubset(payload):
+            raise ValueError(f"Final model payload schema differs for model={model_id}.")
+        if payload["metadata"].get("model_name") != model_id:
+            raise ValueError(f"Final model metadata identity differs for model={model_id}.")
+        wrapper = payload["model"]
+        if not isinstance(wrapper, DLPredictProbaWrapper):
+            raise ValueError(f"Persisted deep wrapper type differs for model={model_id}.")
+        if wrapper.accelerator != "cpu" or wrapper.batch_size != 32:
+            raise ValueError(f"Persisted deep wrapper metadata differs for model={model_id}.")
+        if not callable(wrapper.predictor) or not hasattr(wrapper, "lightning_model"):
+            raise ValueError(f"Persisted deep wrapper predictor differs for model={model_id}.")
+        if not hasattr(payload["normalizer"], "transform"):
+            raise ValueError(f"Persisted deep normalizer differs for model={model_id}.")
+        payloads[model_id] = payload
+    return payloads
 
 
 def _load_prediction_evidence(model_id: str) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -1728,6 +2203,11 @@ def _infer_positive_scores(
     model_input: np.ndarray | pd.DataFrame,
 ) -> np.ndarray:
     """Run the frozen end-to-end raw positive-class inference contract."""
+    if model_id in DEEP_MODEL_IDS:
+        if not isinstance(model_input, np.ndarray):
+            raise TypeError("Deep-model input must be a NumPy array.")
+        return _infer_deep_gpu_direct(payload, model_input)
+
     from src.training.train_final_models import _predict_positive_probabilities
 
     scores = _predict_positive_probabilities(
@@ -1740,8 +2220,39 @@ def _infer_positive_scores(
     return np.asarray(scores, dtype=float)
 
 
+def _infer_deep_gpu_direct(payload: Mapping[str, Any], model_input: np.ndarray) -> np.ndarray:
+    """Normalize once and invoke the persisted deep predictor directly on GPU."""
+    if "model" not in payload or "normalizer" not in payload:
+        raise ValueError("Persisted deep wrapper payload is incomplete.")
+    wrapper = payload["model"]
+    if wrapper.accelerator != "cpu" or wrapper.batch_size != 32:
+        raise ValueError("Persisted deep wrapper accelerator or batch-size contract differs.")
+    if not callable(wrapper.predictor) or not hasattr(payload["normalizer"], "transform"):
+        raise ValueError("Persisted deep wrapper predictor or normalizer contract differs.")
+    normalized = payload["normalizer"].transform(model_input)
+    scores = wrapper.predictor(
+        model=wrapper.lightning_model,
+        x_eval=normalized,
+        batch_size=32,
+        accelerator="gpu",
+    )
+    _actual_model_device_class(wrapper.lightning_model)
+    if wrapper.accelerator != "cpu" or wrapper.batch_size != 32:
+        raise ValueError("Persisted deep wrapper contract changed during direct GPU inference.")
+    values = np.asarray(scores, dtype=float)
+    if values.shape != (len(model_input),):
+        raise ValueError("Deep-model positive-score vector has an invalid shape.")
+    if not np.isfinite(values).all() or np.any(values < 0.0) or np.any(values > 1.0):
+        raise ValueError("Deep-model positive-score vector is nonfinite or outside the unit interval.")
+    del normalized
+    return values
+
+
 def _load_scientific_context(config: Mapping[str, Any]) -> _ScientificContext:
     """Load, align, and baseline-reconcile the frozen scientific inputs."""
+    from src.training.load_final_model import load_final_model
+
+    preloaded_deep_payloads = _load_deep_payloads_before_sensitive_access(load_final_model)
     pipeline_a_path = _project_path(config["paths"]["pipeline_a"])
     with np.load(pipeline_a_path, allow_pickle=False) as payload:
         required_keys = {"x", "sample_id", "label", "channel_names", "clip_length_L"}
@@ -1801,22 +2312,9 @@ def _load_scientific_context(config: Mapping[str, Any]) -> _ScientificContext:
     if int(np.count_nonzero(labels == 1)) != 82 or int(np.count_nonzero(labels == 0)) != 113:
         raise ValueError("Frozen test cohort or class counts differ from the approved plan.")
 
-    from src.training.load_final_model import load_final_model
-
     frozen_scores: dict[str, np.ndarray] = {}
     payloads: dict[str, dict[str, Any]] = {}
     metric_aurocs: dict[str, float] = {}
-    required_payload_keys = {
-        "transformer",
-        "normalizer",
-        "model",
-        "calibrator",
-        "threshold_p_raw",
-        "threshold_p_final_equivalent",
-        "feature_names",
-        "training_sample_ids",
-        "metadata",
-    }
     for model_spec in MODEL_ORDER:
         model_id = str(model_spec["model_id"])
         prediction_keys, prediction_labels, scores = _load_prediction_evidence(model_id)
@@ -1824,9 +2322,12 @@ def _load_scientific_context(config: Mapping[str, Any]) -> _ScientificContext:
             raise ValueError(f"Frozen prediction alignment differs for model={model_id}.")
         frozen_scores[model_id] = scores
         metric_aurocs[model_id] = _load_metric_auroc(model_id)
-        model_path = PROJECT_ROOT / "outputs" / "models" / f"binary_{model_id}_final.pkl"
-        model_payload = load_final_model(model_path)
-        if not isinstance(model_payload, dict) or not required_payload_keys.issubset(model_payload):
+        if model_id in DEEP_MODEL_IDS:
+            model_payload = preloaded_deep_payloads[model_id]
+        else:
+            model_path = PROJECT_ROOT / "outputs" / "models" / f"binary_{model_id}_final.pkl"
+            model_payload = load_final_model(model_path)
+        if not isinstance(model_payload, dict) or not REQUIRED_MODEL_PAYLOAD_KEYS.issubset(model_payload):
             raise ValueError(f"Final model payload schema differs for model={model_id}.")
         if model_payload["metadata"].get("model_name") != model_id:
             raise ValueError(f"Final model metadata identity differs for model={model_id}.")
@@ -1848,14 +2349,37 @@ def _load_scientific_context(config: Mapping[str, Any]) -> _ScientificContext:
 
     baseline_reconciliation: list[dict[str, Any]] = []
     reproduced_scores: dict[str, np.ndarray] = {}
+    deep_inference_provenance: dict[str, dict[str, Any]] = {}
     for model_spec in MODEL_ORDER:
         model_id = str(model_spec["model_id"])
         model_input: np.ndarray | pd.DataFrame = pipeline_a if model_spec["pipeline"] == "pipeline_a" else pipeline_b
+        state_before = ""
+        if model_id in DEEP_MODEL_IDS:
+            state_before = _canonical_model_state_sha256(payloads[model_id]["model"].lightning_model)
         try:
             reproduced = _infer_positive_scores(model_id, payloads[model_id], model_input)
         except Exception as exc:
             raise ValueError(f"Locked baseline inference failed for model={model_id}.") from exc
         reproduced_scores[model_id] = reproduced
+        if model_id in DEEP_MODEL_IDS:
+            state_after = _canonical_model_state_sha256(payloads[model_id]["model"].lightning_model)
+            if state_before != state_after:
+                raise ValueError(f"Deep-model state digest changed during baseline for model={model_id}.")
+            deep_inference_provenance[model_id] = {
+                "model_id": model_id,
+                "persisted_wrapper_accelerator": "cpu",
+                "persisted_batch_size": 32,
+                "effective_batch_size": 32,
+                "baseline_invocation_count": 1,
+                "permutation_invocation_count": 0,
+                "all_actual_device_classes": "cuda",
+                "all_device_records_homogeneous": True,
+                "state_sha256_before_baseline": state_before,
+                "state_sha256_after_baseline": state_after,
+                "state_sha256_after_model_permutation_block": "",
+                "state_digests_identical": False,
+                "wrapper_contract_unchanged": True,
+            }
     for model_spec in MODEL_ORDER:
         model_id = str(model_spec["model_id"])
         try:
@@ -1880,6 +2404,7 @@ def _load_scientific_context(config: Mapping[str, Any]) -> _ScientificContext:
         frozen_scores=frozen_scores,
         payloads=payloads,
         baseline_reconciliation=baseline_reconciliation,
+        deep_inference_provenance=deep_inference_provenance,
     )
 
 
@@ -1905,6 +2430,7 @@ def run_analysis_once(
     output_dir: Path,
     *,
     package_versions: Mapping[str, str],
+    operational_preflight: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Execute one independent complete scientific analysis run.
 
@@ -1912,6 +2438,7 @@ def run_analysis_once(
         config: Validated frozen configuration.
         output_dir: Absent task-owned run directory.
         package_versions: Preflight package-version inventory.
+        operational_preflight: Aggregate authority, implementation, status, and CUDA evidence.
 
     Returns:
         Private-data-free run record also persisted in the run directory.
@@ -1962,6 +2489,20 @@ def run_analysis_once(
             channel_map=context.channel_map if model_spec["pipeline"] == "pipeline_b" else None,
         )
         repeat_rows.extend(model_rows)
+        if model_id in DEEP_MODEL_IDS:
+            record = context.deep_inference_provenance[model_id]
+            state_after_block = _canonical_model_state_sha256(
+                context.payloads[model_id]["model"].lightning_model
+            )
+            record["permutation_invocation_count"] = int(len(CHANNEL_ORDER) * len(permutation_matrix))
+            record["state_sha256_after_model_permutation_block"] = state_after_block
+            record["state_digests_identical"] = _validate_deep_state_digests(
+                {
+                    "before_baseline": record["state_sha256_before_baseline"],
+                    "after_baseline": record["state_sha256_after_baseline"],
+                    "after_model_permutation_block": state_after_block,
+                }
+            )
         if model_id == "minirocket_ridge":
             final_score_cube = score_cube
         else:
@@ -1981,7 +2522,30 @@ def run_analysis_once(
         bootstrap_intervals[channel_name] = (float(ci_low), float(ci_high))
     repeats = pd.DataFrame(repeat_rows, columns=PERMUTATION_REPEAT_COLUMNS)
     frames = build_aggregate_frames(repeats, bootstrap_intervals)
-    report = render_report(frames, context.baseline_reconciliation, config["interpretive_limitations"])
+    if operational_preflight is None:
+        raise ValueError("Operational preflight provenance is required before output serialization.")
+    deep_inference_contract = _build_deep_inference_contract_payload(
+        [context.deep_inference_provenance[model_id] for model_id in DEEP_MODEL_IDS]
+    )
+    report_provenance = {
+        "parent_plan": config["approved_plan"],
+        "amendment_plan": config["gpu_inference_amendment_plan"],
+        "diagnostic_plan": config["diagnostic_plan"],
+        "diagnostic_aggregate_outputs": config["diagnostic_aggregate_outputs"],
+        "implementation_starting_head": config["expected_git_head"],
+        "cuda": {
+            "cuda_available": operational_preflight["cuda_available"],
+            "cuda_device_count": operational_preflight["cuda_device_count"],
+            "cuda_device_class": operational_preflight["cuda_device_class"],
+        },
+        "deep_inference_contract": deep_inference_contract,
+    }
+    report = render_report(
+        frames,
+        context.baseline_reconciliation,
+        config["interpretive_limitations"],
+        operational_provenance=report_provenance,
+    )
     serialized: dict[str, bytes] = {
         filename: _serialize_frame(frame) for filename, frame in frames.items()
     }
@@ -2013,6 +2577,18 @@ def run_analysis_once(
         "wall_clock_seconds": float(perf_counter() - started),
         "git_head": config["expected_git_head"],
         "approved_plan": config["approved_plan"],
+        "gpu_inference_amendment_plan": config["gpu_inference_amendment_plan"],
+        "diagnostic_plan": config["diagnostic_plan"],
+        "diagnostic_aggregate_outputs": config["diagnostic_aggregate_outputs"],
+        "implementation_starting_head": config["expected_git_head"],
+        "starting_unified_implementation_sha256": operational_preflight[
+            "starting_unified_implementation_sha256"
+        ],
+        "execution_implementation_sha256": operational_preflight["execution_implementation_sha256"],
+        "pre_execution_normalized_status_set": operational_preflight[
+            "pre_execution_normalized_status_set"
+        ],
+        "deep_inference_contract": deep_inference_contract,
         "package_versions": dict(package_versions),
         "immutable_hashes": immutable_hashes,
         "model_order": list(MODEL_ORDER),
@@ -2045,7 +2621,7 @@ def _build_audit_payload(
     run_record: Mapping[str, Any],
     immutable_after: Mapping[str, str],
     deterministic_comparison: Mapping[str, Any],
-    final_worktree_status: Sequence[str],
+    final_worktree_status: Sequence[Mapping[str, str]],
 ) -> dict[str, Any]:
     """Build the complete final private-data-free audit payload."""
     immutable_records = [
@@ -2062,11 +2638,24 @@ def _build_audit_payload(
         "analysis_classification": config["analysis_classification"],
         "status": "complete",
         "approved_plan": config["approved_plan"],
+        "gpu_inference_amendment_plan": config["gpu_inference_amendment_plan"],
+        "diagnostic_evidence": {
+            "diagnostic_plan": config["diagnostic_plan"],
+            "aggregate_outputs": config["diagnostic_aggregate_outputs"],
+        },
         "provenance": {
             "git_head": preflight["git_head"],
-            "phase2_start_worktree_status": ["?? .vscode/"],
-            "pre_execution_worktree_status": preflight["worktree_status"],
-            "final_worktree_status": list(final_worktree_status),
+            "implementation_starting_head": config["expected_git_head"],
+            "starting_unified_implementation_sha256": preflight[
+                "starting_unified_implementation_sha256"
+            ],
+            "execution_implementation_sha256": preflight["execution_implementation_sha256"],
+            "phase2_start_normalized_status_set": preflight["phase2_start_normalized_status_set"],
+            "pre_execution_normalized_status_set": preflight["pre_execution_normalized_status_set"],
+            "final_pre_promotion_normalized_status_set": [dict(record) for record in final_worktree_status],
+            "cuda_available": preflight["cuda_available"],
+            "cuda_device_count": preflight["cuda_device_count"],
+            "cuda_device_class": preflight["cuda_device_class"],
             "environment_name": preflight["environment_name"],
             "python_executable_environment_relative": preflight["python_executable_environment_relative"],
             "package_versions": preflight["package_versions"],
@@ -2076,6 +2665,10 @@ def _build_audit_payload(
         "channel_order": list(CHANNEL_ORDER),
         "cohort_reconciliation": run_record["cohort_reconciliation"],
         "baseline_reconciliation": run_record["baseline_reconciliation"],
+        "deep_inference_contract": {
+            **run_record["deep_inference_contract"],
+            "verified_identically_in_run_b": True,
+        },
         "randomization": run_record["randomization"],
         "perturbation": {
             "pipeline_a": (
@@ -2117,10 +2710,20 @@ def _build_audit_payload(
                 "exit_code": 0,
             },
             {
+                "command": "python -m pytest tests/test_figure3_unified_channel_block_permutation.py -q",
+                "exit_code": 0,
+            },
+            {
                 "command": (
                     "python -m pytest tests/test_shap_cross_model_aggregation.py tests/test_shap_cross_model_ig.py "
                     "tests/test_shap_cross_model_kendall_tau.py "
                     "tests/test_shap_cross_model_minirocket_permutation.py -q"
+                ),
+                "exit_code": 0,
+            },
+            {
+                "command": (
+                    "python -m pytest tests/test_figure3_e010_deep_model_reconciliation_diagnostic.py -q"
                 ),
                 "exit_code": 0,
             },
@@ -2137,12 +2740,53 @@ def _build_audit_payload(
 
 def _verify_final_manifest(final_dir: Path, manifest: Mapping[str, Any]) -> None:
     """Verify every promoted non-manifest file against the final manifest."""
-    if manifest.get("analysis_id") != ANALYSIS_ID or len(manifest.get("files", [])) != 6:
+    if (
+        list(manifest) != ["analysis_id", "deep_inference_contract_id", "files"]
+        or manifest.get("analysis_id") != ANALYSIS_ID
+        or manifest.get("deep_inference_contract_id") != DEEP_INFERENCE_CONTRACT_ID
+        or len(manifest.get("files", [])) != 6
+    ):
         raise ValueError("Final manifest schema or inventory differs from the frozen contract.")
     for record in manifest["files"]:
         path = final_dir / Path(record["path"]).name
         if not path.is_file() or path.stat().st_size != record["byte_size"] or _sha256_file(path) != record["sha256"]:
             raise ValueError("Promoted final artifact differs from the manifest.")
+
+
+def _remove_verified_empty_stale_run_a(work_root: Path, final_dir: Path) -> dict[str, bool]:
+    """Remove only the exact verified empty stale run A and then-empty work root."""
+    intended_root = PROJECT_ROOT / "outputs" / "work" / ANALYSIS_ID
+    intended_final = PROJECT_ROOT / "outputs" / "analysis" / ANALYSIS_ID
+    if work_root != intended_root or work_root.is_symlink() or not work_root.is_dir():
+        raise ValueError("Stale work root is absent, invalid, a symlink, or outside the intended root.")
+    if work_root.resolve() != intended_root.resolve():
+        raise ValueError("Stale work root resolves outside the intended root.")
+    if final_dir != intended_final:
+        raise ValueError("Final-output path differs from the intended unified workflow target.")
+    run_a = work_root / "run_a"
+    if run_a.is_symlink() or not run_a.is_dir():
+        raise ValueError("Stale run_a is absent, invalid, or a symlink.")
+    resolved_run_a = run_a.resolve()
+    if resolved_run_a.parent != work_root.resolve() or resolved_run_a.name != "run_a":
+        raise ValueError("Stale run_a resolves outside the exact work root.")
+    if list(run_a.iterdir()):
+        raise ValueError("Stale run_a is not empty.")
+    for sibling in (work_root / "run_b", work_root / "promotion_candidate"):
+        if sibling.exists() or sibling.is_symlink():
+            raise ValueError("Unexpected unified workflow sibling exists during stale-work cleanup.")
+    if final_dir.exists() or final_dir.is_symlink():
+        raise FileExistsError("Unified final output exists during stale-work cleanup.")
+    if [entry.name for entry in work_root.iterdir()] != ["run_a"]:
+        raise ValueError("Unexpected object exists in the unified workflow work root.")
+    run_a.rmdir()
+    if list(work_root.iterdir()):
+        raise ValueError("Unified workflow work root is unexpectedly nonempty after run_a removal.")
+    work_root.rmdir()
+    return {
+        "run_a_validated_empty": True,
+        "run_a_removed": True,
+        "work_root_removed": True,
+    }
 
 
 def _safe_remove_run_directory(work_root: Path, run_name: str) -> None:
@@ -2180,21 +2824,29 @@ def execute_workflow(config_path: Path) -> dict[str, Any]:
         config,
         work_root / "run_a",
         package_versions=preflight["package_versions"],
+        operational_preflight=preflight,
     )
     gc.collect()
     verify_immutable_hashes(config)
+    verify_operational_evidence(config)
+    verify_execution_implementation_hashes(preflight["execution_implementation_sha256"])
     LOGGER.info("Starting independent scientific run B.")
     run_analysis_once(
         config,
         work_root / "run_b",
         package_versions=preflight["package_versions"],
+        operational_preflight=preflight,
     )
     deterministic_comparison = compare_run_directories(work_root / "run_a", work_root / "run_b")
     LOGGER.info("Independent run comparison passed.")
     immutable_after = verify_immutable_hashes(config)
-    final_status = [line for line in _git_output("status", "--short").splitlines() if line]
-    if set(final_status) != set(preflight["worktree_status"]):
-        raise ValueError("Worktree state changed during scientific execution.")
+    verify_operational_evidence(config)
+    verify_execution_implementation_hashes(preflight["execution_implementation_sha256"])
+    final_status_lines = [line for line in _git_output("status", "--short").splitlines() if line]
+    final_status = _validate_pre_execution_status(
+        final_status_lines,
+        config["allowed_pre_execution_git_status"],
+    )
     candidate = work_root / "promotion_candidate"
     if candidate.exists() or candidate.is_symlink():
         raise FileExistsError("Promotion candidate already exists.")
@@ -2229,6 +2881,8 @@ def execute_workflow(config_path: Path) -> dict[str, Any]:
     promoted_manifest = json.loads((final_dir / "manifest.json").read_text(encoding="utf-8"))
     _verify_final_manifest(final_dir, promoted_manifest)
     verify_immutable_hashes(config)
+    verify_operational_evidence(config)
+    verify_execution_implementation_hashes(preflight["execution_implementation_sha256"])
     _safe_remove_run_directory(work_root, "run_a")
     _safe_remove_run_directory(work_root, "run_b")
     final_hashes = {

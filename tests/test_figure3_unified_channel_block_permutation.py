@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+import ast
 import importlib
+import inspect
 import json
+import os
 from pathlib import Path
-from types import ModuleType
+from types import ModuleType, SimpleNamespace
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -71,6 +75,106 @@ def _synthetic_repeat_frame(module: ModuleType) -> pd.DataFrame:
                     }
                 )
     return pd.DataFrame(rows, columns=module.PERMUTATION_REPEAT_COLUMNS)
+
+
+class _SyntheticDeviceTensor:
+    """Expose only a sanitized synthetic tensor device class."""
+
+    def __init__(self, device_class: str) -> None:
+        self.device = SimpleNamespace(type=device_class)
+
+
+class _SyntheticDeviceModel:
+    """Provide synthetic named parameter/buffer device records."""
+
+    def __init__(
+        self,
+        parameter_classes: tuple[str, ...] = ("cuda",),
+        buffer_classes: tuple[str, ...] = ("cuda",),
+    ) -> None:
+        self.parameter_classes = parameter_classes
+        self.buffer_classes = buffer_classes
+        self.parameter_reads = 0
+        self.buffer_reads = 0
+
+    def named_parameters(self) -> list[tuple[str, _SyntheticDeviceTensor]]:
+        """Return synthetic parameter records and count verification reads."""
+        self.parameter_reads += 1
+        return [
+            (f"parameter_{index}", _SyntheticDeviceTensor(device_class))
+            for index, device_class in enumerate(self.parameter_classes)
+        ]
+
+    def named_buffers(self) -> list[tuple[str, _SyntheticDeviceTensor]]:
+        """Return synthetic buffer records and count verification reads."""
+        self.buffer_reads += 1
+        return [
+            (f"buffer_{index}", _SyntheticDeviceTensor(device_class))
+            for index, device_class in enumerate(self.buffer_classes)
+        ]
+
+
+class _RecordingNormalizer:
+    """Record exact transform calls while returning a distinct normalized array."""
+
+    def __init__(self) -> None:
+        self.inputs: list[np.ndarray] = []
+        self.outputs: list[np.ndarray] = []
+
+    def transform(self, values: np.ndarray) -> np.ndarray:
+        """Return a deterministic distinct array for predictor identity checks."""
+        self.inputs.append(values)
+        normalized = np.asarray(values, dtype=float) + 0.25
+        self.outputs.append(normalized)
+        return normalized
+
+
+def _synthetic_deep_payload(
+    *,
+    model_id: str = "inception_time",
+    accelerator: str = "cpu",
+    batch_size: int = 32,
+    predictor: Any | None = None,
+    lightning_model: Any | None = None,
+) -> dict[str, Any]:
+    """Build a complete synthetic locked deep-model payload."""
+    from src.training.dl_inference import DLPredictProbaWrapper
+
+    class SyntheticLightningModel:
+        """Support wrapper construction without loading a real model."""
+
+        def __init__(self, device_model: Any) -> None:
+            self.device_model = device_model
+
+        def to(self, _device: str) -> SyntheticLightningModel:
+            return self
+
+        def named_parameters(self) -> Any:
+            return self.device_model.named_parameters()
+
+        def named_buffers(self) -> Any:
+            return self.device_model.named_buffers()
+
+    device_model = lightning_model or _SyntheticDeviceModel()
+    synthetic_model = SyntheticLightningModel(device_model)
+    predict = predictor or (lambda **kwargs: np.full(len(kwargs["x_eval"]), 0.5, dtype=float))
+    wrapper = DLPredictProbaWrapper(
+        lightning_model=synthetic_model,
+        predictor=predict,
+        batch_size=batch_size,
+        accelerator=accelerator,
+    )
+    return {
+        "transformer": None,
+        "normalizer": _RecordingNormalizer(),
+        "model": wrapper,
+        "calibrator": None,
+        "threshold_p_raw": 0.5,
+        "threshold_p_final_equivalent": 0.5,
+        "feature_names": [f"S{index}" for index in range(1, 12)],
+        "training_sample_ids": np.asarray([10_001, 10_002], dtype=np.int64),
+        "metadata": {"model_name": model_id},
+    }
 
 
 def test_pipeline_a_moves_complete_selected_trajectory() -> None:
@@ -658,3 +762,677 @@ def test_environment_version_gate_uses_frozen_pytorch_lightning_distribution() -
 
     assert versions["pytorch_lightning"] == "2.6.1"
     assert "lightning" not in versions
+
+
+def test_deep_gpu_direct_uses_persisted_normalizer_and_predictor_once() -> None:
+    """A wrapper call, duplicate normalization, or wrong GPU arguments must fail."""
+    module = _analysis_module()
+    calls: list[dict[str, Any]] = []
+    device_model = _SyntheticDeviceModel()
+
+    def predictor(**kwargs: Any) -> np.ndarray:
+        calls.append(kwargs)
+        return np.linspace(0.2, 0.8, len(kwargs["x_eval"]), dtype=float)
+
+    payload = _synthetic_deep_payload(predictor=predictor, lightning_model=device_model)
+    raw = np.arange(4 * 3 * 11, dtype=float).reshape(4, 3, 11)
+
+    scores = module._infer_deep_gpu_direct(payload, raw)
+
+    normalizer = payload["normalizer"]
+    wrapper = payload["model"]
+    assert normalizer.inputs == [raw]
+    assert len(normalizer.outputs) == 1
+    assert len(calls) == 1
+    assert calls[0]["model"] is wrapper.lightning_model
+    assert calls[0]["x_eval"] is normalizer.outputs[0]
+    assert calls[0]["accelerator"] == "gpu"
+    assert calls[0]["batch_size"] == 32
+    assert np.array_equal(scores, np.linspace(0.2, 0.8, 4, dtype=float))
+    assert device_model.parameter_reads == 1
+    assert device_model.buffer_reads == 1
+
+
+def test_deep_gpu_direct_preserves_persisted_wrapper_contract() -> None:
+    """Wrong or mutated persisted CPU/32 metadata must stop direct GPU inference."""
+    module = _analysis_module()
+    raw = np.zeros((3, 2, 11), dtype=float)
+
+    for payload in (
+        _synthetic_deep_payload(accelerator="gpu"),
+        _synthetic_deep_payload(batch_size=16),
+    ):
+        with pytest.raises(ValueError, match="wrapper"):
+            module._infer_deep_gpu_direct(payload, raw)
+
+    payload = _synthetic_deep_payload()
+    wrapper = payload["model"]
+
+    def mutating_predictor(**kwargs: Any) -> np.ndarray:
+        wrapper.accelerator = "gpu"
+        return np.full(len(kwargs["x_eval"]), 0.5, dtype=float)
+
+    wrapper.predictor = mutating_predictor
+    with pytest.raises(ValueError, match="wrapper"):
+        module._infer_deep_gpu_direct(payload, raw)
+    assert wrapper.batch_size == 32
+
+
+def test_deep_wrapper_metadata_is_validated_before_participant_access(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Opening participant inputs before both deep CPU/32 checks must fail."""
+    module = _analysis_module()
+    load_events: list[str] = []
+
+    def loader(path: Path) -> dict[str, Any]:
+        model_id = path.name.removeprefix("binary_").removesuffix("_final.pkl")
+        load_events.append(f"load:{model_id}")
+        return _synthetic_deep_payload(model_id=model_id)
+
+    payloads = module._load_deep_payloads_before_sensitive_access(loader)
+
+    assert list(payloads) == ["inception_time", "cnn_bilstm_attention"]
+    assert load_events == ["load:inception_time", "load:cnn_bilstm_attention"]
+    assert all(payload["model"].accelerator == "cpu" for payload in payloads.values())
+    assert all(payload["model"].batch_size == 32 for payload in payloads.values())
+
+    class SyntheticSensitiveRead(RuntimeError):
+        """Mark the first synthetic participant-level read boundary."""
+
+    ordering_events: list[str] = []
+
+    def preloaded(_loader: Any) -> dict[str, dict[str, Any]]:
+        ordering_events.append("deep_wrappers_validated")
+        return payloads
+
+    def stop_at_first_sensitive_read(*_args: Any, **_kwargs: Any) -> Any:
+        ordering_events.append("participant_read")
+        raise SyntheticSensitiveRead
+
+    with monkeypatch.context() as patch:
+        patch.setattr(module, "_load_deep_payloads_before_sensitive_access", preloaded)
+        patch.setattr(module.np, "load", stop_at_first_sensitive_read)
+        with pytest.raises(SyntheticSensitiveRead):
+            module._load_scientific_context(
+                {"paths": {"pipeline_a": "synthetic/pipeline_a.npz"}}
+            )
+    assert ordering_events == ["deep_wrappers_validated", "participant_read"]
+
+    def invalid_loader(path: Path) -> dict[str, Any]:
+        model_id = path.name.removeprefix("binary_").removesuffix("_final.pkl")
+        batch_size = 16 if model_id == "cnn_bilstm_attention" else 32
+        return _synthetic_deep_payload(model_id=model_id, batch_size=batch_size)
+
+    with pytest.raises(ValueError, match="wrapper"):
+        module._load_deep_payloads_before_sensitive_access(invalid_loader)
+
+
+def test_deep_gpu_direct_has_no_warmup_or_training_array_access() -> None:
+    """A warm-up parameter, training-array access, or extra predictor call must fail."""
+    module = _analysis_module()
+    signature = inspect.signature(module._infer_deep_gpu_direct)
+    assert list(signature.parameters) == ["payload", "model_input"]
+
+    class TrainingArraySentinel:
+        """Raise if an unauthorized training array is inspected."""
+
+        def __array__(self) -> np.ndarray:
+            raise AssertionError("training array was accessed")
+
+    training_array = TrainingArraySentinel()
+    calls: list[int] = []
+
+    def predictor(**kwargs: Any) -> np.ndarray:
+        calls.append(len(kwargs["x_eval"]))
+        return np.full(len(kwargs["x_eval"]), 0.5, dtype=float)
+
+    payload = _synthetic_deep_payload(predictor=predictor)
+    first = np.zeros((3, 2, 11), dtype=float)
+    second = np.ones((3, 2, 11), dtype=float)
+    module._infer_deep_gpu_direct(payload, first)
+    module._infer_deep_gpu_direct(payload, second)
+
+    assert calls == [3, 3]
+    assert len(payload["normalizer"].inputs) == 2
+    assert training_array is training_array
+
+
+def test_baseline_and_permuted_deep_calls_share_gpu_direct_helper(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Routing baseline or permutations through the CPU wrapper must fail."""
+    module = _analysis_module()
+    helper_inputs: list[np.ndarray] = []
+
+    def direct_gpu(_payload: Any, values: np.ndarray) -> np.ndarray:
+        helper_inputs.append(values)
+        participant_mean = values.mean(axis=(1, 2))
+        return 1.0 / (1.0 + np.exp(-participant_mean))
+
+    monkeypatch.setattr(module, "_infer_deep_gpu_direct", direct_gpu)
+    payload = {
+        "transformer": None,
+        "normalizer": object(),
+        "model": SimpleNamespace(
+            predict_proba=lambda _values: pytest.fail("deep wrapper predict_proba was called")
+        ),
+    }
+    original = np.zeros((4, 2, 11), dtype=float)
+    original[:, :, :] = np.asarray([-2.0, -1.0, 1.0, 2.0])[:, None, None]
+    labels = np.asarray([0, 0, 1, 1], dtype=np.int64)
+    baseline = module._infer_positive_scores("inception_time", payload, original)
+
+    rows, _cube = module.execute_model_permutations(
+        module.MODEL_ORDER[4],
+        original,
+        labels,
+        float(module.roc_auc_score(labels, baseline)),
+        np.asarray([[2, 3, 0, 1]], dtype=np.int64),
+        lambda values: module._infer_positive_scores("inception_time", payload, values),
+    )
+
+    assert len(rows) == 11
+    assert len(helper_inputs) == 12
+    assert helper_inputs[0] is original
+
+
+def test_all_six_baselines_reconcile_before_first_permutation(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Generating a permutation before all baseline gates finish must fail."""
+    module = _analysis_module()
+    events: list[str] = []
+
+    def load_context(_config: Any) -> SimpleNamespace:
+        events.extend(f"baseline:{model['model_id']}" for model in module.MODEL_ORDER)
+        return SimpleNamespace(labels=np.asarray([0, 0, 1, 1], dtype=np.int64))
+
+    class StopBeforePermutation(RuntimeError):
+        """Stop after recording the first random-matrix request."""
+
+    def generate(*_args: Any, **_kwargs: Any) -> Any:
+        events.append("permutation_matrix")
+        raise StopBeforePermutation
+
+    monkeypatch.setattr(module, "_configure_determinism", lambda _seed: {})
+    monkeypatch.setattr(module, "verify_immutable_hashes", lambda _config: {})
+    monkeypatch.setattr(module, "_load_scientific_context", load_context)
+    monkeypatch.setattr(module, "generate_random_matrices", generate)
+    config = {"permutation_seed": 42, "n_permutations": 100, "n_bootstrap_final_model": 2000}
+    with pytest.raises(StopBeforePermutation):
+        module.run_analysis_once(config, tmp_path / "run_order", package_versions={"numpy": "synthetic"})
+    assert events[:-1] == [f"baseline:{model['model_id']}" for model in module.MODEL_ORDER]
+    assert events[-1] == "permutation_matrix"
+
+    events.clear()
+
+    def fail_baseline(_config: Any) -> Any:
+        events.append("baseline:minirocket_ridge")
+        raise ValueError("synthetic baseline failure")
+
+    monkeypatch.setattr(module, "_load_scientific_context", fail_baseline)
+    with pytest.raises(ValueError, match="synthetic baseline failure"):
+        module.run_analysis_once(config, tmp_path / "run_failure", package_versions={"numpy": "synthetic"})
+    assert events == ["baseline:minirocket_ridge"]
+
+
+def test_cuda_preflight_requires_exactly_one_device_before_sensitive_access() -> None:
+    """Unavailable, zero-device, or multi-device CUDA states must fail closed."""
+    module = _analysis_module()
+    sensitive_calls: list[str] = []
+
+    for available, count in ((False, 1), (True, 0), (True, 2)):
+        with pytest.raises(ValueError, match="CUDA"):
+            module._validate_cuda_contract(available, count)
+        assert sensitive_calls == []
+
+    result = module._validate_cuda_contract(True, 1)
+    assert result == {"cuda_available": True, "cuda_device_count": 1, "cuda_device_class": "cuda"}
+
+
+def test_actual_deep_device_state_requires_homogeneous_cuda() -> None:
+    """CPU, mixed, absent, non-tensor, or invalid device evidence must fail."""
+    module = _analysis_module()
+    assert module._actual_model_device_class(_SyntheticDeviceModel()) == "cuda"
+
+    invalid_models = (
+        _SyntheticDeviceModel(("cpu",), ("cpu",)),
+        _SyntheticDeviceModel(("cuda",), ("cpu",)),
+        _SyntheticDeviceModel((), ()),
+        _SyntheticDeviceModel(("meta",), ("meta",)),
+    )
+    for model in invalid_models:
+        with pytest.raises(ValueError):
+            module._actual_model_device_class(model)
+
+    non_tensor_model = SimpleNamespace(
+        named_parameters=lambda: [("weight", object())],
+        named_buffers=lambda: [],
+    )
+    with pytest.raises(TypeError, match="non-tensor"):
+        module._actual_model_device_class(non_tensor_model)
+
+
+def test_unified_state_digest_matches_diagnostic_canonical_contract() -> None:
+    """A changed canonical encoding or device-dependent digest must fail."""
+    module = _analysis_module()
+    diagnostic = importlib.import_module("src.analysis.figure3_e010_deep_model_reconciliation_diagnostic")
+    import torch
+
+    class SyntheticState(torch.nn.Module):
+        """Contain one named parameter and one named buffer."""
+
+        def __init__(self) -> None:
+            super().__init__()
+            self.weight = torch.nn.Parameter(torch.asarray([[1.0, 2.0]], dtype=torch.float32))
+            self.register_buffer("offset", torch.asarray([3, 4], dtype=torch.int64))
+
+    model = SyntheticState()
+    expected = diagnostic.canonical_model_state_sha256(model)
+    assert module._canonical_model_state_sha256(model) == expected
+    assert torch.cuda.is_available() is True
+    model.to("cuda")
+    assert module._canonical_model_state_sha256(model) == expected
+    with torch.no_grad():
+        model.weight.add_(1.0)
+    assert module._canonical_model_state_sha256(model) != expected
+
+
+def test_deep_state_digest_gate_covers_baseline_and_complete_permutation_block() -> None:
+    """Missing, reordered, or unequal three-checkpoint digests must stop execution."""
+    module = _analysis_module()
+    digest = "a" * 64
+    valid = {
+        "before_baseline": digest,
+        "after_baseline": digest,
+        "after_model_permutation_block": digest,
+    }
+    assert module._validate_deep_state_digests(valid) is True
+
+    for changed_key in ("after_baseline", "after_model_permutation_block"):
+        changed = dict(valid)
+        changed[changed_key] = "b" * 64
+        with pytest.raises(ValueError, match="state digest"):
+            module._validate_deep_state_digests(changed)
+    with pytest.raises(ValueError, match="checkpoint"):
+        module._validate_deep_state_digests({"before_baseline": digest})
+
+
+def test_four_non_deep_inference_paths_remain_behaviorally_unchanged(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Changing the frozen non-deep helper call or return bytes must fail."""
+    module = _analysis_module()
+    training_module = importlib.import_module("src.training.train_final_models")
+    calls: list[dict[str, Any]] = []
+    expected_scores = np.asarray([0.125, 0.875], dtype=np.float64)
+
+    def predict(**kwargs: Any) -> np.ndarray:
+        calls.append(kwargs)
+        return expected_scores
+
+    monkeypatch.setattr(training_module, "_predict_positive_probabilities", predict)
+    payload = {
+        "transformer": object(),
+        "normalizer": object(),
+        "model": object(),
+    }
+    raw = np.asarray([[1.0], [2.0]])
+    for model_id in ("minirocket_ridge", "xgboost", "elastic_net_lr", "svm"):
+        observed = module._infer_positive_scores(model_id, payload, raw)
+        assert observed.tobytes() == expected_scores.tobytes()
+    assert [call["model_name"] for call in calls] == [
+        "minirocket_ridge",
+        "xgboost",
+        "elastic_net_lr",
+        "svm",
+    ]
+    assert all(call["transformer"] is payload["transformer"] for call in calls)
+    assert all(call["normalizer"] is payload["normalizer"] for call in calls)
+    assert all(call["model"] is payload["model"] for call in calls)
+    assert all(call["x_input"] is raw for call in calls)
+
+    frozen_non_deep_block = '''    from src.training.train_final_models import _predict_positive_probabilities
+
+    scores = _predict_positive_probabilities(
+        model_name=model_id,
+        transformer=payload["transformer"],
+        normalizer=payload["normalizer"],
+        model=payload["model"],
+        x_input=model_input,
+    )
+    return np.asarray(scores, dtype=float)'''
+    assert frozen_non_deep_block in inspect.getsource(module._infer_positive_scores)
+
+
+def test_amendment_parent_and_diagnostic_authorities_are_strict(tmp_path: Path) -> None:
+    """Missing, changed, reordered, absolute, or traversing authority records must fail."""
+    module = _analysis_module()
+    source = Path("configs/figure3_unified_channel_block_permutation.yaml")
+    valid = module.load_analysis_config(source)
+
+    assert valid["approved_plan"] == {
+        "path": "docs/plans/figure3_unified_channel_block_permutation.plan.md",
+        "sha256": "1f1fbf47ef39ccd16ccebe0c8cff920653c844c120aa3bc5201aa4e5c772fb89",
+    }
+    assert valid["gpu_inference_amendment_plan"]["sha256"] == (
+        "665a082b02364ff50eb0ea21044dda1815ede17ac6632412d0fb0a31919506ee"
+    )
+    assert valid["diagnostic_plan"]["sha256"] == (
+        "9129067eaf3c1d433e0b9eddd10a0fdb8a7ee95c152f931b3f69d55dec9ce509"
+    )
+    assert len(valid["diagnostic_aggregate_outputs"]) == 7
+
+    mutations: list[tuple[str, Any]] = []
+    missing = yaml.safe_load(source.read_text(encoding="utf-8"))
+    missing.pop("gpu_inference_amendment_plan", None)
+    mutations.append(("missing", missing))
+    changed = yaml.safe_load(source.read_text(encoding="utf-8"))
+    changed["diagnostic_plan"]["sha256"] = "0" * 64
+    mutations.append(("changed", changed))
+    reordered = yaml.safe_load(source.read_text(encoding="utf-8"))
+    reordered["diagnostic_aggregate_outputs"] = list(reversed(reordered["diagnostic_aggregate_outputs"]))
+    mutations.append(("reordered", reordered))
+    absolute = yaml.safe_load(source.read_text(encoding="utf-8"))
+    absolute["gpu_inference_amendment_plan"]["path"] = "/tmp/amendment.plan.md"
+    mutations.append(("absolute", absolute))
+    traversing = yaml.safe_load(source.read_text(encoding="utf-8"))
+    traversing["diagnostic_plan"]["path"] = "docs/plans/../other.plan.md"
+    mutations.append(("traversing", traversing))
+
+    for name, payload in mutations:
+        changed_path = tmp_path / f"{name}.yaml"
+        changed_path.write_text(yaml.safe_dump(payload, sort_keys=False, allow_unicode=True), encoding="utf-8")
+        with pytest.raises(ValueError):
+            module.load_analysis_config(changed_path)
+
+
+def test_python_interpreter_gate_accepts_exact_approved_symlink_alias(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Resolving away the approved logical Python alias must fail."""
+    module = _analysis_module()
+    versioned_interpreter = tmp_path / "python3.11"
+    versioned_interpreter.write_bytes(b"")
+    bin_directory = tmp_path / "bin"
+    bin_directory.mkdir()
+    approved_alias = bin_directory / "python"
+    approved_alias.symlink_to(versioned_interpreter)
+    alternate_interpreter = tmp_path / "alternate_python"
+    alternate_interpreter.write_bytes(b"")
+    absent_interpreter = tmp_path / "absent_python"
+
+    monkeypatch.setattr(module, "EXPECTED_PYTHON_INTERPRETER", approved_alias, raising=False)
+
+    assert module._validate_python_interpreter_path(str(approved_alias)) == "bin/python"
+    for rejected_path in (versioned_interpreter, alternate_interpreter, absent_interpreter):
+        with pytest.raises(ValueError) as exc_info:
+            module._validate_python_interpreter_path(str(rejected_path))
+        assert str(tmp_path) not in str(exc_info.value)
+
+
+def test_preflight_enforces_exact_normalized_modified_path_status_set() -> None:
+    """A staged, missing, extra, renamed, deleted, or alternate status tuple must fail."""
+    module = _analysis_module()
+    expected = [
+        {"status": "??", "path": ".vscode/"},
+        {"status": " M", "path": "configs/figure3_unified_channel_block_permutation.yaml"},
+        {"status": " M", "path": "src/analysis/figure3_unified_channel_block_permutation.py"},
+        {"status": " M", "path": "tests/test_figure3_unified_channel_block_permutation.py"},
+    ]
+    valid_lines = [
+        " M tests/test_figure3_unified_channel_block_permutation.py",
+        "?? .vscode/",
+        " M configs/figure3_unified_channel_block_permutation.yaml",
+        " M src/analysis/figure3_unified_channel_block_permutation.py",
+    ]
+    assert module._validate_pre_execution_status(valid_lines, expected) == expected
+
+    invalid_sets = (
+        valid_lines[:-1],
+        [*valid_lines, "?? unexpected.txt"],
+        [*valid_lines[:-1], "M  src/analysis/figure3_unified_channel_block_permutation.py"],
+        [*valid_lines[:-1], " D src/analysis/figure3_unified_channel_block_permutation.py"],
+        [*valid_lines[:-1], "R  old.py -> src/analysis/figure3_unified_channel_block_permutation.py"],
+        [*valid_lines[:-1], " M src/analysis/alternate.py"],
+    )
+    for lines in invalid_sets:
+        with pytest.raises(ValueError, match="worktree"):
+            module._validate_pre_execution_status(lines, expected)
+
+
+def test_scientific_csv_contracts_are_unchanged_by_amendment() -> None:
+    """Changing scientific schemas, counts, ordering, or numeric semantics must fail."""
+    module = _analysis_module()
+    config = module.load_analysis_config(Path("configs/figure3_unified_channel_block_permutation.yaml"))
+    assert module.EXPECTED_OUTPUT_ROWS == {
+        "channel_importance_summary.csv": 66,
+        "permutation_repeats.csv": 6600,
+        "cross_model_consistency.csv": 15,
+        "channel_consensus_summary.csv": 11,
+    }
+    assert [model["model_id"] for model in module.MODEL_ORDER] == [
+        "minirocket_ridge",
+        "xgboost",
+        "elastic_net_lr",
+        "svm",
+        "inception_time",
+        "cnn_bilstm_attention",
+    ]
+    assert module.CHANNEL_ORDER == tuple(f"S{index}" for index in range(1, 12))
+    assert config["n_permutations"] == 100
+    assert config["n_bootstrap_final_model"] == 2000
+    assert config["permutation_seed"] == config["bootstrap_seed"] == 42
+    assert config["score_reconciliation_atol"] == 1.0e-6
+    assert config["auroc_reconciliation_atol"] == 1.0e-12
+    assert module.signed_auroc_delta(0.7, 0.8) == pytest.approx(-0.1)
+
+
+def test_operational_provenance_additions_are_aggregate_only(
+    tmp_path: Path,
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    """Operational records must prove GPU state without participant or machine details."""
+    module = _analysis_module()
+    model_records = [
+        {
+            "model_id": model_id,
+            "persisted_wrapper_accelerator": "cpu",
+            "persisted_batch_size": 32,
+            "effective_batch_size": 32,
+            "baseline_invocation_count": 1,
+            "permutation_invocation_count": 1100,
+            "all_actual_device_classes": "cuda",
+            "all_device_records_homogeneous": True,
+            "state_sha256_before_baseline": "a" * 64,
+            "state_sha256_after_baseline": "a" * 64,
+            "state_sha256_after_model_permutation_block": "a" * 64,
+            "state_digests_identical": True,
+            "wrapper_contract_unchanged": True,
+        }
+        for model_id in ("inception_time", "cnn_bilstm_attention")
+    ]
+    contract = module._build_deep_inference_contract_payload(model_records)
+    assert list(contract) == [
+        "contract_id",
+        "requested_accelerator",
+        "required_cuda_device_count",
+        "training_warmup_used",
+        "models",
+    ]
+    assert contract["contract_id"] == "e010_gpu_direct_no_warmup_v1"
+    assert contract["training_warmup_used"] is False
+
+    candidate = tmp_path / "candidate"
+    candidate.mkdir()
+    for filename in module.FINAL_MANIFEST_FILENAMES:
+        (candidate / filename).write_text("aggregate\n", encoding="utf-8")
+    manifest = module.build_manifest_payload(candidate, Path("outputs/analysis/final"))
+    assert list(manifest) == ["analysis_id", "deep_inference_contract_id", "files"]
+
+    safe_payload = json.dumps(
+        {"deep_inference_contract": contract, "participant_level_persistence": False}
+    ).encode()
+    module.validate_serialized_privacy({"audit.json": safe_payload})
+    safe_text = safe_payload.decode()
+    for forbidden in (
+        "fit",
+        "retrain",
+        "recalibr",
+        "threshold_change",
+        "artifact_repair",
+        "sample_id",
+        "y_true",
+        "permutation_indices",
+        "bootstrap_indices",
+        "tensor_shape",
+        "device_name",
+        "host_identifier",
+        "username",
+    ):
+        assert forbidden not in safe_text
+        assert forbidden not in caplog.text
+
+    for field, value in (
+        ("participant_id", "SYNTHETIC-PRIVATE"),
+        ("y_true", 1),
+        ("permutation_indices", [0, 1]),
+        ("tensor_shapes", [[1, 2]]),
+        ("device_name", "SYNTHETIC-DEVICE"),
+        ("host_identifier", "SYNTHETIC-HOST"),
+        ("username", "SYNTHETIC-USER"),
+        ("path", "[PRIVATE_PATH_REDACTED]"),
+    ):
+        encoded = json.dumps({field: value}).encode()
+        with pytest.raises(ValueError, match="privacy validation") as exc_info:
+            module.validate_serialized_privacy({"audit.json": encoded})
+        assert str(value) not in str(exc_info.value)
+
+
+def test_verified_empty_stale_run_a_cleanup_accepts_only_exact_safe_state(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Only the exact empty nonsymlink run_a and now-empty work root may be removed."""
+    module = _analysis_module()
+    monkeypatch.setattr(module, "PROJECT_ROOT", tmp_path)
+    work_root = tmp_path / "outputs" / "work" / module.ANALYSIS_ID
+    run_a = work_root / "run_a"
+    run_a.mkdir(parents=True)
+    final_dir = tmp_path / "outputs" / "analysis" / module.ANALYSIS_ID
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    sentinel = outside / "sentinel.txt"
+    sentinel.write_text("retain", encoding="utf-8")
+
+    result = module._remove_verified_empty_stale_run_a(work_root, final_dir)
+
+    assert result == {
+        "run_a_validated_empty": True,
+        "run_a_removed": True,
+        "work_root_removed": True,
+    }
+    assert not run_a.exists()
+    assert not work_root.exists()
+    assert sentinel.read_text(encoding="utf-8") == "retain"
+
+
+@pytest.mark.parametrize(
+    "unsafe_case",
+    [
+        "symlink",
+        "hidden_file",
+        "ordinary_file",
+        "child_directory",
+        "special_child",
+        "outside_root",
+        "missing_target",
+        "run_b",
+        "promotion_candidate",
+        "final_output",
+    ],
+)
+def test_verified_empty_stale_run_a_cleanup_rejects_every_unsafe_state(
+    unsafe_case: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Every unsafe stale-work shape must fail without deleting any object."""
+    module = _analysis_module()
+    monkeypatch.setattr(module, "PROJECT_ROOT", tmp_path)
+    work_root = tmp_path / "outputs" / "work" / module.ANALYSIS_ID
+    work_root.mkdir(parents=True)
+    run_a = work_root / "run_a"
+    final_dir = tmp_path / "outputs" / "analysis" / module.ANALYSIS_ID
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    outside_sentinel = outside / "sentinel.txt"
+    outside_sentinel.write_text("retain", encoding="utf-8")
+
+    if unsafe_case == "symlink":
+        target = outside / "linked_run"
+        target.mkdir()
+        run_a.symlink_to(target, target_is_directory=True)
+    elif unsafe_case == "missing_target":
+        pass
+    else:
+        run_a.mkdir()
+        if unsafe_case == "hidden_file":
+            (run_a / ".hidden").write_text("retain", encoding="utf-8")
+        elif unsafe_case == "ordinary_file":
+            (run_a / "file.txt").write_text("retain", encoding="utf-8")
+        elif unsafe_case == "child_directory":
+            (run_a / "child").mkdir()
+        elif unsafe_case == "special_child":
+            os.mkfifo(run_a / "synthetic_fifo")
+        elif unsafe_case == "run_b":
+            (work_root / "run_b").mkdir()
+        elif unsafe_case == "promotion_candidate":
+            (work_root / "promotion_candidate").mkdir()
+        elif unsafe_case == "final_output":
+            final_dir.mkdir(parents=True)
+
+    target_root = outside / "outside_work" if unsafe_case == "outside_root" else work_root
+    if unsafe_case == "outside_root":
+        (target_root / "run_a").mkdir(parents=True)
+
+    with pytest.raises((ValueError, FileExistsError)):
+        module._remove_verified_empty_stale_run_a(target_root, final_dir)
+
+    assert outside_sentinel.read_text(encoding="utf-8") == "retain"
+    assert target_root.exists()
+
+
+def test_source_contains_no_forbidden_amendment_operations() -> None:
+    """The amendment helpers must exclude scientific mutation, warm-up, fallback, and recursive cleanup."""
+    module = _analysis_module()
+    assert module.DEEP_MODEL_IDS == ("inception_time", "cnn_bilstm_attention")
+    assert module.DEEP_INFERENCE_CONTRACT_ID == "e010_gpu_direct_no_warmup_v1"
+
+    infer_tree = ast.parse(inspect.getsource(module._infer_deep_gpu_direct))
+    cleanup_tree = ast.parse(inspect.getsource(module._remove_verified_empty_stale_run_a))
+    infer_attributes = {
+        node.attr
+        for node in ast.walk(infer_tree)
+        if isinstance(node, ast.Attribute)
+    }
+    infer_names = {
+        node.id
+        for node in ast.walk(infer_tree)
+        if isinstance(node, ast.Name)
+    }
+    cleanup_calls = {
+        node.func.attr if isinstance(node.func, ast.Attribute) else node.func.id
+        for node in ast.walk(cleanup_tree)
+        if isinstance(node, ast.Call) and isinstance(node.func, (ast.Attribute, ast.Name))
+    }
+    assert not infer_attributes.intersection({"fit", "fit_transform", "partial_fit", "predict_proba"})
+    assert not infer_names.intersection({"train_input", "training_array", "warmup", "cpu_fallback"})
+    assert "rmtree" not in cleanup_calls
+    assert "glob" not in cleanup_calls
+    assert "rglob" not in cleanup_calls
+    assert module.EXPECTED_OUTPUT_COLUMNS == {
+        "channel_importance_summary.csv": module.CHANNEL_IMPORTANCE_COLUMNS,
+        "permutation_repeats.csv": module.PERMUTATION_REPEAT_COLUMNS,
+        "cross_model_consistency.csv": module.CROSS_MODEL_COLUMNS,
+        "channel_consensus_summary.csv": module.CHANNEL_CONSENSUS_COLUMNS,
+    }
