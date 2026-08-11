@@ -35,6 +35,12 @@ The destination hashes below are migration-time local hashes, not frozen scienti
 | `.cursor/rules/project-conventions.mdc` | `20bc6fab69a3ce833f2bd1b19fae52d3a4609231a854ac3c74aec709a4cc6583` | `AGENTS.md` | `1cb134c06871ba1837e0ff235dca9ca6ee0c10c1d08a123ff3912354299f9c9a` |
 | `.cursor/rules/python-coding-standards.mdc` | `e156928096fbdf23d412ed9e03cb2889f6def4ec1d02d7294a435da6919d20b7` | `AGENTS.md` | `1cb134c06871ba1837e0ff235dca9ca6ee0c10c1d08a123ff3912354299f9c9a` |
 
+Additive reviewer-facing preprocessing reporting and provenance closure is documented in
+[`docs/preprocessing/preprocessing_as_executed_reporting_clarification.md`](docs/preprocessing/preprocessing_as_executed_reporting_clarification.md).
+It consolidates the final as-executed K-of-N/QC facts and the preprocessing-configuration integrity anomaly; it does not
+edit the frozen protocol, configuration, run summary, or scientific artifacts, and does not authorize visualization
+production.
+
 ## Current Stage — Final Post-Hoc Robustness and Reporting-Closure Package
 
 The original approved legacy plan has SHA-256 `c1fac4e6ec408f06a9be2efb9748c5ec48d43d981af0faf36bf305c5386b7ef6`. Session 0 completed at `3c0ff6b3b40460a2c340ad3193222ee54979109d`, additive Amendment 01 completed at `2e08e8fb89d99bb62cca2e5204a13ff09e47d432`, Session 1 completed at `d19dcbdb7bd9ef20c8534cca0a87384ed1c6fa9f`, and Commit B completed at `ee042999ebd93eefd393fe6446145f8cbf6b75c0`. Session 2 implementation was independently reviewed and committed at `73807ae9b941320aff822a5e53bd11b57b3a310d`; it added exactly the date-grouped analysis module, CLI, and synthetic tests. Session 2 did not read real participant-level values or scores, compute real score-derived scientific results, run real auxiliary fits, or create Session 5 scientific outputs. The current final post-hoc package has one consolidated active record bundle: `configs/post_hoc_final_supplementary.yaml`, `docs/modeling/final_post_hoc_supplementary_methods.md`, and `outputs/analysis/posthoc_final_freeze_manifest.json`. Original Session 0 and Amendment 01 remain independently recoverable and verifiable from Git history; consolidation changes neither their scientific content nor their historical timing and creates no new Session 0. The successful Session 1 score-blind preflight remains byte-preserved.
