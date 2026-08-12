@@ -1,0 +1,74 @@
+analysis_id: efigure9_disease_category_prediction_matrix_v1
+analysis_identity: plan_orthogonal_descriptive_aggregation
+planning_reference_head: 8c44846477c250a03380eda24a5c99ab63294426
+model:
+  identifier: minirocket_ridge
+  display_name: MiniRocket + Ridge
+evaluation_set:
+  name: internal testing set
+  expected_size: 195
+score:
+  space: p_raw
+  threshold_p_raw: 0.3418938786147648
+  threshold_rule: p_raw >= threshold_p_raw
+disease_categories:
+  - {code: 0, label: HC, true_class: 0}
+  - {code: 1, label: BGL, true_class: 0}
+  - {code: 2, label: LGIN, true_class: 0}
+  - {code: 3, label: HGIN, true_class: 1}
+  - {code: 4, label: EGC, true_class: 1}
+  - {code: 5, label: AGC, true_class: 1}
+predicted_class_order: [0, 1]
+quadrant_mapping:
+  "0,0": TN
+  "0,1": FP
+  "1,0": FN
+  "1,1": TP
+prediction_schema: [sample_id, y_true, p_raw, p_cal, y_pred, quadrant]
+output_schema:
+  - disease_category_code
+  - disease_category_label
+  - true_class
+  - predicted_class
+  - quadrant
+  - count
+  - disease_category_total
+  - within_disease_category_proportion
+serialization:
+  csv_float_format: "%.17g"
+  json_sort_keys: true
+  line_ending: LF
+sources:
+  configs/modeling_global.yaml: c4520df8040adfebdfd1f6ae89376be5484ae3dfeda0cfd2481103df323a2e54
+  outputs/predictions/binary_minirocket_ridge_test_predictions.csv: ec2f912cd83d523cdff92f453472daf3816cafe4238d98e5b6d650fefe73de28
+  outputs/analysis/binary_minirocket_ridge_threshold_mapping.json: 5b3df63297431e0824e7a11df154151beb7f3b97e8cd69fc972b67de5871af95
+  outputs/metrics/binary_minirocket_ridge_test_metrics.csv: eb60d67d42383a0ff764633e09b271c98398ce461f20c2d094f7592a1b882835
+  outputs/analysis/table_one_train_test.csv: 8df9b565bdba4c6af7675608d489de2887bfc806b8408518241845b1d0b68117
+  data/processed/sample_index.csv: 3e31635c37c3cc142eade488c00a240ec5487175b531f9ed94837946ddcb403f
+  data/processed/splits/test_idx.npz: 7fc60acfc54f27e77f60a9813ca829fd61f174a8d3e4ab59aac18f5e05c981c3
+  data/raw/clinical_data/metadata.csv: 58b7c08d9eea834e22d9aebe0e19049f5ca313c384262b3cba21ce9763523aa9
+  src/config.py: e10ccfe1ca068b39472a7b3e201cf709f0f017ab502d2cec851cb8914a3a721f
+  src/analysis/data_split.py: 4c10e56a95d675f47c57922133bd48232893500d515ff50f3e215150261b2ada
+  src/analysis/stage7_part_a_common.py: 2ee75f19c284e84aa0528d557d9f582cf217180005dd014a5dfa06e995527179
+  src/evaluation/metrics.py: f355df339a9ee1bba6fff98c5bf24ea5f611554204da3257d05d702d8708595c
+reconciliation:
+  disease_category_totals: {HC: 32, BGL: 71, LGIN: 10, HGIN: 14, EGC: 24, AGC: 44}
+  true_class_totals: {"0": 113, "1": 82}
+  predicted_class_totals: {"0": 105, "1": 90}
+  quadrant_totals: {TN: 97, FP: 16, FN: 8, TP: 74}
+  total: 195
+outputs:
+  final_directory: outputs/analysis/efigure9_disease_category_prediction_matrix
+  inventory:
+    - audit.json
+    - disease_category_prediction_matrix.csv
+    - manifest.json
+authorized_task_paths:
+  - configs/efigure9_disease_category_prediction_matrix.yaml
+  - src/analysis/efigure9_disease_category_prediction_matrix.py
+  - scripts/run_efigure9_disease_category_prediction_matrix.py
+  - tests/test_efigure9_disease_category_prediction_matrix.py
+execution_command: PYTHONDONTWRITEBYTECODE=1 python scripts/run_efigure9_disease_category_prediction_matrix.py --config configs/efigure9_disease_category_prediction_matrix.yaml
+no_stochastic_procedure: true
+participant_level_persistence: false
+figure_creation_authorized: false
