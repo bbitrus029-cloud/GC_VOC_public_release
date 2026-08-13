@@ -1,0 +1,240 @@
+analysis_id: efigure4_preprocessing_stage_aggregate_replay
+analysis_classification: post_freeze_result_blind_plan_orthogonal_descriptive_reporting_support
+approved_plan:
+  path: docs/plans/efigure4_preprocessing_stage_aggregate_replay_recovery_v4_plan.md
+  sha256: 302f96e626f60463740330a38bcc1c5962543cf5c4f84ee7a32ba942b6d3529d
+original_plan:
+  path: docs/plans/efigure4_preprocessing_stage_aggregate_replay_results_free_plan.md
+  sha256: 33381038e69e153a7b4cf401535c50b8a5123de78d7d2a16644804d6a532515e
+recovery_v2_plan:
+  path: docs/plans/efigure4_preprocessing_stage_aggregate_replay_recovery_v2_plan.md
+  sha256: feacd76d706f9c19c632d4336efa42a17691b1a4fbe40b75759daabf8369eebd
+recovery_v3_plan:
+  path: docs/plans/efigure4_preprocessing_stage_aggregate_replay_recovery_v3_plan.md
+  sha256: 487e5e69b5282dc2188e4b85467f736546491527076351411654125e5e4d57ca
+reporting_correction:
+  path: docs/preprocessing/preprocessing_fallback_denominator_reporting_correction.md
+  sha256: ba0ea1b226a94ea476744ec7e8f6b047b546634d766e4bdca01792dbbca8a15c
+  byte_size: 3374
+numerical_environment_correction:
+  path: docs/preprocessing/preprocessing_stage4_numerical_environment_build_drift_correction.md
+  sha256: 225aff9168b0e4f13e25cbbf6aa5f66ddc151e82a0e28e056cc0d307e917f83b
+channel_metadata_correction:
+  path: docs/preprocessing/preprocessing_stage4_conda_explicit_archive_channel_metadata_correction.md
+  sha256: a1d208e2a2d53faaa931ffa4f99b95dc9690e62a7ff4c55704210d293612f91b
+environment_lock:
+  path: configs/efigure4_preprocessing_stage_aggregate_replay_environment_lock.json
+  sha256: cf3e23de96b76536d6b906e24c2ffbaeb767a70d0940c2d483ac4f2200706cad
+environment_identity:
+  conda_executable: [PRIVATE_PATH_REDACTED]
+  conda_version_output: conda 26.1.0
+  base_prefix: [PRIVATE_PATH_REDACTED]
+  source_prefix: [PRIVATE_PATH_REDACTED]
+  dedicated_prefix: [PRIVATE_PATH_REDACTED]
+  dedicated_interpreter: [PRIVATE_PATH_REDACTED]
+  cache_root: [PRIVATE_PATH_REDACTED]
+  environment_name: gcvocs-efigure4-replay-historical
+  platform: linux
+  subdirectory: linux-64
+  environment_role: efigure4_preprocessing_stage_aggregate_replay_historical_reproduction
+  source_ledger_sha256: e6a91ad784c41e2781c03947562f6bbf78d6cc33a8d0551245cb7eb9c54e04f8
+  final_ledger_sha256: 7b11f59909a6e2f5b1bf1f8f49cba060b2e0b3d3e1b2b55f0da2eecfbcb30334
+  explicit_local_archive_channel_semantics: unknown_channel_expected_only_for_six_explicit_local_sha256_locked_archives
+  base_conda_package:
+    name: conda
+    version: 26.1.0
+    build: py313h78bf25f_0
+    channel: conda-forge
+    subdirectory: linux-64
+runtime_authority:
+  expected_branch: main
+  expected_head: 098d6d5d65d9fb935fa97a30d1353a9694a0dc3a
+  expected_parent: 8c44846477c250a03380eda24a5c99ab63294426
+  preprocessing_frozen_commit: 622cb3664774b3940f7bcf092004cfff62d06822
+  allowed_worktree_entries:
+    - .vscode/settings.json
+    - configs/efigure4_preprocessing_stage_aggregate_replay.yaml
+    - configs/efigure4_preprocessing_stage_aggregate_replay_environment_lock.json
+    - docs/preprocessing/preprocessing_fallback_denominator_reporting_correction.md
+    - docs/preprocessing/preprocessing_stage4_numerical_environment_build_drift_correction.md
+    - docs/preprocessing/preprocessing_stage4_conda_explicit_archive_channel_metadata_correction.md
+    - scripts/run_efigure4_preprocessing_stage_aggregate_replay.py
+    - src/analysis/efigure4_preprocessing_stage_aggregate_replay.py
+    - tests/test_efigure4_preprocessing_stage_aggregate_replay.py
+inputs:
+  preprocessing_config:
+    path: configs/preprocessing.yaml
+    git_blob: b47eec6917588d82f3e866801aff0aede2ea62d0
+    sha256: null
+    sha256_status: unresolved local SHA-256 computation/provenance anomaly
+    byte_size: 16564
+    blake2b: ffe081c644b04d571d693af8c7626151282d19ba5161c3c1f76af6a18e8e480667076eb18ac691653e3e9393031dc30139bd882ac57d7b8b1b36d1941e2b41fb
+  environment:
+    path: environment.yml
+    git_blob: cd8cd04e943417f6a7eae2b009661b09f0883839
+  project_config:
+    path: src/config.py
+    git_blob: d60b8790d7321fcd3606055c1583ebabfe0e5d77
+  preprocessing_module:
+    path: src/data/preprocessing.py
+    git_blob: 929e1f592a56afb76b01ad71ce89bd5f02974d1c
+  smoothing_module:
+    path: src/data/smoothing.py
+    git_blob: 325f5c5cdedbed7d4686ef89f0c6e71d66462af8
+  correction_module:
+    path: src/data/correction.py
+    git_blob: e6c6339ea2ee68271d4f9d40e1a9e7d034b73159
+  environmental_compensation_module:
+    path: src/data/env_compensation.py
+    git_blob: 9690c5bc1f0300eb5753797be73f568d75e25c6e
+  baseline_module:
+    path: src/data/baseline.py
+    git_blob: 9572200331af477f765c249d174677e167c2cfe5
+  loader_module:
+    path: src/data/loader.py
+    git_blob: 8dc8be1ac25ce28fb4fd7c4ff9cc73f90ca0abf8
+  pipeline_a_module:
+    path: src/data/pipeline_a.py
+    git_blob: 5cf1df087469813b83ee7d58a8c848ddfe1713ba
+  sample_index:
+    path: data/processed/sample_index.csv
+    git_blob: 5010bc6ba77d33a6419ab54ccd8c2c18dc4312f3
+  qc_diagnostics:
+    path: data/processed/qc_reports/qc_diagnostics.csv
+    git_blob: 3c1ba290ab5a2df621b5a134e05ba7ce2c84e230
+  pipeline_a:
+    path: data/processed/sequences/pipeline_a_raw.npz
+    git_blob: c0ecbbe8a364392d6bcd22c70df369f4ab38bb74
+  preprocessing_run_summary:
+    path: outputs/analysis/preprocessing_run_summary.md
+    git_blob: 10233024d95acec400b849a769d33b724ac84e3c
+  preprocessing_protocol:
+    path: docs/protocol/preprocessing_plan.md
+    git_blob: 5c92e337e1aeab3dc56aaec9f53d9e0d9c7546fa
+  as_executed_clarification:
+    path: docs/preprocessing/preprocessing_as_executed_reporting_clarification.md
+    git_blob: 861cacc9758fcd07057e80146956da4eeb3fe9ab
+frozen_diff_paths:
+  - configs/preprocessing.yaml
+  - src/data/preprocessing.py
+  - src/data/smoothing.py
+  - src/data/correction.py
+  - src/data/env_compensation.py
+  - src/data/baseline.py
+  - src/data/loader.py
+  - src/data/pipeline_a.py
+  - data/processed/sample_index.csv
+  - data/processed/qc_reports/qc_diagnostics.csv
+  - data/processed/sequences/pipeline_a_raw.npz
+population:
+  expected_source_count: 1040
+  expected_final_count: 972
+  expected_excluded_count: 68
+  expected_source_fallback_count: 60
+  expected_final_fallback_count: 54
+  expected_excluded_fallback_count: 6
+  expected_padded_count: 41
+  final_cohort_selection_rule: in_final_output == True
+  canonical_order: ascending_sample_id
+channels:
+  - S1
+  - S2
+  - S3
+  - S4
+  - S5
+  - S6
+  - S7
+  - S8
+  - S9
+  - S10
+  - S11
+response_axis:
+  name: response_frame
+  first: 0
+  last: 959
+  clip_length: 960
+  convert_to_seconds: false
+padding_relative_deficit_threshold: 0.0125
+stages:
+  - order: 1
+    id: raw_response_window
+    unit: recorded_signal_unit
+  - order: 2
+    id: savitzky_golay_smoothed_response_window
+    unit: recorded_signal_unit
+  - order: 3
+    id: environment_compensated_response_window
+    unit: recorded_signal_unit
+  - order: 4
+    id: fractional_baseline_corrected_response_window
+    unit: fractional_change_from_compensated_baseline
+quantiles:
+  - output_name: q25
+    probability: 0.25
+  - output_name: median
+    probability: 0.50
+  - output_name: q75
+    probability: 0.75
+numpy_quantile_method: linear
+reconciliation:
+  rtol: 0.0
+  atol: 1.0e-12
+  equal_nan: false
+environmental_summary_reconciliation:
+  rtol: 0.0
+  atol: 1.0e-12
+  equal_nan: false
+serialization:
+  csv_float_format: "%.17g"
+  json_sort_keys: true
+  line_ending: LF
+outputs:
+  final_directory: outputs/analysis/efigure4_preprocessing_stage_aggregate_replay
+  candidate_one_directory: outputs/analysis/.efigure4_preprocessing_stage_aggregate_replay.candidate-one
+  candidate_two_directory: outputs/analysis/.efigure4_preprocessing_stage_aggregate_replay.candidate-two
+  allowed_filenames:
+    - stage_channel_frame_summary.csv
+    - aggregate_audit.json
+    - run_summary.md
+    - manifest.json
+  aggregate_csv_columns:
+    - stage_order
+    - stage_id
+    - channel
+    - response_frame
+    - unit
+    - n_participants
+    - q25
+    - median
+    - q75
+  expected_aggregate_rows: 42240
+privacy:
+  allowlisted_material:
+    - aggregate_counts
+    - channel_ids
+    - stage_ids
+    - frame_indices
+    - unit_codes
+    - aggregate_hashes
+    - package_versions
+    - approved_plan_path
+    - project_relative_source_paths
+    - allowlisted_provenance_timestamps
+  forbidden_field_categories:
+    - participant_ids_or_keys
+    - raw_filenames
+    - per_sample_paths_or_hashes
+    - absolute_paths
+    - clinical_dates
+    - labels_or_outcomes
+    - disease_categories
+    - collection_location
+    - clinical_variables
+    - split_membership
+    - participant_level_arrays_or_rows
+  participant_level_persistence: false
+  prohibited_field_access: false
+no_stochastic_operations: true
+output_status: executed_aggregate_only_pending_independent_review
+figure_design_authorization: false
+release_authorization: false
