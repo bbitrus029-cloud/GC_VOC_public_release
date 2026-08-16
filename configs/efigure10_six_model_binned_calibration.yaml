@@ -1,0 +1,655 @@
+schema_version: 1
+analysis:
+  analysis_id: efigure10_six_model_binned_calibration
+  timing_classification: post_hoc_supplementary
+  functional_role: plan_orthogonal_visualization_support_descriptive_aggregation
+  combined_scientific_identity: post-freeze results-free-planned post-hoc supplementary plan-orthogonal descriptive aggregation of already frozen calibrated probabilities
+  evidence_role: supplementary calibration characterization of six already frozen models
+  endpoint_name: high-grade gastric lesion
+  phase1_authoring_date: '2026-08-13'
+authority:
+  approved_plan_path: docs/plans/efigure10_six_model_binned_calibration.plan.md
+  approved_plan_sha256: 84812fdbfb563d07750bf20f091220b86abe0dfb9b38da06fd2aac19b29ad0e7
+  phase2_approval_status: external_phase2_prompt_required
+  phase1_authoring_head: 1e9eb475d5655356cacc3afba7013c5102dd2255
+  phase2_starting_head: 1e9eb475d5655356cacc3afba7013c5102dd2255
+  required_phase2_ancestor: 1e9eb475d5655356cacc3afba7013c5102dd2255
+  modeling_tag_object: 59a30bd7629fcde5dc81bb96411f076e38b31161
+  modeling_tag_commit: 5112f80b8468d62c4f3bf630e06b2b14da78b467
+  prediction_source_commit: 03f4126ec356a4facc17b05ab7b302cb339f0bb5
+  anchor_source_commit: 77a5d8fdf0483f63d0bcdcc53c6b77a757133266
+  recovery_entry_status: a01c_passed_before_recovery_preparation_correction_01
+  recovery_preparation_status: correction_01_results_free_candidate_authored_after_a01c_no_self_attestation
+  recovery_entry_partial_files:
+    - {path: configs/efigure10_six_model_binned_calibration.yaml, sha256: 32c084f9f7ff6d5c289a0f0c5e2f1007ed37ebfb89ea843509afd444638e838b, file_type: regular_file, symlink: false}
+    - {path: tests/test_efigure10_six_model_binned_calibration.py, sha256: a6af20b4d5b18a51fd740524861c2bc7235bc97424e7da088856de8a608b619e, file_type: regular_file, symlink: false}
+  historical_preexec_attempts:
+    - {classification: T01_PREEXEC_ENVIRONMENT_FAILURE, shell_exit: 127, python_process_started: false, pytest_process_started: false, actual_pytest_invocation_counted: false, a02_status: passed}
+  historical_recovery_preparation_attempts:
+    - status: blocked
+      failed_gate: POST_CORRECTION_TEXTUAL_REVIEW
+      failed_expectation: unicode_normalization_distinct_identifier_proof_absent
+      files_changed_before_failure:
+        - configs/efigure10_six_model_binned_calibration.yaml
+        - tests/test_efigure10_six_model_binned_calibration.py
+      a01r_status: passed
+      rpv01_completion_established: false
+      rph01_completion_established: false
+      private_access: none
+      phase2_status: unauthorized
+  production_read_paths:
+    - {path: AGENTS.md, sha256_or_binding: 09d904128916a7c1ed8294a285c17725ecb1eadbcb0c78e4e4a3fbf2cbea1a9a, content_access_phase: authority, role: guidance}
+    - {path: .gitignore, sha256_or_binding: 92299d510a09eae26322b32c64bee31c80916f29931393bd0ff4b7f6cd667a18, content_access_phase: authority, role: ignore_contract}
+    - {path: docs/plans/efigure10_six_model_binned_calibration.plan.md, sha256_or_binding: 84812fdbfb563d07750bf20f091220b86abe0dfb9b38da06fd2aac19b29ad0e7, content_access_phase: authority, role: approved_plan}
+    - {path: configs/efigure10_six_model_binned_calibration.yaml, sha256_or_binding: gate3_independently_approved_postpreparation_h03r_h03_equality, content_access_phase: runtime, role: task_config}
+    - {path: src/analysis/efigure10_six_model_binned_calibration.py, sha256_or_binding: phase2_entry_exit_equality, content_access_phase: runtime, role: task_source}
+    - {path: scripts/run_efigure10_six_model_binned_calibration.py, sha256_or_binding: phase2_entry_exit_equality, content_access_phase: runtime, role: task_cli}
+    - {path: environment.yml, sha256_or_binding: 3dc29be50859d2a3b0cab354d2d7e3eaf0e5baee5de13a972807665c81b61184, content_access_phase: authority, role: dependency_authority}
+    - {path: configs/post_hoc_final_supplementary.yaml, sha256_or_binding: 32a0ffc546053f01e4f2a2b63542b4404d5ce4f9d3f85fcd91b43d4cf06158f9, content_access_phase: runtime, role: frozen_builder_contract}
+    - {path: src/__init__.py, sha256_or_binding: 6d4b362f531938cc2947a280ca4f3f588f16e36460e17dbb8d674e65088ea2dd, content_access_phase: import, role: import_closure}
+    - {path: src/analysis/__init__.py, sha256_or_binding: 670771c6b3326f1d744f27aa29771ab57e59fc4e5264cb1040639e82f2e4c5ac, content_access_phase: import, role: import_closure}
+    - {path: src/analysis/baseline_table.py, sha256_or_binding: deb46dd8aef6da22ed6cc5118e80a7fe03dbca2ad19b2bac2e55564e497e28b8, content_access_phase: import, role: incidental_import_only}
+    - {path: src/analysis/data_split.py, sha256_or_binding: 4c10e56a95d675f47c57922133bd48232893500d515ff50f3e215150261b2ada, content_access_phase: import, role: incidental_import_only}
+    - {path: src/config.py, sha256_or_binding: e10ccfe1ca068b39472a7b3e201cf709f0f017ab502d2cec851cb8914a3a721f, content_access_phase: import, role: project_root_import}
+    - {path: src/training/__init__.py, sha256_or_binding: 8ff646e16528038e559ba03e41d7e9963aa3b5d97b05da54d684d8d25f595b0b, content_access_phase: import, role: import_closure}
+    - {path: src/training/common/__init__.py, sha256_or_binding: 5af842697e9e1662e8fad3475bf7da4716554b66291fc198ef70c1071861563b, content_access_phase: import, role: import_closure}
+    - {path: src/training/common/base_trainer.py, sha256_or_binding: 7230fc55ab336b62a34882420331d59d568f40312b6effd5f0f7e5e3c5afe4e0, content_access_phase: import, role: import_closure}
+    - {path: src/training/common/fold_generator.py, sha256_or_binding: 0ba24624d81c18f17a12c0c30b152e03e461c991db9bdb24d8a8a12541e6a6ca, content_access_phase: import, role: import_closure}
+    - {path: src/training/common/early_stopping.py, sha256_or_binding: bf6d131f21208eee9227e35d765cdfbfe0cc62f51f384275a8be2845160289ad, content_access_phase: import, role: import_closure}
+    - {path: src/training/common/bootstrap.py, sha256_or_binding: 33cd38f1bd6b53eff77bdd5aa7c6431b893f61dbd14ff57a25a98545f2f1cb9f, content_access_phase: import, role: import_closure}
+    - {path: src/training/common/metrics.py, sha256_or_binding: d69d51515600d8e18ed03a09eb1ea0453b282654c4f9ea7618a80817da6a0954, content_access_phase: import, role: incidental_import_only}
+    - {path: src/training/common/normalizer.py, sha256_or_binding: d04df8a5300c3bd4c843a0a26434684e5655e6fb89f5e6269c4a21b0c65056de, content_access_phase: import, role: import_closure}
+    - {path: src/analysis/posthoc_final_reporting.py, sha256_or_binding: 49772c00129e1aafdca7ae67db3a7922d1043296665cb163ca4c27821fe3619f, content_access_phase: runtime, role: frozen_builder}
+    - {path: src/analysis/posthoc_final_common.py, sha256_or_binding: 13eb2a857cf309607ec9ca040adbbbf09de00fd192195efe9d06b911d0327f76, content_access_phase: import, role: frozen_builder_dependency}
+    - {path: src/evaluation/__init__.py, sha256_or_binding: f52d6b063da8aff8895dadad3d781ab676929ec16e94d8f67e5eac773251d748, content_access_phase: import, role: import_closure}
+    - {path: src/evaluation/statistical_tests.py, sha256_or_binding: ef565e50c5fb380db200098adfca454eedda89a8ea71a14dc075680db9d4d5d0, content_access_phase: import, role: import_closure}
+    - {path: src/analysis/posthoc_final_locked_scores.py, sha256_or_binding: 5face8b1263a901d27956051b037ac2d83e2925c95af951b8a9d1bbb42d98b0a, content_access_phase: import, role: import_closure}
+    - {path: src/analysis/posthoc_final_date_grouped.py, sha256_or_binding: 5cad1a34197f8306276b8f274f56ca3af069523a15af81a1ffba84bbc8e1ea45, content_access_phase: import, role: import_closure}
+    - {path: src/training/train_minirocket_ridge.py, sha256_or_binding: 726fccbc3b466d52462713a1dd336e2ab6eb011dff7cbf5e2a6e995009c7d6df, content_access_phase: import, role: import_closure}
+    - {path: src/evaluation/metrics.py, sha256_or_binding: f355df339a9ee1bba6fff98c5bf24ea5f611554204da3257d05d702d8708595c, content_access_phase: import, role: import_closure}
+    - {path: src/evaluation/calibration.py, sha256_or_binding: 33e125ca16669758c94b2ecfc323f1fdf776926699175b8b398151c0c70b9ed9, content_access_phase: import, role: score_provenance}
+    - {path: src/training/common/runtime.py, sha256_or_binding: 54ba8cf3df6929f7724dcc3f9b9b8fe38c27e6ba4fe97157e7eb0256c3493758, content_access_phase: import, role: import_closure}
+    - {path: src/analysis/posthoc_final_audit.py, sha256_or_binding: 664f72c8551167211526e33522e668666d5db6c9a23bab976fc9f1445788be0f, content_access_phase: import, role: import_closure}
+    - {path: src/training/train_final_models.py, sha256_or_binding: 6a2a960a06a022ebc91a06ad0236ff2011ae6c2add5f870c3395a1141958e41b, content_access_phase: hash_only, role: score_provenance}
+    - {path: tests/test_posthoc_final_reporting.py, sha256_or_binding: 27c32d8738c7f3a3faab0774c3dd38ffc30aec93a1e75aef9f8d4dd7e6816a27, content_access_phase: hash_only, role: regression_hash}
+    - {path: docs/modeling/validated_modeling_run_summary.md, sha256_or_binding: 9331d8465302cd4215411e8ff4375f7206d21698c51bb5a6b3994192cd02dad3, content_access_phase: hash_only, role: modeling_provenance}
+    - {path: docs/plans/figure3_unified_channel_block_permutation.plan.md, sha256_or_binding: 1f1fbf47ef39ccd16ccebe0c8cff920653c844c120aa3bc5201aa4e5c772fb89, content_access_phase: hash_only, role: precedent_hash}
+    - {path: outputs/predictions/binary_minirocket_ridge_test_predictions.csv, sha256_or_binding: ec2f912cd83d523cdff92f453472daf3816cafe4238d98e5b6d650fefe73de28, content_access_phase: after_runtime_gate, role: prediction}
+    - {path: outputs/predictions/binary_xgboost_test_predictions.csv, sha256_or_binding: bc3745fd5cb31b85e1256317d05ffe4f20a6e4083a239773a79afa270434730f, content_access_phase: after_runtime_gate, role: prediction}
+    - {path: outputs/predictions/binary_elastic_net_lr_test_predictions.csv, sha256_or_binding: de472a79e76d9d254e7cde217b6ae11053d3a6cab9287b923548c6acdaa7be41, content_access_phase: after_runtime_gate, role: prediction}
+    - {path: outputs/predictions/binary_svm_test_predictions.csv, sha256_or_binding: 0b229d969f476b1ff5d335d5d7ce96af789daf3dc7fcc7ea883817a1ed028773, content_access_phase: after_runtime_gate, role: prediction}
+    - {path: outputs/predictions/binary_inception_time_test_predictions.csv, sha256_or_binding: 661c8387e0888977f990a9f586d68dab36677a8e3c5c0b41df1b65d8859bc5c0, content_access_phase: after_runtime_gate, role: prediction}
+    - {path: outputs/predictions/binary_cnn_bilstm_attention_test_predictions.csv, sha256_or_binding: b56feeb932f6dccdc7dc666f30b8992112e44032d893f77ae63de337fe47e126, content_access_phase: after_runtime_gate, role: prediction}
+    - {path: outputs/analysis/posthoc_final_calibration_points_minirocket_ridge.csv, sha256_or_binding: 8e513f494cd5f9c0863a233e4448ba60d8c10e29c945dbd7e629070c9000cc90, content_access_phase: after_runtime_gate, role: reconciliation_anchor}
+  test_only_read_paths:
+    - {path: tests/test_efigure10_six_model_binned_calibration.py, sha256_or_binding: gate3_independently_approved_postpreparation_h03r_h03_equality, content_access_phase: test, role: focused_suite}
+    - {path: scripts/__init__.py, sha256_or_binding: 107ed8e53a4406f541b0eb1170c704f78002ce0b0120aed44bc5553d8ef50622, content_access_phase: test, role: import_closure}
+    - {path: tests/__init__.py, sha256_or_binding: 662c1aef12af24af800f983013aaed26a429384206c772b1f6ba2340cfbd6192, content_access_phase: test, role: package_closure}
+    - {path: docs/modeling/final_post_hoc_supplementary_methods.md, sha256_or_binding: 9a2a2878f8738b716ae9243e79945d46fb013e05c456da19597d53fafdffbc2a, content_access_phase: test, role: regression_fixture}
+    - {path: docs/plans/acquisition_context_robustness_audit_97707a26.plan.md, sha256_or_binding: ea38735dce9383adeff839ca5c8bdcd084b5f065f5fd68eeda924cdaa522a452, content_access_phase: test, role: regression_fixture}
+    - {path: scripts/run_posthoc_final_locked_scores.py, sha256_or_binding: ec92d83a0abf29d9ce42154598eb247538c415c7c37d5098d8104950e04176e9, content_access_phase: test, role: regression_fixture}
+    - {path: scripts/run_posthoc_final_date_grouped.py, sha256_or_binding: 4cb1d4a525897b6d2795623313f9da6fc18c46271806ecde3a712a657ba5bd2d, content_access_phase: test, role: regression_fixture}
+    - {path: scripts/run_posthoc_final_reporting.py, sha256_or_binding: 11243d05499a2cafbd305e2c9e55d102dc1a290f76571f141b6810132513602b, content_access_phase: test, role: regression_fixture}
+    - {path: scripts/run_posthoc_final_audit.py, sha256_or_binding: 22400cf8b199615a3014daa7cd652a65aee272b90c83bd1be827a8b028706e9a, content_access_phase: test, role: regression_fixture}
+    - {path: tests/test_posthoc_final_common.py, sha256_or_binding: 069fdc6eee2b528a8eefc92186d176815016203612b56f39fed7af55dc600e25, content_access_phase: test, role: regression_fixture}
+    - {path: tests/test_posthoc_final_locked_scores.py, sha256_or_binding: 8ceb44494dd63f9458e0208ba8f9d63be6d6a427cce9cdb186849faaa89502bc, content_access_phase: test, role: regression_fixture}
+    - {path: tests/test_posthoc_final_date_grouped.py, sha256_or_binding: 2b902e06ae29c254be69ccee9d089801fd52a20f5f2aa5c66a6ffcf510eb0718, content_access_phase: test, role: regression_fixture}
+    - {path: tests/test_posthoc_final_audit.py, sha256_or_binding: daefab93b8bca115bbaed420c3b924e10176d5347c76efba2c413799af27970f, content_access_phase: test, role: regression_fixture}
+    - {path: outputs/analysis/posthoc_final_score_blind_preflight.json, sha256_or_binding: 2014bc72ba2c08952be1ad7d7327f07273605c98b3814c2f0ca1b9de4f10e3bf, content_access_phase: test_hash_only, role: regression_provenance}
+    - {path: outputs/analysis/posthoc_final_freeze_manifest.json, sha256_or_binding: 590fc37db21018453e9d0430662183bda7d2fdd4df455f090ab5dee9b505a43f, content_access_phase: test_hash_only, role: regression_provenance}
+    - {path: outputs/analysis/posthoc_final_cohort_flow.csv, sha256_or_binding: 25a173c9485f402c3ea94de22f1ace92f56613603071f8a0431084f9578a37c7, content_access_phase: test_hash_only, role: regression_snapshot}
+  allowed_write_paths:
+    - configs/efigure10_six_model_binned_calibration.yaml
+    - src/analysis/efigure10_six_model_binned_calibration.py
+    - scripts/run_efigure10_six_model_binned_calibration.py
+    - tests/test_efigure10_six_model_binned_calibration.py
+    - outputs/work/efigure10_six_model_binned_calibration/
+    - outputs/analysis/efigure10_six_model_binned_calibration/
+  allowed_commands:
+    - command_id: E01
+      stage: environment_gate
+      execution_kind: shell_block
+      environment: {}
+      argv_or_shell_lines:
+        - set -e
+        - source ~/miniforge3/etc/profile.d/conda.sh
+        - conda activate gcvocs
+        - 'test "$(which python)" = "[PRIVATE_PATH_REDACTED]"'
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions: []
+    - command_id: G01
+      stage: entry_and_runtime
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, rev-parse, --show-toplevel]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: [[PRIVATE_PATH_REDACTED]]
+    - command_id: G02
+      stage: entry_and_runtime
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, branch, --show-current]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: [main]
+    - command_id: G03
+      stage: entry_and_runtime
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, rev-parse, HEAD]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: [1e9eb475d5655356cacc3afba7013c5102dd2255]
+    - command_id: G04
+      stage: entry_and_runtime
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, rev-parse, 'HEAD^']
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: [098d6d5d65d9fb935fa97a30d1353a9694a0dc3a]
+    - command_id: G05
+      stage: entry_and_runtime
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, rev-parse, 'HEAD^^']
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: [8c44846477c250a03380eda24a5c99ab63294426]
+    - command_id: G06
+      stage: entry_preproduction_final
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, status, --short, --branch, --untracked-files=normal, --, configs/efigure10_six_model_binned_calibration.yaml, scripts/run_efigure10_six_model_binned_calibration.py, src/analysis/efigure10_six_model_binned_calibration.py, tests/test_efigure10_six_model_binned_calibration.py, outputs/work/efigure10_six_model_binned_calibration, outputs/analysis/efigure10_six_model_binned_calibration]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals_by_stage
+            expected:
+              phase2_entry: ['## main', '?? configs/efigure10_six_model_binned_calibration.yaml', '?? scripts/run_efigure10_six_model_binned_calibration.py', '?? src/analysis/efigure10_six_model_binned_calibration.py', '?? tests/test_efigure10_six_model_binned_calibration.py']
+              preproduction: ['## main', '?? configs/efigure10_six_model_binned_calibration.yaml', '?? scripts/run_efigure10_six_model_binned_calibration.py', '?? src/analysis/efigure10_six_model_binned_calibration.py', '?? tests/test_efigure10_six_model_binned_calibration.py']
+              final: ['## main', '?? configs/efigure10_six_model_binned_calibration.yaml', '?? outputs/analysis/efigure10_six_model_binned_calibration/', '?? scripts/run_efigure10_six_model_binned_calibration.py', '?? src/analysis/efigure10_six_model_binned_calibration.py', '?? tests/test_efigure10_six_model_binned_calibration.py']
+    - command_id: G07
+      stage: entry_and_runtime
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, rev-parse, modeling-frozen]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: [59a30bd7629fcde5dc81bb96411f076e38b31161]
+    - command_id: G08
+      stage: entry_and_runtime
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, rev-parse, 'modeling-frozen^{commit}']
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: [5112f80b8468d62c4f3bf630e06b2b14da78b467]
+    - command_id: G09
+      stage: entry_and_runtime
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, cat-file, -t, 59a30bd7629fcde5dc81bb96411f076e38b31161]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: [tag]
+    - command_id: G10
+      stage: entry_and_runtime
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, merge-base, --is-ancestor, 5112f80b8468d62c4f3bf630e06b2b14da78b467, 1e9eb475d5655356cacc3afba7013c5102dd2255]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: []
+    - command_id: G11
+      stage: entry_and_runtime
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, merge-base, --is-ancestor, 03f4126ec356a4facc17b05ab7b302cb339f0bb5, 1e9eb475d5655356cacc3afba7013c5102dd2255]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: []
+    - command_id: G12
+      stage: entry_and_runtime
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, merge-base, --is-ancestor, 77a5d8fdf0483f63d0bcdcc53c6b77a757133266, 1e9eb475d5655356cacc3afba7013c5102dd2255]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: []
+    - command_id: G13
+      stage: entry_and_runtime
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, merge-base, --is-ancestor, 1e9eb475d5655356cacc3afba7013c5102dd2255, 1e9eb475d5655356cacc3afba7013c5102dd2255]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: []
+    - command_id: G14
+      stage: worker_preflight
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, show, --no-patch, '--format=%P%n%s', 098d6d5d65d9fb935fa97a30d1353a9694a0dc3a]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: [8c44846477c250a03380eda24a5c99ab63294426, 'feat(efigure9): add disease-category prediction matrix aggregate']
+    - command_id: G15
+      stage: worker_preflight
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, show, --no-patch, '--format=%P%n%s', 1e9eb475d5655356cacc3afba7013c5102dd2255]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: [098d6d5d65d9fb935fa97a30d1353a9694a0dc3a, 'feat(efigure4): add aggregate preprocessing-stage replay']
+    - command_id: G16
+      stage: worker_preflight
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, diff-tree, --no-commit-id, --name-status, -r, 098d6d5d65d9fb935fa97a30d1353a9694a0dc3a]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals_ordered_inventory
+            expected: ["A\tconfigs/efigure9_disease_category_prediction_matrix.yaml", "A\toutputs/analysis/efigure9_disease_category_prediction_matrix/audit.json", "A\toutputs/analysis/efigure9_disease_category_prediction_matrix/disease_category_prediction_matrix.csv", "A\toutputs/analysis/efigure9_disease_category_prediction_matrix/manifest.json", "A\tscripts/run_efigure9_disease_category_prediction_matrix.py", "A\tsrc/analysis/efigure9_disease_category_prediction_matrix.py", "A\ttests/test_efigure9_disease_category_prediction_matrix.py"]
+    - command_id: G17
+      stage: worker_preflight
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, diff-tree, --no-commit-id, --name-status, -r, 1e9eb475d5655356cacc3afba7013c5102dd2255]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals_ordered_inventory
+            expected: ["A\tconfigs/efigure4_preprocessing_stage_aggregate_replay.yaml", "A\tconfigs/efigure4_preprocessing_stage_aggregate_replay_environment_lock.json", "A\tdocs/preprocessing/preprocessing_fallback_denominator_reporting_correction.md", "A\tdocs/preprocessing/preprocessing_stage4_conda_explicit_archive_channel_metadata_correction.md", "A\tdocs/preprocessing/preprocessing_stage4_numerical_environment_build_drift_correction.md", "A\toutputs/analysis/efigure4_preprocessing_stage_aggregate_replay/aggregate_audit.json", "A\toutputs/analysis/efigure4_preprocessing_stage_aggregate_replay/manifest.json", "A\toutputs/analysis/efigure4_preprocessing_stage_aggregate_replay/run_summary.md", "A\toutputs/analysis/efigure4_preprocessing_stage_aggregate_replay/stage_channel_frame_summary.csv", "A\tscripts/run_efigure4_preprocessing_stage_aggregate_replay.py", "A\tsrc/analysis/efigure4_preprocessing_stage_aggregate_replay.py", "A\ttests/test_efigure4_preprocessing_stage_aggregate_replay.py"]
+    - command_id: G18
+      stage: entry_and_runtime
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, diff, '--diff-filter=MDRTUXB', --name-only, '8c44846477c250a03380eda24a5c99ab63294426..1e9eb475d5655356cacc3afba7013c5102dd2255']
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: []
+    - command_id: G19
+      stage: entry_and_runtime
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, check-ignore, -v, --, docs/plans/efigure10_six_model_binned_calibration.plan.md]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: [".gitignore:17:/docs/plans/\tdocs/plans/efigure10_six_model_binned_calibration.plan.md"]
+    - command_id: G20
+      stage: entry_runtime_final
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, diff, --quiet, 098d6d5d65d9fb935fa97a30d1353a9694a0dc3a, --, configs/efigure9_disease_category_prediction_matrix.yaml, outputs/analysis/efigure9_disease_category_prediction_matrix/audit.json, outputs/analysis/efigure9_disease_category_prediction_matrix/disease_category_prediction_matrix.csv, outputs/analysis/efigure9_disease_category_prediction_matrix/manifest.json, scripts/run_efigure9_disease_category_prediction_matrix.py, src/analysis/efigure9_disease_category_prediction_matrix.py, tests/test_efigure9_disease_category_prediction_matrix.py]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: []
+    - command_id: G21
+      stage: entry_runtime_final
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [git, diff, --quiet, 1e9eb475d5655356cacc3afba7013c5102dd2255, --, configs/efigure4_preprocessing_stage_aggregate_replay.yaml, configs/efigure4_preprocessing_stage_aggregate_replay_environment_lock.json, docs/preprocessing/preprocessing_fallback_denominator_reporting_correction.md, docs/preprocessing/preprocessing_stage4_conda_explicit_archive_channel_metadata_correction.md, docs/preprocessing/preprocessing_stage4_numerical_environment_build_drift_correction.md, outputs/analysis/efigure4_preprocessing_stage_aggregate_replay/aggregate_audit.json, outputs/analysis/efigure4_preprocessing_stage_aggregate_replay/manifest.json, outputs/analysis/efigure4_preprocessing_stage_aggregate_replay/run_summary.md, outputs/analysis/efigure4_preprocessing_stage_aggregate_replay/stage_channel_frame_summary.csv, scripts/run_efigure4_preprocessing_stage_aggregate_replay.py, src/analysis/efigure4_preprocessing_stage_aggregate_replay.py, tests/test_efigure4_preprocessing_stage_aggregate_replay.py]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_lines
+            operator: equals
+            expected: []
+    - command_id: H01
+      stage: entry_and_final
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [sha256sum, --, docs/plans/efigure10_six_model_binned_calibration.plan.md]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: sha256_by_path
+            operator: equals_authority_source
+            expected_from: authority.approved_plan_sha256
+    - command_id: H02
+      stage: entry_and_final
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [sha256sum, --, AGENTS.md, .gitignore, environment.yml, configs/post_hoc_final_supplementary.yaml, src/__init__.py, src/analysis/__init__.py, src/analysis/baseline_table.py, src/analysis/data_split.py, src/analysis/posthoc_final_reporting.py, src/analysis/posthoc_final_common.py, src/analysis/posthoc_final_locked_scores.py, src/analysis/posthoc_final_date_grouped.py, src/analysis/posthoc_final_audit.py, src/config.py, src/evaluation/__init__.py, src/evaluation/statistical_tests.py, src/evaluation/metrics.py, src/evaluation/calibration.py, src/training/__init__.py, src/training/common/__init__.py, src/training/common/base_trainer.py, src/training/common/fold_generator.py, src/training/common/early_stopping.py, src/training/common/bootstrap.py, src/training/common/metrics.py, src/training/common/normalizer.py, src/training/train_minirocket_ridge.py, src/training/common/runtime.py, src/training/train_final_models.py, tests/test_posthoc_final_reporting.py, docs/modeling/validated_modeling_run_summary.md, docs/modeling/final_post_hoc_supplementary_methods.md, docs/plans/figure3_unified_channel_block_permutation.plan.md, docs/plans/acquisition_context_robustness_audit_97707a26.plan.md, scripts/__init__.py, scripts/run_posthoc_final_locked_scores.py, scripts/run_posthoc_final_date_grouped.py, scripts/run_posthoc_final_reporting.py, scripts/run_posthoc_final_audit.py, tests/__init__.py, tests/test_posthoc_final_common.py, tests/test_posthoc_final_locked_scores.py, tests/test_posthoc_final_date_grouped.py, tests/test_posthoc_final_audit.py, outputs/analysis/posthoc_final_score_blind_preflight.json, outputs/analysis/posthoc_final_freeze_manifest.json, outputs/analysis/posthoc_final_cohort_flow.csv, outputs/predictions/binary_minirocket_ridge_test_predictions.csv, outputs/predictions/binary_xgboost_test_predictions.csv, outputs/predictions/binary_elastic_net_lr_test_predictions.csv, outputs/predictions/binary_svm_test_predictions.csv, outputs/predictions/binary_inception_time_test_predictions.csv, outputs/predictions/binary_cnn_bilstm_attention_test_predictions.csv, outputs/analysis/posthoc_final_calibration_points_minirocket_ridge.csv]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: sha256_by_path
+            operator: equals_ordered_inventory
+            expected:
+              AGENTS.md: 09d904128916a7c1ed8294a285c17725ecb1eadbcb0c78e4e4a3fbf2cbea1a9a
+              .gitignore: 92299d510a09eae26322b32c64bee31c80916f29931393bd0ff4b7f6cd667a18
+              environment.yml: 3dc29be50859d2a3b0cab354d2d7e3eaf0e5baee5de13a972807665c81b61184
+              configs/post_hoc_final_supplementary.yaml: 32a0ffc546053f01e4f2a2b63542b4404d5ce4f9d3f85fcd91b43d4cf06158f9
+              src/__init__.py: 6d4b362f531938cc2947a280ca4f3f588f16e36460e17dbb8d674e65088ea2dd
+              src/analysis/__init__.py: 670771c6b3326f1d744f27aa29771ab57e59fc4e5264cb1040639e82f2e4c5ac
+              src/analysis/baseline_table.py: deb46dd8aef6da22ed6cc5118e80a7fe03dbca2ad19b2bac2e55564e497e28b8
+              src/analysis/data_split.py: 4c10e56a95d675f47c57922133bd48232893500d515ff50f3e215150261b2ada
+              src/analysis/posthoc_final_reporting.py: 49772c00129e1aafdca7ae67db3a7922d1043296665cb163ca4c27821fe3619f
+              src/analysis/posthoc_final_common.py: 13eb2a857cf309607ec9ca040adbbbf09de00fd192195efe9d06b911d0327f76
+              src/analysis/posthoc_final_locked_scores.py: 5face8b1263a901d27956051b037ac2d83e2925c95af951b8a9d1bbb42d98b0a
+              src/analysis/posthoc_final_date_grouped.py: 5cad1a34197f8306276b8f274f56ca3af069523a15af81a1ffba84bbc8e1ea45
+              src/analysis/posthoc_final_audit.py: 664f72c8551167211526e33522e668666d5db6c9a23bab976fc9f1445788be0f
+              src/config.py: e10ccfe1ca068b39472a7b3e201cf709f0f017ab502d2cec851cb8914a3a721f
+              src/evaluation/__init__.py: f52d6b063da8aff8895dadad3d781ab676929ec16e94d8f67e5eac773251d748
+              src/evaluation/statistical_tests.py: ef565e50c5fb380db200098adfca454eedda89a8ea71a14dc075680db9d4d5d0
+              src/evaluation/metrics.py: f355df339a9ee1bba6fff98c5bf24ea5f611554204da3257d05d702d8708595c
+              src/evaluation/calibration.py: 33e125ca16669758c94b2ecfc323f1fdf776926699175b8b398151c0c70b9ed9
+              src/training/__init__.py: 8ff646e16528038e559ba03e41d7e9963aa3b5d97b05da54d684d8d25f595b0b
+              src/training/common/__init__.py: 5af842697e9e1662e8fad3475bf7da4716554b66291fc198ef70c1071861563b
+              src/training/common/base_trainer.py: 7230fc55ab336b62a34882420331d59d568f40312b6effd5f0f7e5e3c5afe4e0
+              src/training/common/fold_generator.py: 0ba24624d81c18f17a12c0c30b152e03e461c991db9bdb24d8a8a12541e6a6ca
+              src/training/common/early_stopping.py: bf6d131f21208eee9227e35d765cdfbfe0cc62f51f384275a8be2845160289ad
+              src/training/common/bootstrap.py: 33cd38f1bd6b53eff77bdd5aa7c6431b893f61dbd14ff57a25a98545f2f1cb9f
+              src/training/common/metrics.py: d69d51515600d8e18ed03a09eb1ea0453b282654c4f9ea7618a80817da6a0954
+              src/training/common/normalizer.py: d04df8a5300c3bd4c843a0a26434684e5655e6fb89f5e6269c4a21b0c65056de
+              src/training/train_minirocket_ridge.py: 726fccbc3b466d52462713a1dd336e2ab6eb011dff7cbf5e2a6e995009c7d6df
+              src/training/common/runtime.py: 54ba8cf3df6929f7724dcc3f9b9b8fe38c27e6ba4fe97157e7eb0256c3493758
+              src/training/train_final_models.py: 6a2a960a06a022ebc91a06ad0236ff2011ae6c2add5f870c3395a1141958e41b
+              tests/test_posthoc_final_reporting.py: 27c32d8738c7f3a3faab0774c3dd38ffc30aec93a1e75aef9f8d4dd7e6816a27
+              docs/modeling/validated_modeling_run_summary.md: 9331d8465302cd4215411e8ff4375f7206d21698c51bb5a6b3994192cd02dad3
+              docs/modeling/final_post_hoc_supplementary_methods.md: 9a2a2878f8738b716ae9243e79945d46fb013e05c456da19597d53fafdffbc2a
+              docs/plans/figure3_unified_channel_block_permutation.plan.md: 1f1fbf47ef39ccd16ccebe0c8cff920653c844c120aa3bc5201aa4e5c772fb89
+              docs/plans/acquisition_context_robustness_audit_97707a26.plan.md: ea38735dce9383adeff839ca5c8bdcd084b5f065f5fd68eeda924cdaa522a452
+              scripts/__init__.py: 107ed8e53a4406f541b0eb1170c704f78002ce0b0120aed44bc5553d8ef50622
+              scripts/run_posthoc_final_locked_scores.py: ec92d83a0abf29d9ce42154598eb247538c415c7c37d5098d8104950e04176e9
+              scripts/run_posthoc_final_date_grouped.py: 4cb1d4a525897b6d2795623313f9da6fc18c46271806ecde3a712a657ba5bd2d
+              scripts/run_posthoc_final_reporting.py: 11243d05499a2cafbd305e2c9e55d102dc1a290f76571f141b6810132513602b
+              scripts/run_posthoc_final_audit.py: 22400cf8b199615a3014daa7cd652a65aee272b90c83bd1be827a8b028706e9a
+              tests/__init__.py: 662c1aef12af24af800f983013aaed26a429384206c772b1f6ba2340cfbd6192
+              tests/test_posthoc_final_common.py: 069fdc6eee2b528a8eefc92186d176815016203612b56f39fed7af55dc600e25
+              tests/test_posthoc_final_locked_scores.py: 8ceb44494dd63f9458e0208ba8f9d63be6d6a427cce9cdb186849faaa89502bc
+              tests/test_posthoc_final_date_grouped.py: 2b902e06ae29c254be69ccee9d089801fd52a20f5f2aa5c66a6ffcf510eb0718
+              tests/test_posthoc_final_audit.py: daefab93b8bca115bbaed420c3b924e10176d5347c76efba2c413799af27970f
+              outputs/analysis/posthoc_final_score_blind_preflight.json: 2014bc72ba2c08952be1ad7d7327f07273605c98b3814c2f0ca1b9de4f10e3bf
+              outputs/analysis/posthoc_final_freeze_manifest.json: 590fc37db21018453e9d0430662183bda7d2fdd4df455f090ab5dee9b505a43f
+              outputs/analysis/posthoc_final_cohort_flow.csv: 25a173c9485f402c3ea94de22f1ace92f56613603071f8a0431084f9578a37c7
+              outputs/predictions/binary_minirocket_ridge_test_predictions.csv: ec2f912cd83d523cdff92f453472daf3816cafe4238d98e5b6d650fefe73de28
+              outputs/predictions/binary_xgboost_test_predictions.csv: bc3745fd5cb31b85e1256317d05ffe4f20a6e4083a239773a79afa270434730f
+              outputs/predictions/binary_elastic_net_lr_test_predictions.csv: de472a79e76d9d254e7cde217b6ae11053d3a6cab9287b923548c6acdaa7be41
+              outputs/predictions/binary_svm_test_predictions.csv: 0b229d969f476b1ff5d335d5d7ce96af789daf3dc7fcc7ea883817a1ed028773
+              outputs/predictions/binary_inception_time_test_predictions.csv: 661c8387e0888977f990a9f586d68dab36677a8e3c5c0b41df1b65d8859bc5c0
+              outputs/predictions/binary_cnn_bilstm_attention_test_predictions.csv: b56feeb932f6dccdc7dc666f30b8992112e44032d893f77ae63de337fe47e126
+              outputs/analysis/posthoc_final_calibration_points_minirocket_ridge.csv: 8e513f494cd5f9c0863a233e4448ba60d8c10e29c945dbd7e629070c9000cc90
+    - command_id: H03
+      stage: preproduction_and_final
+      execution_kind: argv
+      environment: {}
+      argv_or_shell_lines: [sha256sum, --, configs/efigure10_six_model_binned_calibration.yaml, src/analysis/efigure10_six_model_binned_calibration.py, scripts/run_efigure10_six_model_binned_calibration.py, tests/test_efigure10_six_model_binned_calibration.py]
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: sha256_by_path
+            operator: all_equal
+            expected_from: phase2_worker.captured_h03_preproduction_sha256_by_path
+          - subject: sha256_by_path
+            operator: equals_authority_source
+            expected_from: gate3_prompt.independently_approved_corrected_sha256_by_path
+    - command_id: P01
+      stage: production
+      execution_kind: self_contained_shell_block
+      environment: {}
+      argv_or_shell_lines:
+        - set -e
+        - source ~/miniforge3/etc/profile.d/conda.sh
+        - conda activate gcvocs
+        - 'test "$(which python)" = "[PRIVATE_PATH_REDACTED]"'
+        - 'PYTHONDONTWRITEBYTECODE=1 \'
+        - '  PYTHONPYCACHEPREFIX=outputs/work/efigure10_six_model_binned_calibration/__efigure10_pycache_prefix__ \'
+        - '  python scripts/run_efigure10_six_model_binned_calibration.py \'
+        - '    --config configs/efigure10_six_model_binned_calibration.yaml'
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: stdout_first_line
+            operator: equals
+            expected: 'P01_STATUS: VALIDATED'
+          - subject: analysis_id
+            operator: equals
+            expected: efigure10_six_model_binned_calibration
+          - subject: final_output_paths
+            operator: equals_ordered_inventory
+            expected:
+              - outputs/analysis/efigure10_six_model_binned_calibration/calibration_points.csv
+              - outputs/analysis/efigure10_six_model_binned_calibration/audit.json
+              - outputs/analysis/efigure10_six_model_binned_calibration/manifest.json
+              - outputs/analysis/efigure10_six_model_binned_calibration/report.md
+          - subject: final_output_sha256_by_path
+            operator: matches_lowercase_sha256
+            expected:
+              - outputs/analysis/efigure10_six_model_binned_calibration/calibration_points.csv
+              - outputs/analysis/efigure10_six_model_binned_calibration/audit.json
+              - outputs/analysis/efigure10_six_model_binned_calibration/manifest.json
+              - outputs/analysis/efigure10_six_model_binned_calibration/report.md
+    - command_id: F01
+      stage: final_worker_validation
+      execution_kind: shell_block
+      environment: {}
+      argv_or_shell_lines:
+        - set -e
+        - test -f outputs/analysis/efigure10_six_model_binned_calibration/calibration_points.csv
+        - test ! -L outputs/analysis/efigure10_six_model_binned_calibration/calibration_points.csv
+        - test -f outputs/analysis/efigure10_six_model_binned_calibration/audit.json
+        - test ! -L outputs/analysis/efigure10_six_model_binned_calibration/audit.json
+        - test -f outputs/analysis/efigure10_six_model_binned_calibration/manifest.json
+        - test ! -L outputs/analysis/efigure10_six_model_binned_calibration/manifest.json
+        - test -f outputs/analysis/efigure10_six_model_binned_calibration/report.md
+        - test ! -L outputs/analysis/efigure10_six_model_binned_calibration/report.md
+        - sha256sum -- outputs/analysis/efigure10_six_model_binned_calibration/calibration_points.csv outputs/analysis/efigure10_six_model_binned_calibration/audit.json outputs/analysis/efigure10_six_model_binned_calibration/manifest.json outputs/analysis/efigure10_six_model_binned_calibration/report.md
+        - test ! -e outputs/work/efigure10_six_model_binned_calibration
+        - test ! -L outputs/work/efigure10_six_model_binned_calibration
+        - test ! -e outputs/work/efigure10_six_model_binned_calibration/__efigure10_pycache_prefix__
+        - test ! -L outputs/work/efigure10_six_model_binned_calibration/__efigure10_pycache_prefix__
+        - git status --short --branch --untracked-files=normal -- configs/efigure10_six_model_binned_calibration.yaml scripts/run_efigure10_six_model_binned_calibration.py src/analysis/efigure10_six_model_binned_calibration.py tests/test_efigure10_six_model_binned_calibration.py outputs/work/efigure10_six_model_binned_calibration outputs/analysis/efigure10_six_model_binned_calibration
+        - git check-ignore -v -- docs/plans/efigure10_six_model_binned_calibration.plan.md
+      expected_status: 0
+      postconditions:
+        schema_version: 1
+        assertions:
+          - subject: final_output_sha256_by_path
+            operator: equals_authority_source
+            expected_from: p01_validated_stdout.sha256_by_final_output_path
+          - subject: stdout_lines
+            operator: equals_by_stage
+            expected:
+              final_status: ['## main', '?? configs/efigure10_six_model_binned_calibration.yaml', '?? outputs/analysis/efigure10_six_model_binned_calibration/', '?? scripts/run_efigure10_six_model_binned_calibration.py', '?? src/analysis/efigure10_six_model_binned_calibration.py', '?? tests/test_efigure10_six_model_binned_calibration.py']
+              plan_ignore: [".gitignore:17:/docs/plans/\tdocs/plans/efigure10_six_model_binned_calibration.plan.md"]
+          - subject: required_absent_nonsymlink_paths
+            operator: equals_ordered_inventory
+            expected:
+              - outputs/work/efigure10_six_model_binned_calibration
+              - outputs/work/efigure10_six_model_binned_calibration/__efigure10_pycache_prefix__
+          - subject: repeated_gate_results
+            operator: equals
+            expected:
+              G20: true
+              G21: true
+              H02: true
+              H03: true
+environment:
+  dependency_authority: environment.yml
+  conda_environment: gcvocs
+  required_python_path_prefix: ~/miniforge3/envs/gcvocs/bin/
+  required_packages: [python, pandas, numpy, statsmodels, pytest, pyyaml]
+  package_mutation_forbidden: true
+  rng_use_forbidden: true
+  efigure4_historical_environment_forbidden: true
+  cross_command_activation_inheritance_forbidden: true
+  self_contained_python_command_activation_required: true
+  python_dont_write_bytecode: '1'
+  pytest_disable_plugin_autoload: '1'
+  pytest_pycache_prefix: outputs/work/efigure10_six_model_binned_calibration_pytest/__efigure10_pycache_prefix__
+  production_pycache_prefix: outputs/work/efigure10_six_model_binned_calibration/__efigure10_pycache_prefix__
+  production_pycache_prefix_must_remain_absent: true
+  source_tree_bytecode_read_forbidden: true
+models:
+  - {model_order: 1, model_id: minirocket_ridge, model_display_name: MiniRocket + Ridge, prediction_path: outputs/predictions/binary_minirocket_ridge_test_predictions.csv, sha256: ec2f912cd83d523cdff92f453472daf3816cafe4238d98e5b6d650fefe73de28}
+  - {model_order: 2, model_id: xgboost, model_display_name: XGBoost, prediction_path: outputs/predictions/binary_xgboost_test_predictions.csv, sha256: bc3745fd5cb31b85e1256317d05ffe4f20a6e4083a239773a79afa270434730f}
+  - {model_order: 3, model_id: elastic_net_lr, model_display_name: Elastic Net LR, prediction_path: outputs/predictions/binary_elastic_net_lr_test_predictions.csv, sha256: de472a79e76d9d254e7cde217b6ae11053d3a6cab9287b923548c6acdaa7be41}
+  - {model_order: 4, model_id: svm, model_display_name: SVM, prediction_path: outputs/predictions/binary_svm_test_predictions.csv, sha256: 0b229d969f476b1ff5d335d5d7ce96af789daf3dc7fcc7ea883817a1ed028773}
+  - {model_order: 5, model_id: inception_time, model_display_name: InceptionTime, prediction_path: outputs/predictions/binary_inception_time_test_predictions.csv, sha256: 661c8387e0888977f990a9f586d68dab36677a8e3c5c0b41df1b65d8859bc5c0}
+  - {model_order: 6, model_id: cnn_bilstm_attention, model_display_name: CNN–BiLSTM–Attention, prediction_path: outputs/predictions/binary_cnn_bilstm_attention_test_predictions.csv, sha256: b56feeb932f6dccdc7dc666f30b8992112e44032d893f77ae63de337fe47e126}
+immutable_references:
+  - {path: outputs/analysis/posthoc_final_calibration_points_minirocket_ridge.csv, sha256: 8e513f494cd5f9c0863a233e4448ba60d8c10e29c945dbd7e629070c9000cc90, role: reconciliation_anchor}
+  - {path: src/analysis/posthoc_final_reporting.py, sha256: 49772c00129e1aafdca7ae67db3a7922d1043296665cb163ca4c27821fe3619f, role: frozen_builder}
+  - {path: src/analysis/posthoc_final_common.py, sha256: 13eb2a857cf309607ec9ca040adbbbf09de00fd192195efe9d06b911d0327f76, role: frozen_wilson_utility}
+  - {path: configs/post_hoc_final_supplementary.yaml, sha256: 32a0ffc546053f01e4f2a2b63542b4404d5ce4f9d3f85fcd91b43d4cf06158f9, role: frozen_builder_config}
+  - {path: environment.yml, sha256: 3dc29be50859d2a3b0cab354d2d7e3eaf0e5baee5de13a972807665c81b61184, role: dependency_authority}
+  - {path: tests/test_posthoc_final_reporting.py, sha256: 27c32d8738c7f3a3faab0774c3dd38ffc30aec93a1e75aef9f8d4dd7e6816a27, role: regression_suite}
+  - {path: src/evaluation/calibration.py, sha256: 33e125ca16669758c94b2ecfc323f1fdf776926699175b8b398151c0c70b9ed9, role: calibrator_provenance}
+  - {path: src/training/train_final_models.py, sha256: 6a2a960a06a022ebc91a06ad0236ff2011ae6c2add5f870c3395a1141958e41b, role: score_provenance}
+  - {path: docs/modeling/validated_modeling_run_summary.md, sha256: 9331d8465302cd4215411e8ff4375f7206d21698c51bb5a6b3994192cd02dad3, role: modeling_summary}
+  - {path: docs/plans/figure3_unified_channel_block_permutation.plan.md, sha256: 1f1fbf47ef39ccd16ccebe0c8cff920653c844c120aa3bc5201aa4e5c772fb89, role: operational_precedent_hash}
+input_contract:
+  columns: [sample_id, y_true, p_raw, p_cal, y_pred, quadrant]
+  header_validation_nrows: 0
+  projection_columns: [sample_id, y_true, p_cal]
+  sample_id_dtype: string
+  sample_id_keep_default_na: false
+  sample_id_na_filter: false
+  sample_id_skipinitialspace: false
+  sample_id_normalization_forbidden: true
+  participant_count: 195
+  positive_count: 82
+  negative_count: 113
+  label_values: [0, 1]
+  endpoint_positive: [HGIN, EGC, AGC]
+  endpoint_negative: [HC, BGL, LGIN]
+  alignment_key: sample_id
+  score_column: p_cal
+  unused_columns: [p_raw, y_pred, quadrant]
+  participant_persistence_forbidden: true
+calibration_contract:
+  builder_import: src.analysis.posthoc_final_reporting.build_calibration_points
+  wilson_import: src.analysis.posthoc_final_common.wilson_proportion_ci
+  qcut_q: 10
+  qcut_duplicates: drop
+  n_requested_bins: 10
+  minimum_visualization_bins: 5
+  ci_method: wilson
+  ci_alpha: 0.05
+  common_columns: [bin_index, n, events, nonevents, p_cal_mean, observed_fraction, observed_ci_low, observed_ci_high, ci_method, n_requested_bins, n_actual_bins, visualization_ready, estimability_status, nonestimable_reason]
+  unified_columns: [model_order, model_id, model_display_name, bin_index, n, events, nonevents, p_cal_mean, observed_fraction, observed_ci_low, observed_ci_high, ci_method, n_requested_bins, n_actual_bins, visualization_ready, estimability_status, nonestimable_reason]
+  pandas_dtypes: {model_order: Int64, model_id: string, model_display_name: string, bin_index: Int64, n: Int64, events: Int64, nonevents: Int64, p_cal_mean: Float64, observed_fraction: Float64, observed_ci_low: Float64, observed_ci_high: Float64, ci_method: string, n_requested_bins: Int64, n_actual_bins: Int64, visualization_ready: boolean, estimability_status: category, nonestimable_reason: string}
+  row_order: [model_order, bin_index]
+  builder_adapter_top_level_key_order: [outputs, row_order_and_schema_validation_registry]
+  builder_adapter_key_tree: [outputs.scientific_and_closure.calibration_points.columns, outputs.scientific_and_closure.calibration_points.conditional_row_inventory_contract.n_requested_bins, row_order_and_schema_validation_registry.calibration_points.column_order, row_order_and_schema_validation_registry.calibration_points.dtype_map, row_order_and_schema_validation_registry.calibration_points.nullable_map, row_order_and_schema_validation_registry.calibration_points.missing_representation]
+  frozen_reference_projection_paths: [outputs.scientific_and_closure.calibration_points.columns, outputs.scientific_and_closure.calibration_points.conditional_row_inventory_contract.n_requested_bins, row_order_and_schema_validation_registry.calibration_points.column_order, row_order_and_schema_validation_registry.calibration_points.dtype_map, row_order_and_schema_validation_registry.calibration_points.nullable_map, row_order_and_schema_validation_registry.calibration_points.missing_representation]
+output_contract:
+  work_root: outputs/work/efigure10_six_model_binned_calibration
+  run_a: run_a
+  run_b: run_b
+  promotion_candidate: promotion_candidate
+  final_root: outputs/analysis/efigure10_six_model_binned_calibration
+  files: [calibration_points.csv, audit.json, manifest.json, report.md]
+  csv_serialization: {encoding: utf-8, line_ending: LF, delimiter: ',', quotechar: '"', quoting: minimal, doublequote: true, escapechar: null, index: false, na_rep: '', float_format: '%.17g', boolean_true: 'true', boolean_false: 'false'}
+  json_serialization: {encoding: utf-8, line_ending: LF, indent: 2, ensure_ascii: false, allow_nan: false, sort_keys: false, separators: [',', ': '], terminal_lf: true}
+  markdown_serialization: {encoding: utf-8, line_ending: LF, terminal_lf: true, section_order: [Identity, Authority and reconciliation, Model aggregate states, Result-retention statement, Interpretation boundaries]}
+  audit_key_order: [schema_version, analysis_id, timing_classification, functional_role, plan_authority, authoring_state, runtime_state, freeze_chain, environment, input_hashes_before, input_validation, cohort_reconciliation, model_bin_states, minirocket_reconciliation, source_immutability, privacy_validation, prepromotion_validation, deterministic_rerun, interpretation_boundaries, artifact_status]
+  manifest_key_order: [schema_version, analysis_id, files]
+  production_pycache_prefix_sentinel: outputs/work/efigure10_six_model_binned_calibration/__efigure10_pycache_prefix__
+  production_pycache_prefix_must_remain_absent: true
+  overwrite_forbidden: true
+privacy_contract:
+  forbidden_field_names: [sample_id, participant_id, subject_id, record_id, identifier, y_true, p_raw, p_cal, y_pred, quadrant, bin_assignment, collection_date]
+  forbidden_path_fragments: [data/raw, breath_data, clinical_data, efigure4_preprocessing_stage_aggregate_replay, efigure9_disease_category_prediction_matrix]
+  forbidden_date_patterns: ['[0-9]{4}-[0-9]{2}-[0-9]{2}', '[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}']
+  forbidden_absolute_path_patterns: ['(?:^|[\s"''])/', '[A-Za-z]:\\', 'file://', 'wsl://', '~/', '/home/']
+  provenance_date_allowlist:
+    - {path: analysis.phase1_authoring_date, value: '2026-08-13'}
+    - {path: 'audit.json -> authoring_state.date', value: '2026-08-13'}
+  raw_identifier_field_qualifiers: [sample_id, participant_id, subject_id, record_id, identifier]
+  raw_identifier_token_boundaries: complete_scalar_or_boundary_delimited
+  participant_value_echo_forbidden: true
+  network_forbidden: true
+  project_relative_paths_required: true
+external_namespace_contract:
+  efigure9_commit: 098d6d5d65d9fb935fa97a30d1353a9694a0dc3a
+  efigure9_paths: [configs/efigure9_disease_category_prediction_matrix.yaml, outputs/analysis/efigure9_disease_category_prediction_matrix/audit.json, outputs/analysis/efigure9_disease_category_prediction_matrix/disease_category_prediction_matrix.csv, outputs/analysis/efigure9_disease_category_prediction_matrix/manifest.json, scripts/run_efigure9_disease_category_prediction_matrix.py, src/analysis/efigure9_disease_category_prediction_matrix.py, tests/test_efigure9_disease_category_prediction_matrix.py]
+  efigure4_commit: 1e9eb475d5655356cacc3afba7013c5102dd2255
+  efigure4_paths: [configs/efigure4_preprocessing_stage_aggregate_replay.yaml, configs/efigure4_preprocessing_stage_aggregate_replay_environment_lock.json, docs/preprocessing/preprocessing_fallback_denominator_reporting_correction.md, docs/preprocessing/preprocessing_stage4_conda_explicit_archive_channel_metadata_correction.md, docs/preprocessing/preprocessing_stage4_numerical_environment_build_drift_correction.md, outputs/analysis/efigure4_preprocessing_stage_aggregate_replay/aggregate_audit.json, outputs/analysis/efigure4_preprocessing_stage_aggregate_replay/manifest.json, outputs/analysis/efigure4_preprocessing_stage_aggregate_replay/run_summary.md, outputs/analysis/efigure4_preprocessing_stage_aggregate_replay/stage_channel_frame_summary.csv, scripts/run_efigure4_preprocessing_stage_aggregate_replay.py, src/analysis/efigure4_preprocessing_stage_aggregate_replay.py, tests/test_efigure4_preprocessing_stage_aggregate_replay.py]
+  content_read_forbidden: true
+  write_forbidden: true
