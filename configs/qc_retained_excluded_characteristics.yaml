@@ -1,0 +1,139 @@
+schema_version: qc_retained_excluded_characteristics.config.v1
+package_id: qc_retained_excluded_characteristics
+package_status: plan_orthogonal_descriptive_source
+expected_git_head: 768129c1e3009ffcc8baf4a30a4cc8b7f833318e
+
+population_counts:
+  complete_source: 1040
+  qc_retained: 972
+  qc_excluded: 68
+
+input_columns:
+  raw_metadata:
+    - sample_id
+    - age
+    - sex(0male1female)
+    - BMI
+    - smoking(0no1yes)
+    - drinking(0no1yes)
+    - first_degree_family_history_of_GC(0no1yes)
+    - Hp_Infection(0no1yes)
+  sample_index:
+    - sample_id
+    - label
+    - disease_category
+    - in_final_output
+
+inputs:
+  raw_metadata:
+    path: data/raw/clinical_data/metadata.csv
+    sha256: 58b7c08d9eea834e22d9aebe0e19049f5ca313c384262b3cba21ce9763523aa9
+  sample_index:
+    path: data/processed/sample_index.csv
+    sha256: 3e31635c37c3cc142eade488c00a240ec5487175b531f9ed94837946ddcb403f
+
+anchors:
+  frozen_manifest:
+    path: outputs/analysis/posthoc_final_freeze_manifest.json
+    sha256: 590fc37db21018453e9d0430662183bda7d2fdd4df455f090ab5dee9b505a43f
+  overlap_summary:
+    path: outputs/analysis/posthoc_final_included_excluded_summary.csv
+    sha256: d34625bf594da3e2854917459d8a85c616006a2be7dc15526250fc720affb748
+  overlap_smd:
+    path: outputs/analysis/posthoc_final_included_excluded_smd.csv
+    sha256: e6b473376dbcb2cc78105fa8bf3a761fb980a7151d7581665098d751fc8020fc
+  retained_group_summary:
+    path: outputs/analysis/table_two_six_categories.csv
+    sha256: 46820f1f5c583e7dcca9c3d76037d5bf1bbd1feb43f689d0edddab83c960b546
+  reused_smd_implementation:
+    path: src/analysis/posthoc_final_reporting.py
+    sha256: 49772c00129e1aafdca7ae67db3a7922d1043296665cb163ca4c27821fe3619f
+
+code:
+  analysis: src/analysis/qc_retained_excluded_characteristics.py
+  cli: scripts/run_qc_retained_excluded_characteristics.py
+  reused_smd_implementation: src/analysis/posthoc_final_reporting.py
+configuration:
+  path: configs/qc_retained_excluded_characteristics.yaml
+
+outputs:
+  summary:
+    path: outputs/analysis/qc_retained_excluded_characteristics_summary.csv
+  smd:
+    path: outputs/analysis/qc_retained_excluded_characteristics_smd.csv
+  manifest:
+    path: outputs/analysis/qc_retained_excluded_characteristics_manifest.json
+
+disease_category_codes:
+  HC: 0
+  BGL: 1
+  LGIN: 2
+  HGIN: 3
+  EGC: 4
+  AGC: 5
+
+variable_order:
+  - [age, null]
+  - [sex, female]
+  - [endpoint, 'yes']
+  - [disease_category, HC]
+  - [disease_category, BGL]
+  - [disease_category, LGIN]
+  - [disease_category, HGIN]
+  - [disease_category, EGC]
+  - [disease_category, AGC]
+  - [body_mass_index, null]
+  - [smoking_history, 'yes']
+  - [alcohol_use_history, 'yes']
+  - [first_degree_family_history_of_gastric_cancer, 'yes']
+  - [helicobacter_pylori_status, positive]
+  - [helicobacter_pylori_status, negative]
+  - [helicobacter_pylori_status, missing]
+missingness_variable_order:
+  - age
+  - sex
+  - endpoint
+  - disease_category
+  - body_mass_index
+  - smoking_history
+  - alcohol_use_history
+  - first_degree_family_history_of_gastric_cancer
+
+summary_columns:
+  - variable
+  - level
+  - group
+  - n_total
+  - n_nonmissing
+  - n_missing
+  - count
+  - denominator_n
+  - proportion
+  - mean
+  - sd
+  - median
+  - q1
+  - q3
+  - denominator_rule
+smd_columns:
+  - variable
+  - level
+  - comparison_type
+  - smd_qc_retained_minus_excluded
+  - n_qc_retained_used
+  - n_qc_excluded_used
+  - estimability_status
+  - nonestimable_reason
+
+statistics:
+  continuous_sd_ddof: 1
+  quantile_method: linear
+  signed_direction: qc_retained_minus_qc_excluded
+  denominator_rules:
+    continuous: not_applicable
+    binary_and_disease_category: variable_specific_nonmissing
+    helicobacter_pylori_status: group_total
+  nonestimable_reasons:
+    - smd_fewer_than_two_nonmissing
+    - smd_zero_denominator_nonidentical
+
