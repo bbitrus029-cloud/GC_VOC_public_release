@@ -1,0 +1,367 @@
+schema_version: lgin_postdiagnosis_disposition_source_closure.config.v1
+package_id: lgin_postdiagnosis_disposition_source_closure
+package_status: source_closure_only_not_publication_table
+intended_downstream_consumer: supplementary_etable_7
+expected_git_head: f9a1846e2d1012d8160a9fa089c28e495a858c25
+upstream_stage7_part_b_generation_commit: 09538ab9780f5fbfe4f9263c350c952716b612a6
+
+configuration:
+  path: configs/lgin_postdiagnosis_disposition_source_closure.yaml
+
+implementation:
+  analysis: src/analysis/lgin_postdiagnosis_disposition_source_closure.py
+  cli: scripts/run_lgin_postdiagnosis_disposition_source_closure.py
+  test: tests/test_lgin_postdiagnosis_disposition_source_closure.py
+
+outputs:
+  primary_estimability:
+    path: outputs/analysis/lgin_postdiagnosis_disposition_primary_estimability.csv
+  baseline_context:
+    path: outputs/analysis/lgin_postdiagnosis_disposition_baseline_context.csv
+  within_inpatient_stability:
+    path: outputs/analysis/lgin_postdiagnosis_disposition_within_inpatient_stability.csv
+  manifest:
+    path: outputs/analysis/lgin_postdiagnosis_disposition_source_closure_manifest.json
+
+allowed_untracked_paths:
+  - .vscode/
+  - assets/
+  - configs/lgin_postdiagnosis_disposition_source_closure.yaml
+  - src/analysis/lgin_postdiagnosis_disposition_source_closure.py
+  - scripts/run_lgin_postdiagnosis_disposition_source_closure.py
+  - tests/test_lgin_postdiagnosis_disposition_source_closure.py
+  - outputs/analysis/lgin_postdiagnosis_disposition_primary_estimability.csv
+  - outputs/analysis/lgin_postdiagnosis_disposition_baseline_context.csv
+  - outputs/analysis/lgin_postdiagnosis_disposition_within_inpatient_stability.csv
+  - outputs/analysis/lgin_postdiagnosis_disposition_source_closure_manifest.json
+
+scientific_inputs:
+  - role: global_modeling_contract
+    path: configs/modeling_global.yaml
+    sha256: c4520df8040adfebdfd1f6ae89376be5484ae3dfeda0cfd2481103df323a2e54
+    participant_capable: false
+  - role: project_path_contract
+    path: src/config.py
+    sha256: e10ccfe1ca068b39472a7b3e201cf709f0f017ab502d2cec851cb8914a3a721f
+    participant_capable: false
+  - role: legacy_lgin_method_contract
+    path: src/analysis/lgin_layer_analysis.py
+    sha256: 2279e37423ab866dc4b53d10392a525cdceac5bdd6a549312de42a8133f3be49
+    participant_capable: false
+  - role: stage7_part_a_alignment_contract
+    path: src/analysis/stage7_part_a_common.py
+    sha256: 2ee75f19c284e84aa0528d557d9f582cf217180005dd014a5dfa06e995527179
+    participant_capable: false
+  - role: stage7_part_b_statistical_contract
+    path: src/analysis/stage7_part_b_common.py
+    sha256: e43d6901e5bd869df9c143b82aa4bca405ccdac5c0dc70dc823e3563ac72b9e9
+    participant_capable: false
+  - role: locked_cohort_alignment_contract
+    path: src/analysis/data_split.py
+    sha256: 4c10e56a95d675f47c57922133bd48232893500d515ff50f3e215150261b2ada
+    participant_capable: false
+  - role: authorized_metadata_loader
+    path: src/data/loader.py
+    sha256: 81b9123d1f579795e5bd2165cb9dbf4706e8a7a2446c6e2ef9df4594a829053a
+    participant_capable: false
+  - role: raw_clinical_metadata
+    path: data/raw/clinical_data/metadata.csv
+    sha256: 58b7c08d9eea834e22d9aebe0e19049f5ca313c384262b3cba21ce9763523aa9
+    participant_capable: true
+  - role: locked_sample_index
+    path: data/processed/sample_index.csv
+    sha256: 3e31635c37c3cc142eade488c00a240ec5487175b531f9ed94837946ddcb403f
+    participant_capable: true
+  - role: pipeline_a_alignment_artifact
+    path: data/processed/sequences/pipeline_a_raw.npz
+    sha256: 82dcca83f0caf21f262fbf9f140fa4c0463a7d782986249bcea341d03517095f
+    participant_capable: true
+  - role: pipeline_b_alignment_artifact
+    path: data/processed/features/pipeline_b_raw.csv
+    sha256: 4594b83b6d08674f78501dabe5f236c303252bcd1ac9bf3657c7faa92d40acea
+    participant_capable: true
+  - role: locked_training_oof_membership
+    path: outputs/predictions/binary_minirocket_ridge_nested_cv_oof.csv
+    sha256: 9ee283b0474c0f88a4c62cd2a00b840d41f4349277bf4b7ade2ab05ff259762f
+    participant_capable: true
+  - role: primary_oof_aggregate
+    path: outputs/analysis/lgin_primary_oof_minirocket_ridge.csv
+    sha256: f373328dac0ac5e9015bcb757f8102a7eaa0897a2e30e8b0e112a1212def5f8c
+    participant_capable: false
+  - role: legacy_baseline_aggregate
+    path: outputs/analysis/lgin_baseline_smd_oof_minirocket_ridge.csv
+    sha256: c308f88ad4a417ce9d7e76de8827158d045bcc10662d5bbe191c35f90fa6704d
+    participant_capable: false
+  - role: legacy_stability_aggregate
+    path: outputs/analysis/lgin_within_b_stability_oof_minirocket_ridge.csv
+    sha256: 9f732401f681a3df6bf492b99a74a36274543facac0c61d0f5d94136c638851a
+    participant_capable: false
+  - role: stage7_part_b_aggregate_audit
+    path: outputs/analysis/stage7_part_b_audit.json
+    sha256: 583e3ec909c3abad1c3027fe78f91aafde5aa0784d7704632d5bb23b1fd47f79
+    participant_capable: false
+  - role: frozen_modeling_plan
+    path: docs/protocol/modeling_plan.md
+    sha256: ee954a01c352189ce0ac64f020cb9d391284af13c13ee63f4572b500dcc4865e
+    participant_capable: false
+  - role: validated_modeling_run_summary
+    path: docs/modeling/validated_modeling_run_summary.md
+    sha256: 9331d8465302cd4215411e8ff4375f7206d21698c51bb5a6b3994192cd02dad3
+    participant_capable: false
+
+forbidden_inputs:
+  - outputs/analysis/lgin_descriptive_test_minirocket_ridge.csv
+  - outputs/analysis/lgin_layer_analysis.md
+
+participant_projection:
+  metadata_alias_columns:
+    - sample_id
+    - disease_category
+    - label
+    - collection_location
+    - age
+    - sex
+    - bmi
+    - smoking
+    - drinking
+    - first_degree_family_history_of_gc
+    - hp_infection
+    - cea
+    - ca199
+    - ca724
+  sample_index_columns_after_alignment:
+    - sample_id
+    - label
+    - disease_category
+  oof_prediction_columns:
+    - sample_id
+    - y_true
+
+proxy_mapping:
+  legacy_source_field: collection_location
+  raw_values:
+    1: inpatient_treatment_proxy
+    0: outpatient_followup_proxy
+
+analysis_views:
+  training_nested_cv_oof: exploratory_primary
+  locked_internal_test: estimability_check_only
+
+anchors:
+  lgin_disease_category: 2
+  oof:
+    n_lgin: 39
+    n_inpatient_treatment_proxy: 35
+    n_outpatient_followup_proxy: 4
+    rank_biserial_correlation: 0.9428571428571428
+    mann_whitney_u: 136.0
+    directional_verification_passed: true
+    separation_criterion_passed: true
+  locked_internal_test:
+    n_lgin: 10
+    n_inpatient_treatment_proxy: 10
+    n_outpatient_followup_proxy: 0
+    comparison_estimability_status: not_estimable
+    nonestimable_reason: outpatient_followup_proxy_n_zero
+  audit_lgin_fields:
+    - lgin_primary_view
+    - lgin_primary_view_authorization
+    - lgin_n_b_oof
+    - lgin_n_c_oof
+    - lgin_separation_criterion_passed
+    - lgin_directional_verification_passed
+    - lgin_rb
+    - lgin_mannwhitney_p_two_sided
+    - lgin_within_b_stability_levels_evaluated
+    - lgin_within_b_stability_pass_overall
+    - lgin_test_view
+    - lgin_n_b_test
+    - lgin_n_c_test
+
+baseline_variables:
+  - variable_order: 1
+    variable_key: age
+    source_column: age
+    variable_type: continuous
+    event_level: null
+    inpatient_n_nonmissing: 35
+    outpatient_n_nonmissing: 4
+    difference_metric: absolute_standardized_mean_difference
+  - variable_order: 2
+    variable_key: sex
+    source_column: sex
+    variable_type: binary
+    event_level: female
+    event_code: 1
+    inpatient_n_nonmissing: 35
+    outpatient_n_nonmissing: 4
+    inpatient_event_count: 18
+    outpatient_event_count: 0
+    difference_metric: absolute_proportion_difference
+  - variable_order: 3
+    variable_key: bmi
+    source_column: bmi
+    variable_type: continuous
+    event_level: null
+    inpatient_n_nonmissing: 35
+    outpatient_n_nonmissing: 4
+    difference_metric: absolute_standardized_mean_difference
+  - variable_order: 4
+    variable_key: smoking
+    source_column: smoking
+    variable_type: binary
+    event_level: 'yes'
+    event_code: 1
+    inpatient_n_nonmissing: 35
+    outpatient_n_nonmissing: 4
+    inpatient_event_count: 5
+    outpatient_event_count: 2
+    difference_metric: absolute_proportion_difference
+  - variable_order: 5
+    variable_key: drinking
+    source_column: drinking
+    variable_type: binary
+    event_level: 'yes'
+    event_code: 1
+    inpatient_n_nonmissing: 35
+    outpatient_n_nonmissing: 4
+    inpatient_event_count: 8
+    outpatient_event_count: 2
+    difference_metric: absolute_proportion_difference
+  - variable_order: 6
+    variable_key: family_history
+    source_column: family_history
+    variable_type: binary
+    event_level: 'yes'
+    event_code: 1
+    inpatient_n_nonmissing: 35
+    outpatient_n_nonmissing: 4
+    inpatient_event_count: 2
+    outpatient_event_count: 0
+    difference_metric: absolute_proportion_difference
+  - variable_order: 7
+    variable_key: hp_infection
+    source_column: hp_infection
+    variable_type: binary
+    event_level: positive
+    event_code: 1
+    inpatient_n_nonmissing: 19
+    outpatient_n_nonmissing: 4
+    inpatient_event_count: 3
+    outpatient_event_count: 1
+    difference_metric: absolute_proportion_difference
+  - variable_order: 8
+    variable_key: cea
+    source_column: cea
+    variable_type: continuous
+    event_level: null
+    inpatient_n_nonmissing: 32
+    outpatient_n_nonmissing: 3
+    difference_metric: absolute_standardized_mean_difference
+  - variable_order: 9
+    variable_key: ca199
+    source_column: ca199
+    variable_type: continuous
+    event_level: null
+    inpatient_n_nonmissing: 32
+    outpatient_n_nonmissing: 3
+    difference_metric: absolute_standardized_mean_difference
+  - variable_order: 10
+    variable_key: ca724
+    source_column: ca724
+    variable_type: continuous
+    event_level: null
+    inpatient_n_nonmissing: 32
+    outpatient_n_nonmissing: 3
+    difference_metric: absolute_standardized_mean_difference
+
+statistics:
+  denominator_rule: variable_specific_nonmissing
+  continuous_sd_ddof: 1
+  quantile_method: linear
+  reconciliation_absolute_tolerance: 1.0e-15
+  reconciliation_relative_tolerance: 0.0
+  descriptive_score_criterion: p_cal_gt_0_5
+  stability_minimum_n: 5
+
+stability_mapping:
+  - [1, age_at_60, '<60', age, lt_60]
+  - [1, age_at_60, '>=60', age, ge_60]
+  - [2, sex, '0', sex, male]
+  - [2, sex, '1', sex, female]
+  - [3, bmi_at_24, '<24', bmi, lt_24]
+  - [3, bmi_at_24, '>=24', bmi, ge_24]
+  - [4, smoking, '0', smoking, 'no']
+  - [4, smoking, '1', smoking, 'yes']
+  - [5, drinking, '0', drinking, 'no']
+  - [5, drinking, '1', drinking, 'yes']
+  - [6, family_history, '0', family_history, 'no']
+  - [6, family_history, '1', family_history, 'yes']
+  - [7, hp_infection, '0', hp_infection, negative]
+  - [7, hp_infection, '1', hp_infection, positive]
+  - [7, hp_infection, missing, hp_infection, missing]
+
+schemas:
+  primary_estimability:
+    - analysis_view
+    - analysis_role
+    - n_lgin
+    - n_inpatient_treatment_proxy
+    - n_outpatient_followup_proxy
+    - comparison_estimability_status
+    - nonestimable_reason
+    - rank_biserial_correlation
+    - mann_whitney_u
+    - p_two_sided
+    - median_p_cal_inpatient
+    - q1_p_cal_inpatient
+    - q3_p_cal_inpatient
+    - median_p_cal_outpatient
+    - q1_p_cal_outpatient
+    - q3_p_cal_outpatient
+    - n_p_cal_gt_0_5_inpatient
+    - n_p_cal_gt_0_5_outpatient
+    - directional_verification_passed
+    - separation_criterion_passed
+  baseline_context:
+    - variable_order
+    - variable_key
+    - variable_type
+    - event_level
+    - inpatient_n_total
+    - inpatient_n_nonmissing
+    - inpatient_n_missing
+    - inpatient_event_count
+    - inpatient_denominator_n
+    - inpatient_proportion
+    - inpatient_mean
+    - inpatient_sd
+    - inpatient_median
+    - inpatient_q1
+    - inpatient_q3
+    - outpatient_n_total
+    - outpatient_n_nonmissing
+    - outpatient_n_missing
+    - outpatient_event_count
+    - outpatient_denominator_n
+    - outpatient_proportion
+    - outpatient_mean
+    - outpatient_sd
+    - outpatient_median
+    - outpatient_q1
+    - outpatient_q3
+    - denominator_rule
+    - difference_metric
+    - absolute_difference
+    - estimability_status
+    - nonestimable_reason
+  within_inpatient_stability:
+    - variable_order
+    - variable_key
+    - level_order
+    - level_key
+    - n_in_level
+    - median_p_cal
+    - n_p_cal_gt_0_5
+    - estimability_status
+    - nonestimable_reason
