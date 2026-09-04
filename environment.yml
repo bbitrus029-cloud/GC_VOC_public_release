@@ -24,3 +24,11 @@ dependencies:
   - xgboost=3.2.0
   - scikit-image=0.26.0
   - captum=0.9.0
+  - cairosvg=2.9.0
+  - fontconfig=2.17.1
+  - fonttools=4.62.1
+  - librsvg=2.62.1
+  - lxml=6.1.1
+  - pillow=12.2.0
+  - poppler=26.02.0
+  - python-docx=1.2.0
