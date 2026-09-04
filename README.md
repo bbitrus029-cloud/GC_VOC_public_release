@@ -54,6 +54,25 @@ conda env create -f environment.yml
 conda activate gcvocs
 ```
 
+Visualization dependencies are likewise pinned in `environment.yml`. The headless LibreOffice renderer is a
+separately managed Ubuntu dependency, and licensed Arial fonts are a separately managed local dependency. Exact
+runtime versions and font provenance are verified during environment preparation and validation rather than embedded
+as scientific source data.
+
+## Visualization Layout and Tracking
+
+- `src/visualization/` contains reusable visualization implementation.
+- `scripts/visualization/` contains visualization production entry points.
+- `configs/visualization/` contains tracked runtime profiles and object-specific configurations.
+- `tests/visualization/` contains synthetic or deidentified visualization tests.
+- `outputs/visualization/` contains ignored working, QA, release, supplement-preflight, and handoff products.
+- `assets/visualization/source/` contains ignored private source media.
+
+Implementation code, configurations, and explanatory Markdown or JSON outside ignored output namespaces are tracked.
+Rendered or binary products and private source media are ignored. Environment and layout preparation does not
+authorize visualization production; production sessions remain separately gated by the authority snapshot, execution
+plan, registry, and applicable object or configuration contracts.
+
 ## Status
 
-Preprocessing and modeling are frozen. This administrative reconciliation changes no scientific or statistical method and grants no new execution authority. Session 3 and all later sessions remain separately gated. Session 5 remains unauthorized and not runnable; it requires prior Session 4 completion, separate review, and explicit later go authorization. Visualization v2 remains unauthorized.
+Preprocessing and modeling are frozen. This administrative reconciliation changes no scientific or statistical method and grants no new execution authority. Session 3 and all later sessions remain separately gated. Session 5 remains unauthorized and not runnable; it requires prior Session 4 completion, separate review, and explicit later go authorization. Visualization production remains separately gated.
