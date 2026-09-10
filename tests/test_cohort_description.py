@@ -54,7 +54,8 @@ def test_parse_truncated_numeric_unparseable_returns_none(caplog: pytest.LogCapt
         parsed = _parse_truncated_numeric("abc")
 
     assert parsed is None
-    assert any("abc" in record.message for record in caplog.records)
+    assert caplog.records
+    assert all("abc" not in record.message for record in caplog.records)
 
 
 def test_format_median_iqr_basic() -> None:

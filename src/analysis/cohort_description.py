@@ -37,7 +37,7 @@ TUMOR_MARKER_COLUMNS: dict[str, str] = {
 }
 
 
-def _parse_truncated_numeric(value: object) -> float | None:
+def _parse_truncated_numeric(value: object, *, decimal_comma: bool = False) -> float | None:
     """Parse a possibly censored tumor-marker value into a float or None."""
     if value is None or pd.isna(value):
         return None
@@ -49,11 +49,13 @@ def _parse_truncated_numeric(value: object) -> float | None:
         return None
     if stripped.startswith(">") or stripped.startswith("<"):
         stripped = stripped[1:].strip()
+    if decimal_comma:
+        stripped = stripped.replace(",", ".")
 
     try:
         return float(stripped)
     except ValueError:
-        LOGGER.warning("Unparseable tumor-marker value %r converted to missing.", value)
+        LOGGER.warning("Unparseable tumor-marker value converted to missing.")
         return None
 
 
@@ -89,7 +91,7 @@ def _load_tumor_markers(metadata_path: Path) -> pd.DataFrame:
             elif stripped.startswith("<"):
                 left_censored += 1
 
-            parsed_value = _parse_truncated_numeric(raw_value)
+            parsed_value = _parse_truncated_numeric(raw_value, decimal_comma=alias == "ca199")
             if parsed_value is None and stripped not in {"", "-", "/", "?"} and not stripped.startswith((">", "<")):
                 unparseable += 1
             values.append(parsed_value)
