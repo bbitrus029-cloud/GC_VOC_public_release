@@ -1,5 +1,9 @@
 # Registered Sample-Size Source Verification and Reporting Closure
 
+> **Current reporting authority:** The [dated addendum of 2026-09-12](#addendum---2026-09-12-recovered-final-planning-record-and-reporting-clarification)
+> supersedes the identified earlier Track 1 and split-reporting statements. The earlier closure is preserved
+> as historical evidence; unaffected scientific facts and restrictions remain binding.
+
 ## Scope and non-impact statement
 
 This additive, reviewer-facing document closes reporting questions about the prospectively registered sample-size
@@ -221,3 +225,96 @@ supplement-layout, numbering, or visual-design decision beyond closing that cond
   `configs/post_hoc_final_supplementary.yaml` retain the exclusion of repeated sample-size work.
 - **Unaffected final post-hoc record:** `docs/modeling/final_post_hoc_supplementary_analyses.md` remains unchanged; this
   closure does not alter its unrelated analyses.
+
+## Addendum - 2026-09-12: recovered final planning record and reporting clarification
+
+### Authority and source status
+
+This dated addendum governs current reporting where it supersedes the earlier Track 1 source status, recalled
+AUC 0.50, absence of an exact Track 1 result, split-discrepancy interpretation, and corresponding reporting
+restrictions. The earlier text is retained as the historical closure. All unaffected scientific boundaries remain
+in force. The starting HEAD for this update was `b6941e4c5ff2c22555e41dd514b5b6de9b939ce3`; the preserved
+closure was committed at `768129c1e3009ffcc8baf4a30a4cc8b7f833318e` and its pre-update SHA-256 was
+`8f2c0619456e98b82c26fa3120164a5f0c0856cd548f59a9d6f552413def352d`.
+
+The investigator reported recovering a historical calculation record marked "final" and confirmed that the
+AUC-null-0.75 / recruitment-454 record was the version used for the pre-registration comparison of the two
+planning paths. This confirmation is recorded now; no dated original record or original Python script was
+independently inspected. The original script remains unavailable. The parameter/result record is investigator
+source verification supported by independent arithmetic verification, not a newly registered plan or recovery
+of the original implementation. The earlier AUC-null-0.50 / recruitment-307 candidate is superseded for current
+reporting; its proposed calculation was not reproduced.
+
+### Recovered Track 1 and independently verified arithmetic
+
+The recovered inputs are anticipated AUC 0.90, null AUC 0.75, one-sided alpha 0.05, power 0.90, equal positive
+and negative groups, 20% allocation to internal testing, and 25% potential dropout or non-analyzability.
+The comparison is against AUC 0.75, not chance discrimination.
+
+The independent check uses the Hanley-McNeil (1982) variance approximation with its finite-sample terms.
+For equal group sizes `n`, define `Q1(A) = A / (2 - A)`, `Q2(A) = 2*A^2 / (1 + A)`, and
+`V(A,n) = [A*(1-A) + (n-1)*(Q1(A)-A^2) + (n-1)*(Q2(A)-A^2)] / n^2`.
+With `Phi` the standard normal CDF and `z_0.95 = Phi^-1(0.95)`, the one-sided normal-approximation power is
+`Phi([(0.90-0.75) - z_0.95*sqrt(V(0.75,n))] / sqrt(V(0.90,n)))`.
+The smallest integer group size meeting the unrounded power target is 34:
+
+```json
+{
+  "provenance": "independent arithmetic verification of investigator-supplied final planning record",
+  "auc_null": 0.75,
+  "auc_alternative": 0.90,
+  "alpha_one_sided": 0.05,
+  "power_target": 0.90,
+  "power_at_33_per_group": 0.8997892044267068,
+  "power_at_34_per_group": 0.9095962805599651,
+  "required_positive_test_n": 34,
+  "required_negative_test_n": 34,
+  "required_total_test_n": 68,
+  "test_fraction": 0.20,
+  "required_analyzable_total_n": 340,
+  "dropout_fraction": 0.25,
+  "required_recruitment_n_ceiling": 454
+}
+```
+
+Thus `68 / 0.20 = 340` analyzable participants and `ceil(340 / 0.75) = 454` recruits.
+At 33 per group the power is still below 0.90; rounding the displayed power before deciding the sample size
+would be incorrect. Retain the finite-sample variance and integer-search convention when documenting this
+verification; a simplified asymptotic variance is not numerically interchangeable. Numerical agreement does not
+establish that the unavailable original script used this identical implementation.
+
+References: Hanley JA, McNeil BJ. Radiology. 1982;143:29-36.
+[doi:10.1148/radiology.143.1.7063747](https://doi.org/10.1148/radiology.143.1.7063747), equations 1-2;
+[NCSS single-ROC testing framework](https://www.ncss.com/wp-content/themes/ncss/pdf/Procedures/PASS/Tests_for_One_ROC_Curve.pdf).
+These references support the variance/testing framework, not the historical identity of the investigator's record.
+
+Both paths are compared at the same recruitment scale: Track 1 gives 454 and Track 2 gives 834.
+Track 2 therefore remains determining. Adding the originally planned approximately 100-participant phase gives
+approximately 934, rounded operationally to approximately 1,000 including that phase. This reconciliation
+does not change any planned overall target, executed cohort, result, or final-model sample-size interpretation.
+
+### Other confirmed source clarifications and reporting disposition
+
+- **Split wording:** The investigator explicitly confirmed that 7:3 was a typographical error and that the
+  original sample-size calculation intended 80:20. Treat this as an investigator-confirmed clerical discrepancy
+  supported by the calculation and frozen modeling rule, not an established substantive change of allocation.
+  Preserve the original 7:3 wording as historical evidence; do not claim an independently verified contemporaneous
+  correction. Main Methods reports 80:20; a short eMethods clarification records the discrepancy.
+- **Approximately 100 participants:** The investigator clarified that the intended threshold-development
+  participants would have been restricted to the development set to keep future test signals out of that step.
+  That independently staged phase and forced allocation were not implemented. Actual label-blind cross-sample
+  estimation used the full source cohort or stage-eligible subsets before splitting, including signals from
+  participants later allocated to testing. This remains an execution deviation with the existing end-to-end
+  validation limitation; using more recordings is a decision rationale, not demonstrated improvement in accuracy.
+- **Current reporting:** Main Methods summarizes the two planning paths, the determining development path,
+  approximately 1,000 planned recruits, and the actual 80:20 rule. eMethods reports the recovered Track 1 inputs,
+  the independently reproduced 68-test / 454-recruit chain, the unchanged Track 2 chain, and concise explanations
+  of the clerical discrepancy and unimplemented preliminary phase, regardless of whether the original protocol
+  is supplied. The original protocol's test-based model/Youden-threshold selection wording also needs a brief
+  clarification against the actual development-OOF selection and thresholding documented in
+  `docs/protocol/modeling_plan.md` and `docs/modeling/validated_modeling_run_summary.md`.
+- **Unchanged boundaries:** The retired Riley reconstruction remains ineligible, and the sample-size figure
+  remains closed. No 7:3 display or new sample-size figure/table is required. This update changes this record
+  only; it authorizes no scientific execution, artifact regeneration, visualization-contract change, manuscript
+  production, or Git operation. Dependent production must refresh any binding to this file's changed hash under
+  existing source-freshness rules; historical manifests retain their original hashes.
