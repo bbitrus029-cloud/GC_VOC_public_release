@@ -1,0 +1,5 @@
+metric,model,estimate,ci_low,ci_high,comparison_stat,comparison_value
+auc_roc,voc_only,0.8688670829616414,0.7966045941123996,0.9299788135593219,,
+auc_roc,fusion,0.8791257805530777,0.8135537466547725,0.9348851471900089,,
+delta_auc_fusion_minus_voc,comparison,0.010258697591436272,,,delong_p_two_sided,0.35188928715176293
+nri,comparison,-0.6043710972346119,,,idi,0.008486184878297137

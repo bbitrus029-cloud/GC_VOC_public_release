@@ -1,0 +1,3 @@
+analysis_id,view,estimate,ci_low,ci_high,ci_level,ci_method,n,n_positive,n_negative,n_date_groups_total,n_date_groups_comparable,n_date_groups_noncomparable,n_comparable_pairs,n_bootstrap_valid,n_bootstrap_attempts,bootstrap_seed,tie_credit,estimability_status,nonestimable_reason,ci_status,ci_nonestimable_reason
+analysis_2_within_date_concordance,oof,0.9200955667640032,0.8884029164025802,0.9437197284382493,0.95,percentile_bootstrap_linear_quantile,777,331,446,40,33,7,3767,2000,2000,42,0.5,estimable,,estimable,
+analysis_2_within_date_concordance,test,0.9568965517241379,0.9195979899497487,0.98,0.95,percentile_bootstrap_linear_quantile,195,82,113,36,23,13,232,2000,2000,42,0.5,estimable,,estimable,

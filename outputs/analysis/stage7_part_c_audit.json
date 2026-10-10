@@ -1,0 +1,81 @@
+{
+  "session": 13,
+  "stage": "Stage 7 Part C",
+  "best_model": "minirocket_ridge",
+  "git_commit_hash": "1965750c7664665bb090f69bff3dbe50afa228d7",
+  "timestamp_utc": "2026-05-20T13:01:27Z",
+  "data_split_seed": 43,
+  "bootstrap_n_boot": 2000,
+  "random_seed": 42,
+  "bootstrap_convention": {
+    "erratum": "E011",
+    "linked_commit": "a2af64e",
+    "summary": "single-RNG sequential per E011 (commit a2af64e); reproducibility verified via deterministic PCG64 stream; valid for all bootstrap-derived CIs in this session."
+  },
+  "tm_subset_sizes": {
+    "tm_train_subset_n_total": 516,
+    "tm_train_subset_n_pos": 293,
+    "tm_train_subset_n_neg": 223,
+    "tm_train_subset_prevalence": 0.5678,
+    "tm_test_subset_n_total": 135,
+    "tm_test_subset_n_pos": 76,
+    "tm_test_subset_n_neg": 59,
+    "tm_test_subset_prevalence": 0.563,
+    "full_cohort_n_complete_case": 651,
+    "full_cohort_complete_case_percent": 67.0
+  },
+  "post_hoc_trigger_references": {
+    "A_subgroup_retrain": "Session 11 audit JSON: triggered=false",
+    "C_test_vs_cv_shift": "Session 11 audit JSON: triggered=false",
+    "F_tumor_marker_underpowered": {
+      "evaluated": true,
+      "triggered": false,
+      "tm_test_subset_n_pos": 76,
+      "tm_train_subset_n_pos": 293,
+      "thresholds": {
+        "tm_test_n_pos_lt_30": false,
+        "tm_train_n_pos_lt_50": false
+      },
+      "consequence": "NRI/IDI/DeLong reported with full significance claims per \u00a73.21/\u00a73.22; not descriptive-only."
+    },
+    "G_dl_anomaly": "Erratum E005 (Session 8/9 mitigation)",
+    "H_calibration_failure": "Session 11 audit JSON: triggered=false",
+    "lgin_primary_view": "Session 12 audit JSON: nested_cv_oof per Erratum E012"
+  },
+  "key_findings": {
+    "voc_only_auc_on_tm_test_subset": 0.8688670829616414,
+    "voc_only_ci_low_high_on_tm_test_subset": [
+      0.7966045941123996,
+      0.929978813559322
+    ],
+    "marker_lr_auc_on_tm_test_subset": 0.5809545049063336,
+    "marker_lr_ci_low_high_on_tm_test_subset": [
+      0.480792818911686,
+      0.67418041926851
+    ],
+    "fusion_auc_on_tm_test_subset": 0.8791257805530777,
+    "fusion_ci_low_high_on_tm_test_subset": [
+      0.8135537466547725,
+      0.9348851471900088
+    ],
+    "delta_auc_voc_minus_marker": 0.2879125780553078,
+    "delong_p_voc_vs_marker": 2.56738789073432e-06,
+    "nri_voc_vs_marker": 0.8113291703835861,
+    "idi_voc_vs_marker": 0.4052490310799207,
+    "delta_auc_fusion_minus_voc": 0.0102586975914362,
+    "delong_p_fusion_vs_voc": 0.3518892871517629,
+    "nri_fusion_vs_voc": -0.6043710972346119,
+    "idi_fusion_vs_voc": 0.0084861848782971,
+    "fusion_conclusion_template_used": "voc_alone_preferable",
+    "fusion_conclusion_paragraph": "VOC alone is preferable; supplementation with markers is not supported by these data.",
+    "selection_bias_largest_smd": 0.4078837451559001,
+    "selection_bias_largest_smd_variable": "age",
+    "selection_bias_variables_above_0p1_smd": [
+      "age",
+      "disease_category",
+      "collection_location",
+      "label"
+    ]
+  },
+  "section_2_14_condition_logic_authorization": "Erratum E013 (revised condition A inclusivity / disjunction structure; thresholds 0.01 and 0.05 unchanged)"
+}

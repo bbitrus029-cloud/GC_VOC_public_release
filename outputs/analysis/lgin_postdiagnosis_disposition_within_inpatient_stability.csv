@@ -1,0 +1,16 @@
+variable_order,variable_key,level_order,level_key,n_in_level,median_p_cal,n_p_cal_gt_0_5,estimability_status,nonestimable_reason
+1,age,1,lt_60,14,0.7965606902963835,11,estimable,
+1,age,2,ge_60,21,0.767223915476695,13,estimable,
+2,sex,1,male,17,0.6789669404643804,12,estimable,
+2,sex,2,female,18,0.8484530508853538,12,estimable,
+3,bmi,1,lt_24,20,0.817299077415452,14,estimable,
+3,bmi,2,ge_24,15,0.6448558191275066,10,estimable,
+4,smoking,1,no,30,0.8015653852917137,21,estimable,
+4,smoking,2,yes,5,0.6241304643674446,3,estimable,
+5,drinking,1,no,27,0.8058670273358843,19,estimable,
+5,drinking,2,yes,8,0.6344931417474755,5,estimable,
+6,family_history,1,no,33,0.797263743247543,24,estimable,
+6,family_history,2,yes,2,,,not_reported_small_level,n_in_level_below_5
+7,hp_infection,1,negative,16,0.507310002893447,8,estimable,
+7,hp_infection,2,positive,3,,,not_reported_small_level,n_in_level_below_5
+7,hp_infection,3,missing,16,0.8666768656121151,13,estimable,

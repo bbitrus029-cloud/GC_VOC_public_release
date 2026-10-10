@@ -1,0 +1,44 @@
+{
+  "provenance_schema_version": 1,
+  "stage": "post_hoc_supplementary_plan_1",
+  "best_model": "minirocket_ridge",
+  "random_seed": 42,
+  "temporal_anchor_tag": "modeling-frozen",
+  "generated_at_utc": "2026-05-28T03:06:01Z",
+  "git_commit_hash": "5e480f11992a2ae81eab529896ad3aa55f4d4d17",
+  "locked_inputs": {
+    "anticipated_auc": 0.9,
+    "candidate_predictor_parameters": 25,
+    "anticipated_prevalence": 0.5,
+    "target_shrinkage": 0.9,
+    "target_mape": 0.05,
+    "prevalence_margin_of_error": 0.05,
+    "target_r2_nagelkerke_optimism": 0.05,
+    "normal_quantile_975": 1.96,
+    "cox_snell_simulation_n": 1000000,
+    "mmoe": 1.1
+  },
+  "r2_cs": 0.4441852225028078,
+  "r2_cs_max": 0.75,
+  "n_b1": 385,
+  "n_b2": 1374,
+  "n_b3": 368,
+  "n_b4": 489,
+  "n_required": 1374,
+  "required_events": 687,
+  "required_epv": 27.48,
+  "actual_cohort": {
+    "n": 972,
+    "events": 413,
+    "epv": 16.5
+  },
+  "cohort_meets_all_criteria": false,
+  "shortfall_criteria": [
+    {
+      "criterion": "B2",
+      "n_required_for_criterion": 1374,
+      "shortfall": 402
+    }
+  ],
+  "mmoe_disclosure_flag": true
+}

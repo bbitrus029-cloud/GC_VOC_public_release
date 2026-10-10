@@ -1,0 +1,41 @@
+{
+  "session": 11,
+  "stage": "Stage 7 Part A",
+  "best_model": "minirocket_ridge",
+  "git_commit_hash": "47aef60d3af918376d1f07b6c5d584c156472583",
+  "timestamp_utc": "2026-05-20T08:12:20Z",
+  "data_split_seed": 43,
+  "bootstrap_n_boot": 2000,
+  "random_seed": 42,
+  "bootstrap_convention": {
+    "erratum": "E011",
+    "linked_commit": "a2af64e",
+    "summary": "single-RNG sequential per E011 (commit a2af64e); reproducibility verified via deterministic PCG64 stream; valid for all bootstrap-derived CIs in this session."
+  },
+  "post_hoc_trigger_snapshot": {
+    "A_subgroup_retrain": {
+      "evaluated": true,
+      "triggered": false,
+      "details": "best-model subgroup AUC-ROC point + CI vs full-set per \u00a74.1 \u2014 hgin_egc: estimate=0.926409, ci=[0.883326, 0.963903], condition_1=False, condition_2=False, triggered=False; agc: estimate=0.918745, ci=[0.872687, 0.957567], condition_1=False, condition_2=False, triggered=False"
+    },
+    "C_test_vs_cv_shift": {
+      "evaluated": true,
+      "triggered": false,
+      "details": "all-6-models test AUC-ROC vs nested-CV mean \u2014 average_shift=0.026029, direction=mixed; minirocket_ridge: test_minus_cv=-0.002297; inception_time: test_minus_cv=0.054855; cnn_bilstm_attention: test_minus_cv=0.053972; xgboost: test_minus_cv=0.003246; svm: test_minus_cv=0.024490; elastic_net_lr: test_minus_cv=0.021910"
+    },
+    "F_tumor_marker_underpowered": {
+      "evaluated": false,
+      "reason": "Deferred to Session 13"
+    },
+    "G_dl_anomaly": {
+      "evaluated": "previously addressed",
+      "reference": "Erratum E005 (Session 8/9 mitigation)"
+    },
+    "H_calibration_failure": {
+      "evaluated": true,
+      "triggered": false,
+      "details": "best-model post-Platt Brier vs pre-Platt Brier on test set; brier_pre=0.119257, brier_post=0.121097, delta=0.001840"
+    },
+    "bootstrap_convention": "single-RNG sequential per E011 (commit a2af64e); reproducibility verified via deterministic PCG64 stream; valid for all bootstrap-derived CIs in this session."
+  }
+}

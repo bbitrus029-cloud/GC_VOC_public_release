@@ -1,0 +1,77 @@
+{
+  "session": 14,
+  "stage": "Stage 8",
+  "session_scope": "all_6_models_cross_model_consistency",
+  "git_commit_hash": "82e351672fb9ee6bb6380bf4949644e67eefe040",
+  "timestamp_utc": "2026-05-21T02:18:06Z",
+  "data_split_seed": 43,
+  "bootstrap_n_boot": 2000,
+  "random_seed": 42,
+  "bootstrap_convention": {
+    "erratum": "E011",
+    "linked_commit": "a2af64e",
+    "summary": "single-RNG sequential per E011 (commit a2af64e); reproducibility verified via deterministic PCG64 stream; valid for all bootstrap-derived CIs in this session."
+  },
+  "captum_version": "0.9.0",
+  "captum_dependency_commit": "82e3516",
+  "channel_aggregation_policy": {
+    "xgboost": "TreeSHAP on test n=195, sum(|SHAP|) over 9 features per channel, mean over samples, L1-normalized",
+    "elastic_net_lr": "abs(coef_) on Pipeline B 99 features, sum over 9 features per channel, L1-normalized",
+    "svm": "permutation_importance on Pipeline B 99 features, n_repeats=10, scoring='roc_auc', sum over 9 features per channel, L1-normalized",
+    "minirocket_ridge": "permutation importance on raw Pipeline A channels, n_repeats=10, scoring='roc_auc', direct 11-channel output, L1-normalized",
+    "inception_time": "Captum IntegratedGradients on Pipeline A test n=195, n_steps=50, target=1, sum(|IG|) over 960 timepoints, mean over samples, L1-normalized",
+    "cnn_bilstm_attention": "Captum IntegratedGradients on Pipeline A test n=195, n_steps=50, target=1, sum(|IG|) over 960 timepoints, mean over samples, L1-normalized"
+  },
+  "section_2_21_negative_permutation_handling_authorization": "Erratum E014 (clip-to-zero + diagnostic disclosure for permutation-importance negative aggregated values; uniformly applied across all six models' aggregation paths; SVM channels [3, 5, 7, 8] were clipped in this run; cross-model Kendall Tau and top-K converging results unaffected)",
+  "post_hoc_trigger_references": {
+    "A_subgroup_retrain": "Session 11 audit JSON: triggered=false",
+    "C_test_vs_cv_shift": "Session 11 audit JSON: triggered=false",
+    "F_tumor_marker_underpowered": "Session 13 audit JSON: triggered=false",
+    "G_dl_anomaly": "Erratum E005 (Session 8/9 mitigation)",
+    "H_calibration_failure": "Session 11 audit JSON: triggered=false",
+    "lgin_primary_view": "Session 12 audit JSON: nested_cv_oof per Erratum E012",
+    "fusion_template_logic": "Session 13 audit JSON: voc_alone_preferable per Erratum E013"
+  },
+  "key_findings": {
+    "kendall_tau_max_across_15_pairs": {
+      "pair": "inception_time_vs_cnn_bilstm_attention",
+      "tau": 0.8181818181818182,
+      "ci_low_high": [
+        0.42857142857142855,
+        1.0
+      ]
+    },
+    "kendall_tau_min_across_15_pairs": {
+      "pair": "minirocket_ridge_vs_cnn_bilstm_attention",
+      "tau": 0.23636363636363636,
+      "ci_low_high": [
+        -0.3619732999582812,
+        0.76
+      ]
+    },
+    "kendall_tau_mean_across_15_pairs": 0.46698728826083064,
+    "n_pairs_significant_at_alpha_0.05": 7,
+    "top_3_channels_appearing_in_at_least_4_of_6_models": [
+      "S7",
+      "S10"
+    ],
+    "top_5_channels_appearing_in_at_least_4_of_6_models": [
+      "S2",
+      "S5",
+      "S7",
+      "S10",
+      "S11"
+    ],
+    "top_7_channels_appearing_in_at_least_4_of_6_models": [
+      "S1",
+      "S2",
+      "S5",
+      "S7",
+      "S10",
+      "S11"
+    ],
+    "channels_unanimous_top_5": [
+      "S10"
+    ]
+  }
+}

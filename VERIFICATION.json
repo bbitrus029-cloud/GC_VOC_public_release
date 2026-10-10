@@ -1,0 +1,2717 @@
+{
+  "schema_version": 1,
+  "preparation_date": "2026-10-10",
+  "source_head": "b0bcb9dce2e778ae8f3f672cefc1decf544d0e4e",
+  "classification": "release export verification only; no new scientific analysis",
+  "data": {
+    "participants": 972,
+    "train": 777,
+    "test": 195,
+    "numeric_values_and_frozen_memberships_preserved": true,
+    "deterministic_containers_checked": true,
+    "all_public_npz_allow_pickle_false": true,
+    "explanation_coverage": {
+      "oof_attention": 777,
+      "representative_shap_and_signals": 20
+    }
+  },
+  "model_state_and_loading": {
+    "model_files_reopened": 14,
+    "fitted_state_preserved": true,
+    "threshold_calibrator_artifacts_checked": 6,
+    "same_public_order_source_export_inference_exact": true
+  },
+  "stored_runtime_comparisons": [
+    {
+      "model": "cnn_bilstm_attention",
+      "population": "internal_test",
+      "n": 195,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 0.0002943277359008789,
+        "p_raw_within_tolerance": false,
+        "p_cal_max_absolute_difference": 0.00030235535000489033,
+        "p_cal_within_tolerance": false,
+        "threshold_decisions_identical": true,
+        "passed": false
+      }
+    },
+    {
+      "model": "cnn_bilstm_attention",
+      "population": "training_in_sample",
+      "n": 777,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 0.00032633543014526367,
+        "p_raw_within_tolerance": false,
+        "p_cal_max_absolute_difference": 0.00036324372678187,
+        "p_cal_within_tolerance": false,
+        "threshold_decisions_identical": true,
+        "passed": false
+      }
+    },
+    {
+      "model": "elastic_net_lr",
+      "population": "internal_test",
+      "n": 195,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 6.661338147750939e-16,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 7.771561172376096e-16,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      }
+    },
+    {
+      "model": "elastic_net_lr",
+      "population": "training_in_sample",
+      "n": 777,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 3.6914915568786455e-15,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 2.220446049250313e-15,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      }
+    },
+    {
+      "model": "inception_time",
+      "population": "internal_test",
+      "n": 195,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 0.00014889240264892578,
+        "p_raw_within_tolerance": false,
+        "p_cal_max_absolute_difference": 0.00013043668149353982,
+        "p_cal_within_tolerance": false,
+        "threshold_decisions_identical": true,
+        "passed": false
+      }
+    },
+    {
+      "model": "inception_time",
+      "population": "training_in_sample",
+      "n": 777,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 0.00017067790031433105,
+        "p_raw_within_tolerance": false,
+        "p_cal_max_absolute_difference": 0.00013960074791774524,
+        "p_cal_within_tolerance": false,
+        "threshold_decisions_identical": true,
+        "passed": false
+      }
+    },
+    {
+      "model": "minirocket_ridge",
+      "population": "internal_test",
+      "n": 195,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 5.551115123125783e-16,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 9.43689570931383e-16,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      }
+    },
+    {
+      "model": "minirocket_ridge",
+      "population": "training_in_sample",
+      "n": 777,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 4.163336342344337e-16,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 4.440892098500626e-16,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      }
+    },
+    {
+      "model": "minirocket_ridge_fusion_lr",
+      "population": "synthetic",
+      "n": 3,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "participant_reference": "unverified_missing_approved_inputs"
+    },
+    {
+      "model": "minirocket_ridge_marker_lr",
+      "population": "synthetic",
+      "n": 3,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "participant_reference": "unverified_missing_approved_inputs"
+    },
+    {
+      "model": "svm",
+      "population": "internal_test",
+      "n": 195,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      }
+    },
+    {
+      "model": "svm",
+      "population": "training_in_sample",
+      "n": 777,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      }
+    },
+    {
+      "model": "xgboost",
+      "population": "internal_test",
+      "n": 195,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      }
+    },
+    {
+      "model": "xgboost",
+      "population": "training_in_sample",
+      "n": 777,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      }
+    }
+  ],
+  "recorded_gpu_contract_comparisons": [
+    {
+      "model": "cnn_bilstm_attention",
+      "population": "internal_test",
+      "n": 195,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "fitted_state_unchanged": true,
+      "actual_device": "cuda",
+      "stored_wrapper_accelerator_unchanged": true
+    },
+    {
+      "model": "cnn_bilstm_attention",
+      "population": "training_in_sample",
+      "n": 777,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "fitted_state_unchanged": true,
+      "actual_device": "cuda",
+      "stored_wrapper_accelerator_unchanged": true
+    },
+    {
+      "model": "inception_time",
+      "population": "internal_test",
+      "n": 195,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "fitted_state_unchanged": true,
+      "actual_device": "cuda",
+      "stored_wrapper_accelerator_unchanged": true
+    },
+    {
+      "model": "inception_time",
+      "population": "training_in_sample",
+      "n": 777,
+      "original_exported": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "frozen_reference": {
+        "p_raw_max_absolute_difference": 0.0,
+        "p_raw_within_tolerance": true,
+        "p_cal_max_absolute_difference": 0.0,
+        "p_cal_within_tolerance": true,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      "fitted_state_unchanged": true,
+      "actual_device": "cuda",
+      "stored_wrapper_accelerator_unchanged": true
+    }
+  ],
+  "public_entrypoint": {
+    "passed": false,
+    "atol": 1e-06,
+    "rtol": 0.0,
+    "models": [
+      {
+        "model": "cnn_bilstm_attention",
+        "n": 195,
+        "deep_runtime": "frozen_gpu",
+        "raw_max_absolute_difference": 5.4370611906051636e-06,
+        "calibrated_max_absolute_difference": 1.9766714124264118e-06,
+        "threshold_decisions_identical": true,
+        "passed": false
+      },
+      {
+        "model": "elastic_net_lr",
+        "n": 195,
+        "deep_runtime": "frozen_gpu",
+        "raw_max_absolute_difference": 6.661338147750939e-16,
+        "calibrated_max_absolute_difference": 7.771561172376096e-16,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      {
+        "model": "inception_time",
+        "n": 195,
+        "deep_runtime": "frozen_gpu",
+        "raw_max_absolute_difference": 0.0,
+        "calibrated_max_absolute_difference": 0.0,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      {
+        "model": "minirocket_ridge",
+        "n": 195,
+        "deep_runtime": "frozen_gpu",
+        "raw_max_absolute_difference": 5.551115123125783e-16,
+        "calibrated_max_absolute_difference": 9.43689570931383e-16,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      {
+        "model": "svm",
+        "n": 195,
+        "deep_runtime": "frozen_gpu",
+        "raw_max_absolute_difference": 0.0,
+        "calibrated_max_absolute_difference": 0.0,
+        "threshold_decisions_identical": true,
+        "passed": true
+      },
+      {
+        "model": "xgboost",
+        "n": 195,
+        "deep_runtime": "frozen_gpu",
+        "raw_max_absolute_difference": 0.0,
+        "calibrated_max_absolute_difference": 0.0,
+        "threshold_decisions_identical": true,
+        "passed": true
+      }
+    ]
+  },
+  "marker_and_fusion_coverage": "fitted state, file reopening and three synthetic inputs; no participant parity",
+  "out_of_fold_predictions_recreated": false,
+  "new_verification_predictions_persisted": false,
+  "determinism": {
+    "repeated_data_and_results_exports_byte_identical": true,
+    "all_14_model_payload_states_reconstructed_exactly": true,
+    "model_container_differences": "PyTorch storage identifiers differ for the two deep-model pickle containers. The SVM reconstruction uses four fewer string literals/memos and four extra BINGET references. Typed scientific and sanitized metadata state is exactly equal for every model."
+  },
+  "essential_protocol_privacy_redaction": {
+    "path": "docs/protocol/preprocessing_plan.md",
+    "line": 23,
+    "scope": "two exact collection-period date literals only",
+    "scientific_rules_unchanged": true,
+    "source_worktree_CRLF_and_Git_LF_normalization_verified": true
+  },
+  "actual_filtered_history_verified": true,
+  "institutional_consent_rights_and_license_confirmation": "pending",
+  "sanitized_history_head": "0d773f541ebc313ffd31dee48c53e3b9832ef781",
+  "history": {
+    "status": "verified_actual_sanitized_history",
+    "original_source_head": "b0bcb9dce2e778ae8f3f672cefc1decf544d0e4e",
+    "sanitized_history_head": "0d773f541ebc313ffd31dee48c53e3b9832ef781",
+    "original_branch": "main",
+    "public_branch": "main",
+    "commit_count": 161,
+    "commit_correspondence": [
+      {
+        "original_commit": "2c6113b00e1200f981d3bb7434205757c566c8dd",
+        "public_commit": "f3075b2be751a54ec2ce325c81107b1c4e6e7cdc"
+      },
+      {
+        "original_commit": "e3bc1a3db29555046724e95509a7b5b64135d7b0",
+        "public_commit": "3fe99e2ea0b66b72cab31aa49dab66a201b22bc6"
+      },
+      {
+        "original_commit": "eb746897aeaf04fa2e592bbe10d61e4ae3608135",
+        "public_commit": "c6fecddaa842a3fdc796b9158e9cabfee33104af"
+      },
+      {
+        "original_commit": "be5cf09cff89ec85f135fc672bdd8f8bb50f89dd",
+        "public_commit": "f6ce922f5df98d4e8e647bf0b34b0f49be37146e"
+      },
+      {
+        "original_commit": "cb4b85cc1c57f3a3e11a27fd149033b01b592378",
+        "public_commit": "49dd6440d9f4832f31c517160201c8d011c3aa58"
+      },
+      {
+        "original_commit": "45b8204591c963d50ddf9aede0ba60ac040840a5",
+        "public_commit": "8eb8472ce1c1579888322e635cb1f2faad42dfd3"
+      },
+      {
+        "original_commit": "2fe4758d4cb919bd358721336f5919bc3143bcf2",
+        "public_commit": "35b4600689ffccfa1a90efeb44f726c72f9a22ef"
+      },
+      {
+        "original_commit": "491041b50391d9ad0d2fb4819560af35b7be2084",
+        "public_commit": "6f22254674baee177e2748855f1efe6753c44e1e"
+      },
+      {
+        "original_commit": "421254714d7af7ba4466e1424bb443f26270d464",
+        "public_commit": "adf9c1c916f31d76d4d9aba72143e67fbbb0a7ac"
+      },
+      {
+        "original_commit": "595d7db1525560e5e2e61936a222a71abbfe2762",
+        "public_commit": "e17fa8de8422c39db173fdcbb19e42f098d2138a"
+      },
+      {
+        "original_commit": "0902cca4f891d681c286eba54e737dbc0d75a5fe",
+        "public_commit": "d1fb5d5f1534de685e9b2ebfb3ed2cd3dc0bf408"
+      },
+      {
+        "original_commit": "4119a9fe6c99add4ac3d598b9b55cf0b0ac356ed",
+        "public_commit": "2908d6ff48d5b201b6ac7b97bad479f0cf0e6150"
+      },
+      {
+        "original_commit": "683e79a15bc2688b86dcf462a6124fc8696e18d6",
+        "public_commit": "372af55125b7b9f75c15275a83f9fef5b7879b62"
+      },
+      {
+        "original_commit": "15b5179ac2a465962c6e9542cf0399c17a028b47",
+        "public_commit": "3059381908e930ff4fa46db69687a7b9a8cbb349"
+      },
+      {
+        "original_commit": "a1600896135070c33cc2f77e6e00578bb264e365",
+        "public_commit": "2d1f304aa1dac0b1651637bea05b8969eed3e244"
+      },
+      {
+        "original_commit": "afd6b0c97b5f7d8e2df891924b59059dc81e0d34",
+        "public_commit": "4d24c635ae448e9e5878a0a5a4cbf274346f3f50"
+      },
+      {
+        "original_commit": "337214fb6d7ef3c3a836cfb92cb5f75b1dcc9785",
+        "public_commit": "57a3d7639614fce01558115f89948a1b32370ae8"
+      },
+      {
+        "original_commit": "8e092fabf9838498c8d452d244e57701b2c54806",
+        "public_commit": "dc3d5ff18638a558535b0969e433f5fa63b8cecd"
+      },
+      {
+        "original_commit": "92b015fb8c9f7d29d117becdadf533aed6189e2e",
+        "public_commit": "6074b3817cddd39c8e6ab29f8ffb14a0814063d1"
+      },
+      {
+        "original_commit": "2fa607d564b79508c1e22cce91e007860371ecc7",
+        "public_commit": "fe0373a91a899fe02fa9d34e8b014b456eb64cb9"
+      },
+      {
+        "original_commit": "650ce0e12c5f638f324ddad18f36812b14bc90ee",
+        "public_commit": "a1d45166d34b3660f7e3d3df76fe83ef3b6ae413"
+      },
+      {
+        "original_commit": "622cb3664774b3940f7bcf092004cfff62d06822",
+        "public_commit": "e4ee1bd802e30d392db9eb4cb55498019fd71037"
+      },
+      {
+        "original_commit": "f748c6d8becd85cc663f93d3456e6007e706be80",
+        "public_commit": "afa6028784ada13318a015a1529fc616ca7a037d"
+      },
+      {
+        "original_commit": "20269791ab27d201e935564e81065ff78d75315c",
+        "public_commit": "40795d88123af9151dcfc732fc17b6f9e2fba62e"
+      },
+      {
+        "original_commit": "f0d8e3832c5a44bc45e4630c9536983e75ed24b1",
+        "public_commit": "9f61e2fa16fe27595a342852af722549924c5d63"
+      },
+      {
+        "original_commit": "a2af64e86d01211624d5ec2d50b3e747a32375e0",
+        "public_commit": "8cd45c4f87eeafbfc10442525f23b87beb9c7787"
+      },
+      {
+        "original_commit": "37e980ffe842eed363b920cbf11b39cc28e81aee",
+        "public_commit": "1c3e310bf3d038857c7f12acba7870c58bee7b5d"
+      },
+      {
+        "original_commit": "5dd0b287969183f2746dff0a6ff4765e4fc8da0a",
+        "public_commit": "045862731c1e072a6c7718c216c62a3465ef288c"
+      },
+      {
+        "original_commit": "fa18487aec0a7daecd6528fc4a1bc92c5d755c53",
+        "public_commit": "37a5401d04e4a18860d75955c476eaefe2253e3c"
+      },
+      {
+        "original_commit": "81a0e76fc4df28dddddcd8d65bf0a4eca6bc9765",
+        "public_commit": "27b192e8ce9ca264120b1ceb5f43d64c287e6bda"
+      },
+      {
+        "original_commit": "476682b84c55f219a538a48366d7a3f1edc70128",
+        "public_commit": "be0bd07fcd04dde19b7bf1526f3aaa560c6eefa7"
+      },
+      {
+        "original_commit": "788fbdaf9c3aaf0f5e1c3487a4ba8361b27ac4c8",
+        "public_commit": "625b9380ded3ed7f1cd0a1db4bb542a6a52c94bd"
+      },
+      {
+        "original_commit": "dc862c82e97a2028fa3bc00389e4ed26cf7e6bd3",
+        "public_commit": "19c255f6210e5270ad6f310f9ef23747a101d233"
+      },
+      {
+        "original_commit": "9eb680e3d972b247c375e9126b66dd51543d6442",
+        "public_commit": "0930edda4d9198b53ca8102af0206ef4cb447a7b"
+      },
+      {
+        "original_commit": "b05ab642ebb06d1b4fb85fac4c95612492ed34a5",
+        "public_commit": "1bea6c261e5ad98680c3c88665c593d1aaf6de38"
+      },
+      {
+        "original_commit": "6b6626d2ac37911f51f16d10d91b9ed137d7e5d4",
+        "public_commit": "a0c20687cd2ef7eb239309d993fb8d43053684a4"
+      },
+      {
+        "original_commit": "5af2cc58586d53a547aad8964c410feccb23b9b9",
+        "public_commit": "5d89118091b97449cb55b3e4ce0ae6cfdf71157f"
+      },
+      {
+        "original_commit": "c5dcbcb6a5e5cb8cba1c3ca2de423e925dab8578",
+        "public_commit": "516c99f7be6eb5df2c9424688aa4bed605d05eb3"
+      },
+      {
+        "original_commit": "551c2cfb0a70371412410f1d25432cf48b2e724c",
+        "public_commit": "2fb9f6c9d8a48fc281e97ca406761db02610517f"
+      },
+      {
+        "original_commit": "4984f1903850375f399b7979c0dcdaa85b0a9652",
+        "public_commit": "c31303ffe9fdd86bb364b30bd2558564275b5f7c"
+      },
+      {
+        "original_commit": "c092a4206c03cc192f329cf4368165a0de969f9d",
+        "public_commit": "3b4dd61b9c04df0b9584930bc2a2352c130e4b7e"
+      },
+      {
+        "original_commit": "8a9a609e854c7628fba58627369f061d9aa51dd8",
+        "public_commit": "481c5f7c5db933b4b756bf11c8032e8267c29a3b"
+      },
+      {
+        "original_commit": "03f4126ec356a4facc17b05ab7b302cb339f0bb5",
+        "public_commit": "a19a30f5c375ebc7ef74549f0f1a709a8171353d"
+      },
+      {
+        "original_commit": "47aef60d3af918376d1f07b6c5d584c156472583",
+        "public_commit": "e63da5e187c21d69c3428295e5fbf2eaaee61f79"
+      },
+      {
+        "original_commit": "09538ab9780f5fbfe4f9263c350c952716b612a6",
+        "public_commit": "a144503ae820a6f272a5953f6a46ac1532f9b2bb"
+      },
+      {
+        "original_commit": "1965750c7664665bb090f69bff3dbe50afa228d7",
+        "public_commit": "b7293281f157f07084a8c05a12dd93032add75de"
+      },
+      {
+        "original_commit": "3e823ce29755490eb9517b42cbeda6b00765dab2",
+        "public_commit": "f923d277ac93bdddecc44d07c53959088dfa5211"
+      },
+      {
+        "original_commit": "82e351672fb9ee6bb6380bf4949644e67eefe040",
+        "public_commit": "17ef05cef979f075bc80d418037c236361d0132f"
+      },
+      {
+        "original_commit": "73b3baf974bced3cc0bfe021a9abe61a64ce627b",
+        "public_commit": "730c4f66fdb18b11de2e89963abb03e828f2230c"
+      },
+      {
+        "original_commit": "20d1f0d499fe468ac5d1a4dcefd45d5a43de9046",
+        "public_commit": "77dde1c6ed9ac441dbb96cf7c3cb99e2402a5f50"
+      },
+      {
+        "original_commit": "d20dcc60b28382a926101c9e1b953a3ca224a17d",
+        "public_commit": "59bd2edec744eeaab8cd5b46461cc5fffc514c68"
+      },
+      {
+        "original_commit": "7d93d806633bc2b8049a3b7ba233fa277bb98f2d",
+        "public_commit": "7a9fdefb14a40d4668f8c9740bf6ec77f6594f00"
+      },
+      {
+        "original_commit": "5112f80b8468d62c4f3bf630e06b2b14da78b467",
+        "public_commit": "f69019d9b7edd96f18a55c6bf98e10dbdfd83802"
+      },
+      {
+        "original_commit": "07ca47d8504e6c6a892d9ca0db6e1e93c3202340",
+        "public_commit": "b9240cade8941bf0fed862ac3b2077f32892e143"
+      },
+      {
+        "original_commit": "ae32a245712e20e7a3523f20546e708813502b95",
+        "public_commit": "a8ab9608f968e745ad58e99de22a9023a880e36f"
+      },
+      {
+        "original_commit": "f86807bbad2de89669037d7a4fe5308fb1dce84a",
+        "public_commit": "189f549d02880898e01a7c4f2940c40a1a0ed1ac"
+      },
+      {
+        "original_commit": "5e480f11992a2ae81eab529896ad3aa55f4d4d17",
+        "public_commit": "5a3ca9761f31354819defea527cf3879ab0b7027"
+      },
+      {
+        "original_commit": "73dd2bcd69aac3939890fa7ca01e995472a7a390",
+        "public_commit": "c227b152386d6f86398896c420cce57e66964700"
+      },
+      {
+        "original_commit": "1bbd55e67b3b353580bc7de3f06e997f9cb79d7c",
+        "public_commit": "1d093a90f6235521ea37c2378cf18cbb6c1df4f9"
+      },
+      {
+        "original_commit": "beacefdeae3acff656d49d41f075060b5a08f293",
+        "public_commit": "3ec0eb6ddc84c73db381b57fca4924026916a25d"
+      },
+      {
+        "original_commit": "abf2f99330623d4043ff97eacb6f454812d0839a",
+        "public_commit": "320dd509a15ced6ffcf34777b860a09d830d3d41"
+      },
+      {
+        "original_commit": "2d89ba678d2efbd8bc87ea9efcdb0f31295760ef",
+        "public_commit": "da0c64df7c4383526392d4719c0b25923a8c9c64"
+      },
+      {
+        "original_commit": "6764881a4dbe1c3738e1f86f615c26ee6aa7172f",
+        "public_commit": "ad7f22d4e6c5705cd8805b1b058dafd22ef7c27f"
+      },
+      {
+        "original_commit": "635bec67ddc60013fcc3611f705d5bbf2412c62a",
+        "public_commit": "45c13cd7ace75a347152277021327d1f5aa08c18"
+      },
+      {
+        "original_commit": "0b66184fcadc5d10a791af5096bba866b63dd6e9",
+        "public_commit": "60ab4639852d08069b85638769dfb0d94acec9af"
+      },
+      {
+        "original_commit": "eb194a7f96e0af96f9c9b58031b69011f814c0c9",
+        "public_commit": "7d819a7f3acae2fe01a4cfe2b47c9c766acf6f05"
+      },
+      {
+        "original_commit": "cbb87b0380d7129798002ff4ea8b869c4b786582",
+        "public_commit": "503f5cabec78fe5e024e3ae5ab81c7a22d72f84b"
+      },
+      {
+        "original_commit": "3c0ff6b3b40460a2c340ad3193222ee54979109d",
+        "public_commit": "7aa02872bf35642de15c0f31601d6badf1921c5e"
+      },
+      {
+        "original_commit": "2e08e8fb89d99bb62cca2e5204a13ff09e47d432",
+        "public_commit": "b1827b6955bc2a054ac7cd304a13a89e01fee090"
+      },
+      {
+        "original_commit": "d19dcbdb7bd9ef20c8534cca0a87384ed1c6fa9f",
+        "public_commit": "41348a8b11a318c9ca90125c74ecfd52cf2a12b1"
+      },
+      {
+        "original_commit": "2eb4023cb6d54fabc5baee97e5cb5e0b7d27d7f6",
+        "public_commit": "d50f6ee6b887efe83cb8d9c66f4c124177d1a5c1"
+      },
+      {
+        "original_commit": "ee042999ebd93eefd393fe6446145f8cbf6b75c0",
+        "public_commit": "932d233b7b924e8e152a8149ab2b7aeda16032eb"
+      },
+      {
+        "original_commit": "73807ae9b941320aff822a5e53bd11b57b3a310d",
+        "public_commit": "0ef3cc6e6168f4f32ed57e093ea19be6fd3773f1"
+      },
+      {
+        "original_commit": "aa76e5906ee2feb052e29b2ab9a6a65f4b837829",
+        "public_commit": "8a6534450b431d9c625a9f8d3f259f3e4bf48252"
+      },
+      {
+        "original_commit": "1d83286b1f9322190094a5b04c73923a1c2e489b",
+        "public_commit": "2185333e7468a7bba558e5aca9711aeb832f4c68"
+      },
+      {
+        "original_commit": "ea1e671e69271aa8d6c3367bef4e4eb7b26f18c7",
+        "public_commit": "f1c379be6bd9acf9ea616a575ac8aa8c777d2cdc"
+      },
+      {
+        "original_commit": "c55b52e7ed51933771ed8006934eeab5b75d7d49",
+        "public_commit": "7059ec08f7f2ddb0636609962d393c467e749346"
+      },
+      {
+        "original_commit": "e52b43606ac13b1cb10401691172822a67b1cc47",
+        "public_commit": "e35beaef012212e5edef7e2f64f5389d425106ee"
+      },
+      {
+        "original_commit": "b4a26203fd6678619323ecf16fed5448c770f0b9",
+        "public_commit": "d4a4bc1b069e04d15d0029150c65c0755da3358f"
+      },
+      {
+        "original_commit": "114caac47375ac20e791af372a3eefc20c0739f2",
+        "public_commit": "022ac75fa76d3bce11924db566aa39f400a2f52b"
+      },
+      {
+        "original_commit": "77a5d8fdf0483f63d0bcdcc53c6b77a757133266",
+        "public_commit": "d9be3f1950ee6b3a791a6af274c453ca617eb5d6"
+      },
+      {
+        "original_commit": "6cb752937effd5b424db75998e68b2f53432971a",
+        "public_commit": "3f41d4045d1efb79f00fb1de4ecc0a5cc969afcf"
+      },
+      {
+        "original_commit": "87325c4cfa703c92429c71e72d2a6afb1bea1d1a",
+        "public_commit": "59fc3acb46e527396020af110b6e058b16be155a"
+      },
+      {
+        "original_commit": "b524f11a55f99328d3fc26997620547d7b6e2f24",
+        "public_commit": "0ddaed6505b54311e6105af5fd5fd447515c1f1e"
+      },
+      {
+        "original_commit": "3478442b26bf42e7963b61916d8ac6180984ebbc",
+        "public_commit": "baf4bb92467f86ab15e6dcdf5935006f0bdb3141"
+      },
+      {
+        "original_commit": "8f27b188a7d38abe83829392391abb48f9e1615c",
+        "public_commit": "722890aad86cd8ecdf72eb11d49d80d21114f97d"
+      },
+      {
+        "original_commit": "d00820e337f61b79f0bbb5927c0a2fb8f89332d4",
+        "public_commit": "ec75ed7ac80eef1b8a06f307b954b44c95d35483"
+      },
+      {
+        "original_commit": "98f1b33d9beead54311fd84065b9344d27d7addd",
+        "public_commit": "645496149670cab87ef87999f2039ca2629a1a04"
+      },
+      {
+        "original_commit": "5455aa556c6a872410f6cddbd15dd0b48ae5de36",
+        "public_commit": "98c0feeac251155876f820c9d86f336794357f35"
+      },
+      {
+        "original_commit": "9906e9a845f18136e8328d9f4d8136c432668cdd",
+        "public_commit": "768bb2695ece021ded3fc4e0afc87df03dd70359"
+      },
+      {
+        "original_commit": "8c44846477c250a03380eda24a5c99ab63294426",
+        "public_commit": "8b9ea91d6537c059c413eec6e25f0117e8e9a9ca"
+      },
+      {
+        "original_commit": "098d6d5d65d9fb935fa97a30d1353a9694a0dc3a",
+        "public_commit": "3c60f9fc3e9bb7e8b3bd369fe10d5eae9d8a3cd6"
+      },
+      {
+        "original_commit": "1e9eb475d5655356cacc3afba7013c5102dd2255",
+        "public_commit": "698f68b52f277563046aacac797a26df398a717b"
+      },
+      {
+        "original_commit": "a5a1396149f005eb81d60bc117c88a496300a9c2",
+        "public_commit": "6408974765fbfd2d45c14910a828858a3c5dd903"
+      },
+      {
+        "original_commit": "768129c1e3009ffcc8baf4a30a4cc8b7f833318e",
+        "public_commit": "2af2a900bee7f5f6f92491ff629afb7132fc994e"
+      },
+      {
+        "original_commit": "f9a1846e2d1012d8160a9fa089c28e495a858c25",
+        "public_commit": "47d6664efdc65f767a9d565880e2d7b3add035b1"
+      },
+      {
+        "original_commit": "0b4386a22d838c1f4d5aab29eca3e57031695405",
+        "public_commit": "dd9dc14c0f4da125e814511518c13b6c88c27947"
+      },
+      {
+        "original_commit": "c9b1d7c2f771ffbfad98f690ab50e77ac29ee399",
+        "public_commit": "16c1f93edd834daecbb87089ec208e9828b3f74d"
+      },
+      {
+        "original_commit": "df833b6a1da0b44736d48a14e7e57ad7e096fa34",
+        "public_commit": "799d0dd74d285e22e54cb7c310b0154351856b44"
+      },
+      {
+        "original_commit": "fe036c95b609b92b9ed93b9b9facf20ddfd64d0b",
+        "public_commit": "b2669131b07d4903b31d8b561db2cc217416c577"
+      },
+      {
+        "original_commit": "e51250ba4ed38f02c85a3f1cb2eab53b17909b0d",
+        "public_commit": "154036a3419d56703aa7d1bb3e78f657e4d16027"
+      },
+      {
+        "original_commit": "84dd6b6b59297390a9626cefb87a5c98e9cd1cde",
+        "public_commit": "3eb4ca5695c6c4e1a48e6a176ba0c7cd9c41fcf1"
+      },
+      {
+        "original_commit": "b15f80533d7d2653790fecffb0c84563fd382606",
+        "public_commit": "2684da1a7aa5aa5f431ea5b78a8bf8909c2c06dd"
+      },
+      {
+        "original_commit": "99afe0ced007939fbc87dc1c5963c532234dbf42",
+        "public_commit": "f6a686b24016c88af824552440c152ddf5d7767b"
+      },
+      {
+        "original_commit": "967274b7197eac24fcdff12ec6e3d85681f8399d",
+        "public_commit": "277986c0be0c73be42d41f6cd26e0abeafb8c8e1"
+      },
+      {
+        "original_commit": "7c3247e08bd0daf78420051692761e8dd21535c0",
+        "public_commit": "bf0e00d66614df2d125eb3df16fbbb0b1d49a08a"
+      },
+      {
+        "original_commit": "3d84ae66f85bb1a293fbb2b4e7001a0cdde4211c",
+        "public_commit": "cf61825d909880b8275167e40471b19369d62799"
+      },
+      {
+        "original_commit": "b6941e4c5ff2c22555e41dd514b5b6de9b939ce3",
+        "public_commit": "6543ac75627068981b603460022ca7d59c473f5f"
+      },
+      {
+        "original_commit": "26a7bb1ec60e01f2e93007b2e0697120047a3704",
+        "public_commit": "df62bf0e32a584cfc1201625070df4251dac3226"
+      },
+      {
+        "original_commit": "f1ef579fc29106c9f406099ed82c576c716826fc",
+        "public_commit": "873001e49e61eb69a3a78d37487d13a47ec5dbd9"
+      },
+      {
+        "original_commit": "90a3530e2c9f47295d11d5a5d8f73087ebce2c26",
+        "public_commit": "9429097e64e27aa5121525918dc8b04831354aa1"
+      },
+      {
+        "original_commit": "e6d7bd4b15bf90ea2b1a05d14f5e2d948bc14748",
+        "public_commit": "e5f1af920a795a33cc8353044823e1c39f261a67"
+      },
+      {
+        "original_commit": "e9b0acff5214bb52d1c20808d4bcb74659b83e90",
+        "public_commit": "370ff8dcba1860ff079fc7f9f0a6a6c9462e58e6"
+      },
+      {
+        "original_commit": "f49215e2db9b897192ca971cee4e7387049f6bb7",
+        "public_commit": "addef80fe6ac659c028a63e75a21dea85809ddc5"
+      },
+      {
+        "original_commit": "2a04422d0cd02757e6a08c9852923f99775ea7d9",
+        "public_commit": "32eb8b1bd0f4d9b10b9ec56da245b44dfb415529"
+      },
+      {
+        "original_commit": "929a506ff777f5a968fbda4e9b8ec30e8e3a11db",
+        "public_commit": "c3945bd5cd3dff1cbf72630d7a1b400dcd5eea41"
+      },
+      {
+        "original_commit": "9a0449d9e95be2832cd64576ed103b75bb872b5b",
+        "public_commit": "84bd35a6305a072d8fd1d9fcbb626a0796742be5"
+      },
+      {
+        "original_commit": "26d6c60b37b65521a48b4d674e085abee64483fa",
+        "public_commit": "0f505cfc5bb844097b72f7d157d02f540c4eb65f"
+      },
+      {
+        "original_commit": "72308646eaec9224f83bab1678972d4afe670bf1",
+        "public_commit": "284efac94d8605e1b590bb1b74aeb9bacadbf999"
+      },
+      {
+        "original_commit": "8c45a1f00af0ac2ede3063f0c06db7f35333ace4",
+        "public_commit": "d5780a355d3930abc3762f721dc8904ee64702ee"
+      },
+      {
+        "original_commit": "c697178ea9b71e66ae78e5be1feed3ba1bcc25b0",
+        "public_commit": "a97d31fb9f35b4153deaa2d5e46f08dc0c466163"
+      },
+      {
+        "original_commit": "bf2378f3f7ec10dfd369276af92abf491815e0ff",
+        "public_commit": "be3b267a13996b62a42d5151394c58d398428d50"
+      },
+      {
+        "original_commit": "afe81c0c07dbf63495f63ff5e05a91d3d769dde0",
+        "public_commit": "bca776a89e2fd1896a388a7a08c686e468f3ff82"
+      },
+      {
+        "original_commit": "d3a016d6075b43abea483c3b546ddccc24e19458",
+        "public_commit": "52481c6e4e052ab5bc3331ec507ef7b5d9eab307"
+      },
+      {
+        "original_commit": "dc814016415e64f7b48f30e78de2ad1a12d1e3dc",
+        "public_commit": "c1dd6d80ea84cb353f182f5aa2e84aeb0a844cfc"
+      },
+      {
+        "original_commit": "46534328848af0b4a30b7f0f66d5b546690fc913",
+        "public_commit": "93e64782af2dc777156958b44b4aaee2c18fa87d"
+      },
+      {
+        "original_commit": "c19eed9b26cd780d04c7b4dd18809cf08f47d02f",
+        "public_commit": "f522258afeea2386d5162a0d78fb1f85e9d2c3cc"
+      },
+      {
+        "original_commit": "bcc3827ddc2b3b163053b27dd9cb32d1b858e538",
+        "public_commit": "2e74a4c09d747c3bb7046e479f7963999177560a"
+      },
+      {
+        "original_commit": "2b77de7dfd27c61a76a269f70ce7cdaed26cca14",
+        "public_commit": "4079e6a0e884396be96c8a352db30de4f271a5e9"
+      },
+      {
+        "original_commit": "e27a453279fc61d45128db36e12ceacfeaf9d854",
+        "public_commit": "ea701aa796c3ef943c28eaccc35543b4934ff067"
+      },
+      {
+        "original_commit": "2067b4f095e5581b49e08e75ea88790012f02a2a",
+        "public_commit": "0d15cca7caf7c32fa63a06ff6a538f3e1fa4c0e3"
+      },
+      {
+        "original_commit": "eeb56f1ed0ffe1d336629450155b49e974aaa7b4",
+        "public_commit": "2b88a78a59de521b56d3f36823869e7343ba79e3"
+      },
+      {
+        "original_commit": "92b4ad3869d3f574dcc06c756d6a332979ca735e",
+        "public_commit": "58526223747393197aa388cea9a3aaaa47be208c"
+      },
+      {
+        "original_commit": "1d3a20744cf05f7d06bc1b615f2faa6d81696c8e",
+        "public_commit": "f593de28d33b662677efeee1b75e54cbb3548b4b"
+      },
+      {
+        "original_commit": "de50024f6db423cc891dbd3371021e48303fe123",
+        "public_commit": "4b76cccf1b6def9311e4b450f5b50a2905cb3c09"
+      },
+      {
+        "original_commit": "c2c5b5e372d9f6a86b7ac1d141a20199a2588701",
+        "public_commit": "604f5582798dfd0ffbaf6b0d871701f2b6c44dd3"
+      },
+      {
+        "original_commit": "a2e6c9595010c12f2dc5e0d3c0d7eb1031d1584a",
+        "public_commit": "5d72d33eb2b660c862859585fa5ea026e5eaed77"
+      },
+      {
+        "original_commit": "214e5d2f49558e001dc269cf31add8d49ee4c9b4",
+        "public_commit": "c05d0a381fb1593b829f90e586cf44a6f636d4db"
+      },
+      {
+        "original_commit": "09f88fe48361b41d1469512145853d0b71db9126",
+        "public_commit": "94ed75e4cc41cd66d7107dd709f299440c018e98"
+      },
+      {
+        "original_commit": "0da092c936825778254d33723006821dae5b41f2",
+        "public_commit": "8d2257978ac7a22f6d10aeb1c2b2747e051d6489"
+      },
+      {
+        "original_commit": "57c18430b9e5c977edc4a1bc77f3e4166847d5f3",
+        "public_commit": "4b7c142c5e7466c97c2e93869c7dd14820b3b5ea"
+      },
+      {
+        "original_commit": "823b45731452f6cb523b6cf909b63609be4f8e61",
+        "public_commit": "75d495824aa1a9e599baf4c42252a9935e442ee6"
+      },
+      {
+        "original_commit": "279b7598b3862e6599d1cf5020e85bed550d2b69",
+        "public_commit": "ab81634b5fb8446c588ae0a9b591968801c0d61a"
+      },
+      {
+        "original_commit": "69f937eb8de1d8b5a108d7418fcf0c380d1acd92",
+        "public_commit": "3fa9b6803010bee6b02439ec07b8b114451e75d1"
+      },
+      {
+        "original_commit": "7df0e7838648d26b1a145128c81cba0292e91823",
+        "public_commit": "15c054b468f430ab93d49d1fe75058620afc0e1c"
+      },
+      {
+        "original_commit": "ffaed21f04b3c9ecdfcb99e17f98977a142676ec",
+        "public_commit": "0226254dae010b1744d2b18d792a767a887db9e1"
+      },
+      {
+        "original_commit": "fd64d6d38c1ab8aef41188e42a0ac0c2f6bfd7db",
+        "public_commit": "80b87505422aa3b78fabaf8df9e31693d9dcc9a0"
+      },
+      {
+        "original_commit": "3e78b7e4d624a1ea25f36e8d70e8e749a9917dc5",
+        "public_commit": "8580359d4d5e87abbed066c20c31254e59bf596c"
+      },
+      {
+        "original_commit": "6a32ba3a50607386ff49ca8689357d608e866c0e",
+        "public_commit": "4d4d47f47098605d2273244db945768e2d449370"
+      },
+      {
+        "original_commit": "a19c6d8e9fd4e4b7fafa55f7d78f1247f3df7e80",
+        "public_commit": "4622765f77b1feebccf519e0ec2266129fe150cf"
+      },
+      {
+        "original_commit": "a8a65a56119d4d57142b8a4de0afc9cf98e44fd5",
+        "public_commit": "8a189e6243b3d44f86879179fb170728b9746a35"
+      },
+      {
+        "original_commit": "699883c3fcd28c5390563c64399c2f8ab1a8e6ea",
+        "public_commit": "25c9ca25db467caed52d36fdd28e4bfdb37b1590"
+      },
+      {
+        "original_commit": "24abfb4a5477c69e00579c8eec5c0f915ef99239",
+        "public_commit": "ea544f5accc4d3dab6f1f94eb777d20c15e0a795"
+      },
+      {
+        "original_commit": "f0507c9556e9613c171244808612d04fe2b39060",
+        "public_commit": "f2502f9289ca53f44a4247782b7ad8c152129e18"
+      },
+      {
+        "original_commit": "f46ee60138ea9db38d569cb24d0227cfe089c13c",
+        "public_commit": "f567c5ccca88470b22f53a0894c01f867cfb4798"
+      },
+      {
+        "original_commit": "dafbbb66295d0a46c06a7603316e100891dab2bb",
+        "public_commit": "756db865930b6d230d6533bda0e6924ce26cd221"
+      },
+      {
+        "original_commit": "a4c1f8c36eb142a0e9ef1a9998eb9634fb2e105f",
+        "public_commit": "2d8adf8f7117fbc4298fe5294489dc9586a9309c"
+      },
+      {
+        "original_commit": "c470d1741f1f4dec2f27e5448271986d43ce46df",
+        "public_commit": "d2ca2d5f398697b829c12ebd50df86c5a768a01b"
+      },
+      {
+        "original_commit": "ac27564ec8b889be9c044e4693abdf730693ca4d",
+        "public_commit": "54024372503ffb869c0edf9fbf7ea1518cfcfdb9"
+      },
+      {
+        "original_commit": "8b66a1c23fddc554dd5daf4d6398b90d48038aea",
+        "public_commit": "cf9a30e3ec50f3804a541f16cf11ee0e472c4a06"
+      },
+      {
+        "original_commit": "b0bcb9dce2e778ae8f3f672cefc1decf544d0e4e",
+        "public_commit": "0d773f541ebc313ffd31dee48c53e3b9832ef781"
+      }
+    ],
+    "pruned_commits": [],
+    "freeze_counterparts": [
+      {
+        "original_tag_name": "preprocessing-prespecified",
+        "original_annotated_tag_object": "6dddc7372898b57b3eb488a0adf4cef82f9258a6",
+        "original_commit": "e3bc1a3db29555046724e95509a7b5b64135d7b0",
+        "sanitized_tag_name": "sanitized-preprocessing-prespecified",
+        "sanitized_annotated_tag_object": "053dc25a9b894bcd71fc1810875d5102321296b1",
+        "sanitized_commit": "3fe99e2ea0b66b72cab31aa49dab66a201b22bc6"
+      },
+      {
+        "original_tag_name": "preprocessing-frozen",
+        "original_annotated_tag_object": "3ecfc26c443f335782a05e32f9c5998ad093f3fc",
+        "original_commit": "622cb3664774b3940f7bcf092004cfff62d06822",
+        "sanitized_tag_name": "sanitized-preprocessing-frozen",
+        "sanitized_annotated_tag_object": "a70ffe5bd543454bc418201fe1e424c8a3d7e67d",
+        "sanitized_commit": "e4ee1bd802e30d392db9eb4cb55498019fd71037"
+      },
+      {
+        "original_tag_name": "modeling-prespecified",
+        "original_annotated_tag_object": "40ee1e84e990a7ae79895021e25d3e85e63c88ce",
+        "original_commit": "f0d8e3832c5a44bc45e4630c9536983e75ed24b1",
+        "sanitized_tag_name": "sanitized-modeling-prespecified",
+        "sanitized_annotated_tag_object": "05d08dd4bfa048a75b47dab65549dbdf47f31985",
+        "sanitized_commit": "9f61e2fa16fe27595a342852af722549924c5d63"
+      },
+      {
+        "original_tag_name": "data-split-locked",
+        "original_annotated_tag_object": "7c2e933473d6c19f8151ce0484127ef1f0399a4a",
+        "original_commit": "81a0e76fc4df28dddddcd8d65bf0a4eca6bc9765",
+        "sanitized_tag_name": "sanitized-data-split-locked",
+        "sanitized_annotated_tag_object": "784817fdd7ec71cd1f423783f524154f03a8c931",
+        "sanitized_commit": "27b192e8ce9ca264120b1ceb5f43d64c287e6bda"
+      },
+      {
+        "original_tag_name": "best-model-selected",
+        "original_annotated_tag_object": "320e3480e3d876f485bbcf21d62f79e3fc7fc2fc",
+        "original_commit": "8a9a609e854c7628fba58627369f061d9aa51dd8",
+        "sanitized_tag_name": "sanitized-best-model-selected",
+        "sanitized_annotated_tag_object": "a43ef6fabac69d41d58d74883bc4bc66d75def80",
+        "sanitized_commit": "481c5f7c5db933b4b756bf11c8032e8267c29a3b"
+      },
+      {
+        "original_tag_name": "modeling-frozen",
+        "original_annotated_tag_object": "59a30bd7629fcde5dc81bb96411f076e38b31161",
+        "original_commit": "5112f80b8468d62c4f3bf630e06b2b14da78b467",
+        "sanitized_tag_name": "sanitized-modeling-frozen",
+        "sanitized_annotated_tag_object": "ba75dcbc55edd71bfa006e4a03a9a16ff9a68baa",
+        "sanitized_commit": "f69019d9b7edd96f18a55c6bf98e10dbdfd83802"
+      }
+    ],
+    "annotated_tag_object_ids_are_distinct_from_commit_ids": true,
+    "parent_order_preserved": true,
+    "Git_provenance_timestamps_preserved": true,
+    "author_committer_tagger_identities": "withheld",
+    "retained_scientific_file_hashes": [
+      {
+        "path": ".gitattributes",
+        "public_blob": "cbc00276c46a97c37b80a0cecd5af1bc0651d0fc",
+        "sha256": "ee77432afcdbd5150617907e0b81dd142c48ab78a2c6173488165ff9769e650e"
+      },
+      {
+        "path": ".gitignore",
+        "public_blob": "d6cae95fe984231ac01003319747b291d0e69cfd",
+        "sha256": "397dc8e61f29f651287a7bcf69c3f61f419f18a4f5b471526919bf599828eea0"
+      },
+      {
+        "path": "README.md",
+        "public_blob": "44c5fe2334e538578e1878fd1043a854c0941082",
+        "sha256": "92332cdcbe311e9756f90187c5f2a98d3e5eb79377830f74bfa443466d6ce9c3"
+      },
+      {
+        "path": "README.md",
+        "public_blob": "4b8d43c5773860c7964d1b6077e622bf93d071b3",
+        "sha256": "dc412e657aa150ec0daddbd27003f111e53bc5d287fef7583737f943244ae0bf"
+      },
+      {
+        "path": "README.md",
+        "public_blob": "4c1ac57abbc169292241a922ad3423390f70270d",
+        "sha256": "7a2812351e8324767f2d3eb63e7831094c375d1147af03b1c881255dbdbf3472"
+      },
+      {
+        "path": "README.md",
+        "public_blob": "52fbef52839a0be4312a6220ae5a2277a35f2a07",
+        "sha256": "e0fd4f9d968797e949d96bba3db9c64f8f7a4c5ed38cc741d53868bbeefebc58"
+      },
+      {
+        "path": "README.md",
+        "public_blob": "57cdd5bfe7dfba1ec163422a9a97fa5c7aabdebc",
+        "sha256": "fd5db4609bc63f5bdcd9ec5819bc7f554e5e62acd62e210e06813c4ae3cc0f06"
+      },
+      {
+        "path": "README.md",
+        "public_blob": "7cab3bc3551fc784397537eb3e9d4772f03823f1",
+        "sha256": "e7c685ecd8b080ecdb53f7487fc20fc12666c9a699861917347cb6ce78b4b081"
+      },
+      {
+        "path": "README.md",
+        "public_blob": "8849ce0e84f01a2c56512ae5df58a2713d4846f3",
+        "sha256": "704fecbcd868011e7aee621ed41eed42da63883e37d5cc8cdb11d52b4d7bc344"
+      },
+      {
+        "path": "README.md",
+        "public_blob": "91111fb6d8135a008a4fde269648bd3edf083b40",
+        "sha256": "e71dacc4d30ddec51671c88a971fa6cc9a82b979dbe55f2b7ace741c17ee8057"
+      },
+      {
+        "path": "configs/efigure10_six_model_binned_calibration.yaml",
+        "public_blob": "35255bbe5610dc5645577ee8b58286f7e04542ee",
+        "sha256": "237781d4d3bbe82bf427aaac66aef774f1364f4db1c3bbdc74a192a32baf4180"
+      },
+      {
+        "path": "configs/efigure4_preprocessing_stage_aggregate_replay.yaml",
+        "public_blob": "c890b064a5cbfc677f7d226351e1cd92cfc1e154",
+        "sha256": "3e0b0f7509b405b34c375999e1e5b4870567a4f20d77dc338ac5574a2acb6587"
+      },
+      {
+        "path": "configs/efigure4_preprocessing_stage_aggregate_replay_environment_lock.json",
+        "public_blob": "3c1365304734db63619235dfac3a77e06a540dab",
+        "sha256": "cf3e23de96b76536d6b906e24c2ffbaeb767a70d0940c2d483ac4f2200706cad"
+      },
+      {
+        "path": "configs/efigure9_disease_category_prediction_matrix.yaml",
+        "public_blob": "9731ee72661938951a62d4c8673a4e28069a654f",
+        "sha256": "536886da77b5adf86da8e1f67459d03799e884ecebb4fd871c3bf4f7b47bc26d"
+      },
+      {
+        "path": "configs/figure3_e010_deep_model_reconciliation_diagnostic.yaml",
+        "public_blob": "b73007e4295d77f41a05a78f8c13db9a705e4cae",
+        "sha256": "45d54daee969533d959b49d20b8b121b1d86fd457888daf1cddf18797323f64a"
+      },
+      {
+        "path": "configs/figure3_unified_channel_block_permutation.yaml",
+        "public_blob": "1dd55610deeec5190966db0770f4632895cf9268",
+        "sha256": "694837f6ee7a487af8aa8cf503abb14bc22ec88bc2ff59f90382d3265ae2201f"
+      },
+      {
+        "path": "configs/figure3_unified_channel_block_permutation.yaml",
+        "public_blob": "d02815f38fbd3703ebd929eac5703b35a947be58",
+        "sha256": "f3c7163435bb886177ba955ccbbc1295662ce28015746266523e28cd01c7ebde"
+      },
+      {
+        "path": "configs/lgin_postdiagnosis_disposition_source_closure.yaml",
+        "public_blob": "47214ab291e71882cf4cc98107c1d20d43b8591e",
+        "sha256": "d3fea6da081dda4afd2b0ebad85217252615521b0b61920da42b210308797ac8"
+      },
+      {
+        "path": "configs/modeling_cnn_bilstm_attention.yaml",
+        "public_blob": "a8bce194c04d477913da919b7f1b38d05f0336f8",
+        "sha256": "2732132cc0dbb002054af54824bdf3784ed94349c8fba4c0dd7411e55b1838d6"
+      },
+      {
+        "path": "configs/modeling_elastic_net_lr.yaml",
+        "public_blob": "4f8e694535837439deeabe1102eb81057b7eeb6c",
+        "sha256": "9ea2b154aa765bb6b9c66e2151133de9d51a13db8f4abb6eb6e5a1a3e28754cb"
+      },
+      {
+        "path": "configs/modeling_global.yaml",
+        "public_blob": "e81418d143d8e03846963d9a616fe02157e3e054",
+        "sha256": "c4520df8040adfebdfd1f6ae89376be5484ae3dfeda0cfd2481103df323a2e54"
+      },
+      {
+        "path": "configs/modeling_global.yaml",
+        "public_blob": "ef45f75525c13097c0190c4dba3ce6ac902dced4",
+        "sha256": "f2e71ac5a855f03f24164ea7bc3408e1c8078761c20529e7978add1199475a05"
+      },
+      {
+        "path": "configs/modeling_global.yaml",
+        "public_blob": "ff32a76e1363d665a512b0faa4f6ed72e2512839",
+        "sha256": "42a4c5fa66050ea4bb0cd59c69515dedcb1f371dbd18f9ce3b0d43eff80b664a"
+      },
+      {
+        "path": "configs/modeling_inception_time.yaml",
+        "public_blob": "648f12ab85fe1f5b503a9b4ee764b0493cdecaa0",
+        "sha256": "27b1267a03ce0118ff9d993204289dc15603a8c52674abbca559ec23a0882fc2"
+      },
+      {
+        "path": "configs/modeling_minirocket_ridge.yaml",
+        "public_blob": "2e1c5144d2e210d4974dc4ee95793327b34fd46f",
+        "sha256": "fa2ba5e1d5cefea39139c1f0b42f2f6d7b182a8e26f5a2a283e7a45d768eb85b"
+      },
+      {
+        "path": "configs/modeling_svm.yaml",
+        "public_blob": "2a7626988f06b16af946dc68b85cca293e9a3f3a",
+        "sha256": "3ff72ddd7cec68dc651e468817c637c570e52e034e77bcba41e04b749fa18f15"
+      },
+      {
+        "path": "configs/modeling_xgboost.yaml",
+        "public_blob": "d45eff72f1459fae33282e16d73357290fee6a9e",
+        "sha256": "c24a8b4d840736bfd2d42bef2291fe6aea33370c95f3614657105b241766071f"
+      },
+      {
+        "path": "configs/post_hoc_final_supplementary.yaml",
+        "public_blob": "1f967b7451176348e7b34ceb0aa98b26245d38e4",
+        "sha256": "8d0614ed6f81ef115c3ac6a64b6504f80eca06746a112a5bd2d54dd2fc60764c"
+      },
+      {
+        "path": "configs/post_hoc_final_supplementary.yaml",
+        "public_blob": "37cf32215c17b2c5a8d2440df988fee92003325f",
+        "sha256": "441ad4e27e951a5b31bf2fa078c5371de121594088c22c7dd5c2904d831d704f"
+      },
+      {
+        "path": "configs/post_hoc_final_supplementary.yaml",
+        "public_blob": "bd8874dc7afbeb2edca882fb47ed080a9abb2cfe",
+        "sha256": "32a0ffc546053f01e4f2a2b63542b4404d5ce4f9d3f85fcd91b43d4cf06158f9"
+      },
+      {
+        "path": "configs/post_hoc_final_supplementary_pre_execution_amendment_01.yaml",
+        "public_blob": "6f1f5ae2142dce4475dba9eba565951c0822d3be",
+        "sha256": "ffc0b655fc0292b1d7bdc29b185941c2cea872654be19cbad102997acbd12ff5"
+      },
+      {
+        "path": "configs/post_hoc_supplementary.yaml",
+        "public_blob": "3fd71b37a4c6bafe04cce671e755112055ad29c6",
+        "sha256": "cc48e3b0fabd596edcbc5dc005eafe038b8ee4a4b9437084e0778f7017572f9d"
+      },
+      {
+        "path": "configs/preprocessing.yaml",
+        "public_blob": "1c958267a9a2373ec4c2160bf073fd646e74008a",
+        "sha256": "27113b3d6209f4722b8c40e9baf0e243a37061f4e858382c298c3779aec434e7"
+      },
+      {
+        "path": "configs/preprocessing.yaml",
+        "public_blob": "87fa43459593b7c0376963f769b47159c536d3e1",
+        "sha256": "b130e36fa56f69f9b1d68723c4d2dde97bf6d87f9f9355f5961db6db99820e32"
+      },
+      {
+        "path": "configs/preprocessing.yaml",
+        "public_blob": "b47eec6917588d82f3e866801aff0aede2ea62d0",
+        "sha256": "e3b0d8d9331eda2685926120a3dc7de1a62ba1f5a7f2d411fce87838a63a0664"
+      },
+      {
+        "path": "configs/qc_retained_excluded_characteristics.yaml",
+        "public_blob": "312aa0d802e27daa13c1d9fe0ecfae106ae05b5d",
+        "sha256": "604969b9cfe50304d8aab9cbd3b5c6ed1833db15e68e31f45f847f2d4d3a8c82"
+      },
+      {
+        "path": "docs/modeling/clinical_reporting_clarifications_2026-09-25.md",
+        "public_blob": "51a2ed86e26280e98db275c84849ac8620cee5c0",
+        "sha256": "c53a362c98453becb8178a2b7cf3e8b1ef85213e1439a6dd33307deff56c853f"
+      },
+      {
+        "path": "docs/modeling/etable4_ca199_decimal_correction_2026-09-10.md",
+        "public_blob": "c85438981755a055e6e1502f36239ee870e1a647",
+        "sha256": "7c9b6fbb7d54c3d41d14a76004e7e92b9bf39df246927bcfef62f861e2c7cc39"
+      },
+      {
+        "path": "docs/modeling/final_post_hoc_supplementary_analyses.md",
+        "public_blob": "24873f00c28ab539320f823db78c06ce4f70cb08",
+        "sha256": "4f3843aa4db65741a0f65e06bb6cb16597ca816befb0eb06cca1dbf0e4b59273"
+      },
+      {
+        "path": "docs/modeling/final_post_hoc_supplementary_methods.md",
+        "public_blob": "1c8cad618b744c07e08e19c453c127227c9aa92a",
+        "sha256": "ee799bc317a2f63c692f2e7b52a8eb6134bfad4f3a3c69ef9242f8ee5f97fa12"
+      },
+      {
+        "path": "docs/modeling/final_post_hoc_supplementary_methods.md",
+        "public_blob": "65f1ef6ccb8d5de0fdb4c4c1538e135460b5ad03",
+        "sha256": "edfe093113a237178101feb1b7c24ce616a84d98c054798d7a4dbf2bc220e983"
+      },
+      {
+        "path": "docs/modeling/final_post_hoc_supplementary_methods.md",
+        "public_blob": "b1be0319ab6f771d3bb1e7ffe26604a4e7fa6862",
+        "sha256": "9a2a2878f8738b716ae9243e79945d46fb013e05c456da19597d53fafdffbc2a"
+      },
+      {
+        "path": "docs/modeling/final_post_hoc_supplementary_pre_execution_amendment_01.md",
+        "public_blob": "393d7e161cb3200cee8563faac765e93601df55e",
+        "sha256": "c6f5e465fab72a1f106feed3b4b91fc65d0aa35a7c54cefb689cee0e17ab0a9d"
+      },
+      {
+        "path": "docs/modeling/manuscript_reporting_scope_decisions.md",
+        "public_blob": "e0e153f2bc3591baa92ed6803a802152ee7a7f9e",
+        "sha256": "7f9044133581ffd995281072013e8412aa2758ccbc8c76156e2eabcf584bd7f5"
+      },
+      {
+        "path": "docs/modeling/post_hoc_supplementary_analyses.md",
+        "public_blob": "122a88cf4c2bdd51a50b23ee43ea086da4a4dfa2",
+        "sha256": "aec7fe7e4bf822e65acd3bada2d6d638768777e8bbeddf3dcc6c77ffb76df5d3"
+      },
+      {
+        "path": "docs/modeling/post_hoc_supplementary_analyses.md",
+        "public_blob": "4896ff3f1c60de9d9592ef3d31f43a3507be1e8b",
+        "sha256": "b9064a95e6d773a19a70e3886bf8871ac60724c8ed5a0e9cdc9b0bdd60fca7e3"
+      },
+      {
+        "path": "docs/modeling/post_hoc_supplementary_analyses.md",
+        "public_blob": "4b7725fe52722f3f6e9a6e522768d6ae18167448",
+        "sha256": "1a14f6c6e2a678b74e51804925243558b35b308b982a901d1e46f0d7beea9e85"
+      },
+      {
+        "path": "docs/modeling/post_hoc_supplementary_analyses.md",
+        "public_blob": "53c90e9a9e5ec4cc017bec809d68e83645cac1d5",
+        "sha256": "e81d91f96bdfff48f520b11b726c20f40ac592e5e23d377c517f4c47a93ce5b0"
+      },
+      {
+        "path": "docs/modeling/post_hoc_supplementary_analyses.md",
+        "public_blob": "d4fffc330a605f6da520a708d13be6d182565ad9",
+        "sha256": "fb1a1e075cad17c3e3622af5650191c1200202eaab8f1427232dc6fc6c340e9a"
+      },
+      {
+        "path": "docs/modeling/post_hoc_supplementary_analyses.md",
+        "public_blob": "eec3e3743b51325895f3070e58ba0a2069a09e68",
+        "sha256": "45db147973d5a729952e3e3e5cf1c2a23bd943e37c29ffccc15db0fcaca27f73"
+      },
+      {
+        "path": "docs/modeling/registered_sample_size_reporting_closure.md",
+        "public_blob": "4f8943c9cad67d3d97f2f9f9e4d0c522f81ade2b",
+        "sha256": "8f2c0619456e98b82c26fa3120164a5f0c0856cd548f59a9d6f552413def352d"
+      },
+      {
+        "path": "docs/modeling/registered_sample_size_reporting_closure.md",
+        "public_blob": "5757baf0923e770a8b868afefd3fcd31762cdfec",
+        "sha256": "3abd3a1231519ea69687df1337036ad6331aa20add7ceaf434b6767cbefdfa95"
+      },
+      {
+        "path": "docs/modeling/validated_modeling_run_summary.md",
+        "public_blob": "bc5b705a5222c0c98b763481e41d9adb8b64fa95",
+        "sha256": "9331d8465302cd4215411e8ff4375f7206d21698c51bb5a6b3994192cd02dad3"
+      },
+      {
+        "path": "docs/preprocessing/preprocessing_as_executed_reporting_clarification.md",
+        "public_blob": "861cacc9758fcd07057e80146956da4eeb3fe9ab",
+        "sha256": "6b6ae5933d7904592ca06d17ecc50a39ca2d677474feeefc70bd47e1cf0eaa01"
+      },
+      {
+        "path": "docs/preprocessing/preprocessing_fallback_denominator_reporting_correction.md",
+        "public_blob": "6aafb141c69aa596ba7efab051f4242e65506493",
+        "sha256": "ba0ea1b226a94ea476744ec7e8f6b047b546634d766e4bdca01792dbbca8a15c"
+      },
+      {
+        "path": "docs/preprocessing/preprocessing_stage4_conda_explicit_archive_channel_metadata_correction.md",
+        "public_blob": "b945b4b782fa0bd4148e61aff0a0606d8277516f",
+        "sha256": "a1d208e2a2d53faaa931ffa4f99b95dc9690e62a7ff4c55704210d293612f91b"
+      },
+      {
+        "path": "docs/preprocessing/preprocessing_stage4_numerical_environment_build_drift_correction.md",
+        "public_blob": "5d4b84edbffbeaba563b710db0599bf4b14d811b",
+        "sha256": "225aff9168b0e4f13e25cbbf6aa5f66ddc151e82a0e28e056cc0d307e917f83b"
+      },
+      {
+        "path": "docs/preprocessing/qc6_lineage_correction.md",
+        "public_blob": "997b550a0a0ac472dee47e5c8f5aa900e624a533",
+        "sha256": "3a18cbd06bd93ec6bc1cb4ce7524e450e29fd448bb98f56d76b06315350d9b75"
+      },
+      {
+        "path": "docs/protocol/modeling_plan.md",
+        "public_blob": "3acf96b4eee731926ec9648fc9bf8db7fdf2305b",
+        "sha256": "ee954a01c352189ce0ac64f020cb9d391284af13c13ee63f4572b500dcc4865e"
+      },
+      {
+        "path": "docs/protocol/preprocessing_plan.md",
+        "public_blob": "1b5fd989dbd5761a978fb6cbd260c51353c0270b",
+        "sha256": "5325afaf2f4b5da2074c1676bae84c249f1a114fcb8f8f03eb53b57d7a698b94"
+      },
+      {
+        "path": "environment.yml",
+        "public_blob": "036b98ddc0e39244f583d62a609089dfeade61e1",
+        "sha256": "4681d736febc0dbd182dda0627375d4a68591d110555b5450698eaba23e16803"
+      },
+      {
+        "path": "environment.yml",
+        "public_blob": "65de53ba6091cec3decdc3d42c282c1a497804d7",
+        "sha256": "ffad86b45c9b0ea57ae980a9ebfaf6b4eba3b9195bcb0011731708a24cf64275"
+      },
+      {
+        "path": "environment.yml",
+        "public_blob": "cd8cd04e943417f6a7eae2b009661b09f0883839",
+        "sha256": "3dc29be50859d2a3b0cab354d2d7e3eaf0e5baee5de13a972807665c81b61184"
+      },
+      {
+        "path": "environment.yml",
+        "public_blob": "e041422a78499c8bfdf67ea9b33eea54270137a4",
+        "sha256": "49bd2388732af0c8b3be4f6001299580616095e8b370ed624df043acbf56f657"
+      },
+      {
+        "path": "scripts/__init__.py",
+        "public_blob": "acdab7e27276f916448794e9cf3017f1c502d39f",
+        "sha256": "ad03fc59b61c49890d556bf7ccc2c78dd7eaae955963111151c7f77f8f9f96f3"
+      },
+      {
+        "path": "scripts/run_calibration_tests.py",
+        "public_blob": "23b4a0a583fd641e536e8c427616e4da3fcab33d",
+        "sha256": "c529b538ed09a609f5ed00f527ed033ae7e58e0de8c7ceb5548aa96e35f8656d"
+      },
+      {
+        "path": "scripts/run_cohort_description.py",
+        "public_blob": "cb7596c794fc7e686fe501e9ec8a68f3b83312f8",
+        "sha256": "55376ec044d8270b2560b753d73de130f0197e76d7a60cd7933d64ee443f2981"
+      },
+      {
+        "path": "scripts/run_data_split_seed_selection.py",
+        "public_blob": "3524480b9ee1848cc70b14d6bd0063eda94bb15f",
+        "sha256": "814acb761114e4ce8cabcda9df6444aa3912ce5f6646a2cc11fbe8ee98ceb649"
+      },
+      {
+        "path": "scripts/run_discovery.py",
+        "public_blob": "0c4950de13f86104737c0dcc1b14a7502727b334",
+        "sha256": "574404adcd683e9ba7fbd91c5cde61e9017ba1e77f61b1712abb4791d78d788c"
+      },
+      {
+        "path": "scripts/run_discovery.py",
+        "public_blob": "64a378bb0cfc824115de1ddde99f06e690c242e4",
+        "sha256": "c679f8f0335f0a37957900f17e7c1a10b74022ad4b2ff831e6d4e4a386783d89"
+      },
+      {
+        "path": "scripts/run_discovery.py",
+        "public_blob": "a49378835bd750a9d88cb322f425b411e85e2e17",
+        "sha256": "352c92d8651650926141b90579acea5ed7f992a9c23fc19ce4297869e9a62d9b"
+      },
+      {
+        "path": "scripts/run_discovery.py",
+        "public_blob": "f758d2bd4f3ed3e75f4c3401fc52f2909ada4243",
+        "sha256": "67c64c09669428837e22ccf99be5ff770bae91ca83a89357041abe28c8e8af2f"
+      },
+      {
+        "path": "scripts/run_efigure10_six_model_binned_calibration.py",
+        "public_blob": "fbc0895c1a507c2f3924c622c13283e5e08d9b7f",
+        "sha256": "890d807961ff81a5c731bea8d9f94560530ff7987d86a129a9c3771e37999435"
+      },
+      {
+        "path": "scripts/run_efigure4_preprocessing_stage_aggregate_replay.py",
+        "public_blob": "53058b32cdaf18ff7ab40818788ca67263e72cce",
+        "sha256": "5ebf84d3ce8ebbdf7455360113491267293b9acb18d9f2f2d9934a4152a8aec4"
+      },
+      {
+        "path": "scripts/run_efigure9_disease_category_prediction_matrix.py",
+        "public_blob": "db23d4379fc9c2b188888c812d6eb547c1fbc7c0",
+        "sha256": "bfd04a215f06403268c1ae525086938d3cd2c368adf99b09acaa755b69fa1dad"
+      },
+      {
+        "path": "scripts/run_etable4_ca199_correction.py",
+        "public_blob": "aa168e30637baef11847079d779819e4b1f3b856",
+        "sha256": "4a839bbdef39ca1197cc3bdb1ee2fc50683c75944b407f561f92d57a6e2d4737"
+      },
+      {
+        "path": "scripts/run_figure3_e010_deep_model_reconciliation_diagnostic.py",
+        "public_blob": "0824c82a866f8484cd69739cb043c1d870bf6ee7",
+        "sha256": "98b2dc1fa1ac0423e5a90160be04f22ddfc293203f32cb723d0b0f77210f3573"
+      },
+      {
+        "path": "scripts/run_figure3_unified_channel_block_permutation.py",
+        "public_blob": "eb77b425ebd19bb997581f9459eeb8d00103543d",
+        "sha256": "dd73f69c5ce0d3d23259536ef1c93aa799f20edbb1417dd456ad6b9151ab3816"
+      },
+      {
+        "path": "scripts/run_lgin_postdiagnosis_disposition_source_closure.py",
+        "public_blob": "e3afa661960c926e0d492be195d3dd8370ce3a71",
+        "sha256": "eb09e9d626242e95deb6efeb08dd2c72d21168b6a027d7c45a732ef2740dd03e"
+      },
+      {
+        "path": "scripts/run_optimism_correction.py",
+        "public_blob": "36c745b4754165c34d05459e3cd01f6f972fb362",
+        "sha256": "3c252ac31fc0f75f9a75b42e2064104fae506971342f49625b52deacfc86a81f"
+      },
+      {
+        "path": "scripts/run_posthoc_final_audit.py",
+        "public_blob": "80613fbfe26f7d8c390f8cf32343b0f75ac103c3",
+        "sha256": "22400cf8b199615a3014daa7cd652a65aee272b90c83bd1be827a8b028706e9a"
+      },
+      {
+        "path": "scripts/run_posthoc_final_date_grouped.py",
+        "public_blob": "2c95403b635c502b875beeb870f4bc805f585d9a",
+        "sha256": "4cb1d4a525897b6d2795623313f9da6fc18c46271806ecde3a712a657ba5bd2d"
+      },
+      {
+        "path": "scripts/run_posthoc_final_locked_scores.py",
+        "public_blob": "98fcae820fa171d16eca1bb30a0d61aac3414bbe",
+        "sha256": "fae61113c70fa60f68820433324fb88f71f0165fccb1b652064687254820336a"
+      },
+      {
+        "path": "scripts/run_posthoc_final_locked_scores.py",
+        "public_blob": "dff4faac404d82a8e9c03840550f1eec9f5c8160",
+        "sha256": "ec92d83a0abf29d9ce42154598eb247538c415c7c37d5098d8104950e04176e9"
+      },
+      {
+        "path": "scripts/run_posthoc_final_reporting.py",
+        "public_blob": "59a115480d26dc5e7134e3290a610502e710962e",
+        "sha256": "11243d05499a2cafbd305e2c9e55d102dc1a290f76571f141b6810132513602b"
+      },
+      {
+        "path": "scripts/run_posthoc_observed_prevalence_dca.py",
+        "public_blob": "38fd9bb515b85b80b790a2ebc7002892fbeb55a9",
+        "sha256": "fc6f773d6d2a21f37e5bd87bac4a2646eb86bbb54c20c675ccdea372257eeeb6"
+      },
+      {
+        "path": "scripts/run_preprocessing.py",
+        "public_blob": "8608436ac3047efaaa498e7628d0e38048039a74",
+        "sha256": "b99f0df745455cbf64cc3d2d024a311ad800054bafa9023b9c88be9b9c45ad14"
+      },
+      {
+        "path": "scripts/run_qc_retained_excluded_characteristics.py",
+        "public_blob": "d2f2e65e23c48747ba7f7c4521fa65a222f1bab9",
+        "sha256": "9cae7f9bc1144b8942b1ab3069467783096b46b891867dc49bb67a587340e089"
+      },
+      {
+        "path": "scripts/run_sample_size.py",
+        "public_blob": "b6f876c83703f370c078189e8d7df83b1d0a56c7",
+        "sha256": "6a218abd725f6043ec695759ce71b351f3f10bb04b8213509be560d47e194bbf"
+      },
+      {
+        "path": "scripts/run_threshold_uncertainty.py",
+        "public_blob": "440b88b77cbaa06e5d45a1a5d0b22da54305fb1f",
+        "sha256": "9a74eb07b880d3472ef9c4ffb30ed85ec86ac9ef560de84894dbb7437bfc4d09"
+      },
+      {
+        "path": "src/__init__.py",
+        "public_blob": "c6501a8b5ad55f32d74c58f51bc4a357083c6997",
+        "sha256": "4982dd26547d38c601f471dcb1921543d38907b4620b17d8eccb909463ccf6b3"
+      },
+      {
+        "path": "src/analysis/__init__.py",
+        "public_blob": "525a724f3365a9c4404f22cd9694226d6bd9c168",
+        "sha256": "670771c6b3326f1d744f27aa29771ab57e59fc4e5264cb1040639e82f2e4c5ac"
+      },
+      {
+        "path": "src/analysis/baseline_table.py",
+        "public_blob": "3fb15ab10944ce576054a529a541fb04b4d93288",
+        "sha256": "deb46dd8aef6da22ed6cc5118e80a7fe03dbca2ad19b2bac2e55564e497e28b8"
+      },
+      {
+        "path": "src/analysis/calibration_tests.py",
+        "public_blob": "b0c96b32f7fb2289f2448364239eaed9737c72e2",
+        "sha256": "784bd0f155443384170dded6d7659a117354618240490279e2c2b0cb4dbd4451"
+      },
+      {
+        "path": "src/analysis/clinical_translation.py",
+        "public_blob": "2f8a6d8d64e6619c5cd48494a799edf0fd7e7b4c",
+        "sha256": "120fffebf7b648abb7b4504e4b84ab8ce1a2922b90bd53f24f05e4821a84f626"
+      },
+      {
+        "path": "src/analysis/cohort_description.py",
+        "public_blob": "bc9b963ca2c89b248ced2a34ddf381fb1d2e338d",
+        "sha256": "5ad3ed73b6886b19411621e5ba852d4c7700038923087a3ce2e54d3e0e9f4992"
+      },
+      {
+        "path": "src/analysis/cohort_description.py",
+        "public_blob": "c32e673cf8e9675d982b1a90ec1095bb302ede72",
+        "sha256": "f5a77af01b5c34460ff4f5c423595b26265d6953267fd196c9f261ecb17a8f12"
+      },
+      {
+        "path": "src/analysis/data_split.py",
+        "public_blob": "02f434408e4a1c4bf20b37e8fdd8d16801fb77cc",
+        "sha256": "6c7a7245f509ba1db11dc14b04b0219a0ece8168d4800865aeb111ac04e18c0e"
+      },
+      {
+        "path": "src/analysis/data_split.py",
+        "public_blob": "bbf7b802685839ba277b3e7fd85ebc44bfff55b9",
+        "sha256": "4c10e56a95d675f47c57922133bd48232893500d515ff50f3e215150261b2ada"
+      },
+      {
+        "path": "src/analysis/dca.py",
+        "public_blob": "f32fd1f654630287ca12cc1ece57596c217d7461",
+        "sha256": "e34859debc25c93e0641f32ee610db828e20cd65c80c31a88fb3c358787adf04"
+      },
+      {
+        "path": "src/analysis/efigure10_six_model_binned_calibration.py",
+        "public_blob": "fae3b68cd733f8369b0e5477a4f3fbd9d4413a98",
+        "sha256": "ee0e97ecd3e5f0750af49589e0340b3b8ae7c282d4bdb9e7fb757991d3f67477"
+      },
+      {
+        "path": "src/analysis/efigure4_preprocessing_stage_aggregate_replay.py",
+        "public_blob": "136f1226bea5481cef8171668e1da5f6fecc1707",
+        "sha256": "e0cea659c25ce7f13f824be95516e393abdd3a0d4bb5b86b018d12b96fc9cfb0"
+      },
+      {
+        "path": "src/analysis/efigure9_disease_category_prediction_matrix.py",
+        "public_blob": "4af11181cb7917795a003172e79fa1eb7a8c3fcb",
+        "sha256": "60b2cc7b28231abb0bfbb7d14a978e54237f6e202c36bd1bf51356031a8086b0"
+      },
+      {
+        "path": "src/analysis/etable4_ca199_correction.py",
+        "public_blob": "049364866dd9a065182ce2ed6bb29505a9c3d61b",
+        "sha256": "a200a87cdbee71b32a85b528c16d64a81d9fe299a54c226d43703739dce541c5"
+      },
+      {
+        "path": "src/analysis/fallback_padded_sensitivity.py",
+        "public_blob": "768141363a8599f4d8538a89a3776399619b9ea5",
+        "sha256": "e5ebb3441bc4e77d359acb03100f2d8a15437d091826956be5856f57f4fbf4c8"
+      },
+      {
+        "path": "src/analysis/figure3_e010_deep_model_reconciliation_diagnostic.py",
+        "public_blob": "8f4e3d81cef88c228792c6403bdda8833b568761",
+        "sha256": "b517d3b9d724745769347fde811aeee4d59db0d109f05a4cda098c6eeb0eaaa2"
+      },
+      {
+        "path": "src/analysis/figure3_unified_channel_block_permutation.py",
+        "public_blob": "32cf0050957c25e9ae1295a30221b504235043a2",
+        "sha256": "39624c7b9e575e535faeaf3765c18a3d319714af28cf40137395e48ae3094d24"
+      },
+      {
+        "path": "src/analysis/figure3_unified_channel_block_permutation.py",
+        "public_blob": "7a38b4d9327df27ae7dd1293016d58c1396f3924",
+        "sha256": "18da4f69e15de521022afe47faa1f1c80b8dee764db64ee48e67ee97b143c7ca"
+      },
+      {
+        "path": "src/analysis/lgin_layer_analysis.py",
+        "public_blob": "e38397f8a45124431b48e9875cdc0c35513e3cd7",
+        "sha256": "2279e37423ab866dc4b53d10392a525cdceac5bdd6a549312de42a8133f3be49"
+      },
+      {
+        "path": "src/analysis/lgin_postdiagnosis_disposition_source_closure.py",
+        "public_blob": "d770dc80dc407144a3f2f248274a7ee8e58bc93b",
+        "sha256": "3b42c686d8472ed2db33c8433b905a8c63eab8a4c1b07563eb883fd91c896918"
+      },
+      {
+        "path": "src/analysis/misclassification.py",
+        "public_blob": "501a9615ba23156bba911af0e4818d4ce1b36e87",
+        "sha256": "103649bd3bd2a75df5873c1e5999886de8709aec0ef41ead21dbe610158c8aee"
+      },
+      {
+        "path": "src/analysis/model_selection.py",
+        "public_blob": "abaeff7f079213741ca7d46ed77e146a82b1608e",
+        "sha256": "62c448f966e21ef7e2adbb12b57f20b4cb7693fa6c649cf81b2ea169508be1c5"
+      },
+      {
+        "path": "src/analysis/observed_prevalence_dca.py",
+        "public_blob": "bd7f5d8a21bf3208333306a191a1f5398bd8e06e",
+        "sha256": "85065b717727dd52daee6301e40eca77708efdba32a42dd52bd16c972baad2e4"
+      },
+      {
+        "path": "src/analysis/optimism_correction.py",
+        "public_blob": "1111afbdb6ab33ba96ac655f9bf46cc387cb00a5",
+        "sha256": "0e42418fcd9431d9df7a9030ac4c926c765adddfa7c6210afc8636fa28efa934"
+      },
+      {
+        "path": "src/analysis/posthoc_final_audit.py",
+        "public_blob": "9b0c80c0bde4ca0da9192857c6456496af91b37a",
+        "sha256": "c1573d56f8f652fc11a1ed9f47b8a44a643e56fb82c9b7776a36384e0fba6cfb"
+      },
+      {
+        "path": "src/analysis/posthoc_final_audit.py",
+        "public_blob": "f19f0453e34400da166c75e55b634c3a4e162d79",
+        "sha256": "664f72c8551167211526e33522e668666d5db6c9a23bab976fc9f1445788be0f"
+      },
+      {
+        "path": "src/analysis/posthoc_final_common.py",
+        "public_blob": "3ae869e909c7ba28793aae63e71064b39e4afe33",
+        "sha256": "4836bc88293be719413b4e30de83ba034266558cfb9cb146d52f232b1ea4b4c8"
+      },
+      {
+        "path": "src/analysis/posthoc_final_common.py",
+        "public_blob": "cdc9417c8f3356520ced80c05f0a906f5a786c1e",
+        "sha256": "13eb2a857cf309607ec9ca040adbbbf09de00fd192195efe9d06b911d0327f76"
+      },
+      {
+        "path": "src/analysis/posthoc_final_date_grouped.py",
+        "public_blob": "5173132d508ebcf601c3d4727ab91da4c2f590bf",
+        "sha256": "78704ba7dc467c939a9174a4757126fce67d927f825af5036ba06287cf618eeb"
+      },
+      {
+        "path": "src/analysis/posthoc_final_date_grouped.py",
+        "public_blob": "fee061da9b798c05ba16ff3aa7c351ad089141f7",
+        "sha256": "5cad1a34197f8306276b8f274f56ca3af069523a15af81a1ffba84bbc8e1ea45"
+      },
+      {
+        "path": "src/analysis/posthoc_final_locked_scores.py",
+        "public_blob": "bacf9e1891f6d613201d899d69c3736dd5959ea9",
+        "sha256": "ea3df5d825d20429c9ade2f314712613600614b6c63db51216bceac1dd21fbd6"
+      },
+      {
+        "path": "src/analysis/posthoc_final_locked_scores.py",
+        "public_blob": "f4b15cbf21ed5ccc291968e36dbbafb7b692aa02",
+        "sha256": "cb2ac283f84744ff7cffc7272dea0e1b2e967171f2e0f7791e8f797addb5975e"
+      },
+      {
+        "path": "src/analysis/posthoc_final_locked_scores.py",
+        "public_blob": "f5739745470d1351d4a35af65c505f3bfecac7df",
+        "sha256": "5face8b1263a901d27956051b037ac2d83e2925c95af951b8a9d1bbb42d98b0a"
+      },
+      {
+        "path": "src/analysis/posthoc_final_reporting.py",
+        "public_blob": "083ca56b0f6f56036d72e6a5cfae8fcdc28725be",
+        "sha256": "a4d3fcce7ff1a7fe37c5e790f6651fdd1429945143653cf32ab7c052febf1194"
+      },
+      {
+        "path": "src/analysis/posthoc_final_reporting.py",
+        "public_blob": "9bc2daafc41b95daaf3264f30c54998a5592d46d",
+        "sha256": "49772c00129e1aafdca7ae67db3a7922d1043296665cb163ca4c27821fe3619f"
+      },
+      {
+        "path": "src/analysis/progression_trajectory.py",
+        "public_blob": "6cb961388f756ac4d4e68a75dd5b7de2c33d3a92",
+        "sha256": "69b00ddafeb8e28aa4588b41da53051d282d817328dd9a3b56318e7ff11e6159"
+      },
+      {
+        "path": "src/analysis/qc_retained_excluded_characteristics.py",
+        "public_blob": "b6ebdac76db9ed4d6a142fb7e886a3498e5a1fc6",
+        "sha256": "00ed56ec502cbfeaf727971cde307325751f5ea880db65c546f3c6d116f2984c"
+      },
+      {
+        "path": "src/analysis/reproducibility_verification.py",
+        "public_blob": "3b218cefab739b5f1d7228fa56ecbbfa742e67c4",
+        "sha256": "80b51d3ddb1f3678bdfc43e9badda687e3729c79aff037bbb2a9ec3d0c9abb63"
+      },
+      {
+        "path": "src/analysis/sample_size.py",
+        "public_blob": "701d1a644f504cebec91a322bb766da82f4bbc2b",
+        "sha256": "208edcbbc60e40344560e62219fa483cfc26ff8610f68b344e81bbdccf1a0050"
+      },
+      {
+        "path": "src/analysis/shap_cross_model.py",
+        "public_blob": "a506f7fabfcf09f0fba58c7cbd519bbeb08dd18c",
+        "sha256": "2a23e41c060c38a04a06c7fa6b44d86bee8226dcb47f137396f2ee5b72946d07"
+      },
+      {
+        "path": "src/analysis/stage7_part_a_common.py",
+        "public_blob": "857ae3dd15a5e046ec8e1360b66bc243f623d3f3",
+        "sha256": "2ee75f19c284e84aa0528d557d9f582cf217180005dd014a5dfa06e995527179"
+      },
+      {
+        "path": "src/analysis/stage7_part_b_common.py",
+        "public_blob": "94079528b3abbb8134710157bd1bf04f065f2b42",
+        "sha256": "e43d6901e5bd869df9c143b82aa4bca405ccdac5c0dc70dc823e3563ac72b9e9"
+      },
+      {
+        "path": "src/analysis/stage7_part_c_common.py",
+        "public_blob": "5f6dc28af4a2342a45f49859202c35c220d4a8ad",
+        "sha256": "8dfb3800754d45bac8c5bf8d67223863c96dacc023a1307a40befb237463b237"
+      },
+      {
+        "path": "src/analysis/stratified_robustness.py",
+        "public_blob": "f1879b41a1c55f3c3dbbc9a452afa826c9076562",
+        "sha256": "df32445fcde106e0f549fec40ccb2089ea2b8bc2fc93d25c79850f8761f602df"
+      },
+      {
+        "path": "src/analysis/subgroup_analysis.py",
+        "public_blob": "7a01e2113eeac57ee31b19a7ff5759dae74fc736",
+        "sha256": "3e70d4d9192a4d924129ff96f490224c1350490e62d46764a33921333ec53871"
+      },
+      {
+        "path": "src/analysis/temporal_drift.py",
+        "public_blob": "d13d015e7c02101d11db88cfb9ee6ab0a7322672",
+        "sha256": "9f8c14b58f19f41e764e66e45a259f27a37faaf9a071f7784f6cd3b730cd3efa"
+      },
+      {
+        "path": "src/analysis/three_view_comparison.py",
+        "public_blob": "30bd739b373c91bdd303aeebf934555abe23dbd6",
+        "sha256": "8768ee04e01790f2706bcbc58fd6b0b2ad8c05451ce5ee09c6f1c05d77cefa22"
+      },
+      {
+        "path": "src/analysis/threshold_uncertainty.py",
+        "public_blob": "6cb399396862a39251801c144bdd51c58f72f5fe",
+        "sha256": "2100292a2a536e043482df98f2863372ce9a179001a4f359daf1efe3880bab36"
+      },
+      {
+        "path": "src/analysis/tumor_marker_model.py",
+        "public_blob": "f0dcb96876777de9640db30c62b3957182bd3174",
+        "sha256": "e3c46218d0de7fda76c152376745a9c145a485ef98a44cfe87214d9d12801022"
+      },
+      {
+        "path": "src/analysis/vocs_marker_fusion.py",
+        "public_blob": "6fa7c5e2bf7eb7597369f8b4073b22b8a958109d",
+        "sha256": "74e6da321f6111a9393b6edf470e9ae44f0404cbdf049b492b0e96b000ae57c6"
+      },
+      {
+        "path": "src/config.py",
+        "public_blob": "19263730968ca0e0e94ee605ac34832956ec8c90",
+        "sha256": "8dc50b27dde990461e3e2540bc47fd4dd494a230e4ca865f6c9b4c7c398c465d"
+      },
+      {
+        "path": "src/config.py",
+        "public_blob": "a91ccb6df1f962ea394775ada8d2e48a673604e0",
+        "sha256": "737b34c468c54b5d3761f214233c8d418171f2fba902af54ec0a2afbb919b488"
+      },
+      {
+        "path": "src/config.py",
+        "public_blob": "d60b8790d7321fcd3606055c1583ebabfe0e5d77",
+        "sha256": "e10ccfe1ca068b39472a7b3e201cf709f0f017ab502d2cec851cb8914a3a721f"
+      },
+      {
+        "path": "src/config.py",
+        "public_blob": "f8b81a31784e3de024a4679bf0b2e35fd95bd9cd",
+        "sha256": "3d99ebf4803810551eaf5103ad9ed94c78f7cb5606427b368ca480a45269c1fd"
+      },
+      {
+        "path": "src/config.py",
+        "public_blob": "fae25229a16ced733dc75a73bc55e0c85cc3c17a",
+        "sha256": "1f0e9fb7b94c0e6dc1c365d9b9ec0c3b825b816ad8357413804894ba9379ad6e"
+      },
+      {
+        "path": "src/config.py",
+        "public_blob": "fe0cb3b4523ad628881938c080cb1c6e77effe25",
+        "sha256": "339b1c1d4bae7d180434109e3a1882500d8bc3e5da646e6633e8158ec0b0d456"
+      },
+      {
+        "path": "src/data/__init__.py",
+        "public_blob": "18a5bc1bda6deb9df39bedbc965f96198e362e52",
+        "sha256": "8179b0631604025c670aab23b7f6eab0c47d6b437d806ab9ca8d58c51603b577"
+      },
+      {
+        "path": "src/data/baseline.py",
+        "public_blob": "9572200331af477f765c249d174677e167c2cfe5",
+        "sha256": "2800fd7bc8268841c3613ffde9ca77e4404f8732c0976fed334eceb59a3ffe40"
+      },
+      {
+        "path": "src/data/correction.py",
+        "public_blob": "e6c6339ea2ee68271d4f9d40e1a9e7d034b73159",
+        "sha256": "202ef9c8f673be49af3febc5056ca14488bc50380069c918c32166ced1fb7c80"
+      },
+      {
+        "path": "src/data/discovery.py",
+        "public_blob": "55c38dfa6383e64247622d774ae7d6ee2c9276a3",
+        "sha256": "30f54b6fc725bd1253dddf168f727b9a4db3be59a742ee780c95aeb7a1b2e909"
+      },
+      {
+        "path": "src/data/env_compensation.py",
+        "public_blob": "9690c5bc1f0300eb5753797be73f568d75e25c6e",
+        "sha256": "03e56a732e9938217f1ff8c9587fd1b571ceaa688818b17c15447e02081840eb"
+      },
+      {
+        "path": "src/data/loader.py",
+        "public_blob": "8dc8be1ac25ce28fb4fd7c4ff9cc73f90ca0abf8",
+        "sha256": "b30904e2721b68243635886e129c6110e6199be02af58aa1021160db1719eb76"
+      },
+      {
+        "path": "src/data/pipeline_a.py",
+        "public_blob": "5cf1df087469813b83ee7d58a8c848ddfe1713ba",
+        "sha256": "f261fff76fb1bcf7d0734ccf7713c70e6b24e16234c622a625c5db7c051592f5"
+      },
+      {
+        "path": "src/data/preprocessing.py",
+        "public_blob": "929e1f592a56afb76b01ad71ce89bd5f02974d1c",
+        "sha256": "6e3037b57f3a4c86e424d49dfa53438ca9b9ff4b1dd9f626096f274e1f89b376"
+      },
+      {
+        "path": "src/data/qc.py",
+        "public_blob": "1487564fa32e94ff543f63ac46d8861c6f246d1d",
+        "sha256": "5a634b045fc6d815f9e08c6449dce3bb3e6ee2e63bb6d8b527065f44438814cd"
+      },
+      {
+        "path": "src/data/qc.py",
+        "public_blob": "929413862e7320cdb17591ea5e5f3c27bb149f89",
+        "sha256": "b15ac4f59c3002214cb27d28d76c286daa3127fc934bd2098a67d88d6aa0bab4"
+      },
+      {
+        "path": "src/data/smoothing.py",
+        "public_blob": "325f5c5cdedbed7d4686ef89f0c6e71d66462af8",
+        "sha256": "a51671ea5220382258f0ac605015f3374237c9d52c2dc67abc6fde6297c28e7d"
+      },
+      {
+        "path": "src/evaluation/__init__.py",
+        "public_blob": "8d458aa031ee3c88934f6ec98ead3de0a25f5c36",
+        "sha256": "f52d6b063da8aff8895dadad3d781ab676929ec16e94d8f67e5eac773251d748"
+      },
+      {
+        "path": "src/evaluation/calibration.py",
+        "public_blob": "ee9d4caff7455d0da207fe9bb6b74a99cf40b6c0",
+        "sha256": "33e125ca16669758c94b2ecfc323f1fdf776926699175b8b398151c0c70b9ed9"
+      },
+      {
+        "path": "src/evaluation/metrics.py",
+        "public_blob": "39f29e4da99b5780c2cdd054e90c40b624ef5351",
+        "sha256": "f355df339a9ee1bba6fff98c5bf24ea5f611554204da3257d05d702d8708595c"
+      },
+      {
+        "path": "src/evaluation/statistical_tests.py",
+        "public_blob": "e74fbcdc9055a9edf461b82ed9a7c6e90ca3dcad",
+        "sha256": "ef565e50c5fb380db200098adfca454eedda89a8ea71a14dc075680db9d4d5d0"
+      },
+      {
+        "path": "src/features/__init__.py",
+        "public_blob": "5b01c0334c6055862fb1c76b26d71be3cea5aaab",
+        "sha256": "e5d56a4d5703658967ff51cd8b7fff795bb6eaecf5a94456aa628216707e2998"
+      },
+      {
+        "path": "src/features/extraction.py",
+        "public_blob": "80d3c0950ab91a561240be512807ef3a5bf9889a",
+        "sha256": "a2e51e3b117de307008e20e8bb5f1a31a0bea8c79438e3a00ac2a0932d7108bf"
+      },
+      {
+        "path": "src/models/__init__.py",
+        "public_blob": "b732c009d10508c99c0e8e304ced2d1c25853afd",
+        "sha256": "f39da52d8579319084246ca4a350a0c669d84bcd73f86bf10e51f636363796f9"
+      },
+      {
+        "path": "src/models/cnn_bilstm_attention.py",
+        "public_blob": "9aef77c84a69e782dd3456b00885bba3bd678db0",
+        "sha256": "536b4477f1604231adf15bcc75ca984b328b7e11fd1fe6d2f14420866a946fdc"
+      },
+      {
+        "path": "src/models/data_module.py",
+        "public_blob": "6be8d8690ea22756ea450a38b4242897d0cdfa52",
+        "sha256": "abda6fb58fbc1e60035854ad5241488888e50276842e82cbce1829a4624c4daa"
+      },
+      {
+        "path": "src/models/inception_time.py",
+        "public_blob": "5cfacc5f59a4552996c29866746d0a9a0892b3df",
+        "sha256": "616bf8702271d06c2c4dabb15ad708415bd11ae39c7b2f5fcfc58641f36ebd1e"
+      },
+      {
+        "path": "src/training/__init__.py",
+        "public_blob": "f1c562a3fd4b1d9f94375b9f14e67e54e48b5a49",
+        "sha256": "8ff646e16528038e559ba03e41d7e9963aa3b5d97b05da54d684d8d25f595b0b"
+      },
+      {
+        "path": "src/training/common/__init__.py",
+        "public_blob": "2743309beb316c2161d7a1dc2689c752e64a4551",
+        "sha256": "5af842697e9e1662e8fad3475bf7da4716554b66291fc198ef70c1071861563b"
+      },
+      {
+        "path": "src/training/common/base_trainer.py",
+        "public_blob": "c4e9f0e6963ec86ad48669a8c6687bee2b99a681",
+        "sha256": "8c36e96449049239a196bc98f0bde4c78560b75d41ebb6151886a523b03ba02f"
+      },
+      {
+        "path": "src/training/common/base_trainer.py",
+        "public_blob": "da9d06b14dd5d1941f7ad4215e7842e05459b9fc",
+        "sha256": "7230fc55ab336b62a34882420331d59d568f40312b6effd5f0f7e5e3c5afe4e0"
+      },
+      {
+        "path": "src/training/common/bootstrap.py",
+        "public_blob": "d18c5fcba6e6ebb9a42b9d8ce885b9be0130fe1a",
+        "sha256": "33cd38f1bd6b53eff77bdd5aa7c6431b893f61dbd14ff57a25a98545f2f1cb9f"
+      },
+      {
+        "path": "src/training/common/early_stopping.py",
+        "public_blob": "ed7cf6e468ce2aaaa4afe570ab38234ac6e10b70",
+        "sha256": "bf6d131f21208eee9227e35d765cdfbfe0cc62f51f384275a8be2845160289ad"
+      },
+      {
+        "path": "src/training/common/fold_generator.py",
+        "public_blob": "aa413260a43be5dbd7eab1e387823fdbc7579fbd",
+        "sha256": "0ba24624d81c18f17a12c0c30b152e03e461c991db9bdb24d8a8a12541e6a6ca"
+      },
+      {
+        "path": "src/training/common/metrics.py",
+        "public_blob": "c4fb92e0cc6f8491b5d5a00ee19462848d7b5b85",
+        "sha256": "4ee61f6eb78b4627333b2976d9a7e5a4b7c23c99127f8318d90e29ae74a6b741"
+      },
+      {
+        "path": "src/training/common/metrics.py",
+        "public_blob": "f63f992c5543eaa33ccc2eb8a9ef063a14d7000a",
+        "sha256": "d69d51515600d8e18ed03a09eb1ea0453b282654c4f9ea7618a80817da6a0954"
+      },
+      {
+        "path": "src/training/common/normalizer.py",
+        "public_blob": "905603b66717f9a8221d7a871565697bf3aae540",
+        "sha256": "d04df8a5300c3bd4c843a0a26434684e5655e6fb89f5e6269c4a21b0c65056de"
+      },
+      {
+        "path": "src/training/common/runtime.py",
+        "public_blob": "6f06dbaa666f58a9d7949548c03db0a3b5da6a90",
+        "sha256": "54ba8cf3df6929f7724dcc3f9b9b8fe38c27e6ba4fe97157e7eb0256c3493758"
+      },
+      {
+        "path": "src/training/dl_inference.py",
+        "public_blob": "4dc0c5b6173992c8a9ab023130213d0d560fdd24",
+        "sha256": "1ac8bffa05eede6276dbc424fbab36cf326f5ec1e4b1263ef9dd708c0d870cb9"
+      },
+      {
+        "path": "src/training/load_final_model.py",
+        "public_blob": "6d413e6c7c1afefa05352bafefebe58d0c33a5ff",
+        "sha256": "3813e2ba07c0fb611c5f260ae5deca9e89fa034cb5396ef15acc57170a794330"
+      },
+      {
+        "path": "src/training/train_cnn_bilstm_attention.py",
+        "public_blob": "2bc94b81e27fe2b270b59130e8d20317d27e9835",
+        "sha256": "70cbad7715079dbd9f085c8d1ec73e4b7d4ab9e9f19031aebe845eccac221d38"
+      },
+      {
+        "path": "src/training/train_elastic_net_lr.py",
+        "public_blob": "0aaacf9ff8666af628281b2b966a0928793d4ae7",
+        "sha256": "1960ff8cde363a25e0c4f42881fec0d96353c368fa98e9de90e48f2a589bbe91"
+      },
+      {
+        "path": "src/training/train_elastic_net_lr.py",
+        "public_blob": "3341dc3d3474abfcf8d6de86970bc7d9304a4b93",
+        "sha256": "5c19082db30c0e5345afa4b1e09fe5c2a53ca81fe2102c27f122155ae41a8dcb"
+      },
+      {
+        "path": "src/training/train_elastic_net_lr.py",
+        "public_blob": "4469e70f1150ccdf4f58c7a46a2fbf201fe71bba",
+        "sha256": "db5cb33706e2b56ee37ef595e575f61a37bae362779976a88a43cac576176364"
+      },
+      {
+        "path": "src/training/train_final_models.py",
+        "public_blob": "750ae0dd0b31da03a49f35c24fb0d190dc317e7a",
+        "sha256": "b5be9b1ac922ec273e3ab962237f3b4c444928832ed058a10131a9b6c7cbaa8b"
+      },
+      {
+        "path": "src/training/train_final_models.py",
+        "public_blob": "d3212d60344999c967d1ac66049a61c35749ecc4",
+        "sha256": "6a2a960a06a022ebc91a06ad0236ff2011ae6c2add5f870c3395a1141958e41b"
+      },
+      {
+        "path": "src/training/train_inception_time.py",
+        "public_blob": "9cec9b21aff1adbc2613fdc8013dda1b4387a7d8",
+        "sha256": "6992eb9b9dd92fbfda201b28363b2e1e70b072938d4ce6ba35f7c4a2dcfe7673"
+      },
+      {
+        "path": "src/training/train_inception_time.py",
+        "public_blob": "b817dc70f170c192b5cbe22976caca4175440cba",
+        "sha256": "89aa8e238a7083bc0bb0db09025d2b7618c58d1e52be3c9cd51d2047b7a86544"
+      },
+      {
+        "path": "src/training/train_minirocket_ridge.py",
+        "public_blob": "b3e45a9691bd4cc824055f62af582b51c6ade6b7",
+        "sha256": "726fccbc3b466d52462713a1dd336e2ab6eb011dff7cbf5e2a6e995009c7d6df"
+      },
+      {
+        "path": "src/training/train_minirocket_ridge.py",
+        "public_blob": "ce8994094dc9dc06bd7fdced3454b4af65e6fced",
+        "sha256": "478de4af84b06e77805c764e967daab3377b3c028829cae327973a7954a845b9"
+      },
+      {
+        "path": "src/training/train_minirocket_ridge.py",
+        "public_blob": "d92de7695d3a5fbfe697700a5c37380859332e63",
+        "sha256": "88a884f743f21fe86cade71c7e23783f2c12e2602e9eb86addf48de000c082f2"
+      },
+      {
+        "path": "src/training/train_svm.py",
+        "public_blob": "289c81752df78878df5973f294bd8431c4ef6020",
+        "sha256": "315aab17bd16749d766ab85d03794033e268e23eda06e7c64449c2b12d500ae1"
+      },
+      {
+        "path": "src/training/train_svm.py",
+        "public_blob": "74bcc1217ce2bd37a9d1343fe3a06a0f41eb165d",
+        "sha256": "1dcd6b034338b86603d9e5e62101e6dcaa9ca050246e5d0e9e8ac2f31e087902"
+      },
+      {
+        "path": "src/training/train_svm.py",
+        "public_blob": "c573260103d84a57d76bcf4d7f4a2638b408dcff",
+        "sha256": "18de0396932315c116cb33d071db21a297c55200efff15716e1b837b12e8625c"
+      },
+      {
+        "path": "src/training/train_xgboost.py",
+        "public_blob": "90b54b4e67b8ff5b97d92f5c9de808b21e396d1c",
+        "sha256": "8dfe875b6eb7594c491e27cc0643204872416981d400538f8cb82563e2b76f5e"
+      },
+      {
+        "path": "src/training/train_xgboost.py",
+        "public_blob": "96a692516d0491b96d17673f7c06b6b776b85823",
+        "sha256": "00a5b31c69bea4d0dbe6587396cf71d4e1dc81c8220ca89ffeca53fb8e4c1c4c"
+      },
+      {
+        "path": "src/training/train_xgboost.py",
+        "public_blob": "b5e1d3bc4bab8c1401b79bb880fa38644c223b5d",
+        "sha256": "abe86246ee2ce17ccb4d500b468efd2b86c079cf6b42661bf9dd95ab22beace9"
+      },
+      {
+        "path": "tests/__init__.py",
+        "public_blob": "cf0b1a9ad4467e3d19c51b491e1edb953f03e98e",
+        "sha256": "fe25982ab0a197cb20f8715268abfc5caaa337d3adf85635bad8e830cf528b4e"
+      },
+      {
+        "path": "tests/test_baseline.py",
+        "public_blob": "74aa4d091695a2ea8351ec55de78d73f59f2721a",
+        "sha256": "34453ba7ab551277922ca6f7fcdc1393b4da18f99299fc3eafcd389c61109492"
+      },
+      {
+        "path": "tests/test_calibration_tests.py",
+        "public_blob": "e68dc9bcbcfdf5b52837706297ffdd6d1b08f064",
+        "sha256": "fda94f0c0042f4e7663a27fc72e1f2e096e0201424e0682025cd5f8f0dc6f52c"
+      },
+      {
+        "path": "tests/test_clinical_translation.py",
+        "public_blob": "f3cd10fff994ef04343daadf6ad8e3aeada640de",
+        "sha256": "02cbb0a6b9c42e817e826c0b1b26d962bf6efb9cbb1e5a5b0212a20e2d368cb0"
+      },
+      {
+        "path": "tests/test_cohort_description.py",
+        "public_blob": "92b1ddef6e3abb8147efbb91ac5d3f530e207574",
+        "sha256": "926f2e0c5eba69aea6ab405cfffc8617234dd8aab85d55a330576b5fa96de4e3"
+      },
+      {
+        "path": "tests/test_cohort_description.py",
+        "public_blob": "e0972e63a45287c158a14aa8c7385bf88df82790",
+        "sha256": "5cbe64b6155da3972e00e9848b4b77a8d1bc786099cbb77b88684e4926b79a77"
+      },
+      {
+        "path": "tests/test_common_utils.py",
+        "public_blob": "2a84af1dc70d14264c29d2a2901d2aebfd5b57fc",
+        "sha256": "51232aeae9618d84e4e344ed866e5387f097a98bd53896f3f28e4e4131491946"
+      },
+      {
+        "path": "tests/test_common_utils.py",
+        "public_blob": "bc112e8e09e5b1728989170b9782e3a42e1ad984",
+        "sha256": "47da844f48090c0fa410dccf30fb8ab51c3d60068f2130279a242a32fc610854"
+      },
+      {
+        "path": "tests/test_common_utils.py",
+        "public_blob": "bf6054388b1424dfd589c2cfeaf0e69ea8c646fd",
+        "sha256": "a6dd324bc277fb066a635d5d711dc4b007e883fcf6398e849011cc523391f8ae"
+      },
+      {
+        "path": "tests/test_correction.py",
+        "public_blob": "7e096891278e11861f1907aebd6c4d1cfba17078",
+        "sha256": "165638d7252aaa50d2334ade98d6dae8f07e3b82fc3af071e50242146fd237ad"
+      },
+      {
+        "path": "tests/test_data_split_guard.py",
+        "public_blob": "30fbd036b7cbb378242f57a3ce3e86c8dea0748d",
+        "sha256": "8c816fbfe98af554e5de1fa4412e122ae14592594ed3681af4b32d171407808a"
+      },
+      {
+        "path": "tests/test_data_split_guard.py",
+        "public_blob": "fd11773fe73e7b5ddfca702eab425bec766da934",
+        "sha256": "0d784464f83f4ceb7cd253f9bb0718e9a3a4768942e7d4583ea9f07a3bd4fc89"
+      },
+      {
+        "path": "tests/test_dca.py",
+        "public_blob": "25a62655fd0f13ddd983193e00bad281d58ea593",
+        "sha256": "f78491ca8584153b0ce817e744bc7dfd7279ec7c768234e1d646d06543a91e98"
+      },
+      {
+        "path": "tests/test_delong_aSAH.py",
+        "public_blob": "6a3e095dfb92eb4a0ae761af0eae092a31875e9b",
+        "sha256": "b6b32c4819bf6f8e4d5976980c217fc72a70210bddf4fba6602e02d4bfaf8fe0"
+      },
+      {
+        "path": "tests/test_discovery.py",
+        "public_blob": "5153d177b34f89631f75d2b5434d55f10b492037",
+        "sha256": "b0d7b92ff87dac8008880a0d2da81847aa494de86c68a9bad8a9d26bca9bbccf"
+      },
+      {
+        "path": "tests/test_discovery.py",
+        "public_blob": "55ce56b45e8b12e7e068cc44818c1e1bbd760a24",
+        "sha256": "f55465914c086a58c4f80fefc91c0d92539a9df0b9fde912c79986ac81c32cad"
+      },
+      {
+        "path": "tests/test_dl_models.py",
+        "public_blob": "badcafcf227aaf4e8c9ea9eded7a627d30d97498",
+        "sha256": "bc4eda47030d58ee3d9e34f2ea3c00e9f22570af1b931cefb873e6f2d885ad2f"
+      },
+      {
+        "path": "tests/test_efigure10_six_model_binned_calibration.py",
+        "public_blob": "f862a56da2a945066baf83a7ae51e2b92dd2f6fe",
+        "sha256": "13fe99d2f9c1aec0a6297eef7d0a97ee3fc720dac19d2312d8143963b288c060"
+      },
+      {
+        "path": "tests/test_efigure4_preprocessing_stage_aggregate_replay.py",
+        "public_blob": "433308c9254e8159da7803066011ebb0c04bd739",
+        "sha256": "a5f896fb198792af40977e40a9f9da3ffcebc441a8b294ebf34a54dba5afe591"
+      },
+      {
+        "path": "tests/test_efigure9_disease_category_prediction_matrix.py",
+        "public_blob": "d80223da03ab930710a4c1c1a23a5f0fd14863fb",
+        "sha256": "65ad7e6c4f849abc7b34af58cc97da30ed6c0974cc5d07bd007dba34f4b0815c"
+      },
+      {
+        "path": "tests/test_env_compensation.py",
+        "public_blob": "c8cc391e1207794655f6662991ec471085526ff1",
+        "sha256": "8b02df00a5d3b5a4a1b012ad18589cb8cb25df43b047005663e5ed34ad86fc0e"
+      },
+      {
+        "path": "tests/test_etable4_ca199_correction.py",
+        "public_blob": "5bf176cd973f09dc4d4612ad03680e35ce405489",
+        "sha256": "05d8155aba7966c6ffec9fb79af80615e7e0e4aec7661f0d57d97037aacf9803"
+      },
+      {
+        "path": "tests/test_evaluation.py",
+        "public_blob": "b73dfd02181f518a23b7b246fba277ce3bf5ff45",
+        "sha256": "9192a89adab4ee9f47bf7f538b1f83327a6e6dc46bf68ce1703a8d95b30b31da"
+      },
+      {
+        "path": "tests/test_fallback_padded_sensitivity.py",
+        "public_blob": "7f0407cadb375cb3cdb2cbe676dabe44b5d1f197",
+        "sha256": "270793d0f52ddadd1469e67b27853acc45414f7a408cc48ae563113ef6897c97"
+      },
+      {
+        "path": "tests/test_figure3_e010_deep_model_reconciliation_diagnostic.py",
+        "public_blob": "907d03196a1d0b6fa6b9350d505ba98ac354fb28",
+        "sha256": "e76c6c7f68e648481c2672d4a206ecd5e24fbaa3ce6a87838bef1084bbd6b0be"
+      },
+      {
+        "path": "tests/test_figure3_unified_channel_block_permutation.py",
+        "public_blob": "3b4536945287c776a59f583f1c83d82efa58a801",
+        "sha256": "e69f7c1565c3b2a7ef3e949d625aa2e440ad8fec824db4f2c1f57a6a4b13b336"
+      },
+      {
+        "path": "tests/test_figure3_unified_channel_block_permutation.py",
+        "public_blob": "65e3cea215a94aaf22445ceda71ec86e0407befe",
+        "sha256": "0f5970142e755a3c7d7899f01279faba26dab72a7987e7a96903ae69e79b51bf"
+      },
+      {
+        "path": "tests/test_final_pkl_end_to_end.py",
+        "public_blob": "b22fcc31003bcca1002318490b2d14e63744eb45",
+        "sha256": "b4d233dc50d5ac143c0cb11f5e2a88bec37930bdda87428e37a1bfc649d36213"
+      },
+      {
+        "path": "tests/test_jt_npordtests.py",
+        "public_blob": "4d48c6d96b5ac8dc79b9cef3800f32dd2ced10ce",
+        "sha256": "651d45a5f7d7d21f4df222e31d137a021a7a5c96a8baf92d71e142b462cf5281"
+      },
+      {
+        "path": "tests/test_lgin_layer_analysis.py",
+        "public_blob": "53d9863b3c11cc3317f00fd974f8982158cac588",
+        "sha256": "c8f84ea695298edccc94b2b63c72803402c39339350509490482de0b3f719dee"
+      },
+      {
+        "path": "tests/test_lgin_postdiagnosis_disposition_source_closure.py",
+        "public_blob": "880cbd75c48387d1810adceeb80997dfbe195623",
+        "sha256": "45fcd7972b71951cf1b96ce1e5fd22186a1b10901d0d251414957abb477b644c"
+      },
+      {
+        "path": "tests/test_loader.py",
+        "public_blob": "4d2a655d5a1e4ab9e9e53e494c537c32a82004b0",
+        "sha256": "2f63a5275ecb7d058baeeb1147e3a141a151462d32ac9d554ef6a3c53f874d37"
+      },
+      {
+        "path": "tests/test_misclassification.py",
+        "public_blob": "1a1e3f325edfb454477e96e2ff7075607e4c5367",
+        "sha256": "cd12459fa8e98ffd4e4196fb38b4ef9cbff714182ecccec3bcce381d829dccb7"
+      },
+      {
+        "path": "tests/test_model_selection_phase1.py",
+        "public_blob": "00957f4a89fd2481bd1ea80236814e9208f91b9b",
+        "sha256": "502a7a3de0cbd782d731c5112bae47c75ae603aa80795f216102000a17e66d6c"
+      },
+      {
+        "path": "tests/test_model_selection_phase1.py",
+        "public_blob": "7888f81db3cd8db4ff5c876cb480cb3ce1159244",
+        "sha256": "da936e24833d7fe2e48340b49d506b8892e0600958484116d4548523f6d3b832"
+      },
+      {
+        "path": "tests/test_optimism_correction.py",
+        "public_blob": "184e466b0afa6c700d2256e2be4c9e1ea96eb9d1",
+        "sha256": "10b1984427b0313a167fb1738f2f74c43fed3e6c5e99fa083dbabd8e9f2f033f"
+      },
+      {
+        "path": "tests/test_path_leak_detection.py",
+        "public_blob": "ac901b270adc49ae82beb0ba68aea8823189cba1",
+        "sha256": "9d0e1a11e699a370931747727fe115fcba33dbead3394db08b542749d4be0f21"
+      },
+      {
+        "path": "tests/test_pipeline_a_normalization.py",
+        "public_blob": "68be0529d7d7aaadde9231019b9210466b8d86f9",
+        "sha256": "566942345bee0d4bb0be8fd1d57eda13ffbc07cf7f6847d1c02525c4fa459d5a"
+      },
+      {
+        "path": "tests/test_pipeline_b_normalization.py",
+        "public_blob": "3308a0cbf30a5ee6a11d4de1554ba743b7f3795f",
+        "sha256": "eec7a96d8df398c735621e4ebe2d0f5488f2324b435e621c51f89c0a4fd61653"
+      },
+      {
+        "path": "tests/test_posthoc_final_audit.py",
+        "public_blob": "08156c7c7b187b58cf73695768564efdac36faeb",
+        "sha256": "53de9b0914ac1df935b4e480b4432e5a6a66d2f2ebcbcd43593aefe1fb1ec298"
+      },
+      {
+        "path": "tests/test_posthoc_final_audit.py",
+        "public_blob": "723478620dfb76abcfa2e836847fbc16956e6396",
+        "sha256": "0a718c50d6b441a54ace8e0ed8c90e45b0da42e408a8996c4668e6c8483ee39a"
+      },
+      {
+        "path": "tests/test_posthoc_final_audit.py",
+        "public_blob": "9bd87b55e80b75dd0901c5a3adab9cf6847b39f3",
+        "sha256": "dd4f119fbdb29f03f28933953a8b2668b875bcbd7a0c61fe5beb5a60211d5a88"
+      },
+      {
+        "path": "tests/test_posthoc_final_common.py",
+        "public_blob": "b98e5fb630659f4e4e1c20dd416ae72eb950547e",
+        "sha256": "fdbe06c4b6526371762b93bf403808d09b84f68faaf151f3d686b8f00f6adc56"
+      },
+      {
+        "path": "tests/test_posthoc_final_common.py",
+        "public_blob": "ba910c0a88487290637b8e904b7a9f3392eb840b",
+        "sha256": "edb98dd33c46a793ef32102e5caff04cdb05fa6e6594d1f67a74d801c3e14131"
+      },
+      {
+        "path": "tests/test_posthoc_final_date_grouped.py",
+        "public_blob": "338f7c1b6787f9380912f3f5b80b7b9b435d19c1",
+        "sha256": "2b902e06ae29c254be69ccee9d089801fd52a20f5f2aa5c66a6ffcf510eb0718"
+      },
+      {
+        "path": "tests/test_posthoc_final_date_grouped.py",
+        "public_blob": "a3f290b70ec8f904ad7154b1d920216a965e8893",
+        "sha256": "b546e246a677fc7dcd0abc7a5145a1c9fcb924f069aee64cfbe0e0415ad52885"
+      },
+      {
+        "path": "tests/test_posthoc_final_locked_scores.py",
+        "public_blob": "811fe844cb409fc389b4070556c9a45d378ad4c4",
+        "sha256": "58bcb65d31df256a09688e7dfe22e2598adf00c08b6c2f1075af3a08d49b2575"
+      },
+      {
+        "path": "tests/test_posthoc_final_locked_scores.py",
+        "public_blob": "8779cda78293961aef72632a728c83e1b48a05e0",
+        "sha256": "68d7906e7a4362243bc0a94e71a2392aed6976d321c877c632e11dc54f3a6ff9"
+      },
+      {
+        "path": "tests/test_posthoc_final_locked_scores.py",
+        "public_blob": "a9dcf2a1f472ef40cd0b0cbd274788d6359f8161",
+        "sha256": "f3daf3d541ad5e736bd7983aeb23c8c021676ea47749884d294e9077d350c077"
+      },
+      {
+        "path": "tests/test_posthoc_final_reporting.py",
+        "public_blob": "341a4d3ee7274eec0a445bfa64d007f47967b9c2",
+        "sha256": "27c32d8738c7f3a3faab0774c3dd38ffc30aec93a1e75aef9f8d4dd7e6816a27"
+      },
+      {
+        "path": "tests/test_posthoc_final_reporting.py",
+        "public_blob": "ab1f8de5b17d5063753e22a4313f6914d6e04ea5",
+        "sha256": "cbdc667193220162102385af7b0b53b07ce855a1b646aa67aa30bfcc5c8d8884"
+      },
+      {
+        "path": "tests/test_posthoc_final_reporting.py",
+        "public_blob": "fec9ab2c9a48c1e2b8f16be2d552ce87d383cbe7",
+        "sha256": "9cc3a762ab7e55108652b844eddd3e78f8b11f45120697bb3602c9840d4981fb"
+      },
+      {
+        "path": "tests/test_posthoc_observed_dca.py",
+        "public_blob": "bf30ccd76b1d173868de1773ae1b222dfaa0cc2a",
+        "sha256": "d00fc3dcb8b7029b84c872652cc83f6fb203f04279de2f8a883ba44da6ffd4a1"
+      },
+      {
+        "path": "tests/test_preprocessing.py",
+        "public_blob": "5170374385fc11010cc772b5f09acd76c1814ba5",
+        "sha256": "98df138e78a62e8b0f0a639a540a12fb8464be128123e7558c81685b314858de"
+      },
+      {
+        "path": "tests/test_progression_trajectory.py",
+        "public_blob": "7dafa7c5985c794a429e467564d523d607e80b2e",
+        "sha256": "ba3a2dd42a8d8736550cb93423f8ca06f728e8d5adbd6c392a6d1f1bce011cc2"
+      },
+      {
+        "path": "tests/test_qc.py",
+        "public_blob": "e7334489eedf495a15154a02a02c3de892c940a1",
+        "sha256": "eb456f0e73566747d5cadec0b6a58d9d8f0a75762f8cb3e2f6862f52fc7d40ab"
+      },
+      {
+        "path": "tests/test_qc.py",
+        "public_blob": "f18c8ebb25d22711e05dfc2945bad4f174d9c474",
+        "sha256": "da3f8ab49448d81b263482c8f6de6d6de7532a2016f869a9838f312667dd1370"
+      },
+      {
+        "path": "tests/test_qc_retained_excluded_characteristics.py",
+        "public_blob": "41083082594aa2e7bbd66f8970aa4f5ead75d7dd",
+        "sha256": "f9e625be2a6e31068c4f5ace833a8cc5c734eb7ab33808b85a4090fab2cc9124"
+      },
+      {
+        "path": "tests/test_reproducibility_smoke.py",
+        "public_blob": "bcd425417c4989b7ef83e1c7a596b08052ae96a4",
+        "sha256": "b57d720733a0e1c8a95156cd434e04da526f1ee21ec95ec5b3e7c1f8832ce232"
+      },
+      {
+        "path": "tests/test_sample_size.py",
+        "public_blob": "bee932472b460aa5449274aaf5c910e933165c7d",
+        "sha256": "6e8cc4c1f432fee12a2de5f956eb8c019cc896da8ccb35aca2873b319ca9880f"
+      },
+      {
+        "path": "tests/test_shap_cross_model_aggregation.py",
+        "public_blob": "45e629562c482cd5aafae38c363d8beca2608a3c",
+        "sha256": "5c59e3a3e3fba74febb021da2884abcff03d276e787903b2500bc7631e13acb2"
+      },
+      {
+        "path": "tests/test_shap_cross_model_ig.py",
+        "public_blob": "0e60a7e3e849967b999379d54069807dae620e3f",
+        "sha256": "c41d98e6699221f596236a56ec9708ba1bb4718cf07f71ce16c63e7cdd519b7a"
+      },
+      {
+        "path": "tests/test_shap_cross_model_kendall_tau.py",
+        "public_blob": "a188f615a455a3a7546af9095bb62dd9e22cd2d9",
+        "sha256": "4dc6b45785e2d8a3578da56b62cee94b38ef4222df3772505010c7d2226927c8"
+      },
+      {
+        "path": "tests/test_shap_cross_model_minirocket_permutation.py",
+        "public_blob": "7ecece96e13544e95b82df1b518021b380e532cc",
+        "sha256": "242433480e1b7b02ed470e80ac29dc4f3514f7c851b79a26de2cd1e2b9720642"
+      },
+      {
+        "path": "tests/test_shap_cross_model_top_k_converging.py",
+        "public_blob": "c4f2df48b15ae07fa3496f2b7f9fbf550710dfa4",
+        "sha256": "e02920b4df4f3cd9893028dc580d3174be04557daf752de823081d99143c12ef"
+      },
+      {
+        "path": "tests/test_shap_representative_samples_npz_alignment.py",
+        "public_blob": "6acc776f74f222d8bfaf4040d797114cb2f0b3a1",
+        "sha256": "f6b9670a10bb32f0ec9cc12ef4f574470e9eebcff465fe91a57602fc15febc1d"
+      },
+      {
+        "path": "tests/test_smoothing.py",
+        "public_blob": "277892a72fd933b4e80668e8b442355f933fb3f0",
+        "sha256": "4d624aaa2a3ccf98760329cd5602ebad80291d2b0239c11c2e807824767ab372"
+      },
+      {
+        "path": "tests/test_stratified_robustness.py",
+        "public_blob": "614f1b9795ba9ad97e590d1a4382105b21a5b5e0",
+        "sha256": "fd93fca2c33ee9a5714cdcbaa182226c20bbccbe8e5b9477a076c2400dac228e"
+      },
+      {
+        "path": "tests/test_subgroup_analysis.py",
+        "public_blob": "b2652d880ab1d6e7c4fd451c80f092a33a4e9832",
+        "sha256": "48afe43679668de49176a3b5e4f16d26ea149cdcf44e87c4d64929513b5f8449"
+      },
+      {
+        "path": "tests/test_temporal_drift.py",
+        "public_blob": "661d1893c4a414e3479bbd8582793f6ecd4f8bf6",
+        "sha256": "7db0b49f5dc64af3bc8c0e2f0429b9e9a7be61ff00106a04a5c8aaba8c415287"
+      },
+      {
+        "path": "tests/test_three_view_comparison.py",
+        "public_blob": "741584a980c7ccc7f2e8038496d3b8233abde697",
+        "sha256": "9984a1f8f6d6b72590fe5b439ad2d9f7584e0bbd714b5388d848b1949ab8beda"
+      },
+      {
+        "path": "tests/test_threshold_uncertainty.py",
+        "public_blob": "8742dcccba7dab64dfd66842b88f4f1e9276e13b",
+        "sha256": "913c1cc223faee833357bc9344cee741ba2fc350707815db5b764d5f1ebd7f8a"
+      },
+      {
+        "path": "tests/test_train_cnn_bilstm_attention_smoke.py",
+        "public_blob": "bd9faf5abfd71570ccbf141bb3ad7c74155c0f96",
+        "sha256": "2940ec934a44fad9f03e4b3c25e1a0b24f6ce05230be2cc2186cf6ae08af376d"
+      },
+      {
+        "path": "tests/test_train_elastic_net_lr_smoke.py",
+        "public_blob": "07ec5929fef9ac9730ecd7831279af5a01ca491d",
+        "sha256": "64c4b2c6d6ee68e5e785b6a666768a5fac79aa966dcea15c285a2b29fb20f5a3"
+      },
+      {
+        "path": "tests/test_train_elastic_net_lr_smoke.py",
+        "public_blob": "4f30a7f6fc615aa7db60e7d9fc9cdf42041f12b0",
+        "sha256": "f2df431a8f7ef645f2d4f36bdca211aa6bed9abfa78cd3adf088a3819eee764f"
+      },
+      {
+        "path": "tests/test_train_elastic_net_lr_smoke.py",
+        "public_blob": "ac79d73042cf1c237e2274dcecc62664f9dbf1d8",
+        "sha256": "54d0dca86eacbe73ff7c0fa27410f013937acd6752fe1b4cf6d881f2c65ef1d8"
+      },
+      {
+        "path": "tests/test_train_inception_time_smoke.py",
+        "public_blob": "21aa53e82be7f09d786a19211e08d0633f9e21c6",
+        "sha256": "93062ca08e9eb7d61131719f457f564aa0039f923238035ccabd6d4802e5116e"
+      },
+      {
+        "path": "tests/test_train_inception_time_smoke.py",
+        "public_blob": "f84c32560d02b45f3eb84a674b2cbff34231b60d",
+        "sha256": "bcd9cff29d659a6f5b4008ebffcd39189fe7e494669d64c67345eefdccfd0d1e"
+      },
+      {
+        "path": "tests/test_train_minirocket_ridge_smoke.py",
+        "public_blob": "1ad18df60b2a9a26d008d0686be3e5ef70a4e2f0",
+        "sha256": "e5b63b9c145adee41953f4ba78d34b69748f1420764e9c37fe40669da322dfb8"
+      },
+      {
+        "path": "tests/test_train_minirocket_ridge_smoke.py",
+        "public_blob": "ed3ee8f08ee61530fc7e0e3672b45143b4ef9c21",
+        "sha256": "01452bc10a88ce5f35d7c0b827231c9bdc52c407dab124cc03672ffeaa895b26"
+      },
+      {
+        "path": "tests/test_train_svm_smoke.py",
+        "public_blob": "2f1ebaa08efd56787259ba7f28e5ee76e9cdf865",
+        "sha256": "2346045345da4cfa56ba3937793a37419ffeeb942faac4c978c6c8d4cbe19642"
+      },
+      {
+        "path": "tests/test_train_svm_smoke.py",
+        "public_blob": "7c23af90b8e145c4b3ac090dfd036fb01da12244",
+        "sha256": "ab1c9969533add75a798831db5abe4236b409149c866c22368fdd9fd333c388c"
+      },
+      {
+        "path": "tests/test_train_xgboost_smoke.py",
+        "public_blob": "6d05699ab9eea6039224380998a180ebc743b60d",
+        "sha256": "0ba6a0b4a23e5871c2c8071b6cf55ca02285c3b65dd031201b27a5ea21958b5c"
+      },
+      {
+        "path": "tests/test_train_xgboost_smoke.py",
+        "public_blob": "ecff709d599ebb7ff1214edce93b80d126909b39",
+        "sha256": "6ad3edb862542f28e64c045e6fa9451bfb6b7059c2b9daaf08260746ee427dae"
+      },
+      {
+        "path": "tests/test_tumor_marker_complete_case.py",
+        "public_blob": "f585b6fc47f231457692611b68ea1a7d1d481633",
+        "sha256": "daa64a7f44d4a7a3c9345d2f8d9d04558316730cb28f01a8e4b2b872cd811918"
+      },
+      {
+        "path": "tests/test_tumor_marker_model.py",
+        "public_blob": "2a4c398005e1cbc231e64bcf429ed55c818af5d3",
+        "sha256": "353994904689442621e952d30f601ce77c2371861d53165a6183d611ef23a6e2"
+      },
+      {
+        "path": "tests/test_tumor_marker_no_imputation.py",
+        "public_blob": "c36a8fac6aab7fcdb65d28398738bb25a46bdf7d",
+        "sha256": "153caebb44ab9276d8075ef7c7c9a98f02e9f98d82f56745566aef361ebb3168"
+      },
+      {
+        "path": "tests/test_voc_marker_fusion.py",
+        "public_blob": "1a62c66f1a9907c23cad04f65413869fced0781f",
+        "sha256": "4ce848f85612a92f2c7e813753bc93f1796eccb18382466250124f7542b504dc"
+      }
+    ],
+    "protocol_privacy_redaction": {
+      "path": "docs/protocol/preprocessing_plan.md",
+      "line": 23,
+      "exact_collection_date_literals_removed": 2,
+      "scientific_rules_unchanged": true,
+      "line_endings": "Original source worktree CRLF and Git-blob LF differed only in line endings before redaction."
+    },
+    "evidence_limits": [
+      "Sanitized history is not an untouched original; filtering changes commit identities and may invalidate signatures.",
+      "Git timestamps do not prove external preregistration or absence of prior result access.",
+      "This history verification does not verify a future payload commit or authorize publication."
+    ]
+  },
+  "payload_commit_status_at_preparation": "not yet created; user operation required",
+  "final_committed_scope_verification": "pending; verify actual commit separately without amending this package",
+  "publication_approval": "pending",
+  "licensing_and_hosting": "unresolved",
+  "promoted_worktree_entrypoint": {
+    "status": "executed_from_actual_promoted_destination",
+    "command": "python -B scripts/verify_release_models.py --model all --split test --deep-runtime frozen_gpu",
+    "actual_exit_status": 1,
+    "result": {
+      "passed": false,
+      "atol": 1e-06,
+      "rtol": 0.0,
+      "models": [
+        {
+          "model": "cnn_bilstm_attention",
+          "n": 195,
+          "deep_runtime": "frozen_gpu",
+          "raw_max_absolute_difference": 5.4370611906051636e-06,
+          "calibrated_max_absolute_difference": 1.9766714124264118e-06,
+          "threshold_decisions_identical": true,
+          "passed": false
+        },
+        {
+          "model": "elastic_net_lr",
+          "n": 195,
+          "deep_runtime": "frozen_gpu",
+          "raw_max_absolute_difference": 6.661338147750939e-16,
+          "calibrated_max_absolute_difference": 7.771561172376096e-16,
+          "threshold_decisions_identical": true,
+          "passed": true
+        },
+        {
+          "model": "inception_time",
+          "n": 195,
+          "deep_runtime": "frozen_gpu",
+          "raw_max_absolute_difference": 0.0,
+          "calibrated_max_absolute_difference": 0.0,
+          "threshold_decisions_identical": true,
+          "passed": true
+        },
+        {
+          "model": "minirocket_ridge",
+          "n": 195,
+          "deep_runtime": "frozen_gpu",
+          "raw_max_absolute_difference": 5.551115123125783e-16,
+          "calibrated_max_absolute_difference": 9.43689570931383e-16,
+          "threshold_decisions_identical": true,
+          "passed": true
+        },
+        {
+          "model": "svm",
+          "n": 195,
+          "deep_runtime": "frozen_gpu",
+          "raw_max_absolute_difference": 0.0,
+          "calibrated_max_absolute_difference": 0.0,
+          "threshold_decisions_identical": true,
+          "passed": true
+        },
+        {
+          "model": "xgboost",
+          "n": 195,
+          "deep_runtime": "frozen_gpu",
+          "raw_max_absolute_difference": 0.0,
+          "calibrated_max_absolute_difference": 0.0,
+          "threshold_decisions_identical": true,
+          "passed": true
+        }
+      ]
+    },
+    "verification_scope": "six final models on the 195-sample public-order internal test partition only",
+    "identical_to_authenticated_prior_public_order_result": true,
+    "project_modules_models_and_data_resolve_from_destination": true,
+    "source_and_sealed_candidate_fallback_blocked": true,
+    "public_artifacts_unchanged_by_inference": true,
+    "new_verification_predictions_persisted": false,
+    "interpretation": "Known CNN public-row-order frozen-reference comparison fails the unchanged tolerance; this is separate from successful promotion and source/export integrity checks."
+  },
+  "promoted_worktree_integrity": {
+    "allowlisted_files": 388,
+    "scientific_payload_byte_identical_to_sealed_candidate": true,
+    "schema_privacy_alignment_evidence_and_manifest_checks": "passed",
+    "alignment_and_all_14_model_state_checks": "authenticated prior evidence reused through exact file identity",
+    "private_preparation_ignored_and_untracked": true,
+    "source_refs_inputs_and_destination_Git_state_unchanged": true,
+    "payload_staging_and_commit_not_yet_performed": true
+  }
+}

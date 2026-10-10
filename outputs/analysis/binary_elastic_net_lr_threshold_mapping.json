@@ -1,0 +1,5 @@
+{
+  "monotonicity_note": "Platt calibration is monotonic and does not change AUC-ROC or AUC-PR; it may change Brier score, calibration slope, and calibration intercept. All threshold-dependent metrics are computed once in p_raw space using threshold_p_raw.",
+  "threshold_p_final_equivalent": 0.3146791566257776,
+  "threshold_p_raw": 0.40580526748804524
+}

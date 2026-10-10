@@ -1,0 +1,100 @@
+{
+  "session": 15,
+  "stage": "Stage 9",
+  "git_commit_hash": "20d1f0d499fe468ac5d1a4dcefd45d5a43de9046",
+  "timestamp_utc": "2026-05-21T07:43:12Z",
+  "verification_results": {
+    "smoke_test_passed": true,
+    "smoke_test_n_models_passed": 6,
+    "smoke_test_n_samples_per_model": 10,
+    "smoke_test_per_model": [
+      {
+        "model": "minirocket_ridge",
+        "passed": true,
+        "n_finite": 20,
+        "n_in_range": 20,
+        "quadrant_distribution": {
+          "TP": 5,
+          "TN": 1,
+          "FP": 4,
+          "FN": 0
+        }
+      },
+      {
+        "model": "inception_time",
+        "passed": true,
+        "n_finite": 20,
+        "n_in_range": 20,
+        "quadrant_distribution": {
+          "TP": 5,
+          "TN": 1,
+          "FP": 4,
+          "FN": 0
+        }
+      },
+      {
+        "model": "cnn_bilstm_attention",
+        "passed": true,
+        "n_finite": 20,
+        "n_in_range": 20,
+        "quadrant_distribution": {
+          "TP": 5,
+          "TN": 1,
+          "FP": 4,
+          "FN": 0
+        }
+      },
+      {
+        "model": "xgboost",
+        "passed": true,
+        "n_finite": 20,
+        "n_in_range": 20,
+        "quadrant_distribution": {
+          "TP": 5,
+          "TN": 1,
+          "FP": 4,
+          "FN": 0
+        }
+      },
+      {
+        "model": "svm",
+        "passed": true,
+        "n_finite": 20,
+        "n_in_range": 20,
+        "quadrant_distribution": {
+          "TP": 5,
+          "TN": 1,
+          "FP": 4,
+          "FN": 0
+        }
+      },
+      {
+        "model": "elastic_net_lr",
+        "passed": true,
+        "n_finite": 20,
+        "n_in_range": 20,
+        "quadrant_distribution": {
+          "TP": 4,
+          "TN": 1,
+          "FP": 4,
+          "FN": 1
+        }
+      }
+    ],
+    "path_leak_count": 0,
+    "path_leak_files": []
+  },
+  "errata_count": 14,
+  "post_hoc_trigger_outcomes_summary": {
+    "A_subgroup_retrain": false,
+    "C_test_vs_cv_shift": false,
+    "F_tumor_marker_underpowered": false,
+    "G_dl_anomaly": true,
+    "H_calibration_failure": false
+  },
+  "bootstrap_convention": {
+    "erratum": "E011",
+    "linked_commit": "a2af64e",
+    "summary": "single-RNG sequential per E011 (commit a2af64e); reproducibility verified via deterministic PCG64 stream; valid for all bootstrap-derived CIs in this session."
+  }
+}

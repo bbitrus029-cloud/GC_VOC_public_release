@@ -1,0 +1,6 @@
+fold_id,n_fit,n_validation,n_fit_positive,n_fit_negative,n_validation_positive,n_validation_negative,n_fit_date_groups,n_validation_date_groups,date_overlap_count,calibrator_fit_feasible,validation_auc_roc,estimability_status,nonestimable_reason
+1,628,149,263,365,68,81,32,8,0,True,0.9050472040668119,estimable,
+2,628,149,267,361,64,85,32,8,0,True,0.9314338235294117,estimable,
+3,628,149,267,361,64,85,31,9,0,True,0.9558823529411765,estimable,
+4,611,166,258,353,73,93,31,9,0,True,0.8964501399322433,estimable,
+5,613,164,269,344,62,102,34,6,0,True,0.9074952561669829,estimable,

@@ -1,0 +1,12 @@
+analysis_id,channel_index,channel_name,positive_model_count,zero_model_count,negative_model_count,mean_rank,median_rank,minimum_rank,maximum_rank,mean_delta_auroc,median_delta_auroc
+figure3_unified_channel_block_permutation,1,S1,6,0,0,6.166666666666667,5.5,4.0,10.0,0.02013067486869559,0.021717569609324416
+figure3_unified_channel_block_permutation,2,S2,6,0,0,5.5,5.5,4.0,8.0,0.02150496438592704,0.011380315130584979
+figure3_unified_channel_block_permutation,3,S3,3,0,3,9.333333333333334,9.5,7.0,11.0,0.0005003057773940582,-0.0005371789337362231
+figure3_unified_channel_block_permutation,4,S4,6,0,0,6.5,6.5,4.0,9.0,0.012229476940787102,0.005355601122382889
+figure3_unified_channel_block_permutation,5,S5,6,0,0,5.0,5.0,3.0,8.0,0.0362263472192244,0.02296406216274556
+figure3_unified_channel_block_permutation,6,S6,3,0,3,8.833333333333334,9.0,7.0,11.0,0.00060184185912656,0.00025523418951003073
+figure3_unified_channel_block_permutation,7,S7,6,0,0,1.8333333333333333,2.0,1.0,3.0,0.08025388517159507,0.062043762141161266
+figure3_unified_channel_block_permutation,8,S8,3,0,3,9.333333333333334,10.0,6.0,11.0,0.0006500467659543914,-0.000694474422620348
+figure3_unified_channel_block_permutation,9,S9,3,0,3,9.166666666666666,9.0,8.0,10.0,0.002581570616591118,-3.7772501618754553e-06
+figure3_unified_channel_block_permutation,10,S10,6,0,0,2.3333333333333335,2.5,1.0,4.0,0.08798762500899344,0.06581210878480463
+figure3_unified_channel_block_permutation,11,S11,6,0,0,2.0,2.0,1.0,3.0,0.07829924814734873,0.05325518022879347

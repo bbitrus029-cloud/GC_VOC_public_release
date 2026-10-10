@@ -1,0 +1,171 @@
+{
+  "diagnostic_id": "figure3_e010_deep_model_reconciliation_diagnostic",
+  "diagnostic_classification": "operational_reproducibility_diagnostic_results_aware",
+  "status": "complete",
+  "models": [
+    {
+      "model_id": "inception_time",
+      "model_display_name": "InceptionTime",
+      "model_order": 1
+    },
+    {
+      "model_id": "cnn_bilstm_attention",
+      "model_display_name": "CNN\u2013BiLSTM\u2013Attention",
+      "model_order": 2
+    }
+  ],
+  "conditions": [
+    {
+      "condition_id": "cpu_original_direct",
+      "condition_order": 1,
+      "requested_device_class": "cpu",
+      "input_order": "original_test_idx",
+      "train_warmup": false
+    },
+    {
+      "condition_id": "cpu_original_train_warmup",
+      "condition_order": 2,
+      "requested_device_class": "cpu",
+      "input_order": "original_test_idx",
+      "train_warmup": true
+    },
+    {
+      "condition_id": "gpu_original_direct",
+      "condition_order": 3,
+      "requested_device_class": "cuda",
+      "input_order": "original_test_idx",
+      "train_warmup": false
+    },
+    {
+      "condition_id": "gpu_original_train_warmup",
+      "condition_order": 4,
+      "requested_device_class": "cuda",
+      "input_order": "original_test_idx",
+      "train_warmup": true
+    },
+    {
+      "condition_id": "cpu_participant_sorted_direct",
+      "condition_order": 5,
+      "requested_device_class": "cpu",
+      "input_order": "participant_key_sorted",
+      "train_warmup": false
+    },
+    {
+      "condition_id": "gpu_participant_sorted_direct",
+      "condition_order": 6,
+      "requested_device_class": "cuda",
+      "input_order": "participant_key_sorted",
+      "train_warmup": false
+    }
+  ],
+  "cohort_reconciliation": {
+    "diagnostic_comparison": {
+      "n_test": 195,
+      "n_positive": 82,
+      "n_negative": 113,
+      "validated": true
+    },
+    "execution_only_warmup": {
+      "n_train": 777,
+      "validation_passed": true,
+      "warmup_condition_ids": [
+        "cpu_original_train_warmup",
+        "gpu_original_train_warmup"
+      ],
+      "warmup_executed_for_all_applicable_loads": true
+    }
+  },
+  "state_digest_method": {
+    "algorithm": "sha256_canonical_named_parameters_and_buffers",
+    "device_class_excluded": true,
+    "all_condition_state_unchanged": true
+  },
+  "acceptance_criteria": {
+    "score_reconciliation_atol": 1e-06,
+    "auroc_reconciliation_atol": 1e-12,
+    "other_diagnostics_descriptive_only": true
+  },
+  "output_validation": {
+    "row_counts": {
+      "condition_diagnostics.csv": 48,
+      "comparison_diagnostics.csv": 104,
+      "model_condition_summary.csv": 12,
+      "interpretation_branches.csv": 2
+    },
+    "schemas_match": true,
+    "cross_file_reconciliation_passed": true,
+    "duplicate_serialization_byte_identical": true
+  },
+  "interpretation_branches": [
+    {
+      "diagnostic_id": "figure3_e010_deep_model_reconciliation_diagnostic",
+      "model_id": "inception_time",
+      "model_display_name": "InceptionTime",
+      "model_order": 1,
+      "gpu_stage4b_sequence_reconciles": true,
+      "matched_cpu_sequence_reconciles": false,
+      "e010_gpu_to_cpu_effect_isolatable": true,
+      "e010_gpu_to_cpu_effect_nonisolatable_reason": "",
+      "e010_gpu_to_cpu_change_supported": true,
+      "cpu_warmup_effect_isolatable": true,
+      "cpu_warmup_effect_nonisolatable_reason": "",
+      "gpu_warmup_effect_isolatable": true,
+      "gpu_warmup_effect_nonisolatable_reason": "",
+      "warmup_sequence_effect_supported": false,
+      "cpu_input_order_effect_isolatable": true,
+      "cpu_input_order_effect_nonisolatable_reason": "",
+      "gpu_input_order_effect_isolatable": true,
+      "gpu_input_order_effect_nonisolatable_reason": "",
+      "input_order_sensitivity_supported": false,
+      "within_load_nondeterminism_observed": false,
+      "between_load_nondeterminism_observed": false,
+      "model_state_mutation_observed": false,
+      "any_condition_reconciles": true,
+      "unresolved_artifact_state_or_provenance_mismatch": false,
+      "root_cause_summary": "e010_gpu_to_cpu_change_supported",
+      "pre_e010_pkl_available": false,
+      "e010_source_checkpoint_available": false
+    },
+    {
+      "diagnostic_id": "figure3_e010_deep_model_reconciliation_diagnostic",
+      "model_id": "cnn_bilstm_attention",
+      "model_display_name": "CNN\u2013BiLSTM\u2013Attention",
+      "model_order": 2,
+      "gpu_stage4b_sequence_reconciles": true,
+      "matched_cpu_sequence_reconciles": false,
+      "e010_gpu_to_cpu_effect_isolatable": true,
+      "e010_gpu_to_cpu_effect_nonisolatable_reason": "",
+      "e010_gpu_to_cpu_change_supported": true,
+      "cpu_warmup_effect_isolatable": true,
+      "cpu_warmup_effect_nonisolatable_reason": "",
+      "gpu_warmup_effect_isolatable": true,
+      "gpu_warmup_effect_nonisolatable_reason": "",
+      "warmup_sequence_effect_supported": false,
+      "cpu_input_order_effect_isolatable": true,
+      "cpu_input_order_effect_nonisolatable_reason": "",
+      "gpu_input_order_effect_isolatable": true,
+      "gpu_input_order_effect_nonisolatable_reason": "",
+      "input_order_sensitivity_supported": false,
+      "within_load_nondeterminism_observed": false,
+      "between_load_nondeterminism_observed": false,
+      "model_state_mutation_observed": false,
+      "any_condition_reconciles": true,
+      "unresolved_artifact_state_or_provenance_mismatch": false,
+      "root_cause_summary": "e010_gpu_to_cpu_change_supported",
+      "pre_e010_pkl_available": false,
+      "e010_source_checkpoint_available": false
+    }
+  ],
+  "privacy_validation": {
+    "schema_and_text_scan_passed": true,
+    "participant_level_fields_absent": true,
+    "training_diagnostics_persisted": false,
+    "aligned_score_vectors_released_before_serialization": true
+  },
+  "participant_level_persistence": false,
+  "known_limitations": [
+    "Pre-E010 PKLs are unavailable.",
+    "E010 source checkpoints are unavailable.",
+    "This operational diagnostic does not repair artifacts or amend Figure 3."
+  ]
+}

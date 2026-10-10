@@ -1,0 +1,71 @@
+{
+  "classification": "retrospective_technical_parsing_correction",
+  "status": "implemented_self_checked_pending_independent_review",
+  "cohort_counts": {
+    "Overall": 972,
+    "HC": 158,
+    "BGL": 352,
+    "LGIN": 49,
+    "HGIN": 71,
+    "EGC": 122,
+    "AGC": 220
+  },
+  "reconciliation": {
+    "legacy": {
+      "availability": {
+        "cea": 665,
+        "ca199": 651,
+        "ca724": 651
+      },
+      "complete_cases": 650,
+      "train": {
+        "complete_cases": 515,
+        "positive": 292,
+        "negative": 223
+      },
+      "test": {
+        "complete_cases": 135,
+        "positive": 76,
+        "negative": 59
+      }
+    },
+    "corrected": {
+      "availability": {
+        "cea": 665,
+        "ca199": 652,
+        "ca724": 651
+      },
+      "complete_cases": 651,
+      "train": {
+        "complete_cases": 516,
+        "positive": 293,
+        "negative": 223
+      },
+      "test": {
+        "complete_cases": 135,
+        "positive": 76,
+        "negative": 59
+      }
+    }
+  },
+  "frozen_complete_case_counts": {
+    "tm_train_subset_n_total": 516,
+    "tm_train_subset_n_pos": 293,
+    "tm_train_subset_n_neg": 223,
+    "tm_test_subset_n_total": 135,
+    "tm_test_subset_n_pos": 76,
+    "tm_test_subset_n_neg": 59,
+    "full_cohort_n_complete_case": 651
+  },
+  "checks": {
+    "alignment": true,
+    "numeric_order": true,
+    "split_disjointness_and_coverage": true,
+    "label_category_agreement": true,
+    "legacy_rows_reproduced_all_columns": true,
+    "only_explained_recovery": true,
+    "stage7_normalization_reconciled": true,
+    "unaffected_cells_preserved": true,
+    "all_seven_groups_recomputed": true
+  }
+}

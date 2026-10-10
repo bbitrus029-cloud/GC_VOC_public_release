@@ -1,0 +1,2 @@
+hosmer_lemeshow_statistic,hosmer_lemeshow_df,hosmer_lemeshow_p_value,spiegelhalter_z,spiegelhalter_p_value,observed_brier,expected_brier,variance
+29.450091328788034,8,0.00026428728968155515,1.7883973234132489,0.07371192784541386,0.1210966107848353,0.095442549335895271,0.00020577103352062399

@@ -1,0 +1,17 @@
+indicator,variable_name,variable_type,group_true_n,group_false_n,smd
+fallback_used,age,continuous,54,918,0.539852159032055
+fallback_used,sex,binary,54,918,0.05882352941176472
+fallback_used,bmi,continuous,54,918,0.004758629542406121
+fallback_used,smoking,binary,54,918,0.02723311546840962
+fallback_used,drinking,binary,54,918,0.08278867102396514
+fallback_used,family_history,binary,54,918,0.015250544662309372
+fallback_used,hp_infection,binary,54,918,0.005700483091787417
+fallback_used,disease_category,continuous,54,918,0.10326527748877204
+padded,age,continuous,41,931,0.16530640072490302
+padded,sex,binary,41,931,0.020748735951376718
+padded,bmi,continuous,41,931,0.16395136044120587
+padded,smoking,binary,41,931,0.033507112729559085
+padded,drinking,binary,41,931,0.024468837599224552
+padded,family_history,binary,41,931,0.04815173823059391
+padded,hp_infection,binary,41,931,0.03129356007805967
+padded,disease_category,continuous,41,931,0.2876442807138529

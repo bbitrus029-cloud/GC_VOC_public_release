@@ -1,0 +1,49 @@
+{
+  "session": 12,
+  "stage": "Stage 7 Part B",
+  "best_model": "minirocket_ridge",
+  "git_commit_hash": "09538ab9780f5fbfe4f9263c350c952716b612a6",
+  "timestamp_utc": "2026-05-20T12:24:01Z",
+  "data_split_seed": 43,
+  "bootstrap_n_boot": 2000,
+  "random_seed": 42,
+  "bootstrap_convention": {
+    "erratum": "E011",
+    "linked_commit": "a2af64e",
+    "summary": "single-RNG sequential per E011 (commit a2af64e); reproducibility verified via deterministic PCG64 stream; valid for all bootstrap-derived CIs in this session."
+  },
+  "post_hoc_trigger_references": {
+    "A_subgroup_retrain": "Session 11 audit JSON: triggered=false",
+    "C_test_vs_cv_shift": "Session 11 audit JSON: triggered=false",
+    "F_tumor_marker_underpowered": "Deferred to Session 13",
+    "G_dl_anomaly": "Erratum E005 (Session 8/9 mitigation)",
+    "H_calibration_failure": "Session 11 audit JSON: triggered=false",
+    "lgin_primary_view": "nested_cv_oof",
+    "lgin_primary_view_authorization": "Erratum E012",
+    "lgin_n_b_oof": 35,
+    "lgin_n_c_oof": 4,
+    "lgin_separation_criterion_passed": true,
+    "lgin_directional_verification_passed": true,
+    "lgin_rb": 0.9428571428571428,
+    "lgin_mannwhitney_p_two_sided": 0.0002917897654739,
+    "lgin_within_b_stability_levels_evaluated": 13,
+    "lgin_within_b_stability_pass_overall": true,
+    "lgin_test_view": "descriptive_sensitivity_only_due_to_n_c_test_zero",
+    "lgin_n_b_test": 10,
+    "lgin_n_c_test": 0
+  },
+  "key_findings": {
+    "jt_p_one_sided_upper": 2.4934425976366075e-24,
+    "spearman_rho_test_p_cal_vs_disease_category": 0.7302974186413145,
+    "spearman_p_two_sided": 8.958540492773838e-34,
+    "fp_lgin_fisher_odds_ratio": 579.9230769230769,
+    "fp_lgin_fisher_p_two_sided": 4.622011757998122e-13,
+    "lgin_rb_oof": 0.9428571428571428,
+    "lgin_mannwhitney_p_two_sided_oof": 0.0002917897654739,
+    "lgin_separation_criterion_passed_oof": true,
+    "lgin_within_b_median_p_cal_above_0p5_all_levels": true,
+    "fallback_misclass_fisher_p": 1.0,
+    "padded_misclass_fisher_p": 0.11009760197227725,
+    "temporal_drift_max_auc_roc_delta_across_models": 0.11584956262375623
+  }
+}

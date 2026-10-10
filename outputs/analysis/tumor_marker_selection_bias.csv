@@ -1,0 +1,11 @@
+variable,value_in_tm_subset,value_in_full_test,smd,n_non_missing_tm,n_non_missing_full,interpretation
+age,58.629629629629626,53.05641025641026,0.40788374515590015,135,195,SMD >= 0.1 is conventionally a notable imbalance.
+sex,0.34074074074074073,0.3641025641025641,0.04891692479302212,135,195,SMD >= 0.1 is conventionally a notable imbalance.
+bmi,24.49777777777778,24.22051282051282,0.07351209512801243,135,195,SMD >= 0.1 is conventionally a notable imbalance.
+smoking,0.2814814814814815,0.26666666666666666,0.033218191941496035,135,195,SMD >= 0.1 is conventionally a notable imbalance.
+drinking,0.2,0.2,0.0,135,195,SMD >= 0.1 is conventionally a notable imbalance.
+family_history,0.06666666666666667,0.05128205128205128,0.06534102628035482,135,195,SMD >= 0.1 is conventionally a notable imbalance.
+hp_infection,0.2288135593220339,0.24571428571428572,0.03973635932579907,118,175,SMD >= 0.1 is conventionally a notable imbalance.
+disease_category,2.8666666666666667,2.3025641025641024,0.3060907863203942,135,195,SMD >= 0.1 is conventionally a notable imbalance.
+collection_location,0.6518518518518519,0.48717948717948717,0.3372704026373998,135,195,SMD >= 0.1 is conventionally a notable imbalance.
+label,0.562962962962963,0.4205128205128205,0.2878757579296853,135,195,SMD >= 0.1 is conventionally a notable imbalance.

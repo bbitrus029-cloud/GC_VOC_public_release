@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "analysis_id": "efigure10_six_model_binned_calibration",
+  "timing_classification": "post_hoc_supplementary",
+  "functional_role": "plan_orthogonal_visualization_support_descriptive_aggregation",
+  "cohort_reconciliation": {
+    "models": 6,
+    "participants_per_model": 195,
+    "positive_labels": 82,
+    "negative_labels": 113,
+    "participant_set_agreement": "passed",
+    "cross_model_label_agreement": "passed"
+  },
+  "model_bin_states": [
+    {
+      "model_order": 1,
+      "model_id": "minirocket_ridge",
+      "model_display_name": "MiniRocket + Ridge",
+      "n_requested_bins": 10,
+      "n_actual_bins": 10,
+      "visualization_ready": true,
+      "estimability_status": "estimable",
+      "nonestimable_reason": null,
+      "observed_fraction_sequence_state": "nonmonotonic",
+      "all_rows_retained": true
+    },
+    {
+      "model_order": 2,
+      "model_id": "xgboost",
+      "model_display_name": "XGBoost",
+      "n_requested_bins": 10,
+      "n_actual_bins": 10,
+      "visualization_ready": true,
+      "estimability_status": "estimable",
+      "nonestimable_reason": null,
+      "observed_fraction_sequence_state": "nonmonotonic",
+      "all_rows_retained": true
+    },
+    {
+      "model_order": 3,
+      "model_id": "elastic_net_lr",
+      "model_display_name": "Elastic Net LR",
+      "n_requested_bins": 10,
+      "n_actual_bins": 10,
+      "visualization_ready": true,
+      "estimability_status": "estimable",
+      "nonestimable_reason": null,
+      "observed_fraction_sequence_state": "nonmonotonic",
+      "all_rows_retained": true
+    },
+    {
+      "model_order": 4,
+      "model_id": "svm",
+      "model_display_name": "SVM",
+      "n_requested_bins": 10,
+      "n_actual_bins": 10,
+      "visualization_ready": true,
+      "estimability_status": "estimable",
+      "nonestimable_reason": null,
+      "observed_fraction_sequence_state": "nonmonotonic",
+      "all_rows_retained": true
+    },
+    {
+      "model_order": 5,
+      "model_id": "inception_time",
+      "model_display_name": "InceptionTime",
+      "n_requested_bins": 10,
+      "n_actual_bins": 10,
+      "visualization_ready": true,
+      "estimability_status": "estimable",
+      "nonestimable_reason": null,
+      "observed_fraction_sequence_state": "nonmonotonic",
+      "all_rows_retained": true
+    },
+    {
+      "model_order": 6,
+      "model_id": "cnn_bilstm_attention",
+      "model_display_name": "CNN\u2013BiLSTM\u2013Attention",
+      "n_requested_bins": 10,
+      "n_actual_bins": 10,
+      "visualization_ready": true,
+      "estimability_status": "estimable",
+      "nonestimable_reason": null,
+      "observed_fraction_sequence_state": "nonmonotonic",
+      "all_rows_retained": true
+    }
+  ],
+  "minirocket_reconciliation": {
+    "anchor_path": "outputs/analysis/posthoc_final_calibration_points_minirocket_ridge.csv",
+    "anchor_sha256": "8e513f494cd5f9c0863a233e4448ba60d8c10e29c945dbd7e629070c9000cc90",
+    "common_columns": [
+      "bin_index",
+      "n",
+      "events",
+      "nonevents",
+      "p_cal_mean",
+      "observed_fraction",
+      "observed_ci_low",
+      "observed_ci_high",
+      "ci_method",
+      "n_requested_bins",
+      "n_actual_bins",
+      "visualization_ready",
+      "estimability_status",
+      "nonestimable_reason"
+    ],
+    "check_exact": true,
+    "status": "passed"
+  },
+  "interpretation_boundaries": [
+    "This is an internal, same-center, same-device, same-period random holdout, not external or temporal validation.",
+    "The study uses an enriched diagnostic case-control/two-gate sample.",
+    "Breath was collected after diagnostic endoscopy and indicated biopsy but before treatment.",
+    "The aggregation does not establish population-screening calibration.",
+    "It does not establish pre-endoscopy triage validity.",
+    "It does not establish target-population absolute-risk calibration.",
+    "It does not establish external transportability.",
+    "It does not establish deployment readiness, clinical utility, clinical benefit, or causality.",
+    "p_cal is not a gastric-cancer probability.",
+    "Bins are model-specific, data-dependent quantile groups.",
+    "The same bin number across models does not represent the same probability interval or participant set.",
+    "Wilson intervals quantify uncertainty in the observed positive proportion within a data-dependent bin.",
+    "They are not confidence bands for the entire calibration function.",
+    "They are not confidence intervals for the fitted Platt calibrator.",
+    "They do not provide simultaneous coverage.",
+    "The analysis supports descriptive calibration characterization only.",
+    "It must not rank models by calibration or support a generic well-calibrated claim.",
+    "Mixed, unfavorable, nonmonotonic, collapsed-bin, inconclusive, and not-visualization-ready results are retained.",
+    "LGIN-related interpretation remains exploratory because biopsy may undergrade disease and reference standards differ; this differential-reference-standard limitation remains explicit."
+  ],
+  "artifact_status": "validated_for_atomic_promotion"
+}

@@ -1,0 +1,2 @@
+rb,U,p_two_sided,median_p_cal_B,median_p_cal_C,q1_p_cal_B,q3_p_cal_B,q1_p_cal_C,q3_p_cal_C,n_above_0.5_B,n_above_0.5_C,n_B,n_C,directional_verification_passed,separation_criterion_passed
+0.9428571428571428,136.0,0.000291789765473976,0.7872543532568826,0.050817216531263525,0.43382211587616204,0.9187152813776178,0.03513284398674112,0.09368638953538938,24,0,35,4,True,True

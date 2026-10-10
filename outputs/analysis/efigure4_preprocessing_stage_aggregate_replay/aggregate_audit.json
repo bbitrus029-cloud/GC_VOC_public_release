@@ -1,0 +1,81 @@
+{
+  "analysis_classification": "post_freeze_result_blind_plan_orthogonal_descriptive_reporting_support",
+  "analysis_id": "efigure4_preprocessing_stage_aggregate_replay",
+  "channels": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9",
+    "S10",
+    "S11"
+  ],
+  "declared_lack_of_stochastic_operations": true,
+  "environmental_summary_reconciliation": {
+    "atol": 1e-12,
+    "passed": true,
+    "rtol": 0.0
+  },
+  "finite_value_validation": {
+    "passed": true
+  },
+  "population_counts": {
+    "excluded_before_post_qc_transformations": 68,
+    "fallback_t_baseline_end_excluded_cohort": 6,
+    "fallback_t_baseline_end_final_cohort": 54,
+    "fallback_t_baseline_end_source_cohort": 60,
+    "final_cohort": 972,
+    "source_cohort": 1040,
+    "tail_padded_final_signals": 41
+  },
+  "quantiles": {
+    "method": "linear",
+    "summaries": [
+      "q25",
+      "median",
+      "q75"
+    ]
+  },
+  "response_frames": {
+    "first": 0,
+    "last": 959,
+    "length": 960
+  },
+  "stage4_reconciliation": {
+    "atol": 1e-12,
+    "bitwise_equal": true,
+    "channel_match": true,
+    "clip_length_match": true,
+    "maximum_absolute_difference": 0.0,
+    "order_match": true,
+    "passed": true,
+    "rtol": 0.0,
+    "shape_match": true
+  },
+  "stages": [
+    {
+      "id": "raw_response_window",
+      "order": 1,
+      "unit": "recorded_signal_unit"
+    },
+    {
+      "id": "savitzky_golay_smoothed_response_window",
+      "order": 2,
+      "unit": "recorded_signal_unit"
+    },
+    {
+      "id": "environment_compensated_response_window",
+      "order": 3,
+      "unit": "recorded_signal_unit"
+    },
+    {
+      "id": "fractional_baseline_corrected_response_window",
+      "order": 4,
+      "unit": "fractional_change_from_compensated_baseline"
+    }
+  ]
+}

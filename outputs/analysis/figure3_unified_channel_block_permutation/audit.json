@@ -1,0 +1,326 @@
+{
+  "analysis_id": "figure3_unified_channel_block_permutation",
+  "analysis_classification": "exploratory_post_hoc",
+  "status": "complete",
+  "model_order": [
+    {
+      "model_id": "minirocket_ridge",
+      "model_display_name": "MiniRocket + Ridge",
+      "model_order": 1,
+      "pipeline": "pipeline_a"
+    },
+    {
+      "model_id": "xgboost",
+      "model_display_name": "XGBoost",
+      "model_order": 2,
+      "pipeline": "pipeline_b"
+    },
+    {
+      "model_id": "elastic_net_lr",
+      "model_display_name": "Elastic Net LR",
+      "model_order": 3,
+      "pipeline": "pipeline_b"
+    },
+    {
+      "model_id": "svm",
+      "model_display_name": "SVM",
+      "model_order": 4,
+      "pipeline": "pipeline_b"
+    },
+    {
+      "model_id": "inception_time",
+      "model_display_name": "InceptionTime",
+      "model_order": 5,
+      "pipeline": "pipeline_a"
+    },
+    {
+      "model_id": "cnn_bilstm_attention",
+      "model_display_name": "CNN\u2013BiLSTM\u2013Attention",
+      "model_order": 6,
+      "pipeline": "pipeline_a"
+    }
+  ],
+  "channel_order": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9",
+    "S10",
+    "S11"
+  ],
+  "cohort_reconciliation": {
+    "n_test": 195,
+    "n_positive": 82,
+    "n_negative": 113,
+    "passed": true
+  },
+  "baseline_reconciliation": [
+    {
+      "model_id": "minirocket_ridge",
+      "max_abs_score_difference": 6.106226635438361e-16,
+      "reproduced_auroc": 0.9222965680984243,
+      "frozen_prediction_auroc": 0.9222965680984243,
+      "frozen_metric_auroc": 0.9222965680984244,
+      "reproduced_vs_prediction_auroc_difference": 0.0,
+      "reproduced_vs_metric_auroc_difference": 1.1102230246251565e-16,
+      "prediction_vs_metric_auroc_difference": 1.1102230246251565e-16,
+      "passed": true
+    },
+    {
+      "model_id": "xgboost",
+      "max_abs_score_difference": 1.1102230246251565e-16,
+      "reproduced_auroc": 0.9013598100582776,
+      "frozen_prediction_auroc": 0.9013598100582776,
+      "frozen_metric_auroc": 0.9013598100582776,
+      "reproduced_vs_prediction_auroc_difference": 0.0,
+      "reproduced_vs_metric_auroc_difference": 0.0,
+      "prediction_vs_metric_auroc_difference": 0.0,
+      "passed": true
+    },
+    {
+      "model_id": "elastic_net_lr",
+      "max_abs_score_difference": 6.661338147750939e-16,
+      "reproduced_auroc": 0.8834448521476366,
+      "frozen_prediction_auroc": 0.8834448521476366,
+      "frozen_metric_auroc": 0.8834448521476366,
+      "reproduced_vs_prediction_auroc_difference": 0.0,
+      "reproduced_vs_metric_auroc_difference": 0.0,
+      "prediction_vs_metric_auroc_difference": 0.0,
+      "passed": true
+    },
+    {
+      "model_id": "svm",
+      "max_abs_score_difference": 1.1102230246251565e-16,
+      "reproduced_auroc": 0.8906755881718109,
+      "frozen_prediction_auroc": 0.8906755881718109,
+      "frozen_metric_auroc": 0.8906755881718109,
+      "reproduced_vs_prediction_auroc_difference": 0.0,
+      "reproduced_vs_metric_auroc_difference": 0.0,
+      "prediction_vs_metric_auroc_difference": 0.0,
+      "passed": true
+    },
+    {
+      "model_id": "inception_time",
+      "max_abs_score_difference": 1.1102230246251565e-16,
+      "reproduced_auroc": 0.8633714655730628,
+      "frozen_prediction_auroc": 0.8633714655730628,
+      "frozen_metric_auroc": 0.8633714655730628,
+      "reproduced_vs_prediction_auroc_difference": 0.0,
+      "reproduced_vs_metric_auroc_difference": 0.0,
+      "prediction_vs_metric_auroc_difference": 0.0,
+      "passed": true
+    },
+    {
+      "model_id": "cnn_bilstm_attention",
+      "max_abs_score_difference": 1.1102230246251565e-16,
+      "reproduced_auroc": 0.8782646233541981,
+      "frozen_prediction_auroc": 0.8782646233541981,
+      "frozen_metric_auroc": 0.8782646233541981,
+      "reproduced_vs_prediction_auroc_difference": 0.0,
+      "reproduced_vs_metric_auroc_difference": 0.0,
+      "prediction_vs_metric_auroc_difference": 0.0,
+      "passed": true
+    }
+  ],
+  "deep_inference_contract": {
+    "contract_id": "e010_gpu_direct_no_warmup_v1",
+    "requested_accelerator": "gpu",
+    "required_cuda_device_count": 1,
+    "training_warmup_used": false,
+    "models": [
+      {
+        "model_id": "inception_time",
+        "persisted_wrapper_accelerator": "cpu",
+        "persisted_batch_size": 32,
+        "effective_batch_size": 32,
+        "baseline_invocation_count": 1,
+        "permutation_invocation_count": 1100,
+        "all_actual_device_classes": "cuda",
+        "all_device_records_homogeneous": true,
+        "state_sha256_before_baseline": "a53f2dbb772bc80de7085ce7e0ef7bf2d21f7c68d184a67f3cebaeae27aa0f59",
+        "state_sha256_after_baseline": "a53f2dbb772bc80de7085ce7e0ef7bf2d21f7c68d184a67f3cebaeae27aa0f59",
+        "state_sha256_after_model_permutation_block": "a53f2dbb772bc80de7085ce7e0ef7bf2d21f7c68d184a67f3cebaeae27aa0f59",
+        "state_digests_identical": true,
+        "wrapper_contract_unchanged": true
+      },
+      {
+        "model_id": "cnn_bilstm_attention",
+        "persisted_wrapper_accelerator": "cpu",
+        "persisted_batch_size": 32,
+        "effective_batch_size": 32,
+        "baseline_invocation_count": 1,
+        "permutation_invocation_count": 1100,
+        "all_actual_device_classes": "cuda",
+        "all_device_records_homogeneous": true,
+        "state_sha256_before_baseline": "abe9185f2571077d399805d56c6eb300fbd6009bba4e385a96fa24b206be608f",
+        "state_sha256_after_baseline": "abe9185f2571077d399805d56c6eb300fbd6009bba4e385a96fa24b206be608f",
+        "state_sha256_after_model_permutation_block": "abe9185f2571077d399805d56c6eb300fbd6009bba4e385a96fa24b206be608f",
+        "state_digests_identical": true,
+        "wrapper_contract_unchanged": true
+      }
+    ],
+    "verified_identically_in_run_b": true
+  },
+  "randomization": {
+    "permutation_matrix_sha256": "15cd6fb0b94709e7dcda8f520cc5324c1ccaeb75ad559f63eb6ca110addb3756",
+    "bootstrap_matrix_sha256": "bda98f8b210548acabc8f525cf1cb6f2cfaca71abf97b6ab093e993a0d83fff1",
+    "permutation_matrix_shape": [
+      100,
+      195
+    ],
+    "bootstrap_matrix_shape": [
+      2000,
+      195
+    ],
+    "matrix_digest_dtype": "<i8",
+    "matrix_digest_order": "C",
+    "root_seed_sequence_entropy": 42,
+    "permutation_spawn_key": [
+      0
+    ],
+    "bootstrap_spawn_key": [
+      1
+    ],
+    "bit_generator": "PCG64",
+    "numpy_version": "2.3.5"
+  },
+  "perturbation": {
+    "pipeline_a": "Complete raw [N,L,11] selected-channel trajectory moved by the shared participant mapping before locked inference.",
+    "pipeline_b": "All nine raw engineered features for the selected channel name moved by the shared participant mapping before the fitted normalizer.",
+    "signed_estimand": "baseline_auroc_minus_permuted_auroc",
+    "negative_values_retained": true
+  },
+  "analysis_counts": {
+    "n_permutations": 100,
+    "n_bootstrap_final_model": 2000,
+    "channel_importance_rows": 66,
+    "permutation_repeat_rows": 6600,
+    "cross_model_rows": 15,
+    "channel_consensus_rows": 11
+  },
+  "ci_method": {
+    "final_model": "paired_stratified_participant_bootstrap_fixed_permutations_percentile_95",
+    "supporting_models": "not_computed_supporting_models_by_design",
+    "repeat_percentiles": "permutation_repeat_spread_not_confidence_intervals"
+  },
+  "output_validation": {
+    "row_counts": {
+      "channel_importance_summary.csv": 66,
+      "permutation_repeats.csv": 6600,
+      "cross_model_consistency.csv": 15,
+      "channel_consensus_summary.csv": 11
+    },
+    "schemas": {
+      "channel_importance_summary.csv": [
+        "analysis_id",
+        "model_id",
+        "model_display_name",
+        "model_order",
+        "pipeline",
+        "channel_index",
+        "channel_name",
+        "n_test",
+        "n_positive",
+        "n_negative",
+        "baseline_auroc",
+        "n_permutations",
+        "mean_permuted_auroc",
+        "mean_delta_auroc",
+        "median_delta_auroc",
+        "sd_delta_auroc",
+        "repeat_delta_q025",
+        "repeat_delta_q975",
+        "negative_delta_count",
+        "negative_delta_fraction",
+        "rank_within_model",
+        "n_bootstrap",
+        "bootstrap_ci_low",
+        "bootstrap_ci_high",
+        "ci_method"
+      ],
+      "permutation_repeats.csv": [
+        "analysis_id",
+        "model_id",
+        "model_order",
+        "channel_index",
+        "channel_name",
+        "permutation_repeat",
+        "baseline_auroc",
+        "permuted_auroc",
+        "delta_auroc"
+      ],
+      "cross_model_consistency.csv": [
+        "analysis_id",
+        "model_1_id",
+        "model_1_order",
+        "model_2_id",
+        "model_2_order",
+        "n_channels",
+        "kendall_tau_b",
+        "estimable",
+        "nonestimable_reason"
+      ],
+      "channel_consensus_summary.csv": [
+        "analysis_id",
+        "channel_index",
+        "channel_name",
+        "positive_model_count",
+        "zero_model_count",
+        "negative_model_count",
+        "mean_rank",
+        "median_rank",
+        "minimum_rank",
+        "maximum_rank",
+        "mean_delta_auroc",
+        "median_delta_auroc"
+      ]
+    },
+    "finite_values_passed": true,
+    "ordering_passed": true,
+    "readback_passed": true
+  },
+  "deterministic_rerun": {
+    "scientific_payloads_byte_identical": true,
+    "normalized_run_records_identical": true,
+    "excluded_volatile_fields": [
+      "output_directory",
+      "run_started_at_utc",
+      "run_finished_at_utc",
+      "wall_clock_seconds"
+    ],
+    "scientific_payload_sha256": {
+      "channel_importance_summary.csv": "7bad4e564bf060229f106e896aae051692f2a704b2e6a54eb7928cd8e04a1fe4",
+      "permutation_repeats.csv": "c797ba944d87cc6dbe4b84a16f38a86e157b0f5115ca554d4c995074b088b77b",
+      "cross_model_consistency.csv": "fab35b363aaffb4d5b06078bb629982a312c2f5d39b100d9b547a83bbb6238af",
+      "channel_consensus_summary.csv": "46c89f94c8bf37d131629f822aca0667de1eb707f546acc35691181c5c2703fd",
+      "report.md": "f614f68f75334b6430d6bff9de03a632c25e4f88f1a050d9b5e9997f07f997d3"
+    }
+  },
+  "privacy_validation": {
+    "schema_scan_passed": true,
+    "serialized_text_scan_passed": true,
+    "project_relative_paths_passed": true,
+    "forbidden_values_echoed": false
+  },
+  "participant_level_persistence": false,
+  "interpretive_limitations": [
+    "Exploratory post hoc analysis.",
+    "Internal same-center, same-device, same-period random validation only.",
+    "Enriched case-control or two-gate sampling limits transportability.",
+    "Breath was collected after diagnostic endoscopy and indicated biopsy but before treatment.",
+    "No external, temporal, multicenter, cross-device, prospective, or deployment validation.",
+    "A model score is not a gastric-cancer probability.",
+    "The endpoint is high-grade gastric lesion, not gastric cancer alone.",
+    "MOS channels are cross-responsive and cannot identify a molecule or disease-specific VOC.",
+    "Channel-block importance does not establish causality or hardware inclusion or exclusion.",
+    "Participant-level bootstrap confidence intervals are computed only for MiniRocket + Ridge.",
+    "Supporting-model percentiles describe permutation-repeat spread, not confidence intervals.",
+    "Correlated channel blocks can redistribute permutation importance.",
+    "LGIN findings are exploratory because biopsy may undergrade disease and reference standards differ."
+  ]
+}

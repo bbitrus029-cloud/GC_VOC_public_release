@@ -1,0 +1,14 @@
+{
+  "final_hparams": {},
+  "git_commit_hash": "03f4126ec356a4facc17b05ab7b302cb339f0bb5",
+  "oof_source": "nested_cv_reused",
+  "per_fold_best_hparams": [
+    {},
+    {},
+    {},
+    {},
+    {}
+  ],
+  "per_hp_consistency_flags": {},
+  "training_timestamp_utc": "2026-05-20T01:16:58.105974Z"
+}

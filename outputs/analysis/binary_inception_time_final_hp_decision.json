@@ -1,0 +1,101 @@
+{
+  "final_hparams": {
+    "batch_size": 32,
+    "bottleneck_channels": 32,
+    "depth": 6,
+    "dropout": 0.2,
+    "kernel_sizes": [
+      9,
+      19,
+      39
+    ],
+    "lr": 0.001,
+    "n_filters": 64,
+    "weight_decay": 0.0001
+  },
+  "git_commit_hash": "03f4126ec356a4facc17b05ab7b302cb339f0bb5",
+  "oof_source": "final_hp_rerun",
+  "per_fold_best_hparams": [
+    {
+      "batch_size": 32,
+      "bottleneck_channels": 32,
+      "depth": 6,
+      "dropout": 0.2,
+      "kernel_sizes": [
+        9,
+        19,
+        39
+      ],
+      "lr": 0.001,
+      "n_filters": 64,
+      "weight_decay": 0.0001
+    },
+    {
+      "batch_size": 32,
+      "bottleneck_channels": 32,
+      "depth": 9,
+      "dropout": 0.3,
+      "kernel_sizes": [
+        9,
+        19,
+        39
+      ],
+      "lr": 0.001,
+      "n_filters": 32,
+      "weight_decay": 0.0001
+    },
+    {
+      "batch_size": 32,
+      "bottleneck_channels": 32,
+      "depth": 6,
+      "dropout": 0.2,
+      "kernel_sizes": [
+        9,
+        19,
+        39
+      ],
+      "lr": 0.001,
+      "n_filters": 32,
+      "weight_decay": 0.0001
+    },
+    {
+      "batch_size": 32,
+      "bottleneck_channels": 32,
+      "depth": 6,
+      "dropout": 0.2,
+      "kernel_sizes": [
+        9,
+        19,
+        39
+      ],
+      "lr": 0.001,
+      "n_filters": 64,
+      "weight_decay": 0.0001
+    },
+    {
+      "batch_size": 32,
+      "bottleneck_channels": 32,
+      "depth": 6,
+      "dropout": 0.2,
+      "kernel_sizes": [
+        9,
+        19,
+        39
+      ],
+      "lr": 0.001,
+      "n_filters": 64,
+      "weight_decay": 0.0001
+    }
+  ],
+  "per_hp_consistency_flags": {
+    "batch_size": true,
+    "bottleneck_channels": true,
+    "depth": false,
+    "dropout": false,
+    "kernel_sizes": true,
+    "lr": true,
+    "n_filters": false,
+    "weight_decay": true
+  },
+  "training_timestamp_utc": "2026-05-20T01:17:28.169121Z"
+}

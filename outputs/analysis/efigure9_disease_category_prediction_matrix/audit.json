@@ -1,0 +1,111 @@
+{
+  "analysis_id": "efigure9_disease_category_prediction_matrix_v1",
+  "analysis_identity": "plan_orthogonal_descriptive_aggregation",
+  "artifact_statement": "Aggregate prerequisite; no figure display-label decision is included.",
+  "calculated_disease_category_totals": {
+    "AGC": 44,
+    "BGL": 71,
+    "EGC": 24,
+    "HC": 32,
+    "HGIN": 14,
+    "LGIN": 10
+  },
+  "calculated_predicted_class_totals": {
+    "0": 105,
+    "1": 90
+  },
+  "calculated_quadrant_totals": {
+    "FN": 8,
+    "FP": 16,
+    "TN": 97,
+    "TP": 74
+  },
+  "calculated_true_class_totals": {
+    "0": 113,
+    "1": 82
+  },
+  "checks": {
+    "binary_integer_schema_passed": true,
+    "cartesian_completeness_passed": true,
+    "disease_category_completeness_passed": true,
+    "endpoint_mapping_agreement_passed": true,
+    "identifier_set_alignment_passed": true,
+    "merged_row_count_passed": true,
+    "metadata_identifiers_complete_unique_passed": true,
+    "metadata_row_count_passed": true,
+    "normalization_passed": true,
+    "one_to_one_merge_passed": true,
+    "output_order_passed": true,
+    "output_schema_passed": true,
+    "p_raw_range_and_finiteness_passed": true,
+    "prediction_identifiers_complete_unique_passed": true,
+    "prediction_row_count_passed": true,
+    "prediction_schema_passed": true,
+    "privacy_passed": true,
+    "quadrant_mapping_agreement_passed": true,
+    "reconciliation_disease_category_passed": true,
+    "reconciliation_predicted_class_passed": true,
+    "reconciliation_quadrant_passed": true,
+    "reconciliation_total_passed": true,
+    "reconciliation_true_class_passed": true,
+    "terminology_passed": true,
+    "threshold_derived_prediction_agreement_passed": true,
+    "threshold_exact_passed": true
+  },
+  "determinism_statement": "The operation was deterministic and used no stochastic procedure.",
+  "disease_category_order": [
+    {
+      "code": 0,
+      "label": "HC"
+    },
+    {
+      "code": 1,
+      "label": "BGL"
+    },
+    {
+      "code": 2,
+      "label": "LGIN"
+    },
+    {
+      "code": 3,
+      "label": "HGIN"
+    },
+    {
+      "code": 4,
+      "label": "EGC"
+    },
+    {
+      "code": 5,
+      "label": "AGC"
+    }
+  ],
+  "endpoint_mapping": {
+    "0": [
+      "HC",
+      "BGL",
+      "LGIN"
+    ],
+    "1": [
+      "HGIN",
+      "EGC",
+      "AGC"
+    ]
+  },
+  "evaluation_set": "internal testing set",
+  "expected_evaluation_set_size": 195,
+  "model": "MiniRocket + Ridge",
+  "participant_persistence_statement": "No participant-level records were persisted.",
+  "predicted_class_order": [
+    0,
+    1
+  ],
+  "quadrant_mapping": {
+    "0,0": "TN",
+    "0,1": "FP",
+    "1,0": "FN",
+    "1,1": "TP"
+  },
+  "score_space": "p_raw",
+  "threshold_p_raw": 0.3418938786147648,
+  "threshold_rule": "p_raw >= threshold_p_raw"
+}
