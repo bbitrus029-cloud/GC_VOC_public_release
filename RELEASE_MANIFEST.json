@@ -1,18 +1,24 @@
 {
   "schema_version": 1,
-  "status": "assembled_local_worktree_user_payload_commit_pending",
+  "status": "local_licensing_documentation_update_pending_user_commit",
   "preparation_date": "2026-10-10",
   "source_head": "b0bcb9dce2e778ae8f3f672cefc1decf544d0e4e",
   "public_allowlist": [
     ".gitattributes",
     ".gitignore",
     "DATA_DICTIONARY.md",
+    "LICENSE",
+    "LICENSE-DATA",
+    "LICENSES/ROC-COMPARISON-MIT.txt",
+    "LICENSES/VMAF-BSD-2-Clause-Patent.txt",
+    "LICENSING.md",
     "MODEL_CARD.md",
     "MODEL_INDEX.json",
     "PROVENANCE.md",
     "README.md",
     "RELEASE_MANIFEST.json",
     "RUNTIME_VERSIONS.json",
+    "THIRD_PARTY_NOTICES.md",
     "VERIFICATION.json",
     "configs/efigure10_six_model_binned_calibration.yaml",
     "configs/efigure4_preprocessing_stage_aggregate_replay.yaml",
@@ -398,163 +404,256 @@
       "path": ".gitattributes",
       "bytes": 85,
       "sha256": "ee77432afcdbd5150617907e0b81dd142c48ab78a2c6173488165ff9769e650e",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": ".gitignore",
-      "bytes": 21112,
-      "sha256": "48dc196de418936b539b3dce9ecd9be0938451c217f39e8c37cc6fb9f15daba8",
-      "role": "documentation_or_release_policy"
+      "bytes": 21339,
+      "sha256": "39fdedeff61fd47713f3d6445ad362646b1490af37bf81d5af6ed6ae16d0bdaa",
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "DATA_DICTIONARY.md",
-      "bytes": 5674,
-      "sha256": "9cc95e9999d00bca3b6900e6241e68dec499312b5aef8d6b088af846b4efdab3",
-      "role": "documentation_or_release_policy"
+      "bytes": 6791,
+      "sha256": "e4e5d9680150c0f4d7b4a56e16d03e468f1d52258488081815843cf2edce7ad0",
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "role": "upstream_legal_text",
+      "license_scope": "upstream-legal-text",
+      "schema": {
+        "format": "UTF-8 plain text",
+        "participant_data": false
+      }
+    },
+    {
+      "path": "LICENSE-DATA",
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "role": "upstream_legal_text",
+      "license_scope": "upstream-legal-text",
+      "schema": {
+        "format": "UTF-8 plain text",
+        "participant_data": false
+      }
+    },
+    {
+      "path": "LICENSES/ROC-COMPARISON-MIT.txt",
+      "bytes": 1070,
+      "sha256": "86a32a556bf5fadb6afb64777958ff2c0bbf518d7125754feb8956d1e1cd00d9",
+      "role": "upstream_legal_text",
+      "license_scope": "upstream-legal-text",
+      "schema": {
+        "format": "UTF-8 plain text",
+        "participant_data": false
+      }
+    },
+    {
+      "path": "LICENSES/VMAF-BSD-2-Clause-Patent.txt",
+      "bytes": 2833,
+      "sha256": "a6fdb51d02b9dfe198e55534bb8047fe6d756eda117f4ff83de98f92c1952710",
+      "role": "upstream_legal_text",
+      "license_scope": "upstream-legal-text",
+      "schema": {
+        "format": "UTF-8 plain text",
+        "participant_data": false
+      }
+    },
+    {
+      "path": "LICENSING.md",
+      "bytes": 6863,
+      "sha256": "2ef18b7ef558ffc0f203b27f59d641ffc143011db870409449d119f74a2648d9",
+      "role": "licensing_documentation",
+      "license_scope": "Apache-2.0",
+      "schema": {
+        "format": "UTF-8 Markdown",
+        "participant_data": false
+      }
     },
     {
       "path": "MODEL_CARD.md",
-      "bytes": 4438,
-      "sha256": "0dd4c9d55eef1e9e8cf0516f7c7be8675583b9f6f395a0d50a3e6c6816bfb36c",
-      "role": "documentation_or_release_policy"
+      "bytes": 5080,
+      "sha256": "f44b0957d2f26464e4c5660d29ed509c0fb6905b1c6a6ea9c0f99d086a4c7528",
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "MODEL_INDEX.json",
       "bytes": 11997,
       "sha256": "ee5114852853dd70921ea337151a18f6f3a5d1000fbdf0aa0c35ff3a3288c93a",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "PROVENANCE.md",
-      "bytes": 20925,
-      "sha256": "f86834bb797e5f72084b564aa7143530f5b544916e52d65809bf3be30a49ffbf",
-      "role": "documentation_or_release_policy"
+      "bytes": 21997,
+      "sha256": "f00f49595e230098ac48cf8577936ededf058237833939005b208649084a34ae",
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "README.md",
-      "bytes": 5929,
-      "sha256": "9a97a2b2c42843c07074a47929519f0eeef7f5ec9fb015a2c738bd5e7d174840",
-      "role": "documentation_or_release_policy"
+      "bytes": 7162,
+      "sha256": "a4af1915bb1b3879a03282aca3179ae43c75d431d0b678bbfee8306cac97f489",
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "RUNTIME_VERSIONS.json",
       "bytes": 294,
       "sha256": "a2fcc61c675ef77cb5b4d990fc60bce63d4442b406f8563acd3b421becc71999",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "bytes": 10893,
+      "sha256": "1c1b15d4c514b8c213cc418f13a7990ca148bc88fb7cdbfecff53ec459b39718",
+      "role": "licensing_documentation",
+      "license_scope": "Apache-2.0",
+      "schema": {
+        "format": "UTF-8 Markdown",
+        "participant_data": false
+      }
     },
     {
       "path": "VERIFICATION.json",
-      "bytes": 112838,
-      "sha256": "38aa0afb02cf93599ca4c36c93e661dbbc8a990f8c5f56e8ce7b37f1459b5821",
-      "role": "aggregate_export_verification"
+      "bytes": 115790,
+      "sha256": "ceeee42aa7d9808017d4464b8b454eaca3c96f347bfd8b858da9ca44ac31261e",
+      "role": "aggregate_export_verification",
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "configs/efigure10_six_model_binned_calibration.yaml",
       "bytes": 53852,
       "sha256": "237781d4d3bbe82bf427aaac66aef774f1364f4db1c3bbdc74a192a32baf4180",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/efigure4_preprocessing_stage_aggregate_replay.yaml",
       "bytes": 8828,
       "sha256": "3e0b0f7509b405b34c375999e1e5b4870567a4f20d77dc338ac5574a2acb6587",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/efigure4_preprocessing_stage_aggregate_replay_environment_lock.json",
       "bytes": 54885,
       "sha256": "cf3e23de96b76536d6b906e24c2ffbaeb767a70d0940c2d483ac4f2200706cad",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/efigure9_disease_category_prediction_matrix.yaml",
       "bytes": 3411,
       "sha256": "536886da77b5adf86da8e1f67459d03799e884ecebb4fd871c3bf4f7b47bc26d",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/figure3_e010_deep_model_reconciliation_diagnostic.yaml",
       "bytes": 11993,
       "sha256": "45d54daee969533d959b49d20b8b121b1d86fd457888daf1cddf18797323f64a",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/figure3_unified_channel_block_permutation.yaml",
       "bytes": 9907,
       "sha256": "f3c7163435bb886177ba955ccbbc1295662ce28015746266523e28cd01c7ebde",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/lgin_postdiagnosis_disposition_source_closure.yaml",
       "bytes": 12315,
       "sha256": "d3fea6da081dda4afd2b0ebad85217252615521b0b61920da42b210308797ac8",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/modeling_cnn_bilstm_attention.yaml",
       "bytes": 3625,
       "sha256": "2732132cc0dbb002054af54824bdf3784ed94349c8fba4c0dd7411e55b1838d6",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/modeling_elastic_net_lr.yaml",
       "bytes": 1480,
       "sha256": "9ea2b154aa765bb6b9c66e2151133de9d51a13db8f4abb6eb6e5a1a3e28754cb",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/modeling_global.yaml",
       "bytes": 1444,
       "sha256": "c4520df8040adfebdfd1f6ae89376be5484ae3dfeda0cfd2481103df323a2e54",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/modeling_inception_time.yaml",
       "bytes": 3363,
       "sha256": "27b1267a03ce0118ff9d993204289dc15603a8c52674abbca559ec23a0882fc2",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/modeling_minirocket_ridge.yaml",
       "bytes": 1535,
       "sha256": "fa2ba5e1d5cefea39139c1f0b42f2f6d7b182a8e26f5a2a283e7a45d768eb85b",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/modeling_svm.yaml",
       "bytes": 1503,
       "sha256": "3ff72ddd7cec68dc651e468817c637c570e52e034e77bcba41e04b749fa18f15",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/modeling_xgboost.yaml",
       "bytes": 2989,
       "sha256": "c24a8b4d840736bfd2d42bef2291fe6aea33370c95f3614657105b241766071f",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/post_hoc_final_supplementary.yaml",
       "bytes": 284933,
       "sha256": "32a0ffc546053f01e4f2a2b63542b4404d5ce4f9d3f85fcd91b43d4cf06158f9",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/post_hoc_supplementary.yaml",
       "bytes": 1875,
       "sha256": "cc48e3b0fabd596edcbc5dc005eafe038b8ee4a4b9437084e0778f7017572f9d",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/preprocessing.yaml",
       "bytes": 16564,
       "sha256": "e3b0d8d9331eda2685926120a3dc7de1a62ba1f5a7f2d411fce87838a63a0664",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "configs/qc_retained_excluded_characteristics.yaml",
       "bytes": 3787,
       "sha256": "604969b9cfe50304d8aab9cbd3b5c6ed1833db15e68e31f45f847f2d4d3a8c82",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "data/processed/features/pipeline_b_raw.csv",
@@ -780,7 +879,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/sample_index.csv",
@@ -810,7 +910,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/sequences/pipeline_a_raw.npz",
@@ -863,7 +964,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/splits/dl_holdout_0.npz",
@@ -895,7 +997,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/splits/dl_holdout_1.npz",
@@ -927,7 +1030,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/splits/dl_holdout_2.npz",
@@ -959,7 +1063,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/splits/dl_holdout_3.npz",
@@ -991,7 +1096,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/splits/dl_holdout_4.npz",
@@ -1023,7 +1129,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/splits/final_dl_es_holdout.npz",
@@ -1055,7 +1162,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/splits/outer_fold_0.npz",
@@ -1136,7 +1244,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/splits/outer_fold_1.npz",
@@ -1217,7 +1326,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/splits/outer_fold_2.npz",
@@ -1298,7 +1408,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/splits/outer_fold_3.npz",
@@ -1379,7 +1490,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/splits/outer_fold_4.npz",
@@ -1460,7 +1572,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/splits/test_idx.npz",
@@ -1485,7 +1598,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/splits/train_idx.npz",
@@ -1510,7 +1624,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "data/processed/splits/train_test_split.npz",
@@ -1542,103 +1657,120 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "docs/modeling/clinical_reporting_clarifications_2026-09-25.md",
       "bytes": 10198,
       "sha256": "c53a362c98453becb8178a2b7cf3e8b1ef85213e1439a6dd33307deff56c853f",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "docs/modeling/etable4_ca199_decimal_correction_2026-09-10.md",
       "bytes": 10958,
       "sha256": "7c9b6fbb7d54c3d41d14a76004e7e92b9bf39df246927bcfef62f861e2c7cc39",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "docs/modeling/final_post_hoc_supplementary_analyses.md",
       "bytes": 47887,
       "sha256": "4f3843aa4db65741a0f65e06bb6cb16597ca816befb0eb06cca1dbf0e4b59273",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "docs/modeling/final_post_hoc_supplementary_methods.md",
       "bytes": 25219,
       "sha256": "9a2a2878f8738b716ae9243e79945d46fb013e05c456da19597d53fafdffbc2a",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "docs/modeling/manuscript_reporting_scope_decisions.md",
       "bytes": 16805,
       "sha256": "7f9044133581ffd995281072013e8412aa2758ccbc8c76156e2eabcf584bd7f5",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "docs/modeling/post_hoc_supplementary_analyses.md",
       "bytes": 12308,
       "sha256": "e81d91f96bdfff48f520b11b726c20f40ac592e5e23d377c517f4c47a93ce5b0",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "docs/modeling/registered_sample_size_reporting_closure.md",
       "bytes": 23518,
       "sha256": "3abd3a1231519ea69687df1337036ad6331aa20add7ceaf434b6767cbefdfa95",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "docs/modeling/validated_modeling_run_summary.md",
       "bytes": 44431,
       "sha256": "9331d8465302cd4215411e8ff4375f7206d21698c51bb5a6b3994192cd02dad3",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "docs/preprocessing/preprocessing_as_executed_reporting_clarification.md",
       "bytes": 14693,
       "sha256": "6b6ae5933d7904592ca06d17ecc50a39ca2d677474feeefc70bd47e1cf0eaa01",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "docs/preprocessing/preprocessing_fallback_denominator_reporting_correction.md",
       "bytes": 3374,
       "sha256": "ba0ea1b226a94ea476744ec7e8f6b047b546634d766e4bdca01792dbbca8a15c",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "docs/preprocessing/preprocessing_stage4_conda_explicit_archive_channel_metadata_correction.md",
       "bytes": 6013,
       "sha256": "a1d208e2a2d53faaa931ffa4f99b95dc9690e62a7ff4c55704210d293612f91b",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "docs/preprocessing/preprocessing_stage4_numerical_environment_build_drift_correction.md",
       "bytes": 4649,
       "sha256": "225aff9168b0e4f13e25cbbf6aa5f66ddc151e82a0e28e056cc0d307e917f83b",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "docs/preprocessing/qc6_lineage_correction.md",
       "bytes": 1162,
       "sha256": "3a18cbd06bd93ec6bc1cb4ce7524e450e29fd448bb98f56d76b06315350d9b75",
-      "role": "documentation_or_release_policy"
+      "role": "documentation_or_release_policy",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "docs/protocol/modeling_plan.md",
       "bytes": 41953,
       "sha256": "ee954a01c352189ce0ac64f020cb9d391284af13c13ee63f4572b500dcc4865e",
-      "role": "byte_identical_frozen_protocol"
+      "role": "byte_identical_frozen_protocol",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "docs/protocol/preprocessing_plan.md",
       "bytes": 31906,
       "sha256": "5325afaf2f4b5da2074c1676bae84c249f1a114fcb8f8f03eb53b57d7a698b94",
-      "role": "frozen_protocol_with_essential_date_redaction"
+      "role": "frozen_protocol_with_essential_date_redaction",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "environment.yml",
       "bytes": 634,
       "sha256": "4681d736febc0dbd182dda0627375d4a68591d110555b5450698eaba23e16803",
-      "role": "configuration_or_environment"
+      "role": "configuration_or_environment",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/analysis/binary_cnn_bilstm_attention_final_hp_decision.json",
@@ -1664,7 +1796,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_cnn_bilstm_attention_nested_cv_results.json",
@@ -1701,7 +1834,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_cnn_bilstm_attention_threshold_mapping.json",
@@ -1724,7 +1858,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_elastic_net_lr_final_hp_decision.json",
@@ -1750,7 +1885,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_elastic_net_lr_nested_cv_results.json",
@@ -1780,7 +1916,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_elastic_net_lr_threshold_mapping.json",
@@ -1803,7 +1940,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_inception_time_final_hp_decision.json",
@@ -1829,7 +1967,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_inception_time_nested_cv_results.json",
@@ -1863,7 +2002,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_inception_time_threshold_mapping.json",
@@ -1886,7 +2026,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_minirocket_ridge_final_hp_decision.json",
@@ -1912,7 +2053,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_minirocket_ridge_nested_cv_results.json",
@@ -1941,7 +2083,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_minirocket_ridge_threshold_mapping.json",
@@ -1964,7 +2107,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_svm_final_hp_decision.json",
@@ -1990,7 +2134,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_svm_nested_cv_results.json",
@@ -2019,7 +2164,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_svm_threshold_mapping.json",
@@ -2042,7 +2188,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_xgboost_final_hp_decision.json",
@@ -2068,7 +2215,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_xgboost_nested_cv_results.json",
@@ -2097,7 +2245,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/binary_xgboost_threshold_mapping.json",
@@ -2120,7 +2269,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/dca_minirocket_ridge.csv",
@@ -2150,7 +2300,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/dca_overlay_minirocket_ridge.csv",
@@ -2178,7 +2329,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/efigure10_six_model_binned_calibration/audit.json",
@@ -2207,7 +2359,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/efigure10_six_model_binned_calibration/calibration_points.csv",
@@ -2263,7 +2416,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/efigure4_preprocessing_stage_aggregate_replay/aggregate_audit.json",
@@ -2294,7 +2448,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/efigure4_preprocessing_stage_aggregate_replay/stage_channel_frame_summary.csv",
@@ -2334,7 +2489,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/efigure9_disease_category_prediction_matrix/audit.json",
@@ -2374,7 +2530,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/efigure9_disease_category_prediction_matrix/disease_category_prediction_matrix.csv",
@@ -2412,7 +2569,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/etable4_ca199_decimal_correction_2026-09-10/ca199_correction_statistics.csv",
@@ -2482,7 +2640,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/etable4_ca199_decimal_correction_2026-09-10/correction_audit.json",
@@ -2508,7 +2667,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/fallback_padded_sensitivity_all_models.csv",
@@ -2548,7 +2708,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/fallback_padded_subset_characteristics.csv",
@@ -2582,7 +2743,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/audit.json",
@@ -2615,7 +2777,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/comparison_diagnostics.csv",
@@ -2667,7 +2830,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/condition_diagnostics.csv",
@@ -2783,7 +2947,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/interpretation_branches.csv",
@@ -2859,7 +3024,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/figure3_e010_deep_model_reconciliation_diagnostic/model_condition_summary.csv",
@@ -2949,7 +3115,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/figure3_unified_channel_block_permutation/audit.json",
@@ -2986,7 +3153,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/figure3_unified_channel_block_permutation/channel_consensus_summary.csv",
@@ -3032,7 +3200,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/figure3_unified_channel_block_permutation/channel_importance_summary.csv",
@@ -3104,7 +3273,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/figure3_unified_channel_block_permutation/cross_model_consistency.csv",
@@ -3144,7 +3314,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/figure3_unified_channel_block_permutation/permutation_repeats.csv",
@@ -3184,7 +3355,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/lgin_baseline_smd_oof_minirocket_ridge.csv",
@@ -3218,7 +3390,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/lgin_descriptive_test_minirocket_ridge.csv",
@@ -3246,7 +3419,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/lgin_postdiagnosis_disposition_baseline_context.csv",
@@ -3330,7 +3504,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/lgin_postdiagnosis_disposition_primary_estimability.csv",
@@ -3392,7 +3567,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/lgin_postdiagnosis_disposition_within_inpatient_stability.csv",
@@ -3432,7 +3608,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/lgin_primary_oof_minirocket_ridge.csv",
@@ -3484,7 +3661,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/lgin_within_b_stability_oof_minirocket_ridge.csv",
@@ -3518,7 +3696,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/misclassification_per_sample_minirocket_ridge.csv",
@@ -3554,7 +3733,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/misclassification_representative_samples_minirocket_ridge.csv",
@@ -3596,7 +3776,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_calibration_gof_minirocket_ridge.csv",
@@ -3634,7 +3815,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_final_calibration_points_minirocket_ridge.csv",
@@ -3684,7 +3866,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_final_calibration_smoother_minirocket_ridge.csv",
@@ -3724,7 +3907,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_final_cohort_flow.csv",
@@ -3764,7 +3948,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_final_date_grouped_fold_audit_minirocket_ridge.csv",
@@ -3814,7 +3999,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_final_date_grouped_validation_minirocket_ridge.csv",
@@ -3900,7 +4086,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_final_included_excluded_smd.csv",
@@ -3938,7 +4125,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_final_included_excluded_summary.csv",
@@ -3986,7 +4174,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_final_locked_score_composition_minirocket_ridge.csv",
@@ -4026,7 +4215,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_final_locked_score_metrics_minirocket_ridge.csv",
@@ -4100,7 +4290,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_final_qc5_correctness_minirocket_ridge.csv",
@@ -4168,7 +4359,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_final_within_date_concordance_minirocket_ridge.csv",
@@ -4234,7 +4426,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_observed_prevalence_dca_minirocket_ridge.csv",
@@ -4272,7 +4465,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_optimism_correction_minirocket_ridge.csv",
@@ -4314,7 +4508,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_sample_size_reconstruction.json",
@@ -4355,7 +4550,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_threshold_uncertainty_minirocket_ridge.csv",
@@ -4393,7 +4589,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/posthoc_threshold_uncertainty_minirocket_ridge_dca_curve_data.csv",
@@ -4425,7 +4622,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/progression_trajectory_minirocket_ridge.csv",
@@ -4457,7 +4655,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/qc_retained_excluded_characteristics_smd.csv",
@@ -4495,7 +4694,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/qc_retained_excluded_characteristics_summary.csv",
@@ -4547,7 +4747,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/stage7_part_a_audit.json",
@@ -4577,7 +4778,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/stage7_part_b_audit.json",
@@ -4608,7 +4810,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/stage7_part_c_audit.json",
@@ -4641,7 +4844,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/stage8_audit.json",
@@ -4676,7 +4880,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/stage9_audit.json",
@@ -4704,7 +4909,8 @@
           "training_timestamp_utc"
         ],
         "interpretation": "original scientific values and analysis classifications retained"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/stratified_robustness_age_at_60_all_models.csv",
@@ -4746,7 +4952,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/stratified_robustness_bmi_at_24_all_models.csv",
@@ -4788,7 +4995,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/stratified_robustness_drinking_all_models.csv",
@@ -4830,7 +5038,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/stratified_robustness_family_history_all_models.csv",
@@ -4872,7 +5081,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/stratified_robustness_hp_infection_all_models.csv",
@@ -4914,7 +5124,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/stratified_robustness_sex_all_models.csv",
@@ -4956,7 +5167,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/stratified_robustness_smoking_all_models.csv",
@@ -4998,7 +5210,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/subgroup_agc_all_models.csv",
@@ -5030,7 +5243,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/subgroup_hgin_egc_all_models.csv",
@@ -5062,7 +5276,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/temporal_drift_oof_all_models.csv",
@@ -5106,7 +5321,8 @@
           "time_range_start",
           "time_range_end"
         ]
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/temporal_drift_test_all_models.csv",
@@ -5150,7 +5366,8 @@
           "time_range_start",
           "time_range_end"
         ]
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/three_view_all_models_full_set.csv",
@@ -5184,7 +5401,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/three_view_best_model_with_subgroups.csv",
@@ -5218,7 +5436,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/tumor_marker_lr_comparison_minirocket_ridge.csv",
@@ -5254,7 +5473,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/tumor_marker_selection_bias.csv",
@@ -5290,7 +5510,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/two_tier_risk_stratification_minirocket_ridge.csv",
@@ -5322,7 +5543,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/analysis/voc_marker_fusion_minirocket_ridge.csv",
@@ -5358,7 +5580,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/metrics/binary_cnn_bilstm_attention_nested_cv_summary.csv",
@@ -5392,7 +5615,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/metrics/binary_cnn_bilstm_attention_test_metrics.csv",
@@ -5424,7 +5648,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/metrics/binary_elastic_net_lr_nested_cv_summary.csv",
@@ -5458,7 +5683,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/metrics/binary_elastic_net_lr_test_metrics.csv",
@@ -5490,7 +5716,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/metrics/binary_inception_time_nested_cv_summary.csv",
@@ -5524,7 +5751,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/metrics/binary_inception_time_test_metrics.csv",
@@ -5556,7 +5784,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/metrics/binary_minirocket_ridge_nested_cv_summary.csv",
@@ -5590,7 +5819,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/metrics/binary_minirocket_ridge_test_metrics.csv",
@@ -5622,7 +5852,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/metrics/binary_svm_nested_cv_summary.csv",
@@ -5656,7 +5887,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/metrics/binary_svm_test_metrics.csv",
@@ -5688,7 +5920,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/metrics/binary_xgboost_nested_cv_summary.csv",
@@ -5722,7 +5955,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/metrics/binary_xgboost_test_metrics.csv",
@@ -5754,7 +5988,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/models/binary_cnn_bilstm_attention_final.pkl",
@@ -5765,7 +6000,8 @@
         "format": "pickle",
         "fitted_state_preserved": true,
         "internal_training_ids_removed": true
-      }
+      },
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/models/binary_cnn_bilstm_attention_threshold_calibrator.pkl",
@@ -5776,7 +6012,8 @@
         "format": "pickle",
         "fitted_state_preserved": true,
         "internal_training_ids_removed": true
-      }
+      },
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/models/binary_elastic_net_lr_final.pkl",
@@ -5787,7 +6024,8 @@
         "format": "pickle",
         "fitted_state_preserved": true,
         "internal_training_ids_removed": true
-      }
+      },
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/models/binary_elastic_net_lr_threshold_calibrator.pkl",
@@ -5798,7 +6036,8 @@
         "format": "pickle",
         "fitted_state_preserved": true,
         "internal_training_ids_removed": true
-      }
+      },
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/models/binary_inception_time_final.pkl",
@@ -5809,7 +6048,8 @@
         "format": "pickle",
         "fitted_state_preserved": true,
         "internal_training_ids_removed": true
-      }
+      },
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/models/binary_inception_time_threshold_calibrator.pkl",
@@ -5820,7 +6060,8 @@
         "format": "pickle",
         "fitted_state_preserved": true,
         "internal_training_ids_removed": true
-      }
+      },
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/models/binary_minirocket_ridge_final.pkl",
@@ -5831,7 +6072,8 @@
         "format": "pickle",
         "fitted_state_preserved": true,
         "internal_training_ids_removed": true
-      }
+      },
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/models/binary_minirocket_ridge_fusion_lr.pkl",
@@ -5842,7 +6084,8 @@
         "format": "pickle",
         "fitted_state_preserved": true,
         "internal_training_ids_removed": true
-      }
+      },
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/models/binary_minirocket_ridge_marker_lr.pkl",
@@ -5853,7 +6096,8 @@
         "format": "pickle",
         "fitted_state_preserved": true,
         "internal_training_ids_removed": true
-      }
+      },
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/models/binary_minirocket_ridge_threshold_calibrator.pkl",
@@ -5864,7 +6108,8 @@
         "format": "pickle",
         "fitted_state_preserved": true,
         "internal_training_ids_removed": true
-      }
+      },
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/models/binary_svm_final.pkl",
@@ -5875,7 +6120,8 @@
         "format": "pickle",
         "fitted_state_preserved": true,
         "internal_training_ids_removed": true
-      }
+      },
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/models/binary_svm_threshold_calibrator.pkl",
@@ -5886,7 +6132,8 @@
         "format": "pickle",
         "fitted_state_preserved": true,
         "internal_training_ids_removed": true
-      }
+      },
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/models/binary_xgboost_final.pkl",
@@ -5897,7 +6144,8 @@
         "format": "pickle",
         "fitted_state_preserved": true,
         "internal_training_ids_removed": true
-      }
+      },
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/models/binary_xgboost_threshold_calibrator.pkl",
@@ -5908,7 +6156,8 @@
         "format": "pickle",
         "fitted_state_preserved": true,
         "internal_training_ids_removed": true
-      }
+      },
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "outputs/predictions/binary_cnn_bilstm_attention_final_hp_oof.csv",
@@ -5940,7 +6189,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_cnn_bilstm_attention_nested_cv_oof.csv",
@@ -5972,7 +6222,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_cnn_bilstm_attention_nested_cv_per_fold.csv",
@@ -6006,7 +6257,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_cnn_bilstm_attention_test_predictions.csv",
@@ -6042,7 +6294,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_cnn_bilstm_attention_train_in_sample.csv",
@@ -6078,7 +6331,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_elastic_net_lr_final_hp_oof.csv",
@@ -6110,7 +6364,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_elastic_net_lr_nested_cv_oof.csv",
@@ -6142,7 +6397,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_elastic_net_lr_nested_cv_per_fold.csv",
@@ -6176,7 +6432,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_elastic_net_lr_test_predictions.csv",
@@ -6212,7 +6469,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_elastic_net_lr_train_in_sample.csv",
@@ -6248,7 +6506,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_inception_time_final_hp_oof.csv",
@@ -6280,7 +6539,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_inception_time_nested_cv_oof.csv",
@@ -6312,7 +6572,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_inception_time_nested_cv_per_fold.csv",
@@ -6346,7 +6607,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_inception_time_test_predictions.csv",
@@ -6382,7 +6644,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_inception_time_train_in_sample.csv",
@@ -6418,7 +6681,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_minirocket_ridge_nested_cv_oof.csv",
@@ -6450,7 +6714,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_minirocket_ridge_nested_cv_per_fold.csv",
@@ -6484,7 +6749,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_minirocket_ridge_test_predictions.csv",
@@ -6520,7 +6786,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_minirocket_ridge_train_in_sample.csv",
@@ -6556,7 +6823,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_svm_final_hp_oof.csv",
@@ -6588,7 +6856,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_svm_nested_cv_oof.csv",
@@ -6620,7 +6889,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_svm_nested_cv_per_fold.csv",
@@ -6654,7 +6924,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_svm_test_predictions.csv",
@@ -6690,7 +6961,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_svm_train_in_sample.csv",
@@ -6726,7 +6998,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_xgboost_final_hp_oof.csv",
@@ -6758,7 +7031,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_xgboost_nested_cv_oof.csv",
@@ -6790,7 +7064,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_xgboost_nested_cv_per_fold.csv",
@@ -6824,7 +7099,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_xgboost_test_predictions.csv",
@@ -6860,7 +7136,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/predictions/binary_xgboost_train_in_sample.csv",
@@ -6896,7 +7173,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "y_pred uses p_raw >= frozen threshold",
         "confidence_intervals": "not computed or changed by export"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/shap/binary_cnn_bilstm_attention_channel_importance.csv",
@@ -6926,7 +7204,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/shap/binary_cnn_bilstm_attention_nested_cv_attention.npz",
@@ -6981,7 +7260,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/shap/binary_elastic_net_lr_channel_importance.csv",
@@ -7011,7 +7291,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/shap/binary_inception_time_channel_importance.csv",
@@ -7041,7 +7322,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/shap/binary_minirocket_ridge_channel_importance.csv",
@@ -7071,7 +7353,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/shap/binary_minirocket_ridge_representative_samples_shap.npz",
@@ -7111,7 +7394,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/shap/binary_minirocket_ridge_representative_samples_signals.npz",
@@ -7152,7 +7436,8 @@
         "row_order": "public sample ID ascending",
         "object_dtype": false,
         "zip_timestamp": "fixed format metadata, not a collection date"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/shap/binary_svm_channel_importance.csv",
@@ -7182,7 +7467,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/shap/binary_xgboost_channel_importance.csv",
@@ -7212,7 +7498,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/shap/cross_model_kendall_tau.csv",
@@ -7246,7 +7533,8 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "outputs/shap/cross_model_top_k_converging.csv",
@@ -7276,1031 +7564,1220 @@
         "score_scale": "p_raw and p_cal remain distinct where present",
         "threshold_convention": "original source-specific convention, unchanged",
         "confidence_intervals": "original source method and stored bounds, unchanged"
-      }
+      },
+      "license_scope": "CC-BY-4.0"
     },
     {
       "path": "release_inference.py",
       "bytes": 5587,
       "sha256": "32c3b7f0e33d868d9ce3716c71e5ce2dd24e81a93fd8a2cfa74b8a40f2ab39a5",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/__init__.py",
       "bytes": 70,
       "sha256": "ad03fc59b61c49890d556bf7ccc2c78dd7eaae955963111151c7f77f8f9f96f3",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_calibration_tests.py",
       "bytes": 1690,
       "sha256": "c529b538ed09a609f5ed00f527ed033ae7e58e0de8c7ceb5548aa96e35f8656d",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_cohort_description.py",
       "bytes": 1078,
       "sha256": "55376ec044d8270b2560b753d73de130f0197e76d7a60cd7933d64ee443f2981",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_data_split_seed_selection.py",
       "bytes": 937,
       "sha256": "814acb761114e4ce8cabcda9df6444aa3912ce5f6646a2cc11fbe8ee98ceb649",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_discovery.py",
       "bytes": 40174,
       "sha256": "67c64c09669428837e22ccf99be5ff770bae91ca83a89357041abe28c8e8af2f",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_efigure10_six_model_binned_calibration.py",
       "bytes": 2294,
       "sha256": "890d807961ff81a5c731bea8d9f94560530ff7987d86a129a9c3771e37999435",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_efigure4_preprocessing_stage_aggregate_replay.py",
       "bytes": 2262,
       "sha256": "5ebf84d3ce8ebbdf7455360113491267293b9acb18d9f2f2d9934a4152a8aec4",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_efigure9_disease_category_prediction_matrix.py",
       "bytes": 1707,
       "sha256": "bfd04a215f06403268c1ae525086938d3cd2c368adf99b09acaa755b69fa1dad",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_etable4_ca199_correction.py",
       "bytes": 876,
       "sha256": "4a839bbdef39ca1197cc3bdb1ee2fc50683c75944b407f561f92d57a6e2d4737",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_figure3_e010_deep_model_reconciliation_diagnostic.py",
       "bytes": 1170,
       "sha256": "98b2dc1fa1ac0423e5a90160be04f22ddfc293203f32cb723d0b0f77210f3573",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_figure3_unified_channel_block_permutation.py",
       "bytes": 1484,
       "sha256": "dd73f69c5ce0d3d23259536ef1c93aa799f20edbb1417dd456ad6b9151ab3816",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_lgin_postdiagnosis_disposition_source_closure.py",
       "bytes": 1774,
       "sha256": "eb09e9d626242e95deb6efeb08dd2c72d21168b6a027d7c45a732ef2740dd03e",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_optimism_correction.py",
       "bytes": 2624,
       "sha256": "3c252ac31fc0f75f9a75b42e2064104fae506971342f49625b52deacfc86a81f",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_posthoc_final_audit.py",
       "bytes": 1827,
       "sha256": "22400cf8b199615a3014daa7cd652a65aee272b90c83bd1be827a8b028706e9a",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_posthoc_final_date_grouped.py",
       "bytes": 1635,
       "sha256": "4cb1d4a525897b6d2795623313f9da6fc18c46271806ecde3a712a657ba5bd2d",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_posthoc_final_locked_scores.py",
       "bytes": 3266,
       "sha256": "ec92d83a0abf29d9ce42154598eb247538c415c7c37d5098d8104950e04176e9",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_posthoc_final_reporting.py",
       "bytes": 2271,
       "sha256": "11243d05499a2cafbd305e2c9e55d102dc1a290f76571f141b6810132513602b",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_posthoc_observed_prevalence_dca.py",
       "bytes": 1648,
       "sha256": "fc6f773d6d2a21f37e5bd87bac4a2646eb86bbb54c20c675ccdea372257eeeb6",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_preprocessing.py",
       "bytes": 3453,
       "sha256": "b99f0df745455cbf64cc3d2d024a311ad800054bafa9023b9c88be9b9c45ad14",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_qc_retained_excluded_characteristics.py",
       "bytes": 1415,
       "sha256": "9cae7f9bc1144b8942b1ab3069467783096b46b891867dc49bb67a587340e089",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_sample_size.py",
       "bytes": 1290,
       "sha256": "6a218abd725f6043ec695759ce71b351f3f10bb04b8213509be560d47e194bbf",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/run_threshold_uncertainty.py",
       "bytes": 1722,
       "sha256": "9a74eb07b880d3472ef9c4ffb30ed85ec86ac9ef560de84894dbb7437bfc4d09",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "scripts/verify_release_models.py",
       "bytes": 3669,
       "sha256": "5f0a2d78afc90b96392d1c16c092df8a8edb829ecbb4c87f50783e404a94e5c3",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/__init__.py",
       "bytes": 61,
       "sha256": "4982dd26547d38c601f471dcb1921543d38907b4620b17d8eccb909463ccf6b3",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/__init__.py",
       "bytes": 311,
       "sha256": "670771c6b3326f1d744f27aa29771ab57e59fc4e5264cb1040639e82f2e4c5ac",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/baseline_table.py",
       "bytes": 7736,
       "sha256": "deb46dd8aef6da22ed6cc5118e80a7fe03dbca2ad19b2bac2e55564e497e28b8",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/calibration_tests.py",
       "bytes": 20702,
       "sha256": "784bd0f155443384170dded6d7659a117354618240490279e2c2b0cb4dbd4451",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/clinical_translation.py",
       "bytes": 7375,
       "sha256": "120fffebf7b648abb7b4504e4b84ab8ce1a2922b90bd53f24f05e4821a84f626",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/cohort_description.py",
       "bytes": 26080,
       "sha256": "f5a77af01b5c34460ff4f5c423595b26265d6953267fd196c9f261ecb17a8f12",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/data_split.py",
       "bytes": 25850,
       "sha256": "4c10e56a95d675f47c57922133bd48232893500d515ff50f3e215150261b2ada",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/dca.py",
       "bytes": 5558,
       "sha256": "e34859debc25c93e0641f32ee610db828e20cd65c80c31a88fb3c358787adf04",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/efigure10_six_model_binned_calibration.py",
       "bytes": 113746,
       "sha256": "ee0e97ecd3e5f0750af49589e0340b3b8ae7c282d4bdb9e7fb757991d3f67477",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/efigure4_preprocessing_stage_aggregate_replay.py",
       "bytes": 157847,
       "sha256": "e0cea659c25ce7f13f824be95516e393abdd3a0d4bb5b86b018d12b96fc9cfb0",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/efigure9_disease_category_prediction_matrix.py",
       "bytes": 53856,
       "sha256": "60b2cc7b28231abb0bfbb7d14a978e54237f6e202c36bd1bf51356031a8086b0",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/etable4_ca199_correction.py",
       "bytes": 32659,
       "sha256": "a200a87cdbee71b32a85b528c16d64a81d9fe299a54c226d43703739dce541c5",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/fallback_padded_sensitivity.py",
       "bytes": 10292,
       "sha256": "e5ebb3441bc4e77d359acb03100f2d8a15437d091826956be5856f57f4fbf4c8",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/figure3_e010_deep_model_reconciliation_diagnostic.py",
       "bytes": 79702,
       "sha256": "b517d3b9d724745769347fde811aeee4d59db0d109f05a4cda098c6eeb0eaaa2",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/figure3_unified_channel_block_permutation.py",
       "bytes": 137125,
       "sha256": "18da4f69e15de521022afe47faa1f1c80b8dee764db64ee48e67ee97b143c7ca",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/lgin_layer_analysis.py",
       "bytes": 25432,
       "sha256": "2279e37423ab866dc4b53d10392a525cdceac5bdd6a549312de42a8133f3be49",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/lgin_postdiagnosis_disposition_source_closure.py",
       "bytes": 74366,
       "sha256": "3b42c686d8472ed2db33c8433b905a8c63eab8a4c1b07563eb883fd91c896918",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/misclassification.py",
       "bytes": 16781,
       "sha256": "103649bd3bd2a75df5873c1e5999886de8709aec0ef41ead21dbe610158c8aee",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/model_selection.py",
       "bytes": 33746,
       "sha256": "62c448f966e21ef7e2adbb12b57f20b4cb7693fa6c649cf81b2ea169508be1c5",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/observed_prevalence_dca.py",
       "bytes": 16066,
       "sha256": "85065b717727dd52daee6301e40eca77708efdba32a42dd52bd16c972baad2e4",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/optimism_correction.py",
       "bytes": 32620,
       "sha256": "0e42418fcd9431d9df7a9030ac4c926c765adddfa7c6210afc8636fa28efa934",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/posthoc_final_audit.py",
       "bytes": 101520,
       "sha256": "664f72c8551167211526e33522e668666d5db6c9a23bab976fc9f1445788be0f",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/posthoc_final_common.py",
       "bytes": 58425,
       "sha256": "13eb2a857cf309607ec9ca040adbbbf09de00fd192195efe9d06b911d0327f76",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/posthoc_final_date_grouped.py",
       "bytes": 71564,
       "sha256": "5cad1a34197f8306276b8f274f56ca3af069523a15af81a1ffba84bbc8e1ea45",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/posthoc_final_locked_scores.py",
       "bytes": 132717,
       "sha256": "5face8b1263a901d27956051b037ac2d83e2925c95af951b8a9d1bbb42d98b0a",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/posthoc_final_reporting.py",
       "bytes": 107468,
       "sha256": "49772c00129e1aafdca7ae67db3a7922d1043296665cb163ca4c27821fe3619f",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/progression_trajectory.py",
       "bytes": 9060,
       "sha256": "69b00ddafeb8e28aa4588b41da53051d282d817328dd9a3b56318e7ff11e6159",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/qc_retained_excluded_characteristics.py",
       "bytes": 52401,
       "sha256": "00ed56ec502cbfeaf727971cde307325751f5ea880db65c546f3c6d116f2984c",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/reproducibility_verification.py",
       "bytes": 37373,
       "sha256": "80b51d3ddb1f3678bdfc43e9badda687e3729c79aff037bbb2a9ec3d0c9abb63",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/sample_size.py",
       "bytes": 35026,
       "sha256": "208edcbbc60e40344560e62219fa483cfc26ff8610f68b344e81bbdccf1a0050",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/shap_cross_model.py",
       "bytes": 44118,
       "sha256": "2a23e41c060c38a04a06c7fa6b44d86bee8226dcb47f137396f2ee5b72946d07",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/stage7_part_a_common.py",
       "bytes": 15079,
       "sha256": "2ee75f19c284e84aa0528d557d9f582cf217180005dd014a5dfa06e995527179",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/stage7_part_b_common.py",
       "bytes": 6370,
       "sha256": "e43d6901e5bd869df9c143b82aa4bca405ccdac5c0dc70dc823e3563ac72b9e9",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/stage7_part_c_common.py",
       "bytes": 24258,
       "sha256": "8dfb3800754d45bac8c5bf8d67223863c96dacc023a1307a40befb237463b237",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/stratified_robustness.py",
       "bytes": 6295,
       "sha256": "df32445fcde106e0f549fec40ccb2089ea2b8bc2fc93d25c79850f8761f602df",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/subgroup_analysis.py",
       "bytes": 10204,
       "sha256": "3e70d4d9192a4d924129ff96f490224c1350490e62d46764a33921333ec53871",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/temporal_drift.py",
       "bytes": 8510,
       "sha256": "9f8c14b58f19f41e764e66e45a259f27a37faaf9a071f7784f6cd3b730cd3efa",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/three_view_comparison.py",
       "bytes": 5193,
       "sha256": "8768ee04e01790f2706bcbc58fd6b0b2ad8c05451ce5ee09c6f1c05d77cefa22",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/threshold_uncertainty.py",
       "bytes": 27962,
       "sha256": "2100292a2a536e043482df98f2863372ce9a179001a4f359daf1efe3880bab36",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/tumor_marker_model.py",
       "bytes": 17272,
       "sha256": "e3c46218d0de7fda76c152376745a9c145a485ef98a44cfe87214d9d12801022",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/analysis/vocs_marker_fusion.py",
       "bytes": 18684,
       "sha256": "74e6da321f6111a9393b6edf470e9ae44f0404cbdf049b492b0e96b000ae57c6",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/config.py",
       "bytes": 3523,
       "sha256": "e10ccfe1ca068b39472a7b3e201cf709f0f017ab502d2cec851cb8914a3a721f",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/data/__init__.py",
       "bytes": 65,
       "sha256": "8179b0631604025c670aab23b7f6eab0c47d6b437d806ab9ca8d58c51603b577",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/data/baseline.py",
       "bytes": 6870,
       "sha256": "2800fd7bc8268841c3613ffde9ca77e4404f8732c0976fed334eceb59a3ffe40",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/data/correction.py",
       "bytes": 7248,
       "sha256": "202ef9c8f673be49af3febc5056ca14488bc50380069c918c32166ced1fb7c80",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/data/discovery.py",
       "bytes": 14471,
       "sha256": "30f54b6fc725bd1253dddf168f727b9a4db3be59a742ee780c95aeb7a1b2e909",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/data/env_compensation.py",
       "bytes": 16111,
       "sha256": "03e56a732e9938217f1ff8c9587fd1b571ceaa688818b17c15447e02081840eb",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/data/loader.py",
       "bytes": 9810,
       "sha256": "b30904e2721b68243635886e129c6110e6199be02af58aa1021160db1719eb76",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/data/pipeline_a.py",
       "bytes": 10058,
       "sha256": "f261fff76fb1bcf7d0734ccf7713c70e6b24e16234c622a625c5db7c051592f5",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/data/preprocessing.py",
       "bytes": 20156,
       "sha256": "6e3037b57f3a4c86e424d49dfa53438ca9b9ff4b1dd9f626096f274e1f89b376",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/data/qc.py",
       "bytes": 26534,
       "sha256": "5a634b045fc6d815f9e08c6449dce3bb3e6ee2e63bb6d8b527065f44438814cd",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/data/smoothing.py",
       "bytes": 2897,
       "sha256": "a51671ea5220382258f0ac605015f3374237c9d52c2dc67abc6fde6297c28e7d",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/evaluation/__init__.py",
       "bytes": 1241,
       "sha256": "f52d6b063da8aff8895dadad3d781ab676929ec16e94d8f67e5eac773251d748",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/evaluation/calibration.py",
       "bytes": 5428,
       "sha256": "33e125ca16669758c94b2ecfc323f1fdf776926699175b8b398151c0c70b9ed9",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/evaluation/metrics.py",
       "bytes": 7665,
       "sha256": "f355df339a9ee1bba6fff98c5bf24ea5f611554204da3257d05d702d8708595c",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/evaluation/statistical_tests.py",
       "bytes": 14640,
       "sha256": "ef565e50c5fb380db200098adfca454eedda89a8ea71a14dc075680db9d4d5d0",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0",
+      "third_party_license_exceptions": [
+        {
+          "symbols": [
+            "_compute_midrank",
+            "_fast_delong"
+          ],
+          "license": "MIT",
+          "notice": "LICENSES/ROC-COMPARISON-MIT.txt"
+        },
+        {
+          "symbols": [
+            "_compute_midrank",
+            "_fast_delong"
+          ],
+          "license": "BSD-2-Clause-Patent",
+          "notice": "LICENSES/VMAF-BSD-2-Clause-Patent.txt"
+        }
+      ]
     },
     {
       "path": "src/features/__init__.py",
       "bytes": 65,
       "sha256": "e5d56a4d5703658967ff51cd8b7fff795bb6eaecf5a94456aa628216707e2998",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/features/extraction.py",
       "bytes": 11381,
       "sha256": "a2e51e3b117de307008e20e8bb5f1a31a0bea8c79438e3a00ac2a0932d7108bf",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/models/__init__.py",
       "bytes": 287,
       "sha256": "f39da52d8579319084246ca4a350a0c669d84bcd73f86bf10e51f636363796f9",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/models/cnn_bilstm_attention.py",
       "bytes": 9413,
       "sha256": "536b4477f1604231adf15bcc75ca984b328b7e11fd1fe6d2f14420866a946fdc",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/models/data_module.py",
       "bytes": 3809,
       "sha256": "abda6fb58fbc1e60035854ad5241488888e50276842e82cbce1829a4624c4daa",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/models/inception_time.py",
       "bytes": 10644,
       "sha256": "616bf8702271d06c2c4dabb15ad708415bd11ae39c7b2f5fcfc58641f36ebd1e",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/__init__.py",
       "bytes": 52,
       "sha256": "8ff646e16528038e559ba03e41d7e9963aa3b5d97b05da54d684d8d25f595b0b",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/common/__init__.py",
       "bytes": 980,
       "sha256": "5af842697e9e1662e8fad3475bf7da4716554b66291fc198ef70c1071861563b",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/common/base_trainer.py",
       "bytes": 17796,
       "sha256": "7230fc55ab336b62a34882420331d59d568f40312b6effd5f0f7e5e3c5afe4e0",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/common/bootstrap.py",
       "bytes": 4382,
       "sha256": "33cd38f1bd6b53eff77bdd5aa7c6431b893f61dbd14ff57a25a98545f2f1cb9f",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/common/early_stopping.py",
       "bytes": 4003,
       "sha256": "bf6d131f21208eee9227e35d765cdfbfe0cc62f51f384275a8be2845160289ad",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/common/fold_generator.py",
       "bytes": 14048,
       "sha256": "0ba24624d81c18f17a12c0c30b152e03e461c991db9bdb24d8a8a12541e6a6ca",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/common/metrics.py",
       "bytes": 5201,
       "sha256": "d69d51515600d8e18ed03a09eb1ea0453b282654c4f9ea7618a80817da6a0954",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/common/normalizer.py",
       "bytes": 5211,
       "sha256": "d04df8a5300c3bd4c843a0a26434684e5655e6fb89f5e6269c4a21b0c65056de",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/common/runtime.py",
       "bytes": 433,
       "sha256": "54ba8cf3df6929f7724dcc3f9b9b8fe38c27e6ba4fe97157e7eb0256c3493758",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/dl_inference.py",
       "bytes": 983,
       "sha256": "1ac8bffa05eede6276dbc424fbab36cf326f5ec1e4b1263ef9dd708c0d870cb9",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/load_final_model.py",
       "bytes": 611,
       "sha256": "3813e2ba07c0fb611c5f260ae5deca9e89fa034cb5396ef15acc57170a794330",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/train_cnn_bilstm_attention.py",
       "bytes": 43113,
       "sha256": "70cbad7715079dbd9f085c8d1ec73e4b7d4ab9e9f19031aebe845eccac221d38",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/train_elastic_net_lr.py",
       "bytes": 28971,
       "sha256": "5c19082db30c0e5345afa4b1e09fe5c2a53ca81fe2102c27f122155ae41a8dcb",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/train_final_models.py",
       "bytes": 49851,
       "sha256": "6a2a960a06a022ebc91a06ad0236ff2011ae6c2add5f870c3395a1141958e41b",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/train_inception_time.py",
       "bytes": 43919,
       "sha256": "6992eb9b9dd92fbfda201b28363b2e1e70b072938d4ce6ba35f7c4a2dcfe7673",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/train_minirocket_ridge.py",
       "bytes": 25258,
       "sha256": "726fccbc3b466d52462713a1dd336e2ab6eb011dff7cbf5e2a6e995009c7d6df",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/train_svm.py",
       "bytes": 26202,
       "sha256": "1dcd6b034338b86603d9e5e62101e6dcaa9ca050246e5d0e9e8ac2f31e087902",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "src/training/train_xgboost.py",
       "bytes": 29455,
       "sha256": "abe86246ee2ce17ccb4d500b468efd2b86c079cf6b42661bf9dd95ab22beace9",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/__init__.py",
       "bytes": 46,
       "sha256": "fe25982ab0a197cb20f8715268abfc5caaa337d3adf85635bad8e830cf528b4e",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_baseline.py",
       "bytes": 9770,
       "sha256": "34453ba7ab551277922ca6f7fcdc1393b4da18f99299fc3eafcd389c61109492",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_calibration_tests.py",
       "bytes": 5279,
       "sha256": "fda94f0c0042f4e7663a27fc72e1f2e096e0201424e0682025cd5f8f0dc6f52c",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_clinical_translation.py",
       "bytes": 3387,
       "sha256": "02cbb0a6b9c42e817e826c0b1b26d962bf6efb9cbb1e5a5b0212a20e2d368cb0",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_cohort_description.py",
       "bytes": 6274,
       "sha256": "926f2e0c5eba69aea6ab405cfffc8617234dd8aab85d55a330576b5fa96de4e3",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_common_utils.py",
       "bytes": 14438,
       "sha256": "a6dd324bc277fb066a635d5d711dc4b007e883fcf6398e849011cc523391f8ae",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_correction.py",
       "bytes": 7509,
       "sha256": "165638d7252aaa50d2334ade98d6dae8f07e3b82fc3af071e50242146fd237ad",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_data_split_guard.py",
       "bytes": 5316,
       "sha256": "8c816fbfe98af554e5de1fa4412e122ae14592594ed3681af4b32d171407808a",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_dca.py",
       "bytes": 2797,
       "sha256": "f78491ca8584153b0ce817e744bc7dfd7279ec7c768234e1d646d06543a91e98",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_delong_aSAH.py",
       "bytes": 1483,
       "sha256": "b6b32c4819bf6f8e4d5976980c217fc72a70210bddf4fba6602e02d4bfaf8fe0",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_discovery.py",
       "bytes": 9276,
       "sha256": "f55465914c086a58c4f80fefc91c0d92539a9df0b9fde912c79986ac81c32cad",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_dl_models.py",
       "bytes": 5575,
       "sha256": "bc4eda47030d58ee3d9e34f2ea3c00e9f22570af1b931cefb873e6f2d885ad2f",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_efigure10_six_model_binned_calibration.py",
       "bytes": 99348,
       "sha256": "13fe99d2f9c1aec0a6297eef7d0a97ee3fc720dac19d2312d8143963b288c060",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_efigure4_preprocessing_stage_aggregate_replay.py",
       "bytes": 131803,
       "sha256": "a5f896fb198792af40977e40a9f9da3ffcebc441a8b294ebf34a54dba5afe591",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_efigure9_disease_category_prediction_matrix.py",
       "bytes": 23153,
       "sha256": "65ad7e6c4f849abc7b34af58cc97da30ed6c0974cc5d07bd007dba34f4b0815c",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_env_compensation.py",
       "bytes": 9296,
       "sha256": "8b02df00a5d3b5a4a1b012ad18589cb8cb25df43b047005663e5ed34ad86fc0e",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_etable4_ca199_correction.py",
       "bytes": 5864,
       "sha256": "05d8155aba7966c6ffec9fb79af80615e7e0e4aec7661f0d57d97037aacf9803",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_evaluation.py",
       "bytes": 12453,
       "sha256": "9192a89adab4ee9f47bf7f538b1f83327a6e6dc46bf68ce1703a8d95b30b31da",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_fallback_padded_sensitivity.py",
       "bytes": 3730,
       "sha256": "270793d0f52ddadd1469e67b27853acc45414f7a408cc48ae563113ef6897c97",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_figure3_e010_deep_model_reconciliation_diagnostic.py",
       "bytes": 21422,
       "sha256": "e76c6c7f68e648481c2672d4a206ecd5e24fbaa3ce6a87838bef1084bbd6b0be",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_figure3_unified_channel_block_permutation.py",
       "bytes": 60677,
       "sha256": "e69f7c1565c3b2a7ef3e949d625aa2e440ad8fec824db4f2c1f57a6a4b13b336",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_final_pkl_end_to_end.py",
       "bytes": 12359,
       "sha256": "b4d233dc50d5ac143c0cb11f5e2a88bec37930bdda87428e37a1bfc649d36213",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_jt_npordtests.py",
       "bytes": 1549,
       "sha256": "651d45a5f7d7d21f4df222e31d137a021a7a5c96a8baf92d71e142b462cf5281",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_lgin_layer_analysis.py",
       "bytes": 6098,
       "sha256": "c8f84ea695298edccc94b2b63c72803402c39339350509490482de0b3f719dee",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_lgin_postdiagnosis_disposition_source_closure.py",
       "bytes": 30379,
       "sha256": "45fcd7972b71951cf1b96ce1e5fd22186a1b10901d0d251414957abb477b644c",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_loader.py",
       "bytes": 9969,
       "sha256": "2f63a5275ecb7d058baeeb1147e3a141a151462d32ac9d554ef6a3c53f874d37",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_misclassification.py",
       "bytes": 4259,
       "sha256": "cd12459fa8e98ffd4e4196fb38b4ef9cbff714182ecccec3bcce381d829dccb7",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_model_selection_phase1.py",
       "bytes": 6366,
       "sha256": "502a7a3de0cbd782d731c5112bae47c75ae603aa80795f216102000a17e66d6c",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_optimism_correction.py",
       "bytes": 6227,
       "sha256": "10b1984427b0313a167fb1738f2f74c43fed3e6c5e99fa083dbabd8e9f2f033f",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_path_leak_detection.py",
       "bytes": 2232,
       "sha256": "9d0e1a11e699a370931747727fe115fcba33dbead3394db08b542749d4be0f21",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_pipeline_a_normalization.py",
       "bytes": 6862,
       "sha256": "566942345bee0d4bb0be8fd1d57eda13ffbc07cf7f6847d1c02525c4fa459d5a",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_pipeline_b_normalization.py",
       "bytes": 11145,
       "sha256": "eec7a96d8df398c735621e4ebe2d0f5488f2324b435e621c51f89c0a4fd61653",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_posthoc_final_audit.py",
       "bytes": 63716,
       "sha256": "dd4f119fbdb29f03f28933953a8b2668b875bcbd7a0c61fe5beb5a60211d5a88",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_posthoc_final_common.py",
       "bytes": 45762,
       "sha256": "edb98dd33c46a793ef32102e5caff04cdb05fa6e6594d1f67a74d801c3e14131",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_posthoc_final_date_grouped.py",
       "bytes": 69745,
       "sha256": "2b902e06ae29c254be69ccee9d089801fd52a20f5f2aa5c66a6ffcf510eb0718",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_posthoc_final_locked_scores.py",
       "bytes": 134817,
       "sha256": "58bcb65d31df256a09688e7dfe22e2598adf00c08b6c2f1075af3a08d49b2575",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_posthoc_final_reporting.py",
       "bytes": 70478,
       "sha256": "27c32d8738c7f3a3faab0774c3dd38ffc30aec93a1e75aef9f8d4dd7e6816a27",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_posthoc_observed_dca.py",
       "bytes": 10242,
       "sha256": "d00fc3dcb8b7029b84c872652cc83f6fb203f04279de2f8a883ba44da6ffd4a1",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_preprocessing.py",
       "bytes": 31351,
       "sha256": "98df138e78a62e8b0f0a639a540a12fb8464be128123e7558c81685b314858de",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_progression_trajectory.py",
       "bytes": 2434,
       "sha256": "ba3a2dd42a8d8736550cb93423f8ca06f728e8d5adbd6c392a6d1f1bce011cc2",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_qc.py",
       "bytes": 26288,
       "sha256": "eb456f0e73566747d5cadec0b6a58d9d8f0a75762f8cb3e2f6862f52fc7d40ab",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_qc_retained_excluded_characteristics.py",
       "bytes": 41348,
       "sha256": "f9e625be2a6e31068c4f5ace833a8cc5c734eb7ab33808b85a4090fab2cc9124",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_reproducibility_smoke.py",
       "bytes": 5601,
       "sha256": "b57d720733a0e1c8a95156cd434e04da526f1ee21ec95ec5b3e7c1f8832ce232",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_sample_size.py",
       "bytes": 3523,
       "sha256": "6e8cc4c1f432fee12a2de5f956eb8c019cc896da8ccb35aca2873b319ca9880f",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_shap_cross_model_aggregation.py",
       "bytes": 3009,
       "sha256": "5c59e3a3e3fba74febb021da2884abcff03d276e787903b2500bc7631e13acb2",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_shap_cross_model_ig.py",
       "bytes": 2642,
       "sha256": "c41d98e6699221f596236a56ec9708ba1bb4718cf07f71ce16c63e7cdd519b7a",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_shap_cross_model_kendall_tau.py",
       "bytes": 1860,
       "sha256": "4dc6b45785e2d8a3578da56b62cee94b38ef4222df3772505010c7d2226927c8",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_shap_cross_model_minirocket_permutation.py",
       "bytes": 2836,
       "sha256": "242433480e1b7b02ed470e80ac29dc4f3514f7c851b79a26de2cd1e2b9720642",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_shap_cross_model_top_k_converging.py",
       "bytes": 1650,
       "sha256": "e02920b4df4f3cd9893028dc580d3174be04557daf752de823081d99143c12ef",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_shap_representative_samples_npz_alignment.py",
       "bytes": 1794,
       "sha256": "f6b9670a10bb32f0ec9cc12ef4f574470e9eebcff465fe91a57602fc15febc1d",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_smoothing.py",
       "bytes": 6114,
       "sha256": "4d624aaa2a3ccf98760329cd5602ebad80291d2b0239c11c2e807824767ab372",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_stratified_robustness.py",
       "bytes": 2800,
       "sha256": "fd93fca2c33ee9a5714cdcbaa182226c20bbccbe8e5b9477a076c2400dac228e",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_subgroup_analysis.py",
       "bytes": 3429,
       "sha256": "48afe43679668de49176a3b5e4f16d26ea149cdcf44e87c4d64929513b5f8449",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_temporal_drift.py",
       "bytes": 2269,
       "sha256": "7db0b49f5dc64af3bc8c0e2f0429b9e9a7be61ff00106a04a5c8aaba8c415287",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_three_view_comparison.py",
       "bytes": 3621,
       "sha256": "9984a1f8f6d6b72590fe5b439ad2d9f7584e0bbd714b5388d848b1949ab8beda",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_threshold_uncertainty.py",
       "bytes": 5326,
       "sha256": "913c1cc223faee833357bc9344cee741ba2fc350707815db5b764d5f1ebd7f8a",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_train_cnn_bilstm_attention_smoke.py",
       "bytes": 8335,
       "sha256": "2940ec934a44fad9f03e4b3c25e1a0b24f6ce05230be2cc2186cf6ae08af376d",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_train_elastic_net_lr_smoke.py",
       "bytes": 6432,
       "sha256": "54d0dca86eacbe73ff7c0fa27410f013937acd6752fe1b4cf6d881f2c65ef1d8",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_train_inception_time_smoke.py",
       "bytes": 7447,
       "sha256": "93062ca08e9eb7d61131719f457f564aa0039f923238035ccabd6d4802e5116e",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_train_minirocket_ridge_smoke.py",
       "bytes": 6460,
       "sha256": "01452bc10a88ce5f35d7c0b827231c9bdc52c407dab124cc03672ffeaa895b26",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_train_svm_smoke.py",
       "bytes": 6150,
       "sha256": "2346045345da4cfa56ba3937793a37419ffeeb942faac4c978c6c8d4cbe19642",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_train_xgboost_smoke.py",
       "bytes": 6777,
       "sha256": "6ad3edb862542f28e64c045e6fa9451bfb6b7059c2b9daaf08260746ee427dae",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_tumor_marker_complete_case.py",
       "bytes": 2107,
       "sha256": "daa64a7f44d4a7a3c9345d2f8d9d04558316730cb28f01a8e4b2b872cd811918",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_tumor_marker_model.py",
       "bytes": 4495,
       "sha256": "353994904689442621e952d30f601ce77c2371861d53165a6183d611ef23a6e2",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_tumor_marker_no_imputation.py",
       "bytes": 2412,
       "sha256": "153caebb44ab9276d8075ef7c7c9a98f02e9f98d82f56745566aef361ebb3168",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     },
     {
       "path": "tests/test_voc_marker_fusion.py",
       "bytes": 3441,
       "sha256": "4ce848f85612a92f2c7e813753bc93f1796eccb18382466250124f7542b504dc",
-      "role": "scientific_code_or_synthetic_test"
+      "role": "scientific_code_or_synthetic_test",
+      "license_scope": "Apache-2.0"
     }
   ],
   "manifest_self_hash_policy": "Manifest is allowlisted but cannot contain its own byte hash; private handoff binds it.",
-  "total_payload_bytes_excluding_manifest": 102778155,
+  "total_payload_bytes_excluding_manifest": 102837072,
   "largest_file_bytes": 77617040,
   "private_preparation_distributable": false,
   "release_authorized": false,
@@ -8308,13 +8785,56 @@
   "public_row_order": "opaque sample ID lexicographic order",
   "date_policy": "no participant collection dates or chronological keys; classified provenance only",
   "required_remaining_checks": [
-    "user preparation commit",
-    "final committed scope",
-    "institutional permission and participant consent/data rights",
-    "licensing",
-    "hosting",
-    "publication approval"
+    "user ordinary licensing/documentation commit",
+    "subsequent verification of that actual licensing commit",
+    "separate publication/upload decision",
+    "hosting/distribution configuration and any release or DOI creation, if requested"
   ],
   "sanitized_history_head": "0d773f541ebc313ffd31dee48c53e3b9832ef781",
-  "actual_filtered_history_verified": true
+  "actual_filtered_history_verified": true,
+  "public_file_count": 394,
+  "manifest_license_scope": "Apache-2.0",
+  "licensing_preparation": {
+    "administrative_preparation_date": "2026-10-10",
+    "completed": {
+      "sanitized_history_verified": true,
+      "sanitized_history_head": "0d773f541ebc313ffd31dee48c53e3b9832ef781",
+      "original_payload_commit": "82695e68c73e182470728ae4c8bd8fbc425f167d",
+      "original_payload_postcommit_scope_verified": true,
+      "original_payload_files": 388,
+      "original_payload_bytes": 103075170,
+      "baseline_total_commits": 162,
+      "sanitized_historical_commits": 161,
+      "sharing_permission": "researcher-confirmed for the existing approved deidentified data and fitted models",
+      "independent_institutional_or_consent_document_review": false,
+      "license_selection": {
+        "original_software_configurations_and_technical_documentation": "Apache-2.0",
+        "all_14_fitted_model_and_threshold_calibrator_files": "Apache-2.0",
+        "approved_datasets_and_numerical_results": "CC-BY-4.0",
+        "commercial_reuse_modification_redistribution": "permitted under the applicable license",
+        "third_party_material": "retains original terms and notices; not relicensed"
+      }
+    },
+    "current_task": "local licensing/documentation update; unstaged and uncommitted",
+    "new_ordinary_licensing_commit": "pending user execution",
+    "subsequent_actual_licensing_commit_scope_verification": "pending actual commit",
+    "publication_upload_and_hosting_configuration": "deferred; no remote or upload performed",
+    "release_or_DOI_creation": "not performed",
+    "publication_authorized_in_this_task": false,
+    "scientific_execution_performed": false
+  },
+  "license_scope_policy": {
+    "separate_file_scopes": true,
+    "scope_document": "LICENSING.md",
+    "notice_document": "THIRD_PARTY_NOTICES.md",
+    "project_original_grants": {
+      "original_software_configurations_and_technical_documentation": "Apache-2.0",
+      "all_14_fitted_model_and_threshold_calibrator_files": "Apache-2.0",
+      "approved_datasets_and_numerical_results": "CC-BY-4.0",
+      "commercial_reuse_modification_redistribution": "permitted under the applicable license",
+      "third_party_material": "retains original terms and notices; not relicensed"
+    },
+    "standard_legal_texts": "upstream legal documents reproduced unchanged, not project-original grants",
+    "third_party_exceptions": "preserved at affected routine/file scopes, not relicensed"
+  }
 }

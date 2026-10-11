@@ -1,10 +1,25 @@
 # Gastric-lesion VOC study: local public-release candidate
 
-**Access status:** locally assembled for the user's preparation commit. This package is not approved for public distribution.
-Sanitized history is verified at 0d773f541ebc313ffd31dee48c53e3b9832ef781. The payload commit and final committed-scope verification
-remain outstanding. Full original/public commit correspondence is in PROVENANCE.md and VERIFICATION.json.
-Institutional permission, participant consent/rights, licensing, final committed-history checks, and hosting decisions
-remain unresolved. Nothing in this package asserts author approval or grants a license.
+**Access status:** local candidate; publication and upload are deferred.
+The original payload commit `82695e68c73e182470728ae4c8bd8fbc425f167d` and its postcommit scope review are complete
+(388 files, 103,075,170 bytes). The 161-commit sanitized history remains verified at
+`0d773f541ebc313ffd31dee48c53e3b9832ef781`; the baseline has 162 commits in total.
+The researcher confirmed sharing permission for the existing approved deidentified data and fitted models.
+This records the researcher's confirmation; institutional or consent documents were not independently inspected.
+The current licensing/documentation changes are prepared locally, pending a new user commit and verification
+of that actual commit. The historical 388-file review does not cover the new license files.
+The current scope is in RELEASE_MANIFEST.json; commit correspondence remains in PROVENANCE.md and VERIFICATION.json.
+
+## Licenses
+
+Original software, associated configurations/technical documentation, and all 14 fitted model/calibrator files
+are licensed under [Apache-2.0](LICENSE). Approved data and numerical results, including processed signals,
+features, public identifiers/labels/categories, locked memberships, predictions and explanations, are licensed
+under [CC-BY-4.0](LICENSE-DATA). These are separate file scopes, not a choice of license for every file.
+Both permit commercial reuse, modification and redistribution under their terms.
+[LICENSING.md](LICENSING.md) and the manifest give the exact scope; [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
+preserves upstream terms. The scientific research and validation limitations below are factual limitations,
+not noncommercial or research-only license restrictions.
 
 The prediction endpoint is **high-grade gastric lesion**: HGIN, EGC and AGC are positive; HC, BGL and LGIN are negative.
 Model scores are not gastric-cancer probabilities. Validation is an internal random holdout from the same center,
@@ -76,4 +91,5 @@ requirements; they are not asserted to run unchanged on the public schema. No tr
 Finished manuscript figures/tables, rendered documents, visualization assets, execution logs, editor/agent settings
 and private operational plans are excluded. Historical scientific references may point to deliberately withheld
 files or original commit IDs; PROVENANCE.md explains the distinction. Do not archive the preparation directory or
-the Git directory. Distribution, if later authorized, must use the explicit allowlist and separately verified Git refs.
+the Git directory. Publication is deferred in this preparation workflow. A later public transfer should use
+the explicit allowlist and separately verified Git refs; private preparation is outside the licensed package.

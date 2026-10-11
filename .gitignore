@@ -452,6 +452,15 @@
 !/tests/test_tumor_marker_model.py
 !/tests/test_tumor_marker_no_imputation.py
 !/tests/test_voc_marker_fusion.py
+# Exact licensing additions; existing denials remain in effect.
+!/LICENSE
+!/LICENSE-DATA
+!/LICENSING.md
+!/THIRD_PARTY_NOTICES.md
+!/LICENSES/
+/LICENSES/*
+!/LICENSES/ROC-COMPARISON-MIT.txt
+!/LICENSES/VMAF-BSD-2-Clause-Patent.txt
 /.release-private/
 /.release-runtime/
 /data/raw/

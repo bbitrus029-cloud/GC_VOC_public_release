@@ -478,7 +478,7 @@
     "source_worktree_CRLF_and_Git_LF_normalization_verified": true
   },
   "actual_filtered_history_verified": true,
-  "institutional_consent_rights_and_license_confirmation": "pending",
+  "institutional_consent_rights_and_license_confirmation": "Researcher-confirmed for the existing approved payload; no independent institutional/consent-document audit.",
   "sanitized_history_head": "0d773f541ebc313ffd31dee48c53e3b9832ef781",
   "history": {
     "status": "verified_actual_sanitized_history",
@@ -2629,9 +2629,9 @@
     ]
   },
   "payload_commit_status_at_preparation": "not yet created; user operation required",
-  "final_committed_scope_verification": "pending; verify actual commit separately without amending this package",
-  "publication_approval": "pending",
-  "licensing_and_hosting": "unresolved",
+  "final_committed_scope_verification": "Original payload commit 82695e68c73e182470728ae4c8bd8fbc425f167d verified; new licensing changes await a user commit and its own verification.",
+  "publication_approval": "deferred; this task authorizes no publication/upload",
+  "licensing_and_hosting": "Apache-2.0 and CC-BY-4.0 selected for separate scopes; hosting deferred",
   "promoted_worktree_entrypoint": {
     "status": "executed_from_actual_promoted_destination",
     "command": "python -B scripts/verify_release_models.py --model all --split test --deep-runtime frozen_gpu",
@@ -2713,5 +2713,49 @@
     "private_preparation_ignored_and_untracked": true,
     "source_refs_inputs_and_destination_Git_state_unchanged": true,
     "payload_staging_and_commit_not_yet_performed": true
+  },
+  "historical_preparation_administrative_snapshot": {
+    "applies_to": "original payload preparation before its user commit",
+    "institutional_consent_rights_and_license_confirmation": "pending",
+    "payload_commit_status_at_preparation": "not yet created; user operation required",
+    "final_committed_scope_verification": "pending; verify actual commit separately without amending this package",
+    "publication_approval": "pending",
+    "licensing_and_hosting": "unresolved"
+  },
+  "current_licensing_preparation": {
+    "administrative_preparation_date": "2026-10-10",
+    "completed": {
+      "sanitized_history_verified": true,
+      "sanitized_history_head": "0d773f541ebc313ffd31dee48c53e3b9832ef781",
+      "original_payload_commit": "82695e68c73e182470728ae4c8bd8fbc425f167d",
+      "original_payload_postcommit_scope_verified": true,
+      "original_payload_files": 388,
+      "original_payload_bytes": 103075170,
+      "baseline_total_commits": 162,
+      "sanitized_historical_commits": 161,
+      "sharing_permission": "researcher-confirmed for the existing approved deidentified data and fitted models",
+      "independent_institutional_or_consent_document_review": false,
+      "license_selection": {
+        "original_software_configurations_and_technical_documentation": "Apache-2.0",
+        "all_14_fitted_model_and_threshold_calibrator_files": "Apache-2.0",
+        "approved_datasets_and_numerical_results": "CC-BY-4.0",
+        "commercial_reuse_modification_redistribution": "permitted under the applicable license",
+        "third_party_material": "retains original terms and notices; not relicensed"
+      }
+    },
+    "current_task": "local licensing/documentation update; unstaged and uncommitted",
+    "new_ordinary_licensing_commit": "pending user execution",
+    "subsequent_actual_licensing_commit_scope_verification": "pending actual commit",
+    "publication_upload_and_hosting_configuration": "deferred; no remote or upload performed",
+    "release_or_DOI_creation": "not performed",
+    "publication_authorized_in_this_task": false,
+    "scientific_execution_performed": false
+  },
+  "historical_block_scope": {
+    "payload_commit_status_at_preparation": "historical original-preparation status, not current status",
+    "promoted_worktree_integrity": "historical 388-file precommit snapshot; preserved unchanged",
+    "promoted_worktree_entrypoint": "historical inference result; preserved unchanged, not rerun",
+    "history": "161 sanitized historical commits, excluding later ordinary preparation commits",
+    "scientific_and_model_blocks": "unchanged authenticated evidence; applies only to unchanged scientific bytes"
   }
 }

@@ -1,6 +1,6 @@
 # Model card
 
-Research-use prediction of high-grade gastric lesion under internal, same-center/device/period validation.
+Research model for prediction of high-grade gastric lesion under internal, same-center/device/period validation.
 The case-control sampling and post-endoscopy collection chronology preclude claims of validated population
 screening, pre-endoscopy triage, clinical utility or external validation. Scores are not gastric-cancer probabilities.
 
@@ -58,4 +58,10 @@ storage identifiers when reserialized; numeric/state checks, not container ident
 
 The public payload omits raw acquisitions, collection dates and participant covariates. It supports verified
 inference and access to frozen predictions/results, not a claim of bitwise full-study retraining or external validation.
-Institutional, consent/rights, author licensing and distribution decisions remain pending.
+The researcher confirmed sharing permission/rights for these fitted artifacts. All 14 model and
+threshold/calibrator files enumerated in MODEL_INDEX.json are licensed under Apache-2.0; their exact paths
+are listed in LICENSING.md. Original software/configurations/technical documentation use Apache-2.0,
+while approved datasets and numerical results use CC-BY-4.0. Upstream software retains its own terms.
+Commercial reuse, modification and redistribution are permitted under the applicable licenses. Research status
+and validation limits describe the evidence; they do not impose a research-only use restriction.
+The current licensing update awaits a new user commit and its verification. Publication/upload remains deferred.

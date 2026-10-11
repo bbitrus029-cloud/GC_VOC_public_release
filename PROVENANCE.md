@@ -11,8 +11,10 @@ Every retained commit, tree, blob, message, annotated tag and relevant identity/
 verified against authenticated preparation evidence. All 161 commits are retained, including those made
 empty by payload removal; zero commits were pruned. Parent order and Git provenance timestamps are
 preserved, identities are withheld, and no extra refs or unreachable backup objects remain.
-The public worktree is assembled for the user's preparation commit. That commit and its final committed-scope
-verification remain outstanding; verified history is not proof of the future payload commit.
+The user created payload commit `82695e68c73e182470728ae4c8bd8fbc425f167d`, with this sanitized-history HEAD
+as its sole parent. Its authenticated postcommit review verified 388 files totaling 103,075,170 bytes,
+162 commits, six unchanged sanitized annotated tags and 993 reachable stored objects, with none unreachable.
+The current licensing/documentation edits require a new user commit and subsequent verification of that commit.
 
 Tool: git-filter-repo v2.47.0; upstream commit 6f79afc8c90c592a3052e6cc53c2ca8907515bca.
 Unmodified standalone-script SHA-256: 67447413e273fc76809289111748870b6f6072f08b17efe94863a92d810b7d94.
@@ -46,7 +48,7 @@ Annotated-tag object IDs identify tag objects; commit IDs identify their target 
 
 ## Current payload lineage
 
-Only sanitized current payloads are to be added in the new user-executed preparation commit.
+Sanitized current payloads were added in the completed user-executed preparation commit identified above.
 All 14 ignored model files were separately exported from authenticated source files; they did not arrive
 through cloning. Dataset IDs and positional membership were transformed consistently without refitting,
 new explanation generation, calibration fitting, threshold selection or new scientific analyses.
@@ -58,15 +60,22 @@ packages were checked against their source manifests; their original scientific 
 findings are retained. Operational manifests and rendered reports are not distributed.
 
 Actual filtered-history content, refs, metadata and object-store cleanup have been verified at the history HEAD above.
-Future completion must verify the user's actual staged/committed payload scope and continued exclusion of private preparation.
-Institutional permission, participant consent/data rights, licensing, hosting and publication approval remain outstanding.
-No future payload commit hash is embedded here; later verification binds the actual containing commit externally,
-without requiring an amend or a self-referential commit-hash update.
+The original payload's actual committed scope and private-material exclusion passed postcommit review.
+The researcher has now confirmed sharing permission/rights for the existing approved deidentified participant data
+and fitted models, and selected Apache-2.0 for original software/configurations/technical documentation and all
+14 fitted artifacts, plus CC-BY-4.0 for approved datasets and numerical results. This is researcher confirmation,
+not independent inspection of institutional or participant-consent documents. LICENSING.md defines the scopes.
+This administrative update is prepared locally on 2026-10-10; the new ordinary licensing commit and its
+postcommit scope verification remain pending. Publication/upload and hosting/release/DOI configuration are deferred.
+No future licensing commit hash is invented here; later verification binds its actual identity without an amend.
 No original Git directory, bundle, audit workspace or identifier secret is part of the public allowlist.
-Only public upstream tool code was downloaded; no project content was sent to a network service.
+Earlier preparation downloaded a public upstream history-filter tool. This licensing update retrieved only public
+license texts and upstream legal/version/provenance resources; no project content was sent to a network service.
 
-Applicable source notices and citations remain in retained files. No author approval, license, institutional
-permission, repository URL, publication date or DOI is invented by this preparation.
+Applicable upstream notices and citations remain in retained files and THIRD_PARTY_NOTICES.md. The user's license
+selection and sharing confirmation are recorded without inventing author identities, copyright ownership,
+independent ethics/legal approval, a repository URL, publication date or DOI. Prior private reports remain
+immutable historical evidence; their earlier pending statuses do not override this recorded current decision.
 
 ## Complete original-to-public commit correspondence
 

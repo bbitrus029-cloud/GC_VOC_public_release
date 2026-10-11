@@ -76,3 +76,16 @@ Exact collection dates/times, filenames, per-sample raw paths/hashes, linkage ke
 participant values, disposition and histories are excluded. Provenance timestamps are permitted only in documented
 training/Git/generation fields; fixed ZIP timestamps are serialization metadata. Date-grouped analyses and
 clinical-covariate analyses consequently have explicit public-data reproduction limits.
+
+## Data license and access status
+
+The approved datasets and numerical results are licensed under CC-BY-4.0; see LICENSE-DATA and the exact
+manifest path scopes in LICENSING.md. This includes the unchanged 972-participant payload (777 training,
+195 internal test), existing CV/early-stopping membership, predictions, minimal participant analysis projections,
+777-participant OOF attention, 20-participant representative SHAP/signals and aggregate results. Numerical JSON
+results and aggregate verification remain data/result material even though their suffix is also used for software.
+Commercial reuse, modification and redistribution are permitted under the license. Provide project/file
+attribution, the applicable license and an indication of changes as described in LICENSING.md.
+The researcher confirmed sharing permission/rights for this exact scope; no additional participant variables
+were approved or added. The license does not include withheld raw sources or private linkage. Publication/upload
+is deferred; this local licensing update awaits the user's new commit and its subsequent scope verification.
