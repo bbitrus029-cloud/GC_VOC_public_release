@@ -1,95 +1,125 @@
-# Gastric-lesion VOC study: local public-release candidate
+# Gastric-lesion VOC study
 
-**Access status:** local candidate; publication and upload are deferred.
-The original payload commit `82695e68c73e182470728ae4c8bd8fbc425f167d` and its postcommit scope review are complete
-(388 files, 103,075,170 bytes). The 161-commit sanitized history remains verified at
-`0d773f541ebc313ffd31dee48c53e3b9832ef781`; the baseline has 162 commits in total.
-The researcher confirmed sharing permission for the existing approved deidentified data and fitted models.
-This records the researcher's confirmation; institutional or consent documents were not independently inspected.
-The current licensing/documentation changes are prepared locally, pending a new user commit and verification
-of that actual commit. The historical 388-file review does not cover the new license files.
-The current scope is in RELEASE_MANIFEST.json; commit correspondence remains in PROVENANCE.md and VERIFICATION.json.
+This repository contains scientific code, processed sensor data, frozen predictions, fitted models and
+method records for a study of exhaled volatile organic compounds (VOCs) and gastric-lesion risk stratification.
 
-## Licenses
+The endpoint is **high-grade gastric lesion**: HGIN, EGC and AGC are positive; HC, BGL and LGIN are negative.
+Model scores are not gastric-cancer probabilities. Validation uses an internal random holdout from the same
+center, device and period. The enriched case-control/two-gate sampling and breath collection after diagnostic
+endoscopy and indicated biopsy, but before treatment, limit interpretation. Population screening, validated
+pre-endoscopy triage, clinical benefit, deployment readiness, and prospective or external validation have not
+been established. LGIN findings are exploratory because biopsy can undergrade disease and reference standards
+differ. Cross-responsive MOS channels support sensor-response-pattern evidence; they do not identify individual
+molecules or establish disease-specific VOCs or causal effects.
 
-Original software, associated configurations/technical documentation, and all 14 fitted model/calibrator files
-are licensed under [Apache-2.0](LICENSE). Approved data and numerical results, including processed signals,
-features, public identifiers/labels/categories, locked memberships, predictions and explanations, are licensed
-under [CC-BY-4.0](LICENSE-DATA). These are separate file scopes, not a choice of license for every file.
-Both permit commercial reuse, modification and redistribution under their terms.
-[LICENSING.md](LICENSING.md) and the manifest give the exact scope; [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
-preserves upstream terms. The scientific research and validation limitations below are factual limitations,
-not noncommercial or research-only license restrictions.
+## Repository contents
 
-The prediction endpoint is **high-grade gastric lesion**: HGIN, EGC and AGC are positive; HC, BGL and LGIN are negative.
-Model scores are not gastric-cancer probabilities. Validation is an internal random holdout from the same center,
-device and period. The enriched case-control/two-gate design and post-endoscopy, pre-treatment breath collection
-limit interpretation. Population screening, validated pre-endoscopy triage, clinical benefit, deployment readiness,
-causality, and prospective or external validation have not been established. LGIN findings are exploratory and
-subject to differential reference standards and possible biopsy undergrading. Cross-responsive MOS channels support
-sensor-response-pattern evidence, not identification of individual disease-specific VOC molecules.
+- Processed signal arrays and 99-feature matrices for **972 participants**, with **777 training** and
+  **195 internal-test** participants.
+- Opaque public IDs, outcome labels and disease categories, with locked train/test, cross-validation and
+  early-stopping memberships preserved. No split or membership was regenerated for distribution.
+- Existing nested-CV OOF, final-hyperparameter OOF where available, internal-test and training in-sample
+  predictions, plus minimal participant analysis projections and aggregate numerical results.
+  Training in-sample predictions are not generalization estimates.
+- Existing OOF attention for 777 training participants, distinct from the representative MiniRocket SHAP and
+  processed-signal exports for 20 test participants. Complete participant-level SHAP for every model or
+  participant is not included.
+- All **14 fitted artifacts**: six final candidate models, six threshold/calibrator artifacts, a marker-only
+  model and a fusion model, including their fitted inference dependencies.
+- Scientific source code, runtime configurations, frozen protocols, method records, corrections and
+  privacy-filtered scientific history.
 
-## Contents
+[DATA_DICTIONARY.md](DATA_DICTIONARY.md) defines fields, units, label codes, ordering and membership semantics.
+[MODEL_INDEX.json](MODEL_INDEX.json) lists the exact fitted files, checksums and input order;
+[MODEL_CARD.md](MODEL_CARD.md) describes score meanings, thresholds and verification coverage.
+[RELEASE_MANIFEST.json](RELEASE_MANIFEST.json) is the explicit file allowlist with artifact hashes, schemas
+and license scopes. Numerical datasets and results are distinct from finished manuscript tables.
 
-- Scientific source code, configurations, frozen protocols and scientific method/correction records.
-- Processed signal arrays and 99-feature matrices for 972 retained participants.
-- Opaque public IDs, binary labels, disease categories, and unchanged locked training/testing, CV and early-stopping membership.
-- Existing OOF, final-hyperparameter OOF where available, internal-test and training in-sample predictions.
-- Existing OOF attention for 777 training samples and representative MiniRocket SHAP/signals for 20 test samples.
-- All 14 existing fitted model/calibration files, including six final candidates and marker-only/fusion models.
-- Existing numerical results, supplementary numerical packages, and aggregate export verification.
+## Environment and inference
 
-See [DATA_DICTIONARY.md](DATA_DICTIONARY.md), [MODEL_CARD.md](MODEL_CARD.md),
-[PROVENANCE.md](PROVENANCE.md), [RELEASE_MANIFEST.json](RELEASE_MANIFEST.json), and
-[VERIFICATION.json](VERIFICATION.json).
+Use the dependency declaration in [environment.yml](environment.yml) and the recorded verification versions in
+[RUNTIME_VERSIONS.json](RUNTIME_VERSIONS.json). The commands below use an existing `gcvocs` environment.
+The deep-model GPU comparison requires one CUDA device and the recorded runtime contract.
 
-## Setup and actual entry points
-
-The dependency declaration is [environment.yml](environment.yml); verification used the installed versions in
-[RUNTIME_VERSIONS.json](RUNTIME_VERSIONS.json). Activate the existing gcvocs environment. A future recipient may
-reconstruct that environment from the declaration; no packages were installed or changed during this preparation.
-
-A verified release-contained inference check for the selected MiniRocket model is:
+Run the selected MiniRocket model's internal-test comparison from the repository root:
 
 ~~~bash
 conda activate gcvocs
 PYTHONDONTWRITEBYTECODE=1 python -B scripts/verify_release_models.py --model minirocket_ridge --split test
 ~~~
 
-The full audit uses the existing GPU contract for the two deep models:
+The recorded six-model comparison uses the explicit GPU runtime for the two deep models:
 
 ~~~bash
-PYTHONDONTWRITEBYTECODE=1 CUBLAS_WORKSPACE_CONFIG=:4096:8 python -B scripts/verify_release_models.py   --model all --split test --deep-runtime frozen_gpu
+PYTHONDONTWRITEBYTECODE=1 CUBLAS_WORKSPACE_CONFIG=:4096:8 python -B scripts/verify_release_models.py \
+  --model all --split test --deep-runtime frozen_gpu
 ~~~
 
-The latter command intentionally reports the retained CNN–BiLSTM–Attention public-row-order discrepancy and returns
-a nonzero verification status under the unchanged 1e-6 tolerance. It does not refit models or write participant
-predictions. The four classical families and InceptionTime passed this public-entry-point comparison.
-The Python API is release_inference.load_model and release_inference.predict_scores. Loading requires matching
-MODEL_INDEX.json checksums. Use only the authenticated package model files.
+**Recorded outcome: exit status 1.** CNN–BiLSTM–Attention's raw maximum absolute difference is
+**5.4370611906051636e-6**, exceeding the unchanged **atol=1e-6, rtol=0** comparison.
+The other five models—the four classical families and InceptionTime—pass this public-order internal-test
+comparison, and threshold decisions match for all six. This is a retained failed score comparison, not an
+all-model pass. The command does not refit models or write participant predictions.
 
-## Verified limits
+The Python entry points are `release_inference.load_model` and `release_inference.predict_scores` in
+[release_inference.py](release_inference.py). Loading requires matching [MODEL_INDEX.json](MODEL_INDEX.json)
+checksums; use only the authenticated package model files. The API defaults to stored inference behavior;
+`frozen_gpu` is an explicit runtime option. Inputs, class order, raw/calibrated score meanings and fixed
+threshold conventions are documented in [MODEL_CARD.md](MODEL_CARD.md).
 
-Exported model inference is exactly equal to source-model inference on identical inputs, including public row order.
-The stored CPU wrappers for both deep models do not reproduce the frozen scores within 1e-6. The already-recorded
-GPU/no-warmup/batch-32 contract does reproduce them in original input order. Public row reordering leaves a small
-CNN–BiLSTM–Attention difference above that tolerance; threshold decisions were unchanged. All outcomes, including
-failed checks, are in VERIFICATION.json. Frozen prediction files remain authoritative and were not replaced.
-Repeated data/result exports are byte-identical with the private ID key. All 14 reconstructed model payloads
-match exactly in fitted and sanitized metadata state; pickle storage/string memoization can change container bytes.
+## Verification and reproduction limits
 
-Final fitted models do not recreate nested-CV OOF predictions. Marker/fusion participant parity remains unverified
-because participant biomarkers are outside the approved payload; only fitted-state and synthetic-input checks ran.
-No complete participant-level SHAP dataset exists here for every model or every participant.
+[VERIFICATION.json](VERIFICATION.json) preserves successful and failed checks. Source-model and exported-model
+inference agreed exactly on identical authorized inputs, including public row order. Both deep models' stored
+CPU wrappers failed to reproduce frozen scores within 1e-6. The separate recorded GPU contract—one normalization
+pass, batch size 32 and no warmup—passed in original input order. Public reordering retains the CNN discrepancy
+described above. Original input order is withheld for privacy; the original-order GPU result does not establish
+a pass for the public-order command. Frozen prediction files remain authoritative and were not replaced.
 
-Raw breath recordings, clinical linkage, exact collection dates/times, source filenames and original row order are
-withheld. Public IDs and positional memberships are transformed together. Full raw preprocessing, date-dependent
-analyses, clinical-covariate subgroup/marker analyses, and bitwise retraining cannot be reproduced from this payload.
-Legacy training/analysis entry points retain historical source contracts, including integer IDs and private-source
-requirements; they are not asserted to run unchanged on the public schema. No training was performed for this release.
+All 14 exported fitted states and sanitized metadata were preserved. Repeated data/result exports were
+byte-identical with the same private identifier key; model reserialization can change pickle container bytes
+without changing fitted state. Marker-only and fusion models passed fitted-state, loading and three-row synthetic
+inference checks. Participant biomarkers are outside the payload, so participant-level prediction parity for
+those two models remains unverified. These checks do not establish behavior on untested inputs.
 
-Finished manuscript figures/tables, rendered documents, visualization assets, execution logs, editor/agent settings
-and private operational plans are excluded. Historical scientific references may point to deliberately withheld
-files or original commit IDs; PROVENANCE.md explains the distinction. Do not archive the preparation directory or
-the Git directory. Publication is deferred in this preparation workflow. A later public transfer should use
-the explicit allowlist and separately verified Git refs; private preparation is outside the licensed package.
+Inference with final fitted models does not recreate nested-CV OOF predictions. The repository provides the
+existing frozen predictions and explanations separately. Historical training and analysis entry points retain
+their original contracts, including integer identifiers and private-source requirements; they are not asserted
+to run unchanged on the public schema. No training was performed for the release, and bitwise full-study
+retraining is not reproduced by these inference checks.
+
+Raw breath recordings, original clinical sources and linkage, exact collection dates/times, original filenames,
+per-sample raw paths/hashes and original row order are excluded. Public IDs and positional memberships were
+transformed consistently without publishing a correspondence or key. Additional participant demographics,
+biomarkers, histories and other clinical covariates are withheld. Full raw preprocessing, date-dependent
+analyses and clinical-covariate subgroup/marker analyses therefore cannot be fully reproduced from this payload.
+Finished manuscript figures/tables, rendered documents, private visualization assets, execution logs,
+editor/agent settings and private operational material are also excluded.
+
+## Licenses and attribution
+
+Original software, associated configurations and technical documentation, and all 14 fitted model/calibrator
+artifacts use [Apache-2.0](LICENSE). Approved data and numerical results—including processed signals/features,
+public IDs, labels/categories, locked memberships, predictions, explanations and aggregate results—use
+[CC-BY-4.0](LICENSE-DATA). These are separate file scopes, not a choice of license for every file.
+Both permit commercial reuse, modification and redistribution under their terms.
+
+[LICENSING.md](LICENSING.md) and the manifest give exact path scopes and practical attribution instructions.
+Use the project label “Gastric-lesion VOC study,” identify the relevant files and revision or hashes, retain
+the applicable license/notices and indicate changes as required. [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
+preserves upstream attribution and terms; third-party material and separately installed dependencies are not
+relicensed as original project work. The grants cover distributed material, not withheld raw/private sources,
+manuscripts or finished figures/tables. Scientific limitations describe the evidence and add no research-only
+or noncommercial license restriction.
+
+## Provenance
+
+[PROVENANCE.md](PROVENANCE.md) records the original-to-sanitized correspondence for 161 historical commits,
+the six annotated sanitized freeze counterparts, and the two collection-date redactions in the preprocessing
+protocol. Scientific rules remain unchanged; the documented source-worktree/Git line-ending distinction is
+preserved. Historical references can point to deliberately withheld files or original commit identities.
+Filtering changes commit identities and may invalidate signatures; this is sanitized history, not an untouched
+original. Git timestamps alone do not prove external preregistration or absence of prior result access.
+
+Dated administrative statements elsewhere describe earlier preparation stages; read the licenses and preserved
+scientific verification evidence in their stated scopes, including the failed comparisons described above.

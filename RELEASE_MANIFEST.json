@@ -499,8 +499,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 7162,
-      "sha256": "a4af1915bb1b3879a03282aca3179ae43c75d431d0b678bbfee8306cac97f489",
+      "bytes": 9160,
+      "sha256": "b009eeb943acf9e208728eea7cdcad9d8cd6e56ebeb67171d70dd91a2291bef6",
       "role": "documentation_or_release_policy",
       "license_scope": "Apache-2.0"
     },
@@ -8777,7 +8777,7 @@
     }
   ],
   "manifest_self_hash_policy": "Manifest is allowlisted but cannot contain its own byte hash; private handoff binds it.",
-  "total_payload_bytes_excluding_manifest": 102837072,
+  "total_payload_bytes_excluding_manifest": 102839070,
   "largest_file_bytes": 77617040,
   "private_preparation_distributable": false,
   "release_authorized": false,
